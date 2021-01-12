@@ -27,6 +27,21 @@ module.exports = {
 			indigo: colors.indigo,
 			purple: colors.violet,
 			pink: colors.pink,
+
+			primary: 'hsla(var(--primary-hsl))',
+
+			customs: {
+				red: {
+					100: 'hsla(var(--red-100-hsl))',
+					200: 'hsla(var(--red-200-hsl))',
+					300: 'hsla(var(--red-300-hsl))',
+					400: 'hsla(var(--red-400-hsl))',
+					500: 'hsla(var(--red-500-hsl))',
+				},
+				gray: {
+					100: 'hsla(var(--gray-100-hsl))',
+				},
+			},
 		},
 		spacing: {
 			px: '1px',

@@ -8,7 +8,8 @@
     "start": "next start",
     "dev:debug": "node --inspect ./node_modules/next/dist/bin/next",
     "build:analyze": "cross-env ANALYZE=\"true\" next build",
-    "rebuild": "rimraf ./node_modules ./.next | yarn"
+    "rebuild": "rimraf ./node_modules ./.next | yarn",
+    "rebuild:twin": "rimraf ./.next | yarn dev"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^10.0.5",
