@@ -8,8 +8,9 @@ export const _variables = css`
 		--red-400-hsl: 359, 80%, 46%;
 		--red-500-hsl: 359, 85%, 53%;
 
-		-gray-100-hsl: 0, 0%, 44%;
+		--gray-100-hsl: 0, 0%, 44%;
 
 		--primary-hsl: var(--red-200-hsl);
+		--text-hsl: black;
 	}
 `;

@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const colors = require('tailwindcss/colors');
-
 module.exports = {
 	purge: ['./**/*.tsx', './**/*.ts'],
 	presets: [],
@@ -16,31 +13,18 @@ module.exports = {
 		colors: {
 			transparent: 'transparent',
 			current: 'currentColor',
-
-			black: colors.black,
-			white: colors.white,
-			gray: colors.coolGray,
-			red: colors.red,
-			yellow: colors.amber,
-			green: colors.emerald,
-			blue: colors.blue,
-			indigo: colors.indigo,
-			purple: colors.violet,
-			pink: colors.pink,
-
+			white: 'white',
+			black: 'black',
 			primary: 'hsla(var(--primary-hsl))',
-
-			customs: {
-				red: {
-					100: 'hsla(var(--red-100-hsl))',
-					200: 'hsla(var(--red-200-hsl))',
-					300: 'hsla(var(--red-300-hsl))',
-					400: 'hsla(var(--red-400-hsl))',
-					500: 'hsla(var(--red-500-hsl))',
-				},
-				gray: {
-					100: 'hsla(var(--gray-100-hsl))',
-				},
+			red: {
+				100: 'hsla(var(--red-100-hsl))',
+				200: 'hsla(var(--red-200-hsl))',
+				300: 'hsla(var(--red-300-hsl))',
+				400: 'hsla(var(--red-400-hsl))',
+				500: 'hsla(var(--red-500-hsl))',
+			},
+			gray: {
+				100: 'hsla(var(--gray-100-hsl))',
 			},
 		},
 		spacing: {

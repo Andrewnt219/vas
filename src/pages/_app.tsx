@@ -1,4 +1,4 @@
-import GlobalStyles from '@/styles/GlobalStyles';
+import GlobalStyles from '@src/styles/GlobalStyles';
 import { ReactElement } from 'react';
 import { GlobalStyles as TwGlobalStyles } from 'twin.macro';
 import { AppProps } from 'next/app';

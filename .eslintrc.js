@@ -35,6 +35,8 @@ module.exports = {
 		'jsx-a11y/anchor-is-valid': 0,
 		'@typescript-eslint/ban-ts-ignore': 0,
 		'@typescript-eslint/ban-ts-comment': 0,
+		'@typescript-eslint/ban-types': 0,
 		'import/no-unresolved': ['error', { ignore: ['^@'] }],
+		'no-empty-pattern': 'off',
 	},
 };
