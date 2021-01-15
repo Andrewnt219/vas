@@ -118,6 +118,7 @@ module.exports = {
 			xl: '0.75rem',
 			'2xl': '1rem',
 			'3xl': '1.5rem',
+			survey: '5rem',
 			full: '9999px',
 		},
 		borderWidth: {
@@ -219,6 +220,7 @@ module.exports = {
 			'7xl': ['4.5rem', { lineHeight: '1' }],
 			'8xl': ['6rem', { lineHeight: '1' }],
 			'9xl': ['8rem', { lineHeight: '1' }],
+			xxl: ['9rem', { lineHeight: '1' }],
 		},
 		fontWeight: {
 			thin: '100',
@@ -427,6 +429,7 @@ module.exports = {
 			},
 		},
 		letterSpacing: {
+			tightest: '-0.075em',
 			tighter: '-0.05em',
 			tight: '-0.025em',
 			normal: '0em',
@@ -435,6 +438,9 @@ module.exports = {
 			widest: '0.1em',
 		},
 		lineHeight: {
+			closest: '0.25',
+			closer: '0.5',
+			close: '0.75',
 			none: '1',
 			tight: '1.25',
 			snug: '1.375',

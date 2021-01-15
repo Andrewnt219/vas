@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import React, { ReactElement, ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
-import Image from 'next/image';
 
 type Props = {
 	data: {
@@ -12,7 +12,7 @@ type Props = {
 	children?: never;
 };
 
-function SurveryHeader({ data }: Props): ReactElement {
+function SurveyPageHero({ data }: Props): ReactElement {
 	const { mainText, subText, semesterText } = data;
 
 	return (
@@ -59,11 +59,7 @@ const Header = styled.header<HeaderProps>`
 
 type SemesterTextProps = {};
 const SemesterText = styled.span<SemesterTextProps>`
-	${tw` uppercase font-extrabold`}
-
-	font-size: 2.67rem;
-	line-height: 0.78125;
-	letter-spacing: -0.2rem;
+	${tw`uppercase font-bold text-5xl leading-close tracking-tighter`}
 `;
 
 type LogosContainerProps = {};
@@ -75,29 +71,22 @@ type LogoContainerProps = {};
 const LogoContainer = styled.picture<LogoContainerProps>`
 	img {
 		${tw` w-24 h-24 object-scale-down object-center`}
-		${tw``}
 	}
 `;
 
 type MainProps = {};
 const Main = styled.main<MainProps>`
-	${tw`font-bold text-center`}
+	${tw`text-center`}
 `;
 
 type HeadingProps = {};
 const Heading = styled.h1<HeadingProps>`
-	${tw`uppercase font-black text-center mb-12`}
-
-	line-height: 0.82;
-	letter-spacing: -0.75rem;
-	font-size: 8.875rem;
+	${tw`uppercase font-extrabold text-xxl text-center mb-12 leading-close tracking-tightest`}
 `;
 
 type SubheadingProps = {};
 const Subheading = styled.p<SubheadingProps>`
-	${tw`text-3xl font-medium`}
-
-	letter-spacing: -0.16rem;
+	${tw`text-3xl font-medium tracking-tighter`}
 `;
 
-export default SurveryHeader;
+export default SurveyPageHero;

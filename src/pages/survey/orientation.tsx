@@ -1,6 +1,6 @@
-import OrientationPage from '@src/components/pages/OrientationPage';
+import OrientationPage from '@src/components/pages/SurveyOrientationPage';
 import React, { ReactElement } from 'react';
-import tw, { styled } from 'twin.macro';
+import { styled } from 'twin.macro';
 
 type Props = {};
 

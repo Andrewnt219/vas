@@ -1,15 +1,12 @@
-import SurveySectionHeader from '@src/components/atoms/SurveySectionHeader/SurveySectionHeader';
-import React, { ReactElement } from 'react';
-import tw, { styled } from 'twin.macro';
+import React, { ReactElement, ReactNode } from 'react';
+import { styled } from 'twin.macro';
 
-type Props = {};
+type Props = {
+	children: ReactNode;
+};
 
-function SurveySection({}: Props): ReactElement {
-	return (
-		<Container>
-			<SurveySectionHeader />
-		</Container>
-	);
+function SurveySection({ children }: Props): ReactElement {
+	return <Container>{children}</Container>;
 }
 
 type ContainerProps = {};
