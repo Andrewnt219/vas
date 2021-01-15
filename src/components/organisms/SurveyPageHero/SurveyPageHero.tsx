@@ -48,8 +48,9 @@ const Main = styled.main<MainProps>`
 
 type HeadingProps = {};
 const Heading = styled.h1<HeadingProps>`
-	${tw`text-7xl sm:text-xxl uppercase font-extrabold  text-center mb-12 leading-close tracking-tightest`}
+	${tw`text-7xl sm:text-xxl uppercase font-extrabold  text-center mb-12  tracking-tightest`}
 	${tw`animate-pulse`}
+	line-height: .8;
 `;
 
 type SubheadingProps = {};
