@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import SurveySemesterText from '@src/components/atoms/SurveySemesterText/SurveySemesterText';
+import LogosContainer from '@src/components/molecules/SurveySection/LogosContainer/LogosContainer';
 import React, { ReactElement, ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -18,27 +19,10 @@ function SurveyPageHero({ data }: Props): ReactElement {
 	return (
 		<Section>
 			<Header>
-				<SemesterText>{semesterText}</SemesterText>
-				<LogosContainer>
-					<LogoContainer>
-						<Image
-							width={600}
-							height={360}
-							src="/images/survey-siv-logo.png"
-							alt="a maple leaf icon with side text Seneca International Vietnam"
-						/>
-					</LogoContainer>
-
-					<LogoContainer>
-						<Image
-							width={1582}
-							height={2048}
-							src="/images/survey-vas-logo.png"
-							alt="text says VAS Vietnamese Association at Seneca College"
-						/>
-					</LogoContainer>
-				</LogosContainer>
+				<SurveySemesterText>{semesterText}</SurveySemesterText>
+				<LogosContainer />
 			</Header>
+
 			<Main>
 				<Heading>{mainText}</Heading>
 				<Subheading>{subText}</Subheading>
@@ -54,24 +38,7 @@ const Section = styled.section<SectionProps>`
 
 type HeaderProps = {};
 const Header = styled.header<HeaderProps>`
-	${tw`flex justify-between mb-14`}
-`;
-
-type SemesterTextProps = {};
-const SemesterText = styled.span<SemesterTextProps>`
-	${tw`uppercase font-bold text-5xl leading-close tracking-tighter`}
-`;
-
-type LogosContainerProps = {};
-const LogosContainer = styled.div<LogosContainerProps>`
-	${tw`space-x-5`}
-`;
-
-type LogoContainerProps = {};
-const LogoContainer = styled.picture<LogoContainerProps>`
-	img {
-		${tw` w-24 h-24 object-scale-down object-center`}
-	}
+	${tw`flex justify-between mb-20`}
 `;
 
 type MainProps = {};

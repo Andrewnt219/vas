@@ -9,7 +9,9 @@ import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled } from 'twin.macro';
 
-type Props = {};
+type Props = {
+	onFormSubmitted?: (data: FormInputValues) => void;
+};
 
 type FormInputValues = {
 	interest: string;
@@ -22,11 +24,12 @@ type FormInputValues = {
 	suggestion: string;
 };
 
-function SurveyPageBody({}: Props): ReactElement {
+function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 	const { register, handleSubmit } = useForm<FormInputValues>();
 
 	const onSubmit = (data: FormInputValues) => {
 		console.log(data);
+		onFormSubmitted && onFormSubmitted(data);
 	};
 
 	return (
