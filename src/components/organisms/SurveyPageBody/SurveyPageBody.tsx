@@ -1,6 +1,9 @@
+import SurveySectionAnswerInput from '@src/components/atoms/SurveySectionAnswerInput/SurveySectionAnswerInput';
+import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/SurveySectionQuestion';
+import SurveyRatingInputSet from '@src/components/molecules/SurveySection/SurveyRatingInputSet/SurveyRatingInputSet';
 import SurveySection from '@src/components/molecules/SurveySection/SurveySection';
 import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveySectionHeader/SurveySectionHeader';
-import SurveySectionRating from '@src/components/molecules/SurveySection/SurveySectionRating/SurveySectionRating';
+import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled } from 'twin.macro';
@@ -49,29 +52,40 @@ function SurveyPageBody({}: Props): ReactElement {
 						}}
 					/>
 
-					<SurveySectionRating
-						data={{
-							question:
-								'Theo bạn, nội dung của Virtual Orientation có thú vị và thích hợp không? *',
-							ratingSystem: { inputName: 'interest' },
-						}}
-						inputRef={register}
-					/>
-					<SurveySectionRating
-						data={{
-							question:
-								'Cấu trúc của Virtual Orientation - Winter 2021 có trôi chảy và thời gian chương trình hợp lý không? *',
-							ratingSystem: { inputName: 'smoothness' },
-						}}
-						inputRef={register}
-					/>
-					<SurveySectionRating
-						data={{
-							question: 'Seneca International Vietnam (SIV) *',
-							ratingSystem: { inputName: 'siv' },
-						}}
-						inputRef={register}
-					/>
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Theo bạn, nội dung của Virtual Orientation có thú vị và thích hợp
+							không? *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'interest' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Cấu trúc của Virtual Orientation - Winter 2021 có trôi chảy và
+							thời gian chương trình hợp lý không? *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'smoothness' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Seneca International Vietnam (SIV) *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'siv' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
 				</SurveySection>
 
 				<SurveySection>
@@ -84,28 +98,65 @@ function SurveyPageBody({}: Props): ReactElement {
 						}}
 					/>
 
-					<SurveySectionRating
-						data={{
-							question: 'Vietnamese Association @ Seneca (VAS) *',
-							ratingSystem: { inputName: 'vas' },
-						}}
-						inputRef={register}
-					/>
-					<SurveySectionRating
-						data={{
-							question: 'Guest speaker- Career Development *',
-							ratingSystem: { inputName: 'guests' },
-						}}
-						inputRef={register}
-					/>
-					<SurveySectionRating
-						data={{
-							question:
-								'The HUB/mini break, #StayActive Contest/Testimonials *',
-							ratingSystem: { inputName: 'misc' },
-						}}
-						inputRef={register}
-					/>
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Vietnamese Association @ Seneca (VAS) *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'vas' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Guest speaker- Career Development *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'guests' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							The HUB/mini break, #StayActive Contest/Testimonials *
+						</SurveySectionQuestion>
+
+						<SurveyRatingInputSet
+							data={{ ratingSystem: { inputName: 'misc' } }}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Trong 4 sections ở trên, phần yêu thích nhất của bạn là: *
+						</SurveySectionQuestion>
+
+						<SurveySectionAnswerInput
+							ref={register}
+							type="text"
+							name="favourite"
+							placeholder="Văn bản câu trả lời ngắn"
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Bạn có những góp ý gì về Virtual Orientation hoặc suggestions cho
+							những sự kiện trong tương lai? *
+						</SurveySectionQuestion>
+
+						<SurveySectionAnswerInput
+							ref={register}
+							type="text"
+							name="suggestions"
+							placeholder="Văn bản câu trả lời ngắn"
+						/>
+					</SurveySectionQuestionGroup>
 				</SurveySection>
 
 				<button>Submit</button>

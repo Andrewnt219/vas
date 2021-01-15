@@ -1,27 +1,18 @@
-import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/SurveySectionQuestion';
 import SurveySectionRatingInput from '@src/components/atoms/SurveySectionRatingInput/SurveySectionRatingInput';
 import React, { ReactElement } from 'react';
 import tw, { styled } from 'twin.macro';
 
 type Props = {
-	data: {
-		question: string;
-		ratingSystem: Arguments['ratingSystem'];
-	};
+	data: { ratingSystem: Arguments['ratingSystem'] };
 	inputRef: Arguments['inputRef'];
 };
 
-function SurveySectionRating({ data, inputRef }: Props): ReactElement {
-	const { question, ratingSystem } = data;
-
+function SurveyRatingInputSet({ data, inputRef }: Props): ReactElement {
+	const { ratingSystem } = data;
 	return (
-		<Container>
-			<SurveySectionQuestion>{question}</SurveySectionQuestion>
-
-			<RatingInputSet>
-				{renderSurveySectionRatingInputs({ ratingSystem, inputRef })}
-			</RatingInputSet>
-		</Container>
+		<RatingInputSet>
+			{renderSurveySectionRatingInputs({ ratingSystem, inputRef })}
+		</RatingInputSet>
 	);
 }
 
@@ -59,14 +50,9 @@ function renderSurveySectionRatingInputs({
 
 	return renderedRatingInputs;
 }
-type ContainerProps = {};
-const Container = styled.div<ContainerProps>`
-	${tw`px-20 space-y-10`}
-`;
-
 type RatingInputSetProps = {};
 const RatingInputSet = styled.div<RatingInputSetProps>`
-	${tw`flex justify-between px-4`}
+	${tw`flex justify-between `}
 `;
 
-export default SurveySectionRating;
+export default SurveyRatingInputSet;
