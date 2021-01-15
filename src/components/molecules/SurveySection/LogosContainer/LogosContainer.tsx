@@ -36,7 +36,7 @@ const Container = styled.div<ContainerProps>`
 type LogoContainerProps = {};
 const LogoContainer = styled.picture<LogoContainerProps>`
 	img {
-		${tw` w-24 h-24 object-scale-down object-center`}
+		${tw`w-16 h-16 sm:(w-24 h-24) object-scale-down object-center`}
 	}
 `;
 

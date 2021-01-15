@@ -33,7 +33,7 @@ function SurveyPageHero({ data }: Props): ReactElement {
 
 type SectionProps = {};
 const Section = styled.section<SectionProps>`
-	${tw`text-white bg-primary px-11 pt-10 pb-28`}
+	${tw`text-white bg-primary px-11 pt-10 pb-28 `}
 `;
 
 type HeaderProps = {};
@@ -48,13 +48,13 @@ const Main = styled.main<MainProps>`
 
 type HeadingProps = {};
 const Heading = styled.h1<HeadingProps>`
-	${tw`uppercase font-extrabold text-xxl text-center mb-12 leading-close tracking-tightest`}
+	${tw`text-7xl sm:text-xxl uppercase font-extrabold  text-center mb-12 leading-close tracking-tightest`}
 	${tw`animate-pulse`}
 `;
 
 type SubheadingProps = {};
 const Subheading = styled.p<SubheadingProps>`
-	${tw`text-3xl font-medium tracking-tighter`}
+	${tw` text-lg sm:text-3xl font-medium tracking-tighter`}
 `;
 
 export default SurveyPageHero;

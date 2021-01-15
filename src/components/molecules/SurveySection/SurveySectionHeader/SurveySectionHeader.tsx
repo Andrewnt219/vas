@@ -27,7 +27,7 @@ function SurveySectionHeader({ data }: Props): ReactElement {
 type HeaderProps = {};
 const Header = styled.header<HeaderProps>`
 	${tw`text-center   `}
-	${tw`pt-7 pb-10 px-16 rounded-survey space-y-4 border-4 border-red-100 mb-14`}
+	${tw`pt-7 pb-10 px-10\ sm:px-16 rounded-survey space-y-4 border-4 border-red-100 mb-14`}
 `;
 
 type HeadingProps = {};

@@ -9,7 +9,7 @@ import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/
 import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import tw, { styled } from 'twin.macro';
+import tw, { styled, theme } from 'twin.macro';
 type Props = {
 	onFormSubmitted?: (data: FormInputValues) => void;
 };
@@ -245,12 +245,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 type ContainerProps = {};
 const Container = styled.section<ContainerProps>`
 	${tw`text-red-200 font-medium `}
-	padding: 3.75rem  15%;
+	padding: 3.75rem  5%;
+
+	@media screen and (min-width: ${theme`screens.sm`}) {
+		padding: 3.75rem 15%;
+	}
 `;
 
 type SurveyTitleProps = {};
 const SurveyTitle = styled.h1<SurveyTitleProps>`
-	${tw`font-semibold text-center text-7xl leading-none tracking-tightest`}
+	${tw`font-semibold text-center text-5xl sm:text-7xl leading-none tracking-tightest`}
 	${tw`mb-14`}
 `;
 

@@ -9,6 +9,10 @@ module.exports = {
 			lg: '1024px',
 			xl: '1280px',
 			'2xl': '1536px',
+			'3xl': '1920px',
+			wqhd: '2560px',
+			'4k': '3840px',
+			'8k': '7680px',
 		},
 		colors: {
 			transparent: 'transparent',

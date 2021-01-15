@@ -1,4 +1,4 @@
-import { css } from 'twin.macro';
+import { css, theme } from 'twin.macro';
 
 const fontFace = css`
 	/* montserrat-300 - vietnamese_latin */
@@ -173,11 +173,48 @@ const fontFace = css`
 
 export const _typography = css`
 	:root {
-		font-size: max(100%, 1.25vw);
+		font-size: 62.5%;
 		font-family: 'Montserrat', sans-serif;
 		${fontFace}
+
+		@media screen and (min-width: ${theme`screens.sm`}) {
+			font-size: 75%;
+		}
+
+		@media screen and (min-width: ${theme`screens.md`}) {
+			font-size: 81.25%;
+		}
+
+		@media screen and (min-width: ${theme`screens.lg`}) {
+			font-size: 100%;
+		}
+
+		@media screen and (min-width: ${theme`screens.xl`}) {
+			font-size: 125%;
+		}
+
+		@media screen and (min-width: ${theme`screens.2xl`}) {
+			font-size: 150%;
+		}
+
+		@media screen and (min-width: ${theme`screens.3xl`}) {
+			font-size: 150%;
+		}
+
+		@media screen and (min-width: ${theme`screens.wqhd`}) {
+			font-size: 200%;
+		}
+
+		@media screen and (min-width: ${theme`screens.4k`}) {
+			font-size: 300%;
+		}
+
+		@media screen and (min-width: ${theme`screens.8k`}) {
+			font-size: 600%;
+		}
 	}
 
+	html,
 	body {
 		color: hsla(var(--text-hsl));
 	}
