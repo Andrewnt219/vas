@@ -2,11 +2,29 @@ import SurveySection from '@src/components/molecules/SurveySection/SurveySection
 import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveySectionHeader/SurveySectionHeader';
 import SurveySectionRating from '@src/components/molecules/SurveySection/SurveySectionRating/SurveySectionRating';
 import React, { ReactElement } from 'react';
+import { useForm } from 'react-hook-form';
 import tw, { styled } from 'twin.macro';
 
 type Props = {};
 
+type FormInputValues = {
+	interest: string;
+	smoothness: string;
+	siv: string;
+	vas: string;
+	guests: string;
+	misc: string;
+	favourite: string;
+	suggestion: string;
+};
+
 function SurveyPageBody({}: Props): ReactElement {
+	const { register, handleSubmit } = useForm<FormInputValues>();
+
+	const onSubmit = (data: FormInputValues) => {
+		console.log(data);
+	};
+
 	return (
 		<Container>
 			<header>
@@ -19,7 +37,7 @@ function SurveyPageBody({}: Props): ReactElement {
 				</SurveyTitle>
 			</header>
 
-			<main>
+			<Form onSubmit={handleSubmit(onSubmit)}>
 				<SurveySection>
 					<SurveySectionHeader
 						data={{
@@ -31,9 +49,29 @@ function SurveyPageBody({}: Props): ReactElement {
 						}}
 					/>
 
-					<SurveySectionRating data={{ question: 'Hi' }} />
-					<SurveySectionRating data={{ question: 'Hello' }} />
-					<SurveySectionRating data={{ question: 'Bonjour' }} />
+					<SurveySectionRating
+						data={{
+							question:
+								'Theo bạn, nội dung của Virtual Orientation có thú vị và thích hợp không? *',
+							ratingSystem: { inputName: 'interest' },
+						}}
+						inputRef={register}
+					/>
+					<SurveySectionRating
+						data={{
+							question:
+								'Cấu trúc của Virtual Orientation - Winter 2021 có trôi chảy và thời gian chương trình hợp lý không? *',
+							ratingSystem: { inputName: 'smoothness' },
+						}}
+						inputRef={register}
+					/>
+					<SurveySectionRating
+						data={{
+							question: 'Seneca International Vietnam (SIV) *',
+							ratingSystem: { inputName: 'siv' },
+						}}
+						inputRef={register}
+					/>
 				</SurveySection>
 
 				<SurveySection>
@@ -46,25 +84,51 @@ function SurveyPageBody({}: Props): ReactElement {
 						}}
 					/>
 
-					<SurveySectionRating data={{ question: 'Xin Chao' }} />
-					<SurveySectionRating data={{ question: 'Heu lo' }} />
-					<SurveySectionRating data={{ question: 'Chao' }} />
+					<SurveySectionRating
+						data={{
+							question: 'Vietnamese Association @ Seneca (VAS) *',
+							ratingSystem: { inputName: 'vas' },
+						}}
+						inputRef={register}
+					/>
+					<SurveySectionRating
+						data={{
+							question: 'Guest speaker- Career Development *',
+							ratingSystem: { inputName: 'guests' },
+						}}
+						inputRef={register}
+					/>
+					<SurveySectionRating
+						data={{
+							question:
+								'The HUB/mini break, #StayActive Contest/Testimonials *',
+							ratingSystem: { inputName: 'misc' },
+						}}
+						inputRef={register}
+					/>
 				</SurveySection>
-			</main>
+
+				<button>Submit</button>
+			</Form>
 		</Container>
 	);
 }
 
 type ContainerProps = {};
 const Container = styled.section<ContainerProps>`
-	${tw`text-red-200 font-medium`}
-	padding: 0 15%;
+	${tw`text-red-200 font-medium `}
+	padding: 3.75rem  15%;
 `;
 
 type SurveyTitleProps = {};
 const SurveyTitle = styled.h1<SurveyTitleProps>`
 	${tw`font-semibold text-center text-7xl leading-none tracking-tightest`}
 	${tw`mb-14`}
+`;
+
+type FormProps = {};
+const Form = styled.form<FormProps>`
+	${tw`space-y-24`}
 `;
 
 export default SurveyPageBody;

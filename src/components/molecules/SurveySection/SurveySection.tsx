@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 type Props = {
 	children: ReactNode;
@@ -10,6 +10,12 @@ function SurveySection({ children }: Props): ReactElement {
 }
 
 type ContainerProps = {};
-const Container = styled.section<ContainerProps>``;
+const Container = styled.section<ContainerProps>`
+	${tw`space-y-16 text-xl  tracking-tighter leading-tight font-semibold`}
+
+	label {
+		${tw`font-medium`}
+	}
+`;
 
 export default SurveySection;
