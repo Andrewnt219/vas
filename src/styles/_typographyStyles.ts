@@ -177,6 +177,10 @@ export const _typography = css`
 		font-family: 'Montserrat', sans-serif;
 		${fontFace}
 
+		@media screen and (min-width: ${theme`screens.xs`}) {
+			font-size: 75%;
+		}
+
 		@media screen and (min-width: ${theme`screens.sm`}) {
 			font-size: 75%;
 		}
