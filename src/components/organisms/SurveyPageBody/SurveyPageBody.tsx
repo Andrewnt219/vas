@@ -1,3 +1,4 @@
+import SurveyButton from '@src/components/atoms/SurveyButton/SurveyButton';
 import SurveySectionAnswerInput from '@src/components/atoms/SurveySectionAnswerInput/SurveySectionAnswerInput';
 import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/SurveySectionQuestion';
 import SurveyRatingInputSet from '@src/components/molecules/SurveySection/SurveyRatingInputSet/SurveyRatingInputSet';
@@ -159,7 +160,7 @@ function SurveyPageBody({}: Props): ReactElement {
 					</SurveySectionQuestionGroup>
 				</SurveySection>
 
-				<button>Submit</button>
+				<SurveyButton>Submit</SurveyButton>
 			</Form>
 		</Container>
 	);
@@ -180,6 +181,7 @@ const SurveyTitle = styled.h1<SurveyTitleProps>`
 type FormProps = {};
 const Form = styled.form<FormProps>`
 	${tw`space-y-24`}
+	${tw`flex flex-col items-center`}
 `;
 
 export default SurveyPageBody;
