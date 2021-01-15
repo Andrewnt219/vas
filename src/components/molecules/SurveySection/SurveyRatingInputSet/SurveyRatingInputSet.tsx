@@ -1,18 +1,27 @@
+import SurveyErrorMessage from '@src/components/atoms/SurveyErrorMessage/SurveyErrorMessage';
 import SurveySectionRatingInput from '@src/components/atoms/SurveySectionRatingInput/SurveySectionRatingInput';
+import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import tw, { styled } from 'twin.macro';
 
 type Props = {
-	data: { ratingSystem: Arguments['ratingSystem'] };
+	data: { ratingSystem: Arguments['ratingSystem']; errorMessage?: string };
 	inputRef: Arguments['inputRef'];
 };
 
 function SurveyRatingInputSet({ data, inputRef }: Props): ReactElement {
-	const { ratingSystem } = data;
+	const { ratingSystem, errorMessage } = data;
 	return (
-		<RatingInputSet>
-			{renderSurveySectionRatingInputs({ ratingSystem, inputRef })}
-		</RatingInputSet>
+		<AnimatePresence>
+			{errorMessage && (
+				<SurveyErrorMessage key={ratingSystem.inputName}>
+					{errorMessage}
+				</SurveyErrorMessage>
+			)}
+			<RatingInputSet>
+				{renderSurveySectionRatingInputs({ ratingSystem, inputRef })}
+			</RatingInputSet>
+		</AnimatePresence>
 	);
 }
 

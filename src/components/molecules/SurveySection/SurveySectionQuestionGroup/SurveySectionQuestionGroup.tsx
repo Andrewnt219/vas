@@ -4,7 +4,7 @@ type Props = {};
 const SurveySectionQuestionGroup = styled.div<Props>`
 	${tw`px-20 space-y-10`}
 
-	& > *:nth-child(2) {
+	& > *:last-child {
 		${tw`mx-4`}
 	}
 `;

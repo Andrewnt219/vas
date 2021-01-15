@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement, useState } from 'react';
 import { styled } from 'twin.macro';
 import SurveyPageBody from '../organisms/SurveyPageBody/SurveyPageBody';
@@ -11,32 +12,34 @@ function OrientationPage({}: Props): ReactElement {
 
 	return (
 		<Container>
-			{submitted ? (
-				<SurveyThankYou />
-			) : (
-				<>
-					<SurveyPageHero
-						data={{
-							mainText: (
-								<>
-									challenge
-									<br />
-									accepted
-								</>
-							),
-							subText: 'Being successful in your first semester at Seneca',
-							semesterText: (
-								<>
-									WINTER <br />
-									ORIENTATION <br />
-									2021
-								</>
-							),
-						}}
-					/>
-					<SurveyPageBody onFormSubmitted={() => setSubmitted(true)} />
-				</>
-			)}
+			<AnimatePresence>
+				{submitted ? (
+					<SurveyThankYou />
+				) : (
+					<>
+						<SurveyPageHero
+							data={{
+								mainText: (
+									<>
+										challenge
+										<br />
+										accepted
+									</>
+								),
+								subText: 'Being successful in your first semester at Seneca',
+								semesterText: (
+									<>
+										WINTER <br />
+										ORIENTATION <br />
+										2021
+									</>
+								),
+							}}
+						/>
+						<SurveyPageBody onFormSubmitted={() => setSubmitted(true)} />
+					</>
+				)}
+			</AnimatePresence>
 		</Container>
 	);
 }

@@ -1,5 +1,6 @@
 import SurveySemesterText from '@src/components/atoms/SurveySemesterText/SurveySemesterText';
 import LogosContainer from '@src/components/molecules/SurveySection/LogosContainer/LogosContainer';
+import { motion, Variants } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -7,7 +8,12 @@ type Props = {};
 
 function SurveyThankYou({}: Props): ReactElement {
 	return (
-		<Container>
+		<Container
+			variants={containerVariants}
+			animate="visible"
+			initial="hidden"
+			exit="hidden"
+		>
 			<Header>
 				<SurveySemesterText>
 					WINTER
@@ -25,8 +31,25 @@ function SurveyThankYou({}: Props): ReactElement {
 	);
 }
 
+const containerVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		scale: 0,
+		y: '100%',
+	},
+	visible: {
+		opacity: 1,
+		scale: 1,
+		y: 0,
+		transition: {
+			type: 'tween',
+			ease: 'easeIn',
+		},
+	},
+};
+
 type ContainerProps = {};
-const Container = styled.section<ContainerProps>`
+const Container = styled(motion.section)<ContainerProps>`
 	${tw`h-screen`}
 `;
 type HeaderProps = {};

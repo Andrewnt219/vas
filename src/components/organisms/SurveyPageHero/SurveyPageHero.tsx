@@ -49,6 +49,7 @@ const Main = styled.main<MainProps>`
 type HeadingProps = {};
 const Heading = styled.h1<HeadingProps>`
 	${tw`uppercase font-extrabold text-xxl text-center mb-12 leading-close tracking-tightest`}
+	${tw`animate-pulse`}
 `;
 
 type SubheadingProps = {};

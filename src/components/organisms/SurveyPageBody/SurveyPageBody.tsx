@@ -1,14 +1,15 @@
+import SurveyRatingInputSet from '@components/molecules/SurveySection/SurveyRatingInputSet/SurveyRatingInputSet';
 import SurveyButton from '@src/components/atoms/SurveyButton/SurveyButton';
+import SurveyErrorMessage from '@src/components/atoms/SurveyErrorMessage/SurveyErrorMessage';
 import SurveySectionAnswerInput from '@src/components/atoms/SurveySectionAnswerInput/SurveySectionAnswerInput';
 import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/SurveySectionQuestion';
-import SurveyRatingInputSet from '@src/components/molecules/SurveySection/SurveyRatingInputSet/SurveyRatingInputSet';
 import SurveySection from '@src/components/molecules/SurveySection/SurveySection';
 import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveySectionHeader/SurveySectionHeader';
 import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
+import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled } from 'twin.macro';
-
 type Props = {
 	onFormSubmitted?: (data: FormInputValues) => void;
 };
@@ -25,10 +26,9 @@ type FormInputValues = {
 };
 
 function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
-	const { register, handleSubmit } = useForm<FormInputValues>();
+	const { register, handleSubmit, errors } = useForm<FormInputValues>();
 
 	const onSubmit = (data: FormInputValues) => {
-		console.log(data);
 		onFormSubmitted && onFormSubmitted(data);
 	};
 
@@ -63,8 +63,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'interest' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'interest' },
+								errorMessage: errors['interest']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 
@@ -75,8 +83,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'smoothness' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'smoothness' },
+								errorMessage: errors['smoothness']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 
@@ -86,8 +102,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'siv' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'siv' },
+								errorMessage: errors['siv']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 				</SurveySection>
@@ -108,8 +132,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'vas' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'vas' },
+								errorMessage: errors['vas']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 
@@ -119,8 +151,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'guests' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'guests' },
+								errorMessage: errors['guests']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 
@@ -130,8 +170,16 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
-							data={{ ratingSystem: { inputName: 'misc' } }}
-							inputRef={register}
+							data={{
+								ratingSystem: { inputName: 'misc' },
+								errorMessage: errors['misc']?.message,
+							}}
+							inputRef={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 						/>
 					</SurveySectionQuestionGroup>
 
@@ -140,24 +188,49 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 							Trong 4 sections ở trên, phần yêu thích nhất của bạn là: *
 						</SurveySectionQuestion>
 
+						<AnimatePresence>
+							{errors['favourite'] && (
+								<SurveyErrorMessage>
+									{errors['favourite'].message}
+								</SurveyErrorMessage>
+							)}
+						</AnimatePresence>
+
 						<SurveySectionAnswerInput
-							ref={register}
+							ref={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 							type="text"
 							name="favourite"
 							placeholder="Văn bản câu trả lời ngắn"
 						/>
 					</SurveySectionQuestionGroup>
-
 					<SurveySectionQuestionGroup>
 						<SurveySectionQuestion>
 							Bạn có những góp ý gì về Virtual Orientation hoặc suggestions cho
 							những sự kiện trong tương lai? *
 						</SurveySectionQuestion>
 
+						<AnimatePresence>
+							{errors['suggestion'] && (
+								<SurveyErrorMessage key="suggestion">
+									{errors['suggestion'].message}
+								</SurveyErrorMessage>
+							)}
+						</AnimatePresence>
+
 						<SurveySectionAnswerInput
-							ref={register}
+							ref={register({
+								required: {
+									message: 'Bạn cần điền ô này',
+									value: true,
+								},
+							})}
 							type="text"
-							name="suggestions"
+							name="suggestion"
 							placeholder="Văn bản câu trả lời ngắn"
 						/>
 					</SurveySectionQuestionGroup>
