@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 export class FireStoreDataService {
 	private static instance: FireStoreDataService;
-	private static db: firebase.default.firestore.Firestore | null = null;
+	private static db: firebase.default.database.Database | null = null;
 
 	private static setup = async () => {
 		try {
@@ -29,8 +29,8 @@ export class FireStoreDataService {
 
 	addOrientationSurvey = async (survey: SurveyFsModel): Promise<void> => {
 		FireStoreDataService.db
-			?.collection('survey')
-			.add(survey)
+			?.ref('survey')
+			.push(survey)
 			.catch((error) => {
 				console.log((error as AxiosError).message);
 				console.log(error);

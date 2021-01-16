@@ -8,25 +8,30 @@ import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveyS
 import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
 import { SurveyFsModel } from '@src/model/firebase/SurveyModel';
 import { FireStoreDataService } from '@src/services/firestore-data-service';
-import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled, theme } from 'twin.macro';
+
+type FormValues = Omit<SurveyFsModel, '_submitedAt'>;
 type Props = {
 	onFormSubmitted?: (data: SurveyFsModel) => void;
 };
 
 function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
-	const { register, handleSubmit, errors } = useForm<SurveyFsModel>();
+	const { register, handleSubmit, errors } = useForm<FormValues>();
 
-	const onSubmit = (data: SurveyFsModel) => {
+	const onSubmit = (data: FormValues) => {
+		const submittedData: SurveyFsModel = {
+			...data,
+			_submittedAt: new Date().toString(),
+		};
+
 		FireStoreDataService.getInstance().then((fs) =>
-			fs.addOrientationSurvey(data)
+			fs.addOrientationSurvey(submittedData)
 		);
 
-		axios.post('/api/survey', data);
-		onFormSubmitted && onFormSubmitted(data);
+		onFormSubmitted && onFormSubmitted(submittedData);
 	};
 
 	return (
