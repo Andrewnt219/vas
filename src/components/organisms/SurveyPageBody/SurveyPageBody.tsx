@@ -8,6 +8,7 @@ import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveyS
 import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
 import { SurveyFsModel } from '@src/model/firebase/SurveyModel';
 import { FireStoreDataService } from '@src/services/firestore-data-service';
+import axios from 'axios';
 import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
@@ -23,6 +24,8 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 		FireStoreDataService.getInstance().then((fs) =>
 			fs.addOrientationSurvey(data)
 		);
+
+		axios.post('/api/survey', data);
 		onFormSubmitted && onFormSubmitted(data);
 	};
 
