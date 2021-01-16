@@ -6,29 +6,23 @@ import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/S
 import SurveySection from '@src/components/molecules/SurveySection/SurveySection';
 import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveySectionHeader/SurveySectionHeader';
 import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
+import { SurveyFsModel } from '@src/model/firebase/SurveyModel';
+import { FireStoreDataService } from '@src/services/firestore-data-service';
 import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled, theme } from 'twin.macro';
 type Props = {
-	onFormSubmitted?: (data: FormInputValues) => void;
-};
-
-type FormInputValues = {
-	interest: string;
-	smoothness: string;
-	siv: string;
-	vas: string;
-	guests: string;
-	misc: string;
-	favourite: string;
-	suggestion: string;
+	onFormSubmitted?: (data: SurveyFsModel) => void;
 };
 
 function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
-	const { register, handleSubmit, errors } = useForm<FormInputValues>();
+	const { register, handleSubmit, errors } = useForm<SurveyFsModel>();
 
-	const onSubmit = (data: FormInputValues) => {
+	const onSubmit = (data: SurveyFsModel) => {
+		FireStoreDataService.getInstance().then((fs) =>
+			fs.addOrientationSurvey(data)
+		);
 		onFormSubmitted && onFormSubmitted(data);
 	};
 
