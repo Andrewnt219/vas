@@ -12,7 +12,6 @@ import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled, theme } from 'twin.macro';
-
 type FormValues = Omit<SurveyFsModel, '_submitedAt'>;
 type Props = {
 	onFormSubmitted?: (data: SurveyFsModel) => void;

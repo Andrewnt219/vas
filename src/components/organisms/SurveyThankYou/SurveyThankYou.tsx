@@ -1,12 +1,26 @@
+import SurveyButton from '@src/components/atoms/SurveyButton/SurveyButton';
 import SurveySemesterText from '@src/components/atoms/SurveySemesterText/SurveySemesterText';
 import LogosContainer from '@src/components/molecules/SurveySection/LogosContainer/LogosContainer';
+import storage from '@src/lib/firebase/storage';
 import { motion, Variants } from 'framer-motion';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
 type Props = {};
 
 function SurveyThankYou({}: Props): ReactElement {
+	const [downloadUrl, setDownloadUrl] = useState<string>();
+
+	useEffect(() => {
+		storage
+			.refFromURL(
+				'gs://vas-seneca.appspot.com/winter-orientation-2021-summary.pdf'
+			)
+			.getDownloadURL()
+			.then((url) => setDownloadUrl(url))
+			.catch((err) => console.error(err));
+	}, []);
+
 	return (
 		<Container
 			variants={containerVariants}
@@ -26,6 +40,15 @@ function SurveyThankYou({}: Props): ReactElement {
 			</Header>
 			<Main>
 				<MainText>Thank you for your feedback &#59;&#41;</MainText>
+				<SubText>Download the orientation summary below</SubText>
+
+				{!downloadUrl ? (
+					<SurveyButton>Fetching file</SurveyButton>
+				) : (
+					<SurveyButton as="a" download href={downloadUrl}>
+						Download
+					</SurveyButton>
+				)}
 			</Main>
 		</Container>
 	);
@@ -50,7 +73,7 @@ const containerVariants: Variants = {
 
 type ContainerProps = {};
 const Container = styled(motion.section)<ContainerProps>`
-	${tw`h-screen`}
+	${tw`min-h-screen`}
 `;
 type HeaderProps = {};
 const Header = styled.header<HeaderProps>`
@@ -61,12 +84,21 @@ const Header = styled.header<HeaderProps>`
 
 type MainProps = {};
 const Main = styled.main<MainProps>`
-	${tw`mt-20`}
+	${tw`mt-20 space-y-5 flex flex-col items-center pb-5`}
+
+	button, a {
+		${tw`block mt-10! `}
+	}
 `;
 
 type MainTextProps = {};
 const MainText = styled.h1<MainTextProps>`
 	${tw`text-4xl leading-close tracking-tightest text-red-400 font-medium text-center`}
+`;
+
+type SubTextProps = {};
+const SubText = styled.p<SubTextProps>`
+	${tw`text-xl leading-close tracking-tightest text-red-400 font-normal text-center`}
 `;
 
 export default SurveyThankYou;
