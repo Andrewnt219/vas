@@ -172,8 +172,8 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 									},
 									{ label: 'Không ai cả', value: 'none' },
 								],
-								errorMessage: errors['guests']?.message,
-								name: 'guests',
+								errorMessage: errors['favouriteGuest']?.message,
+								name: 'favouriteGuest',
 							}}
 							inputRef={register}
 						/>
@@ -185,9 +185,9 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<AnimatePresence>
-							{errors['favourite'] && (
+							{errors['suggestionGuest'] && (
 								<SurveyErrorMessage>
-									{errors['favourite'].message}
+									{errors['suggestionGuest'].message}
 								</SurveyErrorMessage>
 							)}
 						</AnimatePresence>
@@ -195,7 +195,7 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						<SurveySectionAnswerInput
 							ref={register}
 							type="text"
-							name="favourite"
+							name="suggestionGuest"
 							placeholder="Câu trả lời của bạn"
 						/>
 					</SurveySectionQuestionGroup>
@@ -207,8 +207,8 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 
 						<SurveyRatingInputSet
 							data={{
-								ratingSystem: { inputName: 'guests' },
-								errorMessage: errors['guests']?.message,
+								ratingSystem: { inputName: 'game' },
+								errorMessage: errors['game']?.message,
 							}}
 							inputRef={register({
 								required: {
@@ -226,9 +226,9 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						</SurveySectionQuestion>
 
 						<AnimatePresence>
-							{errors['suggestion'] && (
-								<SurveyErrorMessage key="suggestion">
-									{errors['suggestion'].message}
+							{errors['suggestionVas'] && (
+								<SurveyErrorMessage key="suggestionVas">
+									{errors['suggestionVas'].message}
 								</SurveyErrorMessage>
 							)}
 						</AnimatePresence>
@@ -241,7 +241,7 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 								},
 							})}
 							type="text"
-							name="suggestion"
+							name="suggestionVas"
 							placeholder="Câu trả lời của bạn"
 						/>
 					</SurveySectionQuestionGroup>

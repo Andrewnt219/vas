@@ -31,7 +31,7 @@ function SurveyRadioGroup({ data, inputRef }: Props): ReactElement {
 			<Container>
 				{inputsProps.map((props) => (
 					<SurveyRadioInput
-						key={name}
+						key={props.value}
 						data={{ label: props.label, name: name }}
 						inputRef={inputRef}
 					/>

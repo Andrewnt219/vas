@@ -4,7 +4,7 @@ import LogosContainer from '@src/components/molecules/SurveySection/LogosContain
 import storage from '@src/lib/firebase/storage';
 import { motion, Variants } from 'framer-motion';
 import React, { ReactElement, useEffect, useState } from 'react';
-import tw, { styled } from 'twin.macro';
+import tw, { styled, theme } from 'twin.macro';
 
 type Props = {};
 
@@ -39,14 +39,28 @@ function SurveyThankYou({}: Props): ReactElement {
 				<LogosContainer />
 			</Header>
 			<Main>
-				<MainText>Thank you for your feedback &#59;&#41;</MainText>
-				<SubText>Download the orientation summary below</SubText>
+				<MainText>Cảm ơn các bạn</MainText>
+				<SubText>
+					đã dành thời gian điền khảo sát về buổi Orientation 2021 kỳ mùa Đông
+					vừa qua. Tụi mình xin dành tặng các bạn <span>summary</span> các điểm
+					nổi bật từ buổi Orientation.
+				</SubText>
+
+				<SubText2>
+					Chúc các bạn có một kỳ học thành công tại Seneca và nhớ theo dõi các
+					dự án siêu thú vị sắp đến từ VAS nhé!
+				</SubText2>
 
 				{!downloadUrl ? (
-					<SurveyButton>Fetching file</SurveyButton>
+					<SurveyButton disabled>Fetching file</SurveyButton>
 				) : (
-					<SurveyButton as="a" download href={downloadUrl}>
-						Download
+					<SurveyButton
+						as="a"
+						download
+						href={downloadUrl}
+						style={{ fontWeight: 500 }}
+					>
+						Summary
 					</SurveyButton>
 				)}
 			</Main>
@@ -85,20 +99,44 @@ const Header = styled.header<HeaderProps>`
 type MainProps = {};
 const Main = styled.main<MainProps>`
 	${tw`mt-20 space-y-5 flex flex-col items-center pb-5`}
+	padding: 0 5%;
 
-	button, a {
+	@media screen and (min-width: ${theme`screens.sm`}) {
+		padding: 0 20%;
+	}
+
+	button,
+	a {
 		${tw`block mt-10! `}
 	}
 `;
 
 type MainTextProps = {};
 const MainText = styled.h1<MainTextProps>`
-	${tw`text-4xl leading-close tracking-tightest text-red-400 font-medium text-center`}
+	${tw`text-4xl  text-red-400 font-medium text-center`}
 `;
 
 type SubTextProps = {};
 const SubText = styled.p<SubTextProps>`
-	${tw`text-xl leading-close tracking-tightest text-red-400 font-normal text-center`}
+	${tw`text-xl leading-none text-red-400 font-normal text-center italic`}
+
+	span {
+		${tw`underline`}
+	}
+`;
+
+type SubText2Props = {};
+const SubText2 = styled.p<SubText2Props>`
+	${tw`text-xl leading-none text-red-400 text-center mt-10! font-medium `}
+	padding: 0 10%;
+
+	@media screen and (min-width: ${theme`screens.sm`}) {
+		padding: 0 15%;
+	}
+
+	span {
+		${tw`underline`}
+	}
 `;
 
 export default SurveyThankYou;

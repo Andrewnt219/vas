@@ -14,7 +14,7 @@ const Container = styled.section<ContainerProps>`
 	${tw`space-y-16 text-xl  tracking-tighter leading-tight font-semibold`}
 
 	label {
-		${tw`font-medium`}
+		${tw`font-normal`}
 	}
 `;
 

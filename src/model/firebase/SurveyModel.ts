@@ -3,9 +3,9 @@ export type SurveyFsModel = {
 	smoothness: number;
 	siv: number;
 	vas: number;
-	guests: number;
-	misc: number;
-	favourite: string;
-	suggestion: string;
+	favouriteGuest: string;
+	suggestionGuest: string;
+	game: number;
+	suggestionVas: string;
 	_submittedAt: string;
 };

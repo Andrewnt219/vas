@@ -55,7 +55,7 @@ const Heading = styled.h1<HeadingProps>`
 
 type SubheadingProps = {};
 const Subheading = styled.p<SubheadingProps>`
-	${tw` text-lg sm:text-3xl font-medium tracking-tighter`}
+	${tw` text-lg sm:text-3xl font-normal tracking-tighter`}
 `;
 
 export default SurveyPageHero;

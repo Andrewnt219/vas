@@ -37,7 +37,7 @@ function SurveySectionRatingInput({ data, inputRef }: Props): ReactElement {
 type FakeInputProps = {};
 const FakeInput = styled.span<FakeInputProps>`
 	${tw`border-current border-2 rounded-full`}
-	${tw`mt-3`}
+	${tw`mt-3 font-semibold! `}
 	${tw`relative`}
 	
 	width: 1em;
