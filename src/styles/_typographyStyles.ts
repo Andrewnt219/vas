@@ -3,6 +3,7 @@ import { css, theme } from 'twin.macro';
 const fontFace = css`
 	/* roboto-regular - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 400;
@@ -15,6 +16,7 @@ const fontFace = css`
 	}
 	/* roboto-italic - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: italic;
 		font-weight: 400;
@@ -27,6 +29,7 @@ const fontFace = css`
 	}
 	/* roboto-500 - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 500;
@@ -37,6 +40,7 @@ const fontFace = css`
 	}
 	/* roboto-500italic - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: italic;
 		font-weight: 500;
@@ -49,6 +53,7 @@ const fontFace = css`
 	}
 	/* roboto-700 - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 700;
@@ -59,6 +64,7 @@ const fontFace = css`
 	}
 	/* roboto-700italic - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: italic;
 		font-weight: 700;
@@ -71,6 +77,7 @@ const fontFace = css`
 	}
 	/* roboto-900 - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 900;
@@ -81,6 +88,7 @@ const fontFace = css`
 	}
 	/* roboto-900italic - vietnamese_latin */
 	@font-face {
+		font-display: swap;
 		font-family: 'Roboto';
 		font-style: italic;
 		font-weight: 900;
