@@ -39,4 +39,9 @@ module.exports = {
 		'import/no-unresolved': ['error', { ignore: ['^@'] }],
 		'no-empty-pattern': 'off',
 	},
+	settings: {
+		react: {
+			version: 'detect',
+		},
+	},
 };

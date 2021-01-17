@@ -3,6 +3,7 @@ import SurveyButton from '@src/components/atoms/SurveyButton/SurveyButton';
 import SurveyErrorMessage from '@src/components/atoms/SurveyErrorMessage/SurveyErrorMessage';
 import SurveySectionAnswerInput from '@src/components/atoms/SurveySectionAnswerInput/SurveySectionAnswerInput';
 import SurveySectionQuestion from '@src/components/atoms/SurveySectionQuestion/SurveySectionQuestion';
+import SurveyRadioGroup from '@src/components/molecules/SurveySection/SurveyRadioGroup/SurveyRadioGroup';
 import SurveySection from '@src/components/molecules/SurveySection/SurveySection';
 import SurveySectionHeader from '@src/components/molecules/SurveySection/SurveySectionHeader/SurveySectionHeader';
 import SurveySectionQuestionGroup from '@src/components/molecules/SurveySection/SurveySectionQuestionGroup/SurveySectionQuestionGroup';
@@ -96,10 +97,20 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 							})}
 						/>
 					</SurveySectionQuestionGroup>
+				</SurveySection>
 
+				<SurveySection>
+					<SurveySectionHeader
+						data={{
+							heading: 'Phần 2',
+							descriptions: [
+								'Các bạn vui lòng đánh giá từng phần của Orientation dựa trên nội dung, thú vị, sự hữu ích của thông tin.',
+							],
+						}}
+					/>
 					<SurveySectionQuestionGroup>
 						<SurveySectionQuestion>
-							Seneca International Vietnam (SIV) *
+							Phần trình bày của Seneca International Vietnam (SIV) *
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
@@ -115,21 +126,10 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 							})}
 						/>
 					</SurveySectionQuestionGroup>
-				</SurveySection>
-
-				<SurveySection>
-					<SurveySectionHeader
-						data={{
-							heading: 'Phần 2',
-							descriptions: [
-								'Các bạn vui lòng đánh giá từng phần của Orientation dựa trên nội dung, thú vị, sự hữu ích của thông tin.',
-							],
-						}}
-					/>
 
 					<SurveySectionQuestionGroup>
 						<SurveySectionQuestion>
-							Vietnamese Association @ Seneca (VAS) *
+							Phần trình bày của các bạn Guest Speakers từ VAS *
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
@@ -148,7 +148,61 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 
 					<SurveySectionQuestionGroup>
 						<SurveySectionQuestion>
-							Guest speaker- Career Development *
+							Trong ba phần trình bày của các bạn Guest Speakers sau, bạn ấn
+							tượng với ai nhất? *
+						</SurveySectionQuestion>
+
+						<SurveyRadioGroup
+							data={{
+								inputsProps: [
+									{
+										label: 'Hà Thu - Kinh nghiệm học Online từ Việt Nam',
+										value: 'ha-thu',
+									},
+
+									{
+										label:
+											'Quách Phi Long - Học Online tại Canada và cơ hội xin thực tập',
+										value: 'long-quach',
+									},
+									{
+										label:
+											'Võ Nguyễn Trâm Anh - Làm sao để nhận được On-Campus job',
+										value: 'tram-anh',
+									},
+									{ label: 'Không ai cả', value: 'none' },
+								],
+								errorMessage: errors['guests']?.message,
+								name: 'guests',
+							}}
+							inputRef={register}
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Bạn có những góp ý gì cho các bạn Guest speakers từ VAS không?
+						</SurveySectionQuestion>
+
+						<AnimatePresence>
+							{errors['favourite'] && (
+								<SurveyErrorMessage>
+									{errors['favourite'].message}
+								</SurveyErrorMessage>
+							)}
+						</AnimatePresence>
+
+						<SurveySectionAnswerInput
+							ref={register}
+							type="text"
+							name="favourite"
+							placeholder="Câu trả lời của bạn"
+						/>
+					</SurveySectionQuestionGroup>
+
+					<SurveySectionQuestionGroup>
+						<SurveySectionQuestion>
+							Phần chơi game Scattegories *
 						</SurveySectionQuestion>
 
 						<SurveyRatingInputSet
@@ -165,50 +219,6 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 						/>
 					</SurveySectionQuestionGroup>
 
-					<SurveySectionQuestionGroup>
-						<SurveySectionQuestion>
-							The HUB/mini break, #StayActive Contest/Testimonials *
-						</SurveySectionQuestion>
-
-						<SurveyRatingInputSet
-							data={{
-								ratingSystem: { inputName: 'misc' },
-								errorMessage: errors['misc']?.message,
-							}}
-							inputRef={register({
-								required: {
-									message: 'Bạn cần điền ô này',
-									value: true,
-								},
-							})}
-						/>
-					</SurveySectionQuestionGroup>
-
-					<SurveySectionQuestionGroup>
-						<SurveySectionQuestion>
-							Trong 4 sections ở trên, phần yêu thích nhất của bạn là: *
-						</SurveySectionQuestion>
-
-						<AnimatePresence>
-							{errors['favourite'] && (
-								<SurveyErrorMessage>
-									{errors['favourite'].message}
-								</SurveyErrorMessage>
-							)}
-						</AnimatePresence>
-
-						<SurveySectionAnswerInput
-							ref={register({
-								required: {
-									message: 'Bạn cần điền ô này',
-									value: true,
-								},
-							})}
-							type="text"
-							name="favourite"
-							placeholder="Văn bản câu trả lời ngắn"
-						/>
-					</SurveySectionQuestionGroup>
 					<SurveySectionQuestionGroup>
 						<SurveySectionQuestion>
 							Bạn có những góp ý gì về Virtual Orientation hoặc suggestions cho
@@ -232,12 +242,12 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 							})}
 							type="text"
 							name="suggestion"
-							placeholder="Văn bản câu trả lời ngắn"
+							placeholder="Câu trả lời của bạn"
 						/>
 					</SurveySectionQuestionGroup>
 				</SurveySection>
 
-				<SurveyButton>Submit</SurveyButton>
+				<SurveyButton>Gửi</SurveyButton>
 			</Form>
 		</Container>
 	);
