@@ -13,7 +13,7 @@ import { AnimatePresence } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import tw, { styled, theme } from 'twin.macro';
-type FormValues = Omit<SurveyFsModel, '_submitedAt'>;
+type FormValues = Omit<SurveyFsModel, '_submitedAt' | '_semester'>;
 type Props = {
 	onFormSubmitted?: (data: SurveyFsModel) => void;
 };
@@ -24,6 +24,7 @@ function SurveyPageBody({ onFormSubmitted }: Props): ReactElement {
 	const onSubmit = (data: FormValues) => {
 		const submittedData: SurveyFsModel = {
 			...data,
+			_semester: 'W21',
 			_submittedAt: new Date().toString(),
 		};
 

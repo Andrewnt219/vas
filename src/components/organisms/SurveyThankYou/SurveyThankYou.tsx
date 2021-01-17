@@ -87,7 +87,7 @@ const containerVariants: Variants = {
 
 type ContainerProps = {};
 const Container = styled(motion.section)<ContainerProps>`
-	${tw`min-h-screen`}
+	${tw`min-h-screen pb-10`}
 `;
 type HeaderProps = {};
 const Header = styled.header<HeaderProps>`

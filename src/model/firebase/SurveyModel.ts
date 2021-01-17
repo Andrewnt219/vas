@@ -7,5 +7,6 @@ export type SurveyFsModel = {
 	suggestionGuest: string;
 	game: number;
 	suggestionVas: string;
+	_semester: string;
 	_submittedAt: string;
 };
