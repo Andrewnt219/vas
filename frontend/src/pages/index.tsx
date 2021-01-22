@@ -1,13 +1,34 @@
-import React, { ReactElement } from 'react';
+import MainLayout from '@src/components/MainLayout/MainLayout';
+import Link from 'next/link';
+import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
 
-function Index(): ReactElement {
-	return <Container>Coming soon.&nbsp;.</Container>;
-}
+type Props = {};
 
-const Container = styled.h1`
-	${tw`bg-red-500 py-10 px-5 w-full  text-white text-6xl font-bold text-center`}
-	${tw`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+const Homepage: VFC<Props> = ({}) => {
+	return (
+		<MainLayout>
+			<div>
+				<h1>Hey, I’m Lee Robinson</h1>
+				<h2>
+					I’m a developer, writer, and creator. I work at ▲Vercel as a Solutions
+					Architect. You’ve found my personal slice of the internet –&nbsp;
+					<Link href="/guestbook">
+						<a>sign my guestbook&nbsp;</a>
+					</Link>
+					while you&apos;re here.
+				</h2>
+				<h3>Most Popular</h3>
+
+				<h3>Projects</h3>
+			</div>
+		</MainLayout>
+	);
+};
+
+type ContainerProps = {};
+const Container = styled.section<ContainerProps>`
+	${tw``}
 `;
 
-export default Index;
+export default Homepage;

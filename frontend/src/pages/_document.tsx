@@ -45,7 +45,27 @@ export default class MyDocument extends Document {
 	render(): ReactElement {
 		return (
 			<Html>
-				<Head />
+				<Head>
+					<link
+						rel="preload"
+						href="/fonts/Inter/inter-v3-latin-regular.woff2"
+						as="font"
+						type="font/woff2"
+						crossOrigin="anonymous"
+					/>
+
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `							
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+									document.documentElement.classList.add('dark');																
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }                
+              `,
+						}}
+					/>
+				</Head>
 				<body>
 					<Main />
 					<NextScript />

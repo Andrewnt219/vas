@@ -10,32 +10,55 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "incremental": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "tsBuildInfoFile": ".tsbuildinfo",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".",
+    "baseUrl": ".",    
     "paths": {
       "@src/*": [
         "src/*"
       ],
       "@components/*": [
         "src/components/*"
-      ],      
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@lib/*": [
+        "src/lib/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@mock/*": [
+        "__test__/mock/*"
+      ]
+      
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/contexts/ThemeContext/ThemeContext.test.tsx", "__test__/setupTests.js"  ],
   "exclude": [
     "node_modules"
   ],
   "files": [
-		"@types/twin.d.ts",
+    "@types/twin.d.ts",
   ]
 }
