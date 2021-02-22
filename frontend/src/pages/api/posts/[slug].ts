@@ -1,41 +1,41 @@
-import firestore from '@src/lib/firebase/firestore';
+import { PostDataService } from '@src/services/post-data-service';
+import { PostsSlugResponse } from 'api-response';
 import { NextApiHandler } from 'next';
 
-const handler: NextApiHandler<{ data: any; error: Error | null }> = async (
-	req,
-	res
-) => {
-	if (req.method !== 'GET') {
-		return res.status(405).json({
-			data: null,
-			error: { message: 'Only GET', name: 'Invalid method' },
-		});
+const handler: NextApiHandler<PostsSlugResponse> = async (req, res) => {
+	try {
+		if (req.method !== 'GET') {
+			return res.status(405).json({
+				data: null,
+				error: { message: 'Only GET' },
+			});
+		}
+
+		const { slug } = req.query;
+
+		if (!slug || slug instanceof Array) {
+			return res.status(400).json({
+				data: null,
+				error: { message: 'Invalid/missing slug param' },
+			});
+		}
+
+		const post = await PostDataService.getPost(slug);
+
+		if (!post) {
+			return res
+				.status(500)
+				.json({ error: { message: 'Something went wrong' }, data: null });
+		}
+
+		return res.status(200).json({ data: post, error: null });
+	} catch (error) {
+		console.log(error);
+
+		return res
+			.status(500)
+			.json({ error: { message: 'Something went wrong' }, data: null });
 	}
-
-	const { slug } = req.query;
-
-	if (!slug) {
-		return res.status(400).json({
-			data: null,
-			error: { name: 'Missing param', message: 'Missing post slug' },
-		});
-	}
-
-	const snapshot = await firestore
-		.collection('entries')
-		.where('slug', '==', slug)
-		.limit(1)
-		.get();
-
-	const post = snapshot.docs[0]?.data();
-	if (!post) {
-		return res.status(404).json({
-			data: null,
-			error: { name: 'Not found', message: 'Post slug not found' },
-		});
-	}
-
-	return res.status(200).json({ data: post, error: null });
 };
 
 export default handler;

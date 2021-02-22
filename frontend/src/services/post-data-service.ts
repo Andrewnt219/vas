@@ -1,19 +1,24 @@
-import axios from 'axios';
+import { Post } from '@prisma/client';
+import { Prisma } from '@src/lib/prisma';
 
 export class PostDataService {
-	public static async increaseViews(slug: string): Promise<number | undefined> {
-		const { data } = await axios.patch<number | undefined>(
-			'/api/posts/increaseViews',
-			{
-				slug,
-			}
-		);
+	private static postDt = Prisma.get().post;
+	public static increaseViews(slug: string): Promise<Post | null> {
+		return Prisma.wrapper(async () => {
+			const post = await this.postDt.upsert({
+				where: { slug },
+				update: { views: { increment: 1 } },
+				create: { slug },
+			});
 
-		return data;
+			return post;
+		});
 	}
-	public static async getPost(slug: string): Promise<any | undefined> {
-		const { data } = await axios.get<any | undefined>(`/api/posts/${slug}`);
+	public static getPost(slug: string): Promise<Post | null> {
+		return Prisma.wrapper(async () => {
+			const post = await this.postDt.findFirst({ where: { slug } });
 
-		return data;
+			return post;
+		});
 	}
 }

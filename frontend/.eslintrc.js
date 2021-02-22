@@ -36,7 +36,7 @@ module.exports = {
 		'@typescript-eslint/ban-ts-ignore': 0,
 		'@typescript-eslint/ban-ts-comment': 0,
 		'@typescript-eslint/ban-types': 0,
-		'import/no-unresolved': ['error', { ignore: ['^@', '^all:', '^part:'] }],
+		'import/no-unresolved': 'off',
 		'no-empty-pattern': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 0,
 	},

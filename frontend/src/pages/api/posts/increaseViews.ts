@@ -1,18 +1,16 @@
-import firestore from '@src/lib/firebase/firestore';
-import firebase from 'firebase-admin';
+import { PostDataService } from '@src/services/post-data-service';
+import { PostsIncreaseViewsResponse } from 'api-response';
 import { NextApiHandler } from 'next';
 
-type Response = {
-	error: Error | null;
-	message: string;
-};
-
-const handler: NextApiHandler<Response> = async (req, res) => {
+const handler: NextApiHandler<PostsIncreaseViewsResponse> = async (
+	req,
+	res
+) => {
 	try {
 		if (req.method !== 'PATCH') {
 			return res.status(405).json({
-				message: '',
-				error: { message: 'Only PATCH', name: 'Invalid method' },
+				data: null,
+				error: { message: 'Only PATCH' },
 			});
 		}
 
@@ -20,24 +18,27 @@ const handler: NextApiHandler<Response> = async (req, res) => {
 
 		if (slug === undefined) {
 			return res.status(400).json({
-				message: '',
-				error: { message: 'Missing slug', name: 'Invalid parameters' },
+				data: null,
+				error: { message: 'Missing slug' },
 			});
 		}
 
-		await firestore
-			.collection('entries')
-			.doc(slug)
-			.update({
-				views: firebase.firestore.FieldValue.increment(1),
-			});
+		const updatedPost = await PostDataService.increaseViews(slug);
 
-		return res.status(200).json({ message: 'OK', error: null });
+		if (!updatedPost) {
+			return res.status(500).json({
+				data: null,
+				error: { message: 'Something went wrong' },
+			});
+		}
+
+		return res.status(200).json({ data: updatedPost, error: null });
 	} catch (error) {
 		console.log(error);
+
 		return res.status(500).json({
-			message: '',
-			error: { message: 'Something went wrong', name: 'Server error' },
+			data: null,
+			error: { message: 'Something went wrong' },
 		});
 	}
 };
