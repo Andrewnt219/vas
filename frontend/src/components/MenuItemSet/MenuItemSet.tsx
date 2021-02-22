@@ -26,7 +26,7 @@ const MenuItemSetContainer = styled.ul<MenuItemSetContainerProps>`
 `;
 
 export const MenuDropdownItemSet = styled(MenuItemSet)`
-	${tw`bg-blue-50 `}
+	${tw` `}
 `;
 
 export default MenuItemSet;

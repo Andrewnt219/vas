@@ -1,26 +1,19 @@
-import { Post } from '@prisma/client';
-import { Db } from './db';
+import axios from 'axios';
 
 export class PostDataService {
-	private static table = Db.get().post;
-	public static insert(postId: string): Promise<Post | undefined> {
-		return Db.handleService(async () => {
-			const post = await this.table.create({
-				data: { id: postId },
-			});
+	public static async increaseViews(slug: string): Promise<number | undefined> {
+		const { data } = await axios.patch<number | undefined>(
+			'/api/posts/increaseViews',
+			{
+				slug,
+			}
+		);
 
-			return post;
-		});
+		return data;
 	}
-	public static increaseViews(postId: string): Promise<number | undefined> {
-		return Db.handleService(async () => {
-			const post = await this.table.upsert({
-				where: { id: postId },
-				update: { views: { increment: 1 } },
-				create: { id: postId },
-			});
+	public static async getPost(slug: string): Promise<any | undefined> {
+		const { data } = await axios.get<any | undefined>(`/api/posts/${slug}`);
 
-			return post.views;
-		});
+		return data;
 	}
 }
