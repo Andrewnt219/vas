@@ -50,10 +50,10 @@ export default function MainLayout({ children, customMeta }: Props) {
 				<meta content={meta.description} name="description" />
 				<meta
 					property="og:url"
-					content={`https://andrewnt.dev${router.asPath}`}
+					content={`https://vasseneca.com${router.asPath}`}
 				/>
 				<meta property="og:type" content={meta.type} />
-				<meta property="og:site_name" content="Andrew Nguyen" />
+				<meta property="og:site_name" content="VAS Seneca" />
 				<meta property="og:description" content={meta.description} />
 				<meta property="og:title" content={meta.title} />
 				<meta property="og:image" content={meta.image} />
@@ -75,12 +75,12 @@ export default function MainLayout({ children, customMeta }: Props) {
 type ContainerProps = {};
 const Container = styled.div<ContainerProps>`
 	${tw`mx-auto`}
-	${tw`prose dark:prose-dark`}
+	${tw`prose`}
 `;
 
 type MainProps = {};
 const Main = styled.main<MainProps>`
 	${tw`flex flex-col justify-center  px-8`}
 	${tw`transition-colors duration-500`}
-	${tw`bg-white dark:bg-black`} // necessary for a smooth transition with main
+	${tw`bg-white`} // necessary for a smooth transition with main
 `;

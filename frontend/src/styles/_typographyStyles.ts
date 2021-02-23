@@ -1,4 +1,4 @@
-import { css } from 'twin.macro';
+import tw, { css } from 'twin.macro';
 
 export const bodyFontFace = css`
 	/* dm-sans-regular - latin */
@@ -66,5 +66,9 @@ export const bodyFontFace = css`
 `;
 
 export const typographyStyles = css`
+	body {
+		${tw`text-body`}
+	}
+
 	${bodyFontFace}
 `;
