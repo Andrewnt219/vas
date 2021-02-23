@@ -1,10 +1,7 @@
-import { useMenuState } from '@src/contexts/MenuStateContext/MenuStateContext';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
-import MobileMenu from '../MobileMenu/MobileMenu';
-import Navbar from '../Navbar/Navbar';
 
 type Props = {
 	children: ReactNode;
@@ -13,7 +10,7 @@ type Props = {
 
 export default function MainLayout({ children, customMeta }: Props) {
 	const router = useRouter();
-	const [isOpenedMenu] = useMenuState();
+
 	const meta = {
 		title: 'Andrew Nguyen – Web Developer, Writer.',
 		description: 'Front-end developer. TypeScript, React, JAM Stack.',
@@ -25,6 +22,29 @@ export default function MainLayout({ children, customMeta }: Props) {
 	return (
 		<Container>
 			<Head>
+				<link rel="shortcut icon" href="/favicon.ico" />
+
+				<link
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href="/apple-touch-icon.png"
+				/>
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="32x32"
+					href="/favicon-32x32.png"
+				/>
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="16x16"
+					href="/favicon-16x16.png"
+				/>
+				<link rel="manifest" href="/site.webmanifest" />
+				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d73732" />
+				<meta name="msapplication-TileColor" content="#d73732" />
+				<meta name="theme-color" content="#d73732"></meta>
 				<title>{meta.title}</title>
 				<meta name="robots" content="follow, index" />
 				<meta content={meta.description} name="description" />
@@ -47,8 +67,6 @@ export default function MainLayout({ children, customMeta }: Props) {
 				)}
 			</Head>
 
-			<Navbar />
-			{isOpenedMenu && <MobileMenu />}
 			<Main id="skip">{children}</Main>
 		</Container>
 	);

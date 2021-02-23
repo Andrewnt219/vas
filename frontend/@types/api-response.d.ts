@@ -1,5 +1,4 @@
 declare module 'api-response' {
-	import type { Post } from '@prisma/client';
 	type Error = {
 		message: string;
 	};
@@ -8,8 +7,4 @@ declare module 'api-response' {
 		error: Error | null;
 		data: T | null;
 	};
-
-	type PostsIncreaseViewsResponse = Response<Post>;
-
-	type PostsSlugResponse = Response<Post>;
 }
