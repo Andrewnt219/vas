@@ -12,106 +12,24 @@ export const routes: RouteValues[] = [
 		exact: true,
 	},
 	{
-		text: 'About',
-		href: '/about',
+		text: 'What is VAS',
+		href: '/about-us',
 	},
 	{
-		text: 'Blog',
-		href: '/blogs',
-		children: [
-			{
-				text: 'Home',
-				href: '/',
-				exact: true,
-			},
-			{
-				text: 'Inner',
-				href: '/blogs',
-				children: [
-					{
-						text: 'Inner',
-						href: '/blogs',
-						children: [
-							{
-								text: 'Home',
-								href: '/',
-								exact: true,
-							},
-							{
-								text: 'Inner',
-								href: '/a',
-								children: [
-									{
-										text: 'Home',
-										href: '/',
-										exact: true,
-									},
-									{
-										text: 'About',
-										href: '/about',
-									},
-									{
-										text: 'Projects',
-										href: '/projects',
-									},
-								],
-							},
-							{
-								text: 'About',
-								href: '/about',
-							},
-							{
-								text: 'Inner',
-								href: '/blogs',
-								children: [
-									{
-										text: 'Home',
-										href: '/',
-										exact: true,
-									},
-									{
-										text: 'About',
-										href: '/about',
-									},
-									{
-										text: 'Projects',
-										href: '/projects',
-									},
-								],
-							},
-							{
-								text: 'Projects',
-								href: '/projects',
-							},
-						],
-					},
-					{
-						text: 'Home',
-						href: '/',
-						exact: true,
-					},
-					{
-						text: 'About',
-						href: '/about',
-					},
-					{
-						text: 'Projects',
-						href: '/projects',
-					},
-				],
-			},
-			{
-				text: 'About',
-				href: '/about',
-			},
-			{
-				text: 'Projects',
-				href: '/projects',
-			},
-		],
+		text: 'Events',
+		href: '/events',
 	},
 	{
-		text: 'Projects',
-		href: '/projects',
+		text: 'News',
+		href: '/news',
+	},
+	{
+		text: 'Our Partners',
+		href: '/partners',
+	},
+	{
+		// eslint-disable-next-line quotes
+		text: "Let's Connect",
+		href: '/contact-us',
 	},
 ];
