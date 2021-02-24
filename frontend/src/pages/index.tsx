@@ -1,5 +1,6 @@
 import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@src/components/MainLayout/MainLayout';
+import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import React, { VFC } from 'react';
 import 'twin.macro';
@@ -35,7 +36,9 @@ const FACTS: FactTileProps['data'][] = [
 
 type Props = {};
 
-const index: VFC<Props> = ({}) => {
+const Index: VFC<Props> = ({}) => {
+	const { t } = useTranslation();
+
 	return (
 		<MainLayout title="VAS">
 			<section tw="grid grid-cols-12 ">
@@ -43,15 +46,8 @@ const index: VFC<Props> = ({}) => {
 					tw="col-start-2 col-end-6 self-center z-10"
 					style={{ width: '125%' }}
 				>
-					<h1 tw="text-5xl text-primary font-bold ">
-						Vietnamese&nbsp;Association
-						<br />
-						at Seneca College
-					</h1>
-					<p tw="mt-10 w-2/3 text-body">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry.
-					</p>
+					<h1 tw="text-5xl text-primary font-bold ">{t('home:hero.title')}</h1>
+					<p tw="mt-10 w-2/3 text-body">{t('home:hero.subtitle')}</p>
 				</header>
 
 				<div tw="col-start-6 col-end-13 relative top-20">
@@ -118,4 +114,4 @@ const index: VFC<Props> = ({}) => {
 	);
 };
 
-export default index;
+export default Index;
