@@ -11,6 +11,7 @@ type FactTileProps = {
 	};
 };
 
+// TODO ask Nhi about shadow
 const FactTile: VFC<FactTileProps> = ({ data }) => {
 	const { key, value } = data;
 	return (
@@ -36,6 +37,7 @@ const FACTS: FactTileProps['data'][] = [
 
 type Props = {};
 
+// TODO check cache control of fonts and images again
 const Index: VFC<Props> = ({}) => {
 	const { t } = useTranslation();
 
