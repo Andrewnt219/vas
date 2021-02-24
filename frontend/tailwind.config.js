@@ -11,16 +11,23 @@ module.exports = {
 	theme: {
 		colors: {
 			primary: '#D73732',
+
 			gray: {
 				DEFAULT: '#F3F0EA',
+				100: '#F6F6F6',
 			},
 			black: {
 				DEFAULT: '#000',
 				half: '#00000080',
 			},
 			white: '#fff',
+			transparent: 'transparent',
+			current: 'currentColor',
 		},
 		extend: {
+			spacing: {
+				full: '100%',
+			},
 			fontSize: {
 				body: ['0.875rem', { lineHeight: '1.46' }],
 				subtitle: ['0.875rem', { lineHeight: '1.46' }],
