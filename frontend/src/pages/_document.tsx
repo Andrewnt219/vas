@@ -69,24 +69,21 @@ export default class MyDocument extends Document {
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d73732" />
 					<meta name="msapplication-TileColor" content="#d73732" />
 					<meta name="theme-color" content="#d73732"></meta>
+
 					<link
 						rel="preload"
-						href="/fonts/Inter/inter-v3-latin-regular.woff2"
+						href="/fonts/dm-sans-v6-latin-500.woff2"
 						as="font"
 						type="font/woff2"
 						crossOrigin="anonymous"
 					/>
 
-					<script
-						dangerouslySetInnerHTML={{
-							__html: `							
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-									document.documentElement.classList.add('dark');																
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }                
-              `,
-						}}
+					<link
+						rel="preload"
+						href="/fonts/dm-sans-v6-latin-700.woff2"
+						as="font"
+						type="font/woff2"
+						crossOrigin="anonymous"
 					/>
 				</Head>
 				<body>
