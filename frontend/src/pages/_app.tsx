@@ -1,3 +1,5 @@
+import Appbar from '@components/Appbar/Appbar';
+import Footer from '@components/Footer/Footer';
 import GlobalStyles from '@styles/GlobalStyles';
 import { AppProps } from 'next/app';
 import { ReactElement } from 'react';
@@ -8,7 +10,10 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 		<>
 			<TwGlobalStyles />
 			<GlobalStyles />
+
+			<Appbar />
 			<Component {...pageProps} />
+			<Footer />
 		</>
 	);
 }
