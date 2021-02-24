@@ -66,6 +66,9 @@ export const bodyFontFace = css`
 `;
 
 export const typographyStyles = css`
+	:root {
+	}
+
 	body {
 		${tw`text-body`}
 	}

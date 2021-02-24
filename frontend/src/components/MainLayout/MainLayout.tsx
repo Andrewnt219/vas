@@ -1,18 +1,22 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import tw, { styled } from 'twin.macro';
+import 'twin.macro';
 
 type Props = {
 	children: ReactNode;
-	customMeta?: { date: string } & Record<string, string>;
+	title?: string;
+	customMeta?: { date: string; title: never } & Record<string, string>;
 };
 
-export default function MainLayout({ children, customMeta }: Props) {
+export default function MainLayout({
+	children,
+	customMeta,
+	title = 'Andrew Nguyen – Web Developer, Writer.',
+}: Props) {
 	const router = useRouter();
 
 	const meta = {
-		title: 'Andrew Nguyen – Web Developer, Writer.',
 		description: 'Front-end developer. TypeScript, React, JAM Stack.',
 		image: 'https://andrewnt.dev/images/banner.png',
 		type: 'website',
@@ -20,9 +24,9 @@ export default function MainLayout({ children, customMeta }: Props) {
 	};
 
 	return (
-		<Container>
+		<div tw="col-span-full">
 			<Head>
-				<title>{meta.title}</title>
+				<title>{title}</title>
 				<meta name="robots" content="follow, index" />
 				<meta content={meta.description} name="description" />
 				<meta
@@ -43,21 +47,7 @@ export default function MainLayout({ children, customMeta }: Props) {
 					<meta property="article:published_time" content={meta.date} />
 				)}
 			</Head>
-
-			<Main id="skip">{children}</Main>
-		</Container>
+			<main id="skip">{children}</main>
+		</div>
 	);
 }
-
-type ContainerProps = {};
-const Container = styled.div<ContainerProps>`
-	${tw`mx-auto`}
-	${tw`prose`}
-`;
-
-type MainProps = {};
-const Main = styled.main<MainProps>`
-	${tw`flex flex-col justify-center  px-8`}
-	${tw`transition-colors duration-500`}
-	${tw`bg-white`} // necessary for a smooth transition with main
-`;
