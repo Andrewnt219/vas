@@ -69,6 +69,10 @@ export const typographyStyles = css`
 	:root {
 	}
 
+	html:lang(vi-VN) {
+		font-family: 'san-serif';
+	}
+
 	body {
 		${tw`text-body`}
 	}
