@@ -6,6 +6,9 @@ type Props = {
 	className?: string;
 };
 
+/**
+ * @description renders the logo with link to homepage
+ */
 const Logo: VFC<Props> = ({ className }) => {
 	return (
 		<NextLink href="/">

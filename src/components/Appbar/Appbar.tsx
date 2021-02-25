@@ -5,6 +5,9 @@ import 'twin.macro';
 import MenuItemSet from './components/MenuItemSet/MenuItemSet';
 type Props = {};
 
+/**
+ * @description renders the navigation bar
+ */
 const Appbar: VFC<Props> = ({}) => {
 	return (
 		<nav tw="grid grid-cols-12 col-span-full">

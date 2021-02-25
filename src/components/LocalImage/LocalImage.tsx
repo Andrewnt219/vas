@@ -1,29 +1,39 @@
 import NextImage, { ImageProps } from 'next/image';
 import React, { SyntheticEvent, useRef, VFC } from 'react';
 import 'twin.macro';
+
+// For some reasons, using Omit src cause error
 type Props = ImageProps & {
 	className?: string;
 };
 
-// For some reasons, using Omit src cause error
+/**
+ * @description Enhanced local images loading with next-optimized-images
+ */
 const Image: VFC<Props> = ({ className, src, ...imageProps }) => {
 	const lqipRef = useRef<HTMLImageElement | null>(null);
 
-	const handleImageLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-		const imageElement = lqipRef.current;
+	// Switch display with placeholder
+	const handleImageLoad = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
+		const placeholderImageEl = lqipRef.current;
+		const { currentTarget: imageEl } = ev;
 
-		if (imageElement) {
-			e.currentTarget.style.opacity = '1';
-			imageElement.style.opacity = '0';
+		imageEl.style.opacity = '1';
+
+		if (placeholderImageEl) {
+			placeholderImageEl.style.opacity = '0';
 		}
 	};
 
-	const handleErrorLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-		const imageElement = lqipRef.current;
+	// Show placeholder again
+	const handleErrorLoad = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
+		const placeholderImageEl = lqipRef.current;
+		const { currentTarget: imageEl } = ev;
 
-		if (imageElement) {
-			imageElement.style.opacity = '1';
-			e.currentTarget.style.opacity = '0';
+		imageEl.style.opacity = '0';
+
+		if (placeholderImageEl) {
+			placeholderImageEl.style.opacity = '1';
 		}
 	};
 

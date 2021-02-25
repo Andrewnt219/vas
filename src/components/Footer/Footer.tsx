@@ -6,6 +6,9 @@ type MediaIconAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 	children: ReactNode;
 };
 
+/**
+ * @description renders a link with svg icon
+ */
 const MediaIconAnchor: VFC<MediaIconAnchorProps> = ({
 	className,
 	children,
@@ -36,6 +39,9 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
 
 type Props = {};
 
+/**
+ * @description renders the main footer
+ */
 const Footer: VFC<Props> = ({}) => {
 	return (
 		<footer tw="absolute bottom-0 bg-primary h-56 w-full pt-7 text-white text-lg flex-center flex-col">

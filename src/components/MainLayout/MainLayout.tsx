@@ -9,6 +9,9 @@ type Props = {
 	customMeta?: { date: string; title: never } & Record<string, string>;
 };
 
+/**
+ * @description renders the main layout with meta tags
+ */
 export default function MainLayout({
 	children,
 	customMeta,

@@ -5,6 +5,9 @@ export type RouteValues = Pick<LinkProps, 'href'> & {
 	children?: RouteValues[];
 };
 
+/**
+ * @description routes for navigation bar
+ */
 export const routes: RouteValues[] = [
 	{
 		text: 'Home',

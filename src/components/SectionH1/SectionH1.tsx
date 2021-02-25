@@ -5,6 +5,9 @@ type Props = {
 	children: ReactNode;
 };
 
+/**
+ * @description renders a styled header for a section
+ */
 const SectionH1: VFC<Props> = ({ children }) => {
 	return <Heading>{children}</Heading>;
 };

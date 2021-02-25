@@ -8,6 +8,9 @@ type Props = {
 	className?: string;
 };
 
+/**
+ * @description renders a set of navigation links
+ */
 const MenuItemSet: VFC<Props> = ({ data, className }) => {
 	return (
 		<Container className={className}>

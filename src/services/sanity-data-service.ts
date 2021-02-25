@@ -1,9 +1,13 @@
 import { SanityClient } from '@sanity/client';
 import { PostModel, postModelQuery } from '@src/models/PostModel';
 
+/**
+ * @description for interacting with Sanity Studio
+ */
 export class SanityDataService {
 	private static client: SanityClient | null = null;
 
+	// dynamically import the client (reduce initial bundle)
 	private static async setup() {
 		try {
 			SanityDataService.client = (await import('@lib/sanity')).sanityClient;
@@ -12,6 +16,7 @@ export class SanityDataService {
 		}
 	}
 
+	// Wrapper for services
 	private static async withFetch<T>(
 		query: string,
 		params: Record<string, any> = {}
@@ -25,6 +30,7 @@ export class SanityDataService {
 		return client.fetch<T>(query, params);
 	}
 
+	// return the sanity client
 	private static async getClient() {
 		if (!SanityDataService.client) {
 			await SanityDataService.setup();

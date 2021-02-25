@@ -8,10 +8,14 @@ type Props = {
 	data: RouteValues;
 };
 
+/**
+ * @description renders a link or active link in the menu
+ */
 const MenuItem: VFC<Props> = ({ data }) => {
 	const { href, text, exact } = data;
 
 	const isActive = useRouteMatch(href.toString(), exact);
+
 	return (
 		<NextLink href={href} passHref>
 			<Anchor isActive={isActive}>{text}</Anchor>
