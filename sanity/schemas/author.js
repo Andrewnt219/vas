@@ -1,41 +1,22 @@
+import { customDescriptionField } from '../fields/common/descriptionField';
+import { slugField } from '../fields/common/slugField';
+import { thumbnailField } from '../fields/common/thumbnailField';
+import { titleField } from '../fields/common/titleField';
+
 export default {
-	name: "author",
-	title: "Author",
-	type: "document",
+	name: 'author',
+	title: 'Author',
+	type: 'document',
 	fields: [
-		{
-			name: "name",
-			title: "Name",
-			type: "string",
-		},
-		{
-			name: "slug",
-			title: "Slug",
-			type: "slug",
-			options: {
-				source: "name",
-				maxLength: 96,
-			},
-		},
-		{
-			name: "image",
-			title: "Image",
-			type: "image",
-			options: {
-				hotspot: true,
-				metadata: ["lqip"],
-			},
-		},
-		{
-			name: "bio",
-			title: "Bio",
-			type: "text",
-		},
+		titleField,
+		slugField,
+		thumbnailField,
+		customDescriptionField({ description: 'Biography' }),
 	],
 	preview: {
 		select: {
-			title: "name",
-			media: "image",
+			title: titleField.name,
+			media: thumbnailField.name,
 		},
 	},
 };
