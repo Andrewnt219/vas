@@ -2450,7 +2450,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -4057,7 +4057,6 @@ get-window@^1.1.1:
 get-youtube-id@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/get-youtube-id/-/get-youtube-id-1.0.1.tgz#adb6f475e292d98f98ed5bfb530887656193e157"
-  integrity sha512-5yidLzoLXbtw82a/Wb7LrajkGn29BM6JuLWeHyNfzOGp1weGyW4+7eMz6cP23+etqj27VlOFtq8fFFDMLq/FXQ==
 
 getpass@^0.1.1:
   version "0.1.7"
@@ -5028,7 +5027,6 @@ load-json-file@^2.0.0:
 load-script@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
-  integrity sha1-BJGTngvuVkPuSUp+PaPSuscMbKQ=
 
 loader-runner@^2.3.0:
   version "2.4.0"
@@ -5137,6 +5135,10 @@ lodash.foreach@^3.0.3:
     lodash._baseeach "^3.0.0"
     lodash._bindcallback "^3.0.0"
     lodash.isarray "^3.0.0"
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
@@ -5436,7 +5438,7 @@ moment-timezone@^0.5.11:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.19.1:
+"moment@>= 2.9.0", moment@^2.19.1, moment@^2.29.1:
   version "2.29.1"
   resolved "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
 
@@ -7020,7 +7022,6 @@ react-tiny-virtual-list@^2.0.5:
 react-youtube@^7.13.1:
   version "7.13.1"
   resolved "https://registry.yarnpkg.com/react-youtube/-/react-youtube-7.13.1.tgz#3b327599a687bf22e071468818522920b36bcb57"
-  integrity sha512-b++TLHmHDpd0ZBS1wcbYabbuchU+W4jtx5A2MUQX0BINNKKsaIQX29sn/aLvZ9v5luwAoceia3VGtyz9blaB9w==
   dependencies:
     fast-deep-equal "3.1.3"
     prop-types "15.7.2"
@@ -7163,7 +7164,7 @@ regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
-regenerator-runtime@^0.13.4:
+regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
 
@@ -7387,6 +7388,17 @@ sanity-diff-patch@^1.0.9:
   dependencies:
     diff-match-patch "^1.0.5"
 
+sanity-plugin-intl-input@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.npmjs.org/sanity-plugin-intl-input/-/sanity-plugin-intl-input-5.0.6.tgz#3bd4fb7ad809d1feef4109c4c4d735d626c9edb5"
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    classnames "^2.2.6"
+    lodash.get "^4.4.2"
+    moment "^2.29.1"
+    regenerator-runtime "^0.13.7"
+    slugify "^1.4.6"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -7568,7 +7580,6 @@ simple-swizzle@^0.2.2:
 sister@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/sister/-/sister-3.0.2.tgz#bb3e39f07b1f75bbe1945f29a27ff1e5a2f26be4"
-  integrity sha512-p19rtTs+NksBRKW9qn0UhZ8/TUI9BPw9lmtHny+Y3TinWlOa9jWh9xB0AtPSdmOy49NJJJSSe0Ey4C7h0TrcYA==
 
 slash@^2.0.0:
   version "2.0.0"
@@ -7583,6 +7594,10 @@ slate@^0.58.4:
     immer "^5.0.0"
     is-plain-object "^3.0.0"
     tiny-warning "^1.0.3"
+
+slugify@^1.4.6:
+  version "1.4.7"
+  resolved "https://registry.npmjs.org/slugify/-/slugify-1.4.7.tgz#e42359d505afd84a44513280868e31202a79a628"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
@@ -8682,7 +8697,6 @@ yargs@~3.10.0:
 youtube-player@5.5.2:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/youtube-player/-/youtube-player-5.5.2.tgz#052b86b1eabe21ff331095ffffeae285fa7f7cb5"
-  integrity sha512-ZGtsemSpXnDky2AUYWgxjaopgB+shFHgXVpiJFeNB5nWEugpW1KWYDaHKuLqh2b67r24GtP6HoSW5swvf0fFIQ==
   dependencies:
     debug "^2.6.6"
     load-script "^1.0.0"

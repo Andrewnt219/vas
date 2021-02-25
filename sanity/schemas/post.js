@@ -7,12 +7,15 @@ import { titleField } from '../fields/common/titleField';
 import { categoryField } from '../fields/post/categoryField';
 import { isArchivedField } from '../fields/post/isArchivedField';
 import { snippetField } from '../fields/post/snippetField';
-
+import { i18n } from './documentTranslation';
 // TODO generate slug on publish action
+// TODO set up SEO for the post
+//
 export default {
 	name: 'post',
 	title: 'Post',
 	type: 'document',
+	i18n,
 
 	initialValue: {
 		[isArchivedField.name]: false,
