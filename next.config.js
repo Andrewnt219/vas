@@ -4,7 +4,8 @@ const bundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
 const nextTranslate = require('next-translate');
-
+const nextOptimizedImages = require('next-optimized-images');
+const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 const eslintOptions = {
@@ -18,6 +19,9 @@ const nextConfig = {
 			config.node = { fs: 'empty', module: 'empty' };
 		}
 
+		// for next-optimized-images
+		config.resolve.alias.images = path.join(__dirname, '/images');
+
 		// For linting in terminal
 		if (dev) {
 			config.plugins.push(new ESLintPlugin(eslintOptions));
@@ -27,4 +31,7 @@ const nextConfig = {
 	},
 };
 
-module.exports = withPlugins([bundleAnalyzer], nextTranslate(nextConfig));
+module.exports = withPlugins(
+	[bundleAnalyzer, nextOptimizedImages],
+	nextTranslate(nextConfig)
+);
