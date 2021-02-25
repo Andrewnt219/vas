@@ -64,7 +64,6 @@ const Index: VFC<Props> = ({}) => {
 					height={713}
 					layout="responsive"
 					sizes="50vw"
-					loading="eager"
 				/>
 			</section>
 
