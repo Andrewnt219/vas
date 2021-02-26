@@ -1,8 +1,11 @@
+import { GetPostResponse } from '@api-response';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
+import { FireBasePost } from '@firebase';
 import MainLayout from '@src/components/MainLayout/MainLayout';
+import axios from 'axios';
 import useTranslation from 'next-translate/useTranslation';
-import React, { VFC } from 'react';
+import React, { useEffect, useState, VFC } from 'react';
 import 'twin.macro';
 type FactTileProps = {
 	data: {
@@ -43,8 +46,14 @@ type Props = {};
 
 // TODO check cache control of fonts and images again
 const Index: VFC<Props> = ({}) => {
+	const [views, setViews] = useState<FireBasePost | null>(null);
 	const { t } = useTranslation();
-
+	useEffect(() => {
+		axios
+			.get<GetPostResponse>('/api/posts/abc')
+			.then((res) => setViews(res.data.data))
+			.catch((res) => setViews(null));
+	}, []);
 	return (
 		<MainLayout title="VAS">
 			<section tw="grid grid-cols-12">
@@ -52,7 +61,10 @@ const Index: VFC<Props> = ({}) => {
 					tw="col-start-2 col-end-6 self-center z-10"
 					style={{ width: '125%' }}
 				>
-					<h1 tw="text-5xl text-primary font-bold ">{t('home:hero.title')}</h1>
+					<h1 tw="text-5xl text-primary font-bold ">
+						{t('home:hero.title')}
+						{views?.views ?? '...'}
+					</h1>
 					<p tw="mt-10 w-2/3 text-body">{t('home:hero.subtitle')}</p>
 				</header>
 
