@@ -1,9 +1,8 @@
-import { GetPostResponse } from '@api-response';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import { FireBasePost } from '@firebase';
+import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
-import axios from 'axios';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect, useState, VFC } from 'react';
 import 'twin.macro';
@@ -46,13 +45,18 @@ type Props = {};
 
 // TODO check cache control of fonts and images again
 const Index: VFC<Props> = ({}) => {
-	const [views, setViews] = useState<FireBasePost | null>(null);
+	const [views, setViews] = useState<number | null>(null);
+	const [post, setPost] = useState<FireBasePost | null>(null);
+
 	const { t } = useTranslation();
 	useEffect(() => {
-		axios
-			.get<GetPostResponse>('/api/posts/abc')
+		PostDataService.increaseViews('abc')
 			.then((res) => setViews(res.data.data))
 			.catch((res) => setViews(null));
+
+		PostDataService.getPost('abc')
+			.then((res) => setPost(res.data.data))
+			.catch((res) => setPost(null));
 	}, []);
 	return (
 		<MainLayout title="VAS">
@@ -63,7 +67,8 @@ const Index: VFC<Props> = ({}) => {
 				>
 					<h1 tw="text-5xl text-primary font-bold ">
 						{t('home:hero.title')}
-						{views?.views ?? '...'}
+						{views ?? '...'}
+						{post?.views ?? '...'}
 					</h1>
 					<p tw="mt-10 w-2/3 text-body">{t('home:hero.subtitle')}</p>
 				</header>

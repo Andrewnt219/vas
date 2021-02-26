@@ -47,4 +47,5 @@ const handler: NextApiHandler<IncreaseViewResponse> = async (req, res) => {
 		});
 	}
 };
+
 export default handler;
