@@ -1,10 +1,8 @@
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
-import { FireBasePost } from '@firebase';
-import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useEffect, useState, VFC } from 'react';
+import React, { VFC } from 'react';
 import 'twin.macro';
 type FactTileProps = {
 	data: {
@@ -18,9 +16,9 @@ const FactTile: VFC<FactTileProps> = ({ data }) => {
 	const { key, value } = data;
 	return (
 		<div tw="bg-white rounded-3xl shadow-lg relative pb-full">
-			<div tw="position-center flex flex-col   items-center space-y-5 font-medium leading-tight">
-				<span tw="text-primary text-8xl ">{value}</span>
-				<span tw="text-4xl ">{key}</span>
+			<div tw="position-center flex flex-col   items-center  font-medium leading-tight space-y-1 md:space-y-3">
+				<span tw="text-primary text-4xl md:text-8xl">{value}</span>
+				<span tw="text-base md:text-4xl">{key}</span>
 			</div>
 		</div>
 	);
@@ -43,55 +41,41 @@ const FACTS: FactTileProps['data'][] = [
 
 type Props = {};
 
-// TODO check cache control of fonts and images again
 const Index: VFC<Props> = ({}) => {
-	const [views, setViews] = useState<number | null>(null);
-	const [post, setPost] = useState<FireBasePost | null>(null);
-
 	const { t } = useTranslation();
-	useEffect(() => {
-		PostDataService.increaseViews('abc')
-			.then((res) => setViews(res.data.data))
-			.catch((res) => setViews(null));
 
-		PostDataService.getPost('abc')
-			.then((res) => setPost(res.data.data))
-			.catch((res) => setPost(null));
-	}, []);
 	return (
 		<MainLayout title="VAS">
-			<section tw="grid grid-cols-12">
-				<header
-					tw="col-start-2 col-end-6 self-center z-10"
-					style={{ width: '125%' }}
-				>
-					<h1 tw="text-5xl text-primary font-bold ">
+			<section tw="grid grid-cols-12 content-start xl:-mt-24">
+				<header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 w-xl text-left)">
+					<h1 tw="text-2xl text-primary font-bold md:text-4xl lg:text-5xl">
 						{t('home:hero.title')}
-						{views ?? '...'}
-						{post?.views ?? '...'}
 					</h1>
-					<p tw="mt-10 w-2/3 text-body">{t('home:hero.subtitle')}</p>
+					<p tw="mt-4 md:text-base lg:mt-6  xl:(mt-12 w-2/3)">
+						{t('home:hero.subtitle')}
+					</p>
 				</header>
 
-				<Image
-					tw="col-start-6 col-end-13 relative top-20"
-					src="friends-with-books.png"
-					alt="A group of friends reading books"
-					width={910}
-					height={713}
-					layout="responsive"
-					sizes="50vw"
-				/>
+				<main tw="col-span-full mt-10 xl:(mt-0 col-start-6 col-end-13 relative top-24)">
+					<Image
+						src="friends-with-books.png"
+						alt="A group of friends reading books"
+						width={910}
+						height={713}
+						layout="responsive"
+						sizes="50vw"
+					/>
+				</main>
 			</section>
 
-			<section tw="bg-gray-100 pt-40">
+			<section tw="bg-gray-100 pt-10 md:pt-20 xl:pt-40">
 				<header>
 					<SectionH1>Our facts</SectionH1>
 				</header>
 
-				<main tw="grid grid-cols-12 mt-28">
+				<main tw="grid grid-cols-12 space-y-10 md:space-y-24 xl:(space-y-0 mt-24)">
 					<Image
-						tw="col-start-1 col-end-3 relative -top-1/3 "
+						tw="hidden xl:(block col-start-1 col-end-3 relative -top-1/3)"
 						src="woman-with-pencil.png"
 						alt="A woman holds a human-size pencil"
 						width={251}
@@ -100,7 +84,7 @@ const Index: VFC<Props> = ({}) => {
 						sizes="15vw"
 					/>
 
-					<ul tw="grid grid-cols-2 gap-32 col-start-4 col-end-10 ">
+					<ul tw="grid grid-cols-2 gap-10 grid-p-sm xl:(grid-p-md gap-32)">
 						{FACTS.map((fact) => (
 							<li key={fact.key}>
 								<FactTile data={fact} />
@@ -109,7 +93,7 @@ const Index: VFC<Props> = ({}) => {
 					</ul>
 
 					<Image
-						tw="col-start-10 col-end-13 w-full h-full"
+						tw="hidden xl:(block col-start-10 col-end-13 w-full h-full) "
 						src="man-with-champion-cup.png"
 						alt="A man holds a champion cup"
 						width={336}
@@ -119,7 +103,7 @@ const Index: VFC<Props> = ({}) => {
 					/>
 
 					<Image
-						tw="col-start-4 col-end-10 -mt-96 z-10 relative top-7"
+						tw="grid-p-sm relative z-10 top-3 md:top-6 lg:top-7 xl:(grid-p-md -mt-96!)"
 						src="friends-with-hobbies.png"
 						alt="A group of friends with different hobbies"
 						width={831}

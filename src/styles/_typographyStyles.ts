@@ -66,8 +66,9 @@ export const bodyFontFace = css`
 `;
 
 export const typographyStyles = css`
-	:root {
-	}
+	/* :root {
+		${tw`md:text-xl xl:text-2xl 2xl:text-3xl`}
+	} */
 
 	html:lang(vi-VN) {
 		font-family: 'san-serif';

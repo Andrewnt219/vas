@@ -27,6 +27,10 @@ module.exports = {
 		extend: {
 			spacing: {
 				full: '100%',
+				xl: '125%',
+				'2xl': '150%',
+				'3xl': '175%',
+				'4xl': '200%',
 			},
 			fontSize: {
 				body: ['0.875rem', { lineHeight: '1.46' }],
@@ -70,7 +74,7 @@ module.exports = {
 		clear: false,
 		order: false,
 	},
-	plugins: [require('@tailwindcss/typography'), centers],
+	plugins: [require('@tailwindcss/typography'), centers, grid],
 };
 
 function centers({ addComponents }) {
@@ -85,6 +89,20 @@ function centers({ addComponents }) {
 			display: 'flex',
 			'justify-content': 'center',
 			'align-items': 'center',
+		},
+	});
+}
+
+function grid({ addComponents }) {
+	addComponents({
+		'.grid-p-sm': {
+			'grid-column': '2/12',
+		},
+		'.grid-p-md': {
+			'grid-column': '4/10',
+		},
+		'.grid-p-lg': {
+			'grid-column': '6/8',
 		},
 	});
 }

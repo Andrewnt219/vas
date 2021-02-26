@@ -5,6 +5,7 @@ import 'twin.macro';
 import MenuItemSet from './components/MenuItemSet/MenuItemSet';
 type Props = {};
 
+// TODO responsive
 /**
  * @description renders the navigation bar
  */

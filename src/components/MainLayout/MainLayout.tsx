@@ -12,16 +12,13 @@ type Props = {
 /**
  * @description renders the main layout with meta tags
  */
-export default function MainLayout({
-	children,
-	customMeta,
-	title = 'Andrew Nguyen – Web Developer, Writer.',
-}: Props) {
+export default function MainLayout({ children, customMeta, title }: Props) {
 	const router = useRouter();
 
+	// TODO replace banner.png with vas
 	const meta = {
-		description: 'Front-end developer. TypeScript, React, JAM Stack.',
-		image: 'https://andrewnt.dev/images/banner.png',
+		description: 'Vietnamese Association at Seneca College.',
+		image: 'https://vasseneca.com/images/banner.png',
 		type: 'website',
 		...customMeta,
 	};
@@ -50,7 +47,9 @@ export default function MainLayout({
 					<meta property="article:published_time" content={meta.date} />
 				)}
 			</Head>
-			<main id="skip">{children}</main>
+			<main tw="mt-20" id="skip">
+				{children}
+			</main>
 		</div>
 	);
 }

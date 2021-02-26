@@ -6,6 +6,7 @@ type MediaIconAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 	children: ReactNode;
 };
 
+//TODO responsive
 /**
  * @description renders a link with svg icon
  */
