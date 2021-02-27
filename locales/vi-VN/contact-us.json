@@ -1,0 +1,12 @@
+{
+	"form": {
+		"errors": {
+			"required": "Can thiet",
+			"minLength": "Qua ngan, {{length}}",
+			"maxLength": "Qua dai, {{length}}"
+		},
+		"first-name": "Ho",
+		"last-name": "Ten",
+		"phone": "Dien thoai"
+	}
+}

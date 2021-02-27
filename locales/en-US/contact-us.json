@@ -1,0 +1,12 @@
+{
+	"form": {
+		"errors": {
+			"required": "Required",
+			"minLength": "Too short, {{length}}",
+			"maxLength": "Too long, {{length}}"
+		},
+		"first-name": "First Name",
+		"last-name": "Last Name",
+		"phone": "Phone"
+	}
+}

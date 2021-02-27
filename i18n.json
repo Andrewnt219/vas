@@ -1,8 +1,9 @@
-{      
-    "locales": ["en-US", "vi-VN"],
-    "defaultLocale": "en-US",
-    "pages": {
-      "/": ["home"],
-      "*": ["common"]
-    }
+{
+	"locales": ["en-US", "vi-VN"],
+	"defaultLocale": "en-US",
+	"pages": {
+		"/contact-us": ["contact-us"],
+		"/": ["home"],
+		"*": ["common"]
+	}
 }
