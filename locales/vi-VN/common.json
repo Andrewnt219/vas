@@ -1,3 +1,10 @@
 {
-
+	"navbar": {
+		"home": "Home",
+		"about-us": "VAS là ai",
+		"events": "Sự kiện",
+		"news": "Tin Tức",
+		"partners": "Đối tác",
+		"contact-us": "Liên lạc"
+	}
 }

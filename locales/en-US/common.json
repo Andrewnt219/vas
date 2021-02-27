@@ -1,3 +1,10 @@
 {
-
+	"navbar": {
+		"home": "Home",
+		"about-us": "What is VAS",
+		"events": "Events",
+		"news": "News",
+		"partners": "Our Partners",
+		"contact-us": "Let's Connect"
+	}
 }

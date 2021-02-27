@@ -1,6 +1,6 @@
 import { LinkProps } from 'next/link';
 export type RouteValues = Pick<LinkProps, 'href'> & {
-	text: string;
+	i18nKey: string;
 	exact?: boolean;
 	children?: RouteValues[];
 };
@@ -10,29 +10,29 @@ export type RouteValues = Pick<LinkProps, 'href'> & {
  */
 export const routes: RouteValues[] = [
 	{
-		text: 'Home',
+		i18nKey: 'home',
 		href: '/',
 		exact: true,
 	},
 	{
-		text: 'What is VAS',
+		i18nKey: 'about-us',
 		href: '/about-us',
 	},
 	{
-		text: 'Events',
+		i18nKey: 'events',
 		href: '/events',
 	},
 	{
-		text: 'News',
+		i18nKey: 'news',
 		href: '/news',
 	},
 	{
-		text: 'Our Partners',
+		i18nKey: 'partners',
 		href: '/partners',
 	},
 	{
 		// eslint-disable-next-line quotes
-		text: "Let's Connect",
+		i18nKey: 'contact-us',
 		href: '/contact-us',
 	},
 ];

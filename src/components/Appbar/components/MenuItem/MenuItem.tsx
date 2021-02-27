@@ -1,5 +1,6 @@
 import { RouteValues } from '@src/data/routes-data';
 import { useRouteMatch } from '@src/package/hooks/useRouteMatch';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
 import tw, { css, styled } from 'twin.macro';
@@ -13,13 +14,14 @@ type Props = {
  * @description renders a link or active link in the menu
  */
 const MenuItem: VFC<Props> = ({ data }) => {
-	const { href, text, exact } = data;
+	const { href, i18nKey, exact } = data;
 
 	const isActive = useRouteMatch(href.toString(), exact);
+	const { t } = useTranslation('common');
 
 	return (
 		<NextLink href={href} passHref>
-			<Anchor isActive={isActive}>{text}</Anchor>
+			<Anchor isActive={isActive}>{t(`navbar.${i18nKey}`)}</Anchor>
 		</NextLink>
 	);
 };

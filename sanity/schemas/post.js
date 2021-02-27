@@ -46,7 +46,6 @@ export default {
 		},
 		prepare(selection) {
 			const { author, title, isArchived } = selection;
-
 			let attributedTitle = title;
 
 			if (isArchived) {

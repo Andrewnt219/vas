@@ -1,8 +1,14 @@
+import { Response } from '@api-response';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
+import { sanityClient } from '@lib/sanity';
+import { SanityDataService } from '@services/sanity-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
+import { PostModel } from '@src/models/PostModel';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
+import useSWR from 'swr';
 import 'twin.macro';
 type FactTileProps = {
 	data: {
@@ -38,11 +44,43 @@ const FACTS: FactTileProps['data'][] = [
 /* -------------------------------------------------------------------------- */
 /*                                    INDEX                                   */
 /* -------------------------------------------------------------------------- */
+type StaticProps = Response<PostModel>;
 
-type Props = {};
+type Params = {};
+export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
+	const posts = await SanityDataService.getPosts();
 
-const Index: VFC<Props> = ({}) => {
+	if (!posts[0]) {
+		return {
+			props: {
+				data: null,
+				error: { message: 'Post not found', name: 'Sanity Error' },
+			},
+			revalidate: 1,
+		};
+	}
+
+	return {
+		props: { data: posts[0], error: null },
+		revalidate: 1,
+	};
+};
+
+type Props = InferGetStaticPropsType<typeof getStaticProps> & {};
+
+const fetcher = () => {
+	// SanityDataService.switchLanguage('vi-VN');
+	return SanityDataService.getPosts();
+};
+
+const Index: VFC<Props> = () => {
 	const { t } = useTranslation();
+	const { data, error } = useSWR([null], fetcher, {
+		refreshInterval: 1,
+		revalidateOnFocus: true,
+	});
+
+	sanityClient.fetch('*[_type == "post"]').then((data) => console.log(data));
 
 	return (
 		<MainLayout title="VAS">

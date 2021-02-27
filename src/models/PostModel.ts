@@ -5,9 +5,10 @@
 export type PostModel = {
 	title: string;
 	slug: string;
-	content: string;
+	body: string;
 	_createdAt: string;
 	_id: string;
+	_lang: string;
 };
 
 /**
@@ -16,9 +17,10 @@ export type PostModel = {
 export const postModelQuery = `
 	{
 		_id,
+		_lang,
 		_createdAt,
 		title,
-		content,
+		body,
 		"slug": slug.current 
 	}
 `;
