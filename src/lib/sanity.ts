@@ -9,6 +9,7 @@ export const sanityClient = initSanityClient({
 	useCdn: true,
 });
 
+// TODO Preview feature
 export const localizedSanityClient = initSanityClient({
 	projectId: process.env.NEXT_PUBLIC_SANITY_CLIENT_ID as string,
 	dataset: 'production',
