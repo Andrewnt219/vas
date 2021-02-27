@@ -15,7 +15,7 @@ const Appbar: VFC<Props> = ({}) => {
 			<Logo tw="col-start-2 col-end-3" />
 
 			<MenuItemSet
-				tw="hidden lg:block col-start-6 col-end-12 justify-end"
+				tw="hidden lg:flex col-start-6 col-end-12 justify-end"
 				data={routes}
 			/>
 		</nav>

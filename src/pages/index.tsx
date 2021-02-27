@@ -1,34 +1,13 @@
-import { Response } from '@api-response';
+import FactTile from '@components/FactTile/FactTile';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
-import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
-import { PostModel } from '@src/models/PostModel';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { ComponentProps } from '@utils';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
 import 'twin.macro';
-type FactTileProps = {
-	data: {
-		key: string;
-		value: string;
-	};
-};
 
-// TODO ask Nhi about shadow
-const FactTile: VFC<FactTileProps> = ({ data }) => {
-	const { key, value } = data;
-	return (
-		<div tw="bg-white rounded-3xl shadow-lg relative pb-full">
-			<div tw="position-center flex flex-col   items-center  font-medium leading-tight space-y-1 md:space-y-3">
-				<span tw="text-primary text-4xl md:text-8xl">{value}</span>
-				<span tw="text-base md:text-4xl">{key}</span>
-			</div>
-		</div>
-	);
-};
-
-const FACTS: FactTileProps['data'][] = [
+const FACTS: ComponentProps<typeof FactTile>['data'][] = [
 	{
 		key: 'members',
 		value: '08',
@@ -39,44 +18,9 @@ const FACTS: FactTileProps['data'][] = [
 	},
 ];
 
-/* -------------------------------------------------------------------------- */
-/*                                    INDEX                                   */
-/* -------------------------------------------------------------------------- */
-type StaticProps = Response<PostModel>;
+type Props = {};
 
-type Params = {};
-export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
-	try {
-		PostDataService.switchLanguage('vi-VN');
-		const posts = await PostDataService.getPosts();
-
-		if (!posts[0]) {
-			return {
-				props: {
-					data: null,
-					error: { message: 'Post not found', name: 'Sanity Error' },
-				},
-				revalidate: 1,
-			};
-		}
-
-		return {
-			props: { data: posts[0], error: null },
-			revalidate: 1,
-		};
-	} catch (error) {
-		console.log('getStaticProps:', error);
-
-		return {
-			props: { data: null, error: { message: 'Something went wrong' } },
-			revalidate: 1,
-		};
-	}
-};
-
-type Props = InferGetStaticPropsType<typeof getStaticProps> & {};
-
-const Index: VFC<Props> = ({ data, error }) => {
+const Index: VFC<Props> = () => {
 	const { t } = useTranslation();
 
 	return (

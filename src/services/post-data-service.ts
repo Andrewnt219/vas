@@ -1,15 +1,14 @@
 import { FireBasePost as PostMeta } from '@firebase';
 import firestore from '@lib/firestore';
 import { localizedSanityClient } from '@lib/sanity';
+import i18nConfig from '@root/i18n.json';
+import { Languages } from '@src/data/localization-data';
 import { PostModel, postModelQuery } from '@src/models/PostModel';
 import firebase from 'firebase-admin';
-
-type Languages = 'en-US' | 'vi-VN';
-
 export class PostDataService {
 	private static collection = firestore.collection('posts');
 	private static cms = localizedSanityClient;
-	private static language: Languages = 'en-US';
+	private static language: Languages = i18nConfig.defaultLocale as Languages;
 
 	public static switchLanguage(lang: Languages): void {
 		this.language = lang;
@@ -30,7 +29,7 @@ export class PostDataService {
 
 	public static async getPostSlugs(): Promise<{ slug: string }[]> {
 		return this.cms.fetch(
-			`*[_type == 'post' && _lang = $lang] {
+			`*[_type == 'post'] {
 					"slug": slug.current
 			}`,
 			{ lang: this.language }

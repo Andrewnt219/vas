@@ -28,7 +28,8 @@
 			"@services/*": ["src/services/*"],
 			"@styles/*": ["src/styles/*"],
 			"@mock/*": ["__test__/mock/*"],
-			"@src/*": ["src/*"]
+			"@src/*": ["src/*"],
+			"@root/*": ["./*"]
 		}
 	},
 	"include": [

@@ -30,7 +30,7 @@ const MenuItem: VFC<Props> = ({ data }) => {
 			)}
 			<NextLink href={href} passHref>
 				<a tw="text-xl text-center leading-tight font-bold pt-5 inline-block border-t-4 border-transparent transition-colors hocus:(text-primary)">
-					{t(`navbar.${i18nKey}`)}
+					{t(`navbar.${i18nKey}`, null, { fallback: '...' })}
 				</a>
 			</NextLink>
 		</div>
