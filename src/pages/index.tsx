@@ -1,13 +1,12 @@
 import { Response } from '@api-response';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
-import { SanityDataService } from '@services/sanity-data-service';
+import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
 import { PostModel } from '@src/models/PostModel';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
-import useSWR from 'swr';
 import 'twin.macro';
 type FactTileProps = {
 	data: {
@@ -47,38 +46,39 @@ type StaticProps = Response<PostModel>;
 
 type Params = {};
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
-	const posts = await SanityDataService.getPosts();
+	try {
+		PostDataService.switchLanguage('vi-VN');
+		const posts = await PostDataService.getPosts();
 
-	if (!posts[0]) {
+		if (!posts[0]) {
+			return {
+				props: {
+					data: null,
+					error: { message: 'Post not found', name: 'Sanity Error' },
+				},
+				revalidate: 1,
+			};
+		}
+
 		return {
-			props: {
-				data: null,
-				error: { message: 'Post not found', name: 'Sanity Error' },
-			},
+			props: { data: { ...posts[0] }, error: null },
+			revalidate: 1,
+		};
+	} catch (error) {
+		console.log(error);
+
+		return {
+			props: { data: null, error: { message: 'Something went wrong' } },
 			revalidate: 1,
 		};
 	}
-
-	return {
-		props: { data: posts[0], error: null },
-		revalidate: 1,
-	};
 };
 
 type Props = InferGetStaticPropsType<typeof getStaticProps> & {};
 
-const fetcher = () => {
-	// SanityDataService.switchLanguage('vi-VN');
-	return SanityDataService.getPosts();
-};
-
-const Index: VFC<Props> = () => {
+const Index: VFC<Props> = ({ data, error }) => {
 	const { t } = useTranslation();
-	const { data, error } = useSWR([null], fetcher, {
-		refreshInterval: 1,
-		revalidateOnFocus: true,
-	});
-
+	console.log({ data, error });
 	return (
 		<MainLayout title="VAS">
 			<section tw="grid grid-cols-12 content-start xl:-mt-24">
