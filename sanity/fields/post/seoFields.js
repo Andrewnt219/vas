@@ -4,7 +4,7 @@ export const seoFields = {
 	type: 'seo-tools', // use seo-tools type
 	options: {
 		baseUrl(doc) {
-			return `https://vasseneca.com/${doc._lang}/posts`;
+			return `https://vas-canary.vercel.app/${doc._lang}/posts`;
 		},
 		slug(doc) {
 			// (REQUIRED) a function to return the sug of the current page, which will be appended to the baseUrl
