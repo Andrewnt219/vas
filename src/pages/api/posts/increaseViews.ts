@@ -1,7 +1,5 @@
 import { IncreaseViewResponse } from '@api-response';
-import { FireBasePost } from '@firebase';
-import firestore from '@src/lib/firestore';
-import firebase from 'firebase-admin';
+import { PostDataService } from '@services/post-data-service';
 import { NextApiHandler } from 'next';
 
 const handler: NextApiHandler<IncreaseViewResponse> = async (req, res) => {
@@ -22,21 +20,13 @@ const handler: NextApiHandler<IncreaseViewResponse> = async (req, res) => {
 			});
 		}
 
-		const postRef = firestore.collection('posts').doc(slug);
+		const post = await PostDataService.increaseViews(slug);
 
-		await postRef.update({
-			views: firebase.firestore.FieldValue.increment(1),
-		});
-
-		const postDoc = await postRef.get();
-
-		if (!postDoc.exists) {
+		if (!post) {
 			return res
 				.status(404)
 				.json({ data: null, error: { message: 'Post not found' } });
 		}
-
-		const post = postDoc.data() as FireBasePost;
 
 		return res.status(200).json({ data: post.views, error: null });
 	} catch (error) {

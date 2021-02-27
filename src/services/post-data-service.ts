@@ -1,40 +1,35 @@
-import {
-	GetPostResponse as GetPostMetaResponse,
-	IncreaseViewResponse,
-} from '@api-response';
-import { SanityClient } from '@sanity/client';
+import { FireBasePost as PostMeta } from '@firebase';
+import firestore from '@lib/firestore';
+import { localizedSanityClient } from '@lib/sanity';
 import { PostModel, postModelQuery } from '@src/models/PostModel';
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import firebase from 'firebase-admin';
 
 type Languages = 'en-US' | 'vi-VN';
 
 export class PostDataService {
-	private static api: AxiosInstance = axios.create({
-		baseURL: '/api/posts/',
-	});
-
-	private static client: SanityClient | null = null;
+	private static collection = firestore.collection('posts');
+	private static cms = localizedSanityClient;
 	private static language: Languages = 'en-US';
 
-	public static switchLanguage(lang: Languages) {
+	public static switchLanguage(lang: Languages): void {
 		this.language = lang;
 	}
-	public static async getPostBySlug(slug: string) {
-		return this.withFetch<PostModel | null>(
+	public static async getPostBySlug(slug: string): Promise<PostModel | null> {
+		return this.cms.fetch(
 			`*[_type == 'post' && slug.current == $slug && _lang == $lang   ] ${postModelQuery}[0]`,
 			{ slug, lang: this.language }
 		);
 	}
 
-	public static async getPosts() {
-		return this.withFetch<PostModel[]>(
+	public static async getPosts(): Promise<PostModel[]> {
+		return this.cms.fetch(
 			`*[_type == 'post' && _lang == $lang] ${postModelQuery}`,
 			{ lang: this.language }
 		);
 	}
 
-	public static async getPostSlugs() {
-		return this.withFetch<{ slug: string }[]>(
+	public static async getPostSlugs(): Promise<{ slug: string }[]> {
+		return this.cms.fetch(
 			`*[_type == 'post' && _lang = $lang] {
 					"slug": slug.current
 			}`,
@@ -42,53 +37,29 @@ export class PostDataService {
 		);
 	}
 
-	public static increaseViews(
-		slug: string
-	): Promise<AxiosResponse<IncreaseViewResponse>> {
-		return this.api.patch<IncreaseViewResponse>('/increaseView', {
-			slug: slug,
+	public static async increaseViews(slug: string): Promise<PostMeta | null> {
+		const postMetaRef = this.collection.doc(slug);
+
+		await postMetaRef.update({
+			views: firebase.firestore.FieldValue.increment(1),
 		});
-	}
 
-	public static getPostMeta(
-		slug: string
-	): Promise<AxiosResponse<GetPostMetaResponse>> {
-		return this.api.get<GetPostMetaResponse>(`/${slug}`);
-	}
+		const postMetaDoc = await postMetaRef.get();
 
-	//#region private helpers
-	// dynamically import the client (reduce initial bundle)
-	private static async setup() {
-		try {
-			PostDataService.client = (
-				await import('@lib/sanity')
-			).localizedSanityClient;
-		} catch (error) {
-			console.error('Fail to import sanity client');
-		}
-	}
-
-	// Wrapper for services
-	private static async withFetch<T>(
-		query: string,
-		params: Record<string, any> = {}
-	): Promise<T> {
-		const client = await PostDataService.getClient();
-
-		if (!client) {
-			throw new Error('Sanity client is not set up!');
+		if (!postMetaDoc.exists) {
+			return null;
 		}
 
-		return client.fetch<T>(query, params);
+		return postMetaDoc.data() as PostMeta;
 	}
 
-	// return the sanity client
-	private static async getClient() {
-		if (!PostDataService.client) {
-			await PostDataService.setup();
+	public static async getPostMeta(slug: string): Promise<PostMeta | null> {
+		const postMetaDoc = await this.collection.doc(slug).get();
+
+		if (!postMetaDoc.exists) {
+			return null;
 		}
 
-		return PostDataService.client;
+		return postMetaDoc.data() as PostMeta;
 	}
-	//#endregion
 }

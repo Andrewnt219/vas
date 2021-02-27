@@ -1,6 +1,5 @@
 import { GetPostResponse } from '@api-response';
-import { FireBasePost } from '@firebase';
-import firestore from '@src/lib/firestore';
+import { PostDataService } from '@services/post-data-service';
 import { NextApiHandler } from 'next';
 
 const handler: NextApiHandler<GetPostResponse> = async (req, res) => {
@@ -27,18 +26,16 @@ const handler: NextApiHandler<GetPostResponse> = async (req, res) => {
 		});
 	}
 
-	const postDoc = await firestore.collection('posts').doc(slug).get();
+	const postMeta = await PostDataService.getPostMeta(slug);
 
-	if (!postDoc.exists) {
+	if (!postMeta) {
 		return res.status(404).json({
 			data: null,
 			error: { message: 'Post not found' },
 		});
 	}
 
-	const post = postDoc.data() as FireBasePost;
-
-	return res.status(200).json({ data: post, error: null });
+	return res.status(200).json({ data: postMeta, error: null });
 };
 
 export default handler;

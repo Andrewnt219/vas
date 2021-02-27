@@ -61,11 +61,11 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
 		}
 
 		return {
-			props: { data: { ...posts[0] }, error: null },
+			props: { data: posts[0], error: null },
 			revalidate: 1,
 		};
 	} catch (error) {
-		console.log(error);
+		console.log('getStaticProps:', error);
 
 		return {
 			props: { data: null, error: { message: 'Something went wrong' } },
@@ -78,7 +78,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps> & {};
 
 const Index: VFC<Props> = ({ data, error }) => {
 	const { t } = useTranslation();
-	console.log({ data, error });
+
 	return (
 		<MainLayout title="VAS">
 			<section tw="grid grid-cols-12 content-start xl:-mt-24">
