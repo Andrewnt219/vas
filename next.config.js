@@ -5,11 +5,22 @@ const bundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const nextTranslate = require('next-translate');
 const nextOptimizedImages = require('next-optimized-images');
+const nextPwa = require('next-pwa');
+
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 const eslintOptions = {
 	extensions: ['js', 'jsx', 'tsx', 'ts'],
+};
+
+const pwaConfig = {
+	pwa: {
+		dest: 'public',
+		disable: process.env.NODE_ENV === 'development',
+		publicExcludes: ['!*.jpg', '!*.png', '!*.svg', '!svg', '!images', '!fonts'],
+		buildExcludes: [/chunks\/images\/.*$/, /static\/images\/.*$/],
+	},
 };
 
 const nextConfig = {
@@ -32,6 +43,6 @@ const nextConfig = {
 };
 
 module.exports = withPlugins(
-	[bundleAnalyzer, nextOptimizedImages],
+	[bundleAnalyzer, nextOptimizedImages, [nextPwa, pwaConfig]],
 	nextTranslate(nextConfig)
 );

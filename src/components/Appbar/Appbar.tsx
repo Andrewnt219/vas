@@ -14,7 +14,10 @@ const Appbar: VFC<Props> = ({}) => {
 		<nav tw="grid grid-cols-12 col-span-full">
 			<Logo tw="col-start-2 col-end-3" />
 
-			<MenuItemSet tw="col-start-6 col-end-12 justify-end" data={routes} />
+			<MenuItemSet
+				tw="hidden lg:block col-start-6 col-end-12 justify-end"
+				data={routes}
+			/>
 		</nav>
 	);
 };
