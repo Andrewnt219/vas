@@ -776,6 +776,12 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.12.13":
+  version "7.13.8"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.13.8.tgz#cc886a85c072df1de23670dc1aa59fc116c4017c"
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.12.13":
   version "7.12.13"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.12.13.tgz#530265be8a2589dbb37523844c5bcb55947fb327"
@@ -1613,6 +1619,16 @@
   version "3.0.0"
   resolved "https://registry.npmjs.org/@types/warning/-/warning-3.0.0.tgz#0d2501268ad8f9962b740d387c4654f5f8e23e52"
 
+"@wordpress/autop@^2.0.2":
+  version "2.11.1"
+  resolved "https://registry.npmjs.org/@wordpress/autop/-/autop-2.11.1.tgz#771cf6d9af2607eeaefe68a2996a42266c5f8fde"
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
+"@yoast/feature-flag@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.npmjs.org/@yoast/feature-flag/-/feature-flag-0.5.2.tgz#ef4cd8ddb959c5857c5d68639ab09ab75c381508"
+
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.npmjs.org/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -1904,6 +1920,12 @@ aws-sign2@~0.7.0:
 aws4@^1.8.0:
   version "1.11.0"
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.npmjs.org/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  dependencies:
+    follow-redirects "^1.10.0"
 
 babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -3203,7 +3225,7 @@ domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.npmjs.org/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
 
-domelementtype@1:
+domelementtype@1, domelementtype@^1.3.1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f"
 
@@ -3217,7 +3239,13 @@ domexception@^1.0.1:
   dependencies:
     webidl-conversions "^4.0.2"
 
-domutils@^1.7.0:
+domhandler@^2.3.0:
+  version "2.4.2"
+  resolved "https://registry.npmjs.org/domhandler/-/domhandler-2.4.2.tgz#8805097e933d65e85546f726d60f5eb88b44f803"
+  dependencies:
+    domelementtype "1"
+
+domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
   resolved "https://registry.npmjs.org/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
   dependencies:
@@ -3321,6 +3349,10 @@ enhanced-resolve@^3.4.0:
     memory-fs "^0.4.0"
     object-assign "^4.0.1"
     tapable "^0.2.7"
+
+entities@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
 
 entities@^2.0.0:
   version "2.2.0"
@@ -3846,6 +3878,10 @@ flux@^4.0.1:
     fbemitter "^3.0.0"
     fbjs "^3.0.0"
 
+follow-redirects@^1.10.0:
+  version "1.13.3"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
+
 follow-redirects@^1.2.4:
   version "1.13.2"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
@@ -4302,6 +4338,17 @@ html-encoding-sniffer@^1.0.2:
 html-entities@^1.2.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/html-entities/-/html-entities-1.4.0.tgz#cfbd1b01d2afaf9adca1b10ae7dffab98c71d2dc"
+
+htmlparser2@^3.9.2:
+  version "3.10.1"
+  resolved "https://registry.npmjs.org/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
+  dependencies:
+    domelementtype "^1.3.1"
+    domhandler "^2.3.0"
+    domutils "^1.5.1"
+    entities "^1.1.1"
+    inherits "^2.0.1"
+    readable-stream "^3.1.1"
 
 http-errors@1.7.2:
   version "1.7.2"
@@ -4826,6 +4873,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.npmjs.org/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jed@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/jed/-/jed-1.1.1.tgz#7a549bbd9ffe1585b0cd0a191e203055bee574b4"
+
 js-base64@^2.1.9:
   version "2.6.4"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -5077,6 +5128,10 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash-es@^4.17.10:
+  version "4.17.21"
+  resolved "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+
 lodash._arrayeach@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/lodash._arrayeach/-/lodash._arrayeach-3.0.0.tgz#bab156b2a90d3f1bbd5c653403349e5e5933ef9e"
@@ -5148,6 +5203,10 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.npmjs.org/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+
 lodash.isplainobject@^4.0.0, lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -5198,6 +5257,10 @@ log-symbols@^2.1.0, log-symbols@^2.2.0:
   resolved "https://registry.npmjs.org/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
   dependencies:
     chalk "^2.0.1"
+
+loglevel@^1.6.1:
+  version "1.7.1"
+  resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.7.1.tgz#005fde2f5e6e47068f935ff28573e125ef72f197"
 
 loglevelnext@^1.0.1:
   version "1.0.5"
@@ -5864,6 +5927,10 @@ parse-ms@^1.0.0:
 parse5@5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
+
+parse5@^5.1.0:
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
 
 parseurl@~1.3.3:
   version "1.3.3"
@@ -7399,6 +7466,22 @@ sanity-plugin-intl-input@^5.0.6:
     regenerator-runtime "^0.13.7"
     slugify "^1.4.6"
 
+sanity-plugin-seo-tools@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/sanity-plugin-seo-tools/-/sanity-plugin-seo-tools-1.1.2.tgz#b62448861fedcd30da8de63541aa228475bfd32b"
+  dependencies:
+    "@babel/runtime" "^7.12.13"
+    axios "^0.21.1"
+    classnames "^2.2.6"
+    lodash.debounce "^4.0.8"
+    lodash.isequal "^4.5.0"
+    regenerator-runtime "^0.13.7"
+    yoastseo "^1.90.0"
+
+sassdash@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/sassdash/-/sassdash-0.9.0.tgz#e2114e80af0c01639d1c6b88a3eb350740cb1169"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -8013,7 +8096,7 @@ terser@4.6.7:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-through2@^2.0.3, through2@~2.0.3:
+through2@^2.0.0, through2@^2.0.3, through2@~2.0.3:
   version "2.0.5"
   resolved "https://registry.npmjs.org/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
   dependencies:
@@ -8092,6 +8175,12 @@ to-regex@^3.0.1, to-regex@^3.0.2:
 toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
+
+tokenizer2@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/tokenizer2/-/tokenizer2-2.0.1.tgz#c62846214bd05d6b74e4924156d246e6cc070f3e"
+  dependencies:
+    through2 "^2.0.0"
 
 tough-cookie@^2.3.3, tough-cookie@^2.4.3, tough-cookie@~2.5.0:
   version "2.5.0"
@@ -8693,6 +8782,20 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+yoastseo@^1.90.0:
+  version "1.90.0"
+  resolved "https://registry.npmjs.org/yoastseo/-/yoastseo-1.90.0.tgz#b9a118b621caa166303ae87f5eba7cf99cdf4e27"
+  dependencies:
+    "@wordpress/autop" "^2.0.2"
+    "@yoast/feature-flag" "^0.5.2"
+    htmlparser2 "^3.9.2"
+    jed "^1.1.0"
+    lodash-es "^4.17.10"
+    loglevel "^1.6.1"
+    parse5 "^5.1.0"
+    sassdash "0.9.0"
+    tokenizer2 "^2.0.1"
 
 youtube-player@5.5.2:
   version "5.5.2"

@@ -6,6 +6,7 @@ import { thumbnailField } from '../fields/common/thumbnailField';
 import { titleField } from '../fields/common/titleField';
 import { categoryField } from '../fields/post/categoryField';
 import { isArchivedField } from '../fields/post/isArchivedField';
+import { seoFields } from '../fields/post/seoFields';
 import { snippetField } from '../fields/post/snippetField';
 import { i18n } from './documentTranslation';
 // TODO generate slug on publish action
@@ -35,6 +36,7 @@ export default {
 		createdAtField,
 		authorField,
 		isArchivedField,
+		seoFields,
 	],
 
 	preview: {
