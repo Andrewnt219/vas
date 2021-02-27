@@ -1,7 +1,6 @@
 import { Response } from '@api-response';
 import Image from '@components/LocalImage/LocalImage';
 import SectionH1 from '@components/SectionH1/SectionH1';
-import { sanityClient } from '@lib/sanity';
 import { SanityDataService } from '@services/sanity-data-service';
 import MainLayout from '@src/components/MainLayout/MainLayout';
 import { PostModel } from '@src/models/PostModel';
@@ -79,8 +78,6 @@ const Index: VFC<Props> = () => {
 		refreshInterval: 1,
 		revalidateOnFocus: true,
 	});
-
-	sanityClient.fetch('*[_type == "post"]').then((data) => console.log(data));
 
 	return (
 		<MainLayout title="VAS">

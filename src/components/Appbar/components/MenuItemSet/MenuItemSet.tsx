@@ -1,4 +1,5 @@
 import { RouteValues } from '@src/data/routes-data';
+import { AnimateSharedLayout } from 'framer-motion';
 import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
 import MenuItem from '../MenuItem/MenuItem';
@@ -13,13 +14,15 @@ type Props = {
  */
 const MenuItemSet: VFC<Props> = ({ data, className }) => {
 	return (
-		<Container className={className}>
-			{data.map((route) => (
-				<li key={route.href.toString()}>
-					<MenuItem data={route} />
-				</li>
-			))}
-		</Container>
+		<AnimateSharedLayout>
+			<Container className={className}>
+				{data.map((route) => (
+					<li key={route.href.toString()}>
+						<MenuItem data={route} />
+					</li>
+				))}
+			</Container>
+		</AnimateSharedLayout>
 	);
 };
 

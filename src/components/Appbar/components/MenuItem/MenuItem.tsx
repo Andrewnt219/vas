@@ -1,9 +1,10 @@
 import { RouteValues } from '@src/data/routes-data';
 import { useRouteMatch } from '@src/package/hooks/useRouteMatch';
+import { motion } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
-import tw, { css, styled } from 'twin.macro';
+import 'twin.macro';
 
 type Props = {
 	data: RouteValues;
@@ -20,20 +21,20 @@ const MenuItem: VFC<Props> = ({ data }) => {
 	const { t } = useTranslation('common');
 
 	return (
-		<NextLink href={href} passHref>
-			<Anchor isActive={isActive}>{t(`navbar.${i18nKey}`)}</Anchor>
-		</NextLink>
+		<div tw="relative">
+			{isActive && (
+				<motion.div
+					layoutId="top-bar"
+					tw="absolute top-0 w-full h-1 bg-primary"
+				/>
+			)}
+			<NextLink href={href} passHref>
+				<a tw="text-xl text-center leading-tight font-bold pt-5 inline-block border-t-4 border-transparent transition-colors hocus:(text-primary)">
+					{t(`navbar.${i18nKey}`)}
+				</a>
+			</NextLink>
+		</div>
 	);
 };
 
-const activeLinkCss = css`
-	${tw` border-primary `}
-`;
-type AnchorProps = { isActive: boolean };
-const Anchor = styled.a<AnchorProps>`
-	${tw`text-xl text-center leading-tight font-bold pt-5 inline-block border-t-4 border-transparent transition-colors`}
-	${tw`hocus:(text-primary)`}
-
-	${(p) => p.isActive && activeLinkCss}
-`;
 export default MenuItem;
