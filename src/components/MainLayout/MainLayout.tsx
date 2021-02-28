@@ -47,7 +47,7 @@ export default function MainLayout({ children, customMeta, title }: Props) {
 					<meta property="article:published_time" content={meta.date} />
 				)}
 			</Head>
-			<main tw="mt-20" id="skip">
+			<main tw="mt-20" id="skip" title="content">
 				{children}
 			</main>
 		</div>

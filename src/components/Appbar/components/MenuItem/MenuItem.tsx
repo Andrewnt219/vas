@@ -10,7 +10,6 @@ type Props = {
 	data: RouteValues;
 };
 
-// TODO framer animated layout for the active bar. This means extract the bar to an element, not border
 /**
  * @description renders a link or active link in the menu
  */

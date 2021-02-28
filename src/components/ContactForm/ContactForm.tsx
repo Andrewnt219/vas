@@ -60,7 +60,12 @@ function ContactForm({ className }: Props) {
 	});
 
 	return (
-		<form onSubmit={onSubmit} noValidate className={className}>
+		<form
+			onSubmit={onSubmit}
+			noValidate
+			className={className}
+			title="contact-form"
+		>
 			{textFields.map((fieldData) => (
 				<InputGroup key={fieldData.name} data={fieldData} />
 			))}
