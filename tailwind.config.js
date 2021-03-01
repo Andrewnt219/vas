@@ -9,6 +9,9 @@ module.exports = {
 	},
 	darkMode: false, // or 'media' or 'class'
 	theme: {
+		boxShadow: {
+			card: '10px 10px 50px 3px rgba(39, 92, 141, 0.1)',
+		},
 		colors: {
 			primary: '#D73732',
 
@@ -26,6 +29,7 @@ module.exports = {
 		},
 		extend: {
 			spacing: {
+				xs: '56.25%',
 				full: '100%',
 				xl: '125%',
 				'2xl': '150%',
@@ -74,7 +78,7 @@ module.exports = {
 		clear: false,
 		order: false,
 	},
-	plugins: [require('@tailwindcss/typography'), centers, grid],
+	plugins: [require('@tailwindcss/typography'), centers, grid, sizing],
 };
 
 function centers({ addComponents }) {
@@ -103,6 +107,18 @@ function grid({ addComponents }) {
 		},
 		'.grid-p-lg': {
 			'grid-column': '6/8',
+		},
+	});
+}
+
+function sizing({ addComponents }) {
+	addComponents({
+		'.absolute-cover': {
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			width: '100%',
+			height: '100%',
 		},
 	});
 }

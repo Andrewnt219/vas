@@ -10,8 +10,9 @@ type Props = ImageProps & {
 /**
  * @description Enhanced local images loading with next-optimized-images
  */
-const Image: VFC<Props> = ({ className, src, ...imageProps }) => {
+const LocalImage: VFC<Props> = ({ className, src, ...imageProps }) => {
 	const lqipRef = useRef<HTMLImageElement | null>(null);
+	const fixedSrc = src.startsWith('/') ? src.replace('/', '') : src;
 
 	// Switch display with placeholder
 	const handleImageLoad = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
@@ -44,11 +45,11 @@ const Image: VFC<Props> = ({ className, src, ...imageProps }) => {
 				aria-hidden="true"
 				alt=""
 				ref={lqipRef}
-				src={require(`images/${src}?lqip`)}
+				src={require(`images/${fixedSrc}?lqip`)}
 			/>
 			<NextImage
 				tw="opacity-0 transition-opacity duration-500 delay-200"
-				src={require(`images/${src}`)}
+				src={require(`images/${fixedSrc}`)}
 				onLoad={handleImageLoad}
 				onError={handleErrorLoad}
 				{...imageProps}
@@ -57,4 +58,4 @@ const Image: VFC<Props> = ({ className, src, ...imageProps }) => {
 	);
 };
 
-export default Image;
+export default LocalImage;

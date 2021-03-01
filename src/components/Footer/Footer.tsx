@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
+import 'twin.macro';
 import MediaIconAnchor from './components/MediaIconAnchor/MediaIconAnchor';
-
 type Props = {};
 
 /**

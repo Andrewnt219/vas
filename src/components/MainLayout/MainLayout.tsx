@@ -5,14 +5,20 @@ import 'twin.macro';
 
 type Props = {
 	children: ReactNode;
-	title?: string;
+	title: string;
 	customMeta?: { date: string; title: never } & Record<string, string>;
+	className?: string;
 };
 
 /**
  * @description renders the main layout with meta tags
  */
-export default function MainLayout({ children, customMeta, title }: Props) {
+export default function MainLayout({
+	children,
+	customMeta,
+	title,
+	className,
+}: Props) {
 	const router = useRouter();
 
 	// TODO replace banner.png with vas
@@ -24,7 +30,7 @@ export default function MainLayout({ children, customMeta, title }: Props) {
 	};
 
 	return (
-		<div tw="col-span-full">
+		<>
 			<Head>
 				<title>{title}</title>
 				<meta name="robots" content="follow, index" />
@@ -47,9 +53,14 @@ export default function MainLayout({ children, customMeta, title }: Props) {
 					<meta property="article:published_time" content={meta.date} />
 				)}
 			</Head>
-			<main tw="mt-20" id="skip" title="content">
+			<main
+				className={className}
+				tw="col-span-full grid grid-cols-12 mt-20 pb-14"
+				id="skip"
+				title="content"
+			>
 				{children}
 			</main>
-		</div>
+		</>
 	);
 }
