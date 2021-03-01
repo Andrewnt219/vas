@@ -18,12 +18,8 @@ function PageBanner({ className, data }: Props) {
 	const { title, subtitle, imgPath } = data;
 
 	return (
-		<header
-			className={className}
-			tw="w-full relative"
-			style={{ paddingBottom: '41.7%' }}
-		>
-			<CustomLocalImage src={imgPath} />
+		<header className={className} tw="w-full relative pb-2xs">
+			<CustomLocalImage src={imgPath} sizes="83vw" />
 			<div
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
 				style={{
@@ -31,8 +27,8 @@ function PageBanner({ className, data }: Props) {
 						'linear-gradient(180deg, rgba(0, 0, 0, 0.088) 0%, rgba(0, 0, 0, 0.4) 100%)',
 				}}
 			>
-				<h1 tw="text-h1 font-bold">{title}</h1>
-				<p tw="font-medium text-subtitle mt-5 max-w-md text-center">
+				<h1 tw="font-bold text-2xl md:text-h1">{title}</h1>
+				<p tw="hidden  md:(block text-center text-subtitle mt-5 max-w-md font-medium)">
 					{subtitle}
 				</p>
 			</div>

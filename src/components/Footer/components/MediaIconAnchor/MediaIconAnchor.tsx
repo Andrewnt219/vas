@@ -25,6 +25,8 @@ const MediaIconAnchor: VFC<Props> = ({
 type StyledAnchorProps = {};
 const StyledAnchor = styled.a<StyledAnchorProps>`
 	svg {
+		width: 2em;
+		height: 2em;
 		${tw`fill-current text-white transition-transform `}
 	}
 

@@ -5,6 +5,6 @@ export default createGlobalStyle`
   ${typographyStyles}     
 
   #__next {
-    ${tw`grid grid-cols-12 relative pb-56 min-h-screen items-start content-start`}
+    ${tw`grid grid-cols-12 relative pb-36  min-h-screen items-start content-start md:pb-56`}
   }
 `;

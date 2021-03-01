@@ -9,7 +9,7 @@ type Props = {};
 const Footer: VFC<Props> = ({}) => {
 	return (
 		<footer
-			tw="absolute bottom-0 bg-primary h-56 w-full pt-7 text-white text-lg flex-center flex-col"
+			tw="absolute bottom-0 bg-primary h-36 w-full text-white  flex-center flex-col md:(h-56 text-lg)"
 			role="contentinfo"
 		>
 			<ul tw="flex items-center  space-x-6">
@@ -22,8 +22,6 @@ const Footer: VFC<Props> = ({}) => {
 					>
 						<svg
 							aria-hidden="true"
-							width="33"
-							height="33"
 							viewBox="0 0 33 33"
 							xmlns="http://www.w3.org/2000/svg"
 						>
@@ -67,8 +65,6 @@ const Footer: VFC<Props> = ({}) => {
 					>
 						<svg
 							aria-hidden="true"
-							width="33"
-							height="33"
 							viewBox="0 0 33 33"
 							xmlns="http://www.w3.org/2000/svg"
 						>

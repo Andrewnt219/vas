@@ -1,8 +1,7 @@
 import MainLayout from '@components/MainLayout/MainLayout';
 import PageBanner from '@components/PageBanner/PageBanner';
 import React, { VFC } from 'react';
-import tw, { styled } from 'twin.macro';
-
+import 'twin.macro';
 type Props = {};
 
 const events: VFC<Props> = ({}) => {
@@ -21,8 +20,4 @@ const events: VFC<Props> = ({}) => {
 	);
 };
 
-type ContainerProps = {};
-const Container = styled.div<ContainerProps>`
-	${tw``}
-`;
 export default events;
