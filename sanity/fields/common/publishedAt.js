@@ -1,6 +1,6 @@
-export const createdAtField = {
-	name: 'createdAt',
-	title: 'Created At',
+export const publishedAtField = {
+	name: 'publishedAt',
+	title: 'Published At',
 	type: 'datetime',
 	options: {
 		dateFormat: 'MMM DD YYYY',

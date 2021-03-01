@@ -12,6 +12,7 @@ import post from './post';
 import youtube from './youtube';
 
 // Then we give our schema to the builder and provide the result to Sanity
+
 export default createSchema({
 	// We name our schema
 	name: 'default',

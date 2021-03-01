@@ -1,6 +1,6 @@
 import { authorField } from '../fields/common/authorField';
 import { bodyField } from '../fields/common/bodyField';
-import { createdAtField } from '../fields/common/createdAtField';
+import { publishedAtField } from '../fields/common/publishedAt';
 import { slugField } from '../fields/common/slugField';
 import { thumbnailField } from '../fields/common/thumbnailField';
 import { titleField } from '../fields/common/titleField';
@@ -10,8 +10,7 @@ import { seoFields } from '../fields/post/seoFields';
 import { snippetField } from '../fields/post/snippetField';
 import { i18n } from './documentTranslation';
 // TODO generate slug on publish action
-// TODO set up SEO for the post
-//
+// TODO add missing schema (some are optional) (Location, event time, etc.)
 export default {
 	name: 'post',
 	title: 'Post',
@@ -20,7 +19,7 @@ export default {
 
 	initialValue: {
 		[isArchivedField.name]: false,
-		[createdAtField.name]: new Date().toISOString(),
+		[publishedAtField.name]: new Date().toISOString(),
 		[authorField.name]: {
 			_ref: '683e1c33-cde6-4179-a0f3-586b8670dbe4', // dang-mai-phuong
 		},
@@ -33,7 +32,7 @@ export default {
 		bodyField,
 		thumbnailField,
 		snippetField,
-		createdAtField,
+		publishedAtField,
 		authorField,
 		isArchivedField,
 		seoFields,
