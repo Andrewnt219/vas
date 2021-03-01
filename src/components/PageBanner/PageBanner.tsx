@@ -1,4 +1,4 @@
-import LocalImage from '@components/LocalImage/LocalImage';
+import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import React, { ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -8,18 +8,19 @@ type Props = {
 		/**
 		 * Path inside dir images/
 		 */
-		imgPath: string;
+		imgSrc: string;
+		imgLqip: string;
 		title: ReactNode;
 		subtitle: ReactNode;
 	};
 };
 
 function PageBanner({ className, data }: Props) {
-	const { title, subtitle, imgPath } = data;
+	const { title, subtitle, imgSrc, imgLqip } = data;
 
 	return (
 		<header className={className} tw="w-full relative pb-2xs">
-			<CustomLocalImage src={imgPath} sizes="83vw" />
+			<CustomLocalImage src={imgSrc} lqip={imgLqip} sizes="83vw" />
 			<div
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
 				style={{
@@ -37,7 +38,7 @@ function PageBanner({ className, data }: Props) {
 }
 
 // Workaround weird typechecking of next-images
-const CustomLocalImage = styled(LocalImage).attrs({ layout: 'fill' })`
+const CustomLocalImage = styled(EnhancedImage).attrs({ layout: 'fill' })`
 	${tw`absolute-cover`}
 
 	img {

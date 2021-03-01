@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const { fontFamily, spacing } = require('tailwindcss/defaultTheme');
+const {
+	fontFamily,
+	spacing,
+	transitionProperty,
+} = require('tailwindcss/defaultTheme');
+const _ = require('lodash');
 
 module.exports = {
 	purge: {
@@ -28,6 +33,9 @@ module.exports = {
 			current: 'currentColor',
 		},
 		extend: {
+			transitionProperty: {
+				colors: transitionProperty.colors + ', text-decoration-color',
+			},
 			spacing: {
 				'2xs': '42.5%',
 				xs: '56.25%',
@@ -38,13 +46,13 @@ module.exports = {
 				'4xl': '200%',
 			},
 			fontSize: {
-				body: ['0.875rem', { lineHeight: '1.46' }],
+				body: ['0.875rem', { lineHeight: '1.43' }],
 				subtitle: ['0.875rem', { lineHeight: '1.46' }],
-				nav: '1.25rem',
-				newsBody: '1.4375rem',
-				title: '2.25rem',
-				h3: '3rem',
-				h1: '4rem',
+				nav: ['1.25rem', { lineHeight: '1.3' }],
+				newsBody: ['1.4375rem', { lineHeight: '1.3' }],
+				title: ['2.25rem', { lineHeight: '1.3' }],
+				h3: ['3rem', { lineHeight: '1.3' }],
+				h1: ['4rem', { lineHeight: '1.3' }],
 			},
 
 			fontFamily: {
@@ -79,8 +87,23 @@ module.exports = {
 		clear: false,
 		order: false,
 	},
-	plugins: [require('@tailwindcss/typography'), centers, grid, sizing],
+	plugins: [
+		require('@tailwindcss/typography'),
+		centers,
+		grid,
+		sizing,
+		commons,
+		decorator,
+	],
 };
+
+function commons({ addUtilities }) {
+	addUtilities({
+		'.content': {
+			content: '""',
+		},
+	});
+}
 
 function centers({ addComponents }) {
 	addComponents({
@@ -122,4 +145,17 @@ function sizing({ addComponents }) {
 			height: '100%',
 		},
 	});
+}
+
+function decorator({ addUtilities, e, theme, variants }) {
+	const colors = theme('colors', {});
+	const decorationVariants = variants('textDecoration', []);
+
+	const textDecorationColorUtility = _.map(colors, (color, name) => ({
+		[`.decorator-${e(name)}`]: {
+			textDecorationColor: `${color}`,
+		},
+	}));
+
+	addUtilities(textDecorationColorUtility, decorationVariants);
 }

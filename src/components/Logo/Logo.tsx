@@ -11,7 +11,7 @@ type Props = {
  */
 const Logo: VFC<Props> = ({ className }) => {
 	return (
-		<NextLink href="/">
+		<NextLink href="/" passHref>
 			<a aria-label="Link to homepage" className={className}>
 				<Image
 					src="/svg/logo.svg"
