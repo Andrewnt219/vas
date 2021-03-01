@@ -1,19 +1,10 @@
-import React, { ReactNode, VFC } from 'react';
 import tw, { styled } from 'twin.macro';
-
-type Props = {
-	children: ReactNode;
-};
 
 /**
  * @description renders a styled header for a section
  */
-const SectionH1: VFC<Props> = ({ children }) => {
-	return <Heading>{children}</Heading>;
-};
-
-type HeadingProps = {};
-const Heading = styled.h1<HeadingProps>`
+type SectionH1Props = {};
+const SectionH1 = styled.h1<SectionH1Props>`
 	${tw`text-2xl md:text-4xl mx-auto max-w-max relative pb-2 md:pb-4`}
 	${tw`lg:(text-5xl pb-8)`}
 

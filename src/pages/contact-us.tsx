@@ -7,6 +7,7 @@ type Props = {};
 const ContactUs: VFC<Props> = ({}) => {
 	return (
 		<Container>
+			<h1 id="contact-title">Let&apos;s connect</h1>
 			<ContactForm />
 		</Container>
 	);

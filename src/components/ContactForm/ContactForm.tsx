@@ -61,11 +61,13 @@ function ContactForm({ className }: Props) {
 
 	return (
 		<form
+			aria-labelledby="contact-form-title"
 			onSubmit={onSubmit}
 			noValidate
 			className={className}
-			title="contact-form"
 		>
+			<h2 id="contact-form-title">We would love to hear from you</h2>
+
 			{textFields.map((fieldData) => (
 				<InputGroup key={fieldData.name} data={fieldData} />
 			))}

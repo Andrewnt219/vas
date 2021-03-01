@@ -1,6 +1,6 @@
 import { Response } from '@api-response';
+import { PostModel } from '@lib/sanity/PostModel';
 import { PostDataService } from '@services/post-data-service';
-import { PostModel } from '@src/models/PostModel';
 import { assertLanguages } from '@src/utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';

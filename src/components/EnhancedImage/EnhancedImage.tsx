@@ -5,14 +5,15 @@ import 'twin.macro';
 // For some reasons, using Omit src cause error
 type Props = ImageProps & {
 	className?: string;
+	lqip: string;
 };
 
 /**
  * @description Enhanced local images loading with next-optimized-images
  */
-const LocalImage: VFC<Props> = ({ className, src, ...imageProps }) => {
+const EnhancedImage: VFC<Props> = ({ className, lqip, ...imageProps }) => {
 	const lqipRef = useRef<HTMLImageElement | null>(null);
-	const fixedSrc = src.startsWith('/') ? src.replace('/', '') : src;
+	// const fixedSrc = src.startsWith('/') ? src.replace('/', '') : src;
 
 	// Switch display with placeholder
 	const handleImageLoad = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
@@ -41,15 +42,14 @@ const LocalImage: VFC<Props> = ({ className, src, ...imageProps }) => {
 	return (
 		<div className={className} tw="relative">
 			<img
-				tw="h-full w-full object-cover absolute top-0 left-0 opacity-100 duration-300 "
+				tw="h-full w-full object-cover absolute top-0 left-0 opacity-100 duration-500 "
 				aria-hidden="true"
 				alt=""
 				ref={lqipRef}
-				src={require(`images/${fixedSrc}?lqip`)}
+				src={lqip}
 			/>
 			<NextImage
-				tw="opacity-0 transition-opacity duration-500 delay-200"
-				src={require(`images/${fixedSrc}`)}
+				tw="opacity-0 transition-opacity duration-300 "
 				onLoad={handleImageLoad}
 				onError={handleErrorLoad}
 				{...imageProps}
@@ -58,4 +58,4 @@ const LocalImage: VFC<Props> = ({ className, src, ...imageProps }) => {
 	);
 };
 
-export default LocalImage;
+export default EnhancedImage;

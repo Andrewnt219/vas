@@ -57,7 +57,6 @@ export default function MainLayout({
 				className={className}
 				tw="col-span-full grid grid-cols-12 mt-6 pb-6 xl:(mt-20 pb-14)"
 				id="skip"
-				title="content"
 			>
 				{children}
 			</main>
