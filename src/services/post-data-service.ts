@@ -1,9 +1,9 @@
 import { FireBasePost as PostMeta } from '@firebase';
 import firestore from '@lib/firestore';
-import { localizedSanityClient } from '@lib/sanity';
+import { PostModel, postModelQuery } from '@lib/sanity/PostModel';
+import { localizedSanityClient } from '@lib/sanity/sanity-clients';
 import i18nConfig from '@root/i18n.json';
 import { Languages } from '@src/data/localization-data';
-import { PostModel, postModelQuery } from '@src/models/PostModel';
 import firebase from 'firebase-admin';
 export class PostDataService {
 	private static collection = firestore.collection('posts');
