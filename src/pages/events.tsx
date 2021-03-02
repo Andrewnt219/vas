@@ -4,6 +4,7 @@ import PageBanner from '@components/PageBanner/PageBanner';
 import { EventCardModel } from '@lib/sanity/EventCardModel';
 import React, { VFC } from 'react';
 import 'twin.macro';
+
 type Props = {};
 
 const events: VFC<Props> = ({}) => {
