@@ -33,12 +33,16 @@ module.exports = {
 			current: 'currentColor',
 		},
 		extend: {
+			maxWidth: {
+				'8xl': '105rem',
+			},
 			transitionProperty: {
 				colors: transitionProperty.colors + ', text-decoration-color',
 			},
 			spacing: {
 				'2xs': '42.5%',
 				xs: '56.25%',
+				sm: '75%',
 				full: '100%',
 				xl: '125%',
 				'2xl': '150%',
@@ -80,7 +84,11 @@ module.exports = {
 			}),
 		},
 	},
-
+	variants: {
+		extend: {
+			alignSelf: ['even'],
+		},
+	},
 	corePlugins: {
 		float: false,
 		container: false,

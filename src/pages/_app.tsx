@@ -12,9 +12,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 			<GlobalStyles />
 
 			<Appbar />
-			<h1 tw="col-span-full text-h1 font-bold text-primary text-center">
-				Coming soon
-			</h1>
+			<Component {...pageProps} />
 			<Footer />
 		</>
 	);

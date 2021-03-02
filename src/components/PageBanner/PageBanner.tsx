@@ -19,7 +19,10 @@ function PageBanner({ className, data }: Props) {
 	const { title, subtitle, imgSrc, imgLqip } = data;
 
 	return (
-		<header className={className} tw="w-full relative pb-2xs">
+		<header
+			className={className}
+			tw="relative col-span-full pb-2xs mb-10 md:mb-20 xl:grid-p-sm"
+		>
 			<CustomLocalImage src={imgSrc} lqip={imgLqip} sizes="83vw" />
 			<div
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
@@ -29,7 +32,7 @@ function PageBanner({ className, data }: Props) {
 				}}
 			>
 				<h1 tw="font-bold text-2xl md:text-h1">{title}</h1>
-				<p tw="hidden  md:(block text-center text-subtitle mt-5 max-w-md font-medium)">
+				<p tw="hidden md:(block text-center text-subtitle mt-5 max-w-md font-medium)">
 					{subtitle}
 				</p>
 			</div>
