@@ -74,7 +74,10 @@ const Index: VFC<Props> = () => {
 						sizes="15vw"
 					/>
 
-					<ul tw="grid grid-cols-2 gap-10 grid-p-sm xl:(grid-p-md gap-32)">
+					<ul
+						tw="grid grid-cols-2 gap-10 grid-p-sm xl:(grid-p-md gap-32)"
+						aria-label="Facts about VAS"
+					>
 						{FACTS.map((fact) => (
 							<li key={fact.key}>
 								<FactTile data={fact} />

@@ -12,7 +12,7 @@ const Footer: VFC<Props> = ({}) => {
 			tw="absolute bottom-0 bg-primary h-36 w-full text-white  flex-center flex-col md:(h-56 text-lg)"
 			role="contentinfo"
 		>
-			<ul tw="flex items-center  space-x-6">
+			<ul tw="flex items-center  space-x-6" aria-label="social medias">
 				<li>
 					<MediaIconAnchor
 						href="https://facebook.com"

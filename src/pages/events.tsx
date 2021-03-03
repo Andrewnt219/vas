@@ -21,7 +21,10 @@ const Events: VFC<Props> = ({}) => {
 				}}
 			/>
 
-			<ul tw="grid-p-sm flex flex-col space-y-16 xl:(col-start-3 col-end-12 all-child:(w-sm even:self-end))">
+			<ul
+				tw="grid-p-sm flex flex-col space-y-16 xl:(col-start-3 col-end-12 all-child:(w-sm even:self-end))"
+				aria-label="articles about VAS' events"
+			>
 				<EventCard data={card} />
 				<EventCard data={card2} />
 				<EventCard data={card3} />
@@ -29,7 +32,7 @@ const Events: VFC<Props> = ({}) => {
 
 			<Pagination
 				tw="col-span-full"
-				usePaginationProps={{ count: 20 }}
+				count={20}
 				onItemClicked={(ev, page) => console.log(page)}
 			/>
 		</MainLayout>

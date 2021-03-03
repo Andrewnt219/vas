@@ -6,7 +6,8 @@ import React, { ReactElement } from 'react';
 import tw, { css, styled } from 'twin.macro';
 
 type Props = {
-	usePaginationProps: UsePaginationProps;
+	count: NonNullable<UsePaginationProps['count']>;
+	usePaginationProps?: Omit<UsePaginationProps, 'count'>;
 	onItemClicked?(
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 		currentPage: number
@@ -14,9 +15,15 @@ type Props = {
 	className?: string;
 };
 
-function Pagination({ className, onItemClicked, usePaginationProps }: Props) {
+function Pagination({
+	className,
+	onItemClicked,
+	count,
+	usePaginationProps,
+}: Props) {
 	// passing in `items` doesn't work properly
 	const { items } = usePagination({
+		count,
 		...usePaginationProps,
 	});
 	const Buttons = renderControllers(items, onItemClicked);
@@ -29,12 +36,18 @@ function Pagination({ className, onItemClicked, usePaginationProps }: Props) {
 			className={className}
 			tw="flex-center flex-col max-w-max mx-auto mt-10 md:mt-20"
 		>
-			<ul tw="w-2xl flex items-center justify-between">
+			<ul
+				tw="w-2xl flex items-center justify-between"
+				aria-label="arrow buttons"
+			>
 				{PrevButton}
 				{NextButton}
 			</ul>
 
-			<ul tw="flex items-center space-x-2 mt-2 text-base md:(text-newsBody mt-5)">
+			<ul
+				tw="flex items-center space-x-2 mt-2 text-base md:(text-newsBody mt-5)"
+				aria-label="page buttons"
+			>
 				{Buttons}
 			</ul>
 		</nav>
