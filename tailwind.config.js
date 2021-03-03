@@ -28,7 +28,6 @@ module.exports = {
 			},
 			black: {
 				DEFAULT: '#000',
-				half: '#00000080',
 			},
 			white: '#fff',
 			transparent: 'transparent',

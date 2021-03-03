@@ -6,6 +6,7 @@ import 'twin.macro';
 type Props = ImageProps & {
 	className?: string;
 	lqip: string;
+	alt: string;
 };
 
 /**

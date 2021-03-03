@@ -1,5 +1,5 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import { EventCardModel } from '@lib/sanity/EventCardModel';
+import { EventCardModel } from '@lib/sanity/models/EventCardModel';
 import { Semester } from '@src/data/common-data';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
@@ -25,6 +25,7 @@ function EventCard({ className, data }: Props) {
 						tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
 						src={data.thumbnail.url}
 						lqip={data.thumbnail.metadata.lqip}
+						alt={data.thumbnail.alt ?? ''}
 						layout="fill"
 					/>
 				</div>

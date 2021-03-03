@@ -1,4 +1,7 @@
 // TODO move to @types
+
+import { ImageModel } from './ImageModel';
+
 /**
  * @description the stucture of sanity quired post
  */
@@ -9,18 +12,10 @@ export type PostModel = {
 	_createdAt: string;
 	_id: string;
 	_lang: string;
+	publishedAt: string;
+	snippet: string;
+	locations: string[];
+	fromDate: string;
+	toDate: string;
+	thumbnail: ImageModel;
 };
-
-/**
- * @description the query structure for a post
- */
-export const postModelQuery = `
-	{
-		_id,
-		_lang,
-		_createdAt,
-		title,
-		body,
-		"slug": slug.current 
-	}
-`;

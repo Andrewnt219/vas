@@ -2,7 +2,7 @@ import EventCard from '@components/EventCard/EventCard';
 import MainLayout from '@components/MainLayout/MainLayout';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
-import { EventCardModel } from '@lib/sanity/EventCardModel';
+import { EventCardModel } from '@lib/sanity/models/EventCardModel';
 import React, { VFC } from 'react';
 import 'twin.macro';
 
@@ -15,6 +15,7 @@ const Events: VFC<Props> = ({}) => {
 				data={{
 					imgSrc: require('images/hero/events.png'),
 					imgLqip: require('images/hero/events.png?lqip'),
+					imgAlt: 'a group of students attending an event at Senece College',
 					subtitle:
 						'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 					title: 'Events',
@@ -25,9 +26,15 @@ const Events: VFC<Props> = ({}) => {
 				tw="grid-p-sm flex flex-col space-y-16 xl:(col-start-3 col-end-12 all-child:(w-sm even:self-end))"
 				aria-label="articles about VAS' events"
 			>
-				<EventCard data={card} />
-				<EventCard data={card2} />
-				<EventCard data={card3} />
+				<li>
+					<EventCard data={card} />
+				</li>
+				<li>
+					<EventCard data={card2} />
+				</li>
+				<li>
+					<EventCard data={card3} />
+				</li>
 			</ul>
 
 			<Pagination
