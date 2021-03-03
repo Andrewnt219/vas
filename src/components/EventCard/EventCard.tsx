@@ -43,11 +43,11 @@ function EventCard({ className, data }: Props) {
 				<p tw="md:text-right">Location: {data.locations.join('& ')}</p>
 			</div>
 
-			<div tw="text-base text-black-half md:text-newsBody">
+			<div tw="text-base text-gray-200 md:text-newsBody">
 				<p tw="mb-4 md:mb-6">{data.snippet}</p>
 
 				<NextLink href={`/posts/${data.slug}`} passHref>
-					<a tw="italic underline decorator-transparent  hocus:( decorator-primary text-primary) transition-colors ">
+					<a tw="italic underline decorator-transparent  hocus:(outline-none decorator-primary text-primary) transition-colors ">
 						Read more ...
 					</a>
 				</NextLink>

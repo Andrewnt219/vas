@@ -23,6 +23,8 @@ module.exports = {
 			gray: {
 				DEFAULT: '#F3F0EA',
 				100: '#F6F6F6',
+				200: '#6B7280',
+				300: '#7A7A7A',
 			},
 			black: {
 				DEFAULT: '#000',
@@ -87,6 +89,8 @@ module.exports = {
 	variants: {
 		extend: {
 			alignSelf: ['even'],
+			backgroundColor: ['active'],
+			backgroundOpacity: ['active'],
 		},
 	},
 	corePlugins: {

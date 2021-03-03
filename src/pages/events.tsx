@@ -1,13 +1,14 @@
 import EventCard from '@components/EventCard/EventCard';
 import MainLayout from '@components/MainLayout/MainLayout';
 import PageBanner from '@components/PageBanner/PageBanner';
+import Pagination from '@components/Pagination/Pagination';
 import { EventCardModel } from '@lib/sanity/EventCardModel';
 import React, { VFC } from 'react';
 import 'twin.macro';
 
 type Props = {};
 
-const events: VFC<Props> = ({}) => {
+const Events: VFC<Props> = ({}) => {
 	return (
 		<MainLayout title="Events" tw="">
 			<PageBanner
@@ -25,6 +26,12 @@ const events: VFC<Props> = ({}) => {
 				<EventCard data={card2} />
 				<EventCard data={card3} />
 			</ul>
+
+			<Pagination
+				tw="col-span-full"
+				usePaginationProps={{ count: 20 }}
+				onItemClicked={(ev, page) => console.log(page)}
+			/>
 		</MainLayout>
 	);
 };
@@ -95,4 +102,4 @@ const card3: EventCardModel = {
 	title:
 		'Metallica\'s Twitch Performance Got Dubbed Over With Generic "Elevator Music"',
 };
-export default events;
+export default Events;

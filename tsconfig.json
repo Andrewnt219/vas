@@ -22,6 +22,8 @@
 		"jsx": "preserve",
 		"baseUrl": ".",
 		"paths": {
+			"@data/*": ["src/data/*"],
+			"@package/*": ["src/package/*"],
 			"@components/*": ["src/components/*"],
 			"@contexts/*": ["src/contexts/*"],
 			"@lib/*": ["src/lib/*"],
