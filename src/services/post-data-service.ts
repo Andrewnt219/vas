@@ -1,6 +1,6 @@
 import { FireBasePost as PostMeta } from '@firebase';
 import firestore from '@lib/firestore';
-import { PostModel, postModelQuery } from '@lib/sanity/PostModel';
+import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
 import i18nConfig from '@root/i18n.json';
 import { Languages } from '@src/data/localization-data';
