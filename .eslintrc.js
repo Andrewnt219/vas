@@ -44,4 +44,7 @@ module.exports = {
 			version: 'detect',
 		},
 	},
+	env: {
+		'jest/globals': true,
+	},
 };
