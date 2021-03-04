@@ -19,3 +19,5 @@ export type PostModel = {
 	toDate: string;
 	thumbnail: ImageModel;
 };
+
+export const postModelQuery = `*[_type == 'post'] {...}`;

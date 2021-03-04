@@ -1,13 +1,13 @@
-import { RouteValues } from '@src/data/routes-data';
-import { useRouteMatch } from '@src/package/hooks/useRouteMatch';
+import { useRouteMatch } from '@package/hooks/useRouteMatch/useRouteMatch';
+import { Route } from '@src/data/routes-data';
 import { motion } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
-import 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 type Props = {
-	data: RouteValues;
+	data: Route;
 };
 
 /**
@@ -28,12 +28,17 @@ const MenuItem: VFC<Props> = ({ data }) => {
 				/>
 			)}
 			<NextLink href={href} passHref>
-				<a tw="text-xl text-center leading-tight font-bold pt-5 inline-block border-t-4 border-transparent transition-colors hocus:(text-primary)">
+				<StyledMenuLink>
 					{t(`navbar.${i18nKey}`, null, { fallback: '...' })}
-				</a>
+				</StyledMenuLink>
 			</NextLink>
 		</div>
 	);
 };
+
+export const StyledMenuLink = styled.a`
+	${tw`text-xl text-center leading-tight font-bold pt-5 inline-block border-t-4 border-transparent transition-colors hocus:(text-primary)`}
+	${tw` hocus:(outline-none)`}
+`;
 
 export default MenuItem;
