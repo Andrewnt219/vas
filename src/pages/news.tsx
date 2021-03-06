@@ -1,7 +1,7 @@
-import MainLayout from '@components/MainLayout/MainLayout';
 import NewsCard from '@components/NewsCard/NewsCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
+import MainLayout from '@src/layouts/MainLayout';
 import { ComponentProps } from '@utils';
 import React, { VFC } from 'react';
 import 'twin.macro';

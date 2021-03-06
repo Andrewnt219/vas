@@ -34,4 +34,10 @@ function TripleCardsdGroup({ className, data }: Props) {
 	);
 }
 
+export function validateTripleCardsGroup(
+	data: OrientationCardModel[]
+): data is Props['data'] {
+	return data.length === 3;
+}
+
 export default TripleCardsdGroup;

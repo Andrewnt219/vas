@@ -1,5 +1,5 @@
 import { Response } from '@api-response';
-import { PostModel } from '@lib/sanity/PostModel';
+import { PostModel } from '@lib/sanity/models/PostModel';
 import { PostDataService } from '@services/post-data-service';
 import { assertLanguages } from '@src/utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';

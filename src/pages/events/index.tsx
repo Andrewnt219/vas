@@ -1,8 +1,8 @@
-import EventCard from '@components/EventCard/EventCard';
-import MainLayout from '@components/MainLayout/MainLayout';
+import EventCard from '@components/EnhancedImage/EventCard/EventCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
 import { EventCardModel } from '@lib/sanity/models/EventCardModel';
+import MainLayout from '@src/layouts/MainLayout';
 import React, { VFC } from 'react';
 import 'twin.macro';
 

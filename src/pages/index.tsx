@@ -1,7 +1,7 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import FactTile from '@components/FactTile/FactTile';
 import SectionH1 from '@components/SectionH1/SectionH1';
-import MainLayout from '@src/components/MainLayout/MainLayout';
+import MainLayout from '@src/layouts/MainLayout';
 import { ComponentProps } from '@utils';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';

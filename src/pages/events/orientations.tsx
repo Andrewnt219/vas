@@ -1,54 +1,26 @@
-import Button from '@components/Button/Button';
-import MainLayout from '@components/MainLayout/MainLayout';
-import OrientationCard from '@components/OrientationCard/OrientationCard';
-import PageBanner from '@components/PageBanner/PageBanner';
-import TripleCardsdGroup from '@components/TripleCardGroup/TripleCardsGroup';
+import EventsPage from '@layouts/EventsPage';
 import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
 import React from 'react';
 import 'twin.macro';
 
 type Props = { className?: string };
 
-function orientations({ className }: Props) {
+function Orientations({ className }: Props) {
 	const posts = [];
 	if (posts.length > 3) {
 		posts.push('a');
 	}
-	return (
-		<MainLayout title="Orientations">
-			<PageBanner
-				data={{
-					imgAlt: "A picture of sourvenirs from one of VAS's orientations",
-					imgLqip: require('images/hero/orientation.png?lqip'),
-					imgSrc: require('images/hero/orientation.png'),
-					title: 'Orientation',
-					subtitle:
-						'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',
-				}}
-			/>
-
-			<div tw="grid-p-sm space-y-10 xl:space-y-14">
-				<TripleCardsdGroup data={[card, card1, card2]} tw="" />
-
-				<hr tw="my-10 border-t border-black " />
-
-				<ul
-					aria-label="Articles about VAS' orientations"
-					tw="  grid grid-cols-12 gap-y-8 md:gap-8 xl:gap-12"
-				>
-					{[card3, card4, card5].map((post) => (
-						<li key={post.slug} tw="col-span-full md:col-span-6 xl:col-span-4 ">
-							<OrientationCard data={post} />
-						</li>
-					))}
-				</ul>
-
-				{/* TODO: make a load more component that automatically triggered on intersect */}
-				<Button variant="outline">Load More</Button>
-			</div>
-		</MainLayout>
-	);
+	return <EventsPage data={{ posts: cards, bannerProps: data }} />;
 }
+
+const data = {
+	imgAlt: "A picture of sourvenirs from one of VAS's orientations",
+	imgLqip: require('images/hero/orientation.png?lqip'),
+	imgSrc: require('images/hero/orientation.png'),
+	title: 'Orientation',
+	subtitle:
+		'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',
+};
 
 const card: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
@@ -173,5 +145,6 @@ const card5: OrientationCardModel = {
 	},
 	title: 'Summer 2019 Orientation',
 };
+const cards = [card, card1, card2, card3, card4, card5];
 
-export default orientations;
+export default Orientations;
