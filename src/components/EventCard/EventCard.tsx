@@ -1,3 +1,4 @@
+import Button from '@components/Button/Button';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { EventCardModel } from '@lib/sanity/models/EventCardModel';
 import { Semester } from '@src/data/common-data';
@@ -11,6 +12,7 @@ function EventCard({ className, data }: Props) {
 	return (
 		<article className={className} tw="space-y-4 xl:space-y-14">
 			<div tw="relative pl-5 before:(content absolute top-0 left-0 h-full w-1 block bg-primary)">
+				{/* TODO remove the seconds to dismiss the mismatch server-client error */}
 				<time dateTime={dayjs(data.publishedAt).format()}>
 					{dayjs(data.publishedAt).format('DD MMMM YYYY')}
 				</time>
@@ -32,25 +34,25 @@ function EventCard({ className, data }: Props) {
 
 				<p>
 					Time:{' '}
-					<time dateTime={dayjs(data.fromDate).format()}>
+					<time dateTime={dayjs(data.fromDate).format('MMM DD')}>
 						{dayjs(data.fromDate).format('MMM DD')}
 					</time>{' '}
 					&#8211;{' '}
-					<time dateTime={dayjs(data.toDate).format()}>
+					<time dateTime={dayjs(data.toDate).format('MMM DD')}>
 						{dayjs(data.toDate).format('MMM DD')}
 					</time>
 				</p>
 
-				<p tw="md:text-right">Location: {data.locations.join('& ')}</p>
+				<p tw="md:text-right">Location: {data.locations.join(' & ')}</p>
 			</div>
 
 			<div tw="text-base text-gray-200 md:text-newsBody">
 				<p tw="mb-4 md:mb-6">{data.snippet}</p>
 
 				<NextLink href={`/posts/${data.slug}`} passHref>
-					<a tw="italic underline decorator-transparent  hocus:(outline-none decorator-primary text-primary) transition-colors ">
+					<Button as="a" variant="link" tw="italic">
 						Read more ...
-					</a>
+					</Button>
 				</NextLink>
 			</div>
 		</article>
