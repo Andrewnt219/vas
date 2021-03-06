@@ -27,10 +27,7 @@ function PageBanner({ className, data }: Props) {
 			<CustomLocalImage src={imgSrc} lqip={imgLqip} alt={imgAlt} sizes="83vw" />
 			<div
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
-				style={{
-					background:
-						'linear-gradient(180deg, rgba(0, 0, 0, 0.088) 0%, rgba(0, 0, 0, 0.4) 100%)',
-				}}
+				css="background: linear-gradient(180deg, rgba(0, 0, 0, 0.088) 0%, rgba(0, 0, 0, 0.4) 100%)"
 			>
 				<h1 tw="font-bold text-2xl md:text-h1">{title}</h1>
 				<p tw="hidden md:(block text-center text-subtitle mt-5 max-w-md font-medium)">
