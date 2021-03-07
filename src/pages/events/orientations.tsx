@@ -1,4 +1,5 @@
 import EventsPage from '@layouts/EventsPage';
+import MainLayout from '@layouts/MainLayout';
 import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
 import React from 'react';
 import 'twin.macro';
@@ -10,7 +11,11 @@ function Orientations({ className }: Props) {
 	if (posts.length > 3) {
 		posts.push('a');
 	}
-	return <EventsPage data={{ posts: cards, bannerProps: data }} />;
+	return (
+		<MainLayout title="Orientations" className={className}>
+			<EventsPage data={{ posts: cards, bannerProps: data }} />
+		</MainLayout>
+	);
 }
 
 const data = {
