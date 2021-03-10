@@ -2,37 +2,35 @@ import { InputLabel } from '@components/InputLabel/InputLabel';
 import TextField from '@components/TextField/TextField';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import type { FieldError, FieldValues } from 'react-hook-form';
+import type {
+	FieldError,
+	FieldValues,
+	RefCallbackHandler,
+} from 'react-hook-form';
 import tw, { css, styled } from 'twin.macro';
-
-type InputRef =
-	| ((instance: HTMLInputElement | null) => void)
-	| React.RefObject<HTMLInputElement>
-	| null
-	| undefined;
 
 export type InputGroupProps<T extends FieldValues> = {
 	data: {
 		error?: FieldError;
-		register: InputRef;
+		register: RefCallbackHandler;
 		labelText: string;
-		name: string & keyof T; // smartass TypeScript cannot interfere key is string
 	};
-
+	isTextArea?: boolean;
 	className?: string;
 };
 
 function InputGroup<T extends FieldValues>({
 	className,
 	data,
+	isTextArea,
 }: InputGroupProps<T>) {
-	const { labelText, name, register, error } = data;
+	const { labelText, register, error } = data;
 
 	return (
 		<Container className={className} tw="" isInvalid={!!error?.message}>
-			<InputLabel htmlFor={name}>{labelText}</InputLabel>
+			<InputLabel htmlFor={register.name}>{labelText}</InputLabel>
 
-			<TextField name={name} ref={register} />
+			<TextField as={isTextArea ? 'textarea' : 'input'} {...register} />
 
 			<AnimatePresence exitBeforeEnter>
 				<motion.span
@@ -57,8 +55,7 @@ const invalidCss = css`
 		text-decoration: underline;
 	}
 
-	// Cannot use TextField directly for some reason
-	input {
+	${TextField} {
 		${tw`bg-primary bg-opacity-30`}
 	}
 `;
