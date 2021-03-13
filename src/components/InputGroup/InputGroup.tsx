@@ -2,35 +2,19 @@ import { InputLabel } from '@components/InputLabel/InputLabel';
 import TextField from '@components/TextField/TextField';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import type {
-	FieldError,
-	FieldValues,
-	RefCallbackHandler,
-} from 'react-hook-form';
+import type { FieldError } from 'react-hook-form';
 import tw, { css, styled } from 'twin.macro';
 
-export type InputGroupProps<T extends FieldValues> = {
-	data: {
-		error?: FieldError;
-		register: RefCallbackHandler;
-		labelText: string;
-	};
-	isTextArea?: boolean;
+export type InputGroupProps = {
+	error?: FieldError;
 	className?: string;
+	children: [ReturnType<typeof InputLabel>, ReturnType<typeof TextField>];
 };
 
-function InputGroup<T extends FieldValues>({
-	className,
-	data,
-	isTextArea,
-}: InputGroupProps<T>) {
-	const { labelText, register, error } = data;
-
+function InputGroup({ className, error, children }: InputGroupProps) {
 	return (
 		<Container className={className} tw="" isInvalid={!!error?.message}>
-			<InputLabel htmlFor={register.name}>{labelText}</InputLabel>
-
-			<TextField as={isTextArea ? 'textarea' : 'input'} {...register} />
+			{children}
 
 			<AnimatePresence exitBeforeEnter>
 				<motion.span
@@ -41,6 +25,8 @@ function InputGroup<T extends FieldValues>({
 						transition: { type: 'tween', duration: 0.15 },
 					}}
 					exit={{ opacity: 0 }}
+					//
+					tw="text-smaller text-primary"
 				>
 					{error?.message}
 				</motion.span>
@@ -50,11 +36,6 @@ function InputGroup<T extends FieldValues>({
 }
 
 const invalidCss = css`
-	${InputLabel} {
-		color: blue;
-		text-decoration: underline;
-	}
-
 	${TextField} {
 		${tw`bg-primary bg-opacity-30`}
 	}
@@ -64,13 +45,7 @@ type ContainerProps = {
 	isInvalid: boolean;
 };
 const Container = styled.div<ContainerProps>`
-	${tw``}
-
-	&:focus-within {
-		${InputLabel} {
-			color: red;
-		}
-	}
+	${tw`flex flex-col space-y-1 md:space-y-3`}
 
 	${(p) => p.isInvalid && invalidCss}
 `;

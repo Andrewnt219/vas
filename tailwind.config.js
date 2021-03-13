@@ -25,6 +25,7 @@ module.exports = {
 				100: '#F6F6F6',
 				200: '#6B7280',
 				300: '#7A7A7A',
+				400: '#EEE',
 			},
 			black: {
 				DEFAULT: '#000',
@@ -34,6 +35,9 @@ module.exports = {
 			current: 'currentColor',
 		},
 		extend: {
+			borderRadius: {
+				'4xl': '3.125rem',
+			},
 			maxWidth: {
 				'8xl': '105rem',
 			},
@@ -56,8 +60,6 @@ module.exports = {
 				nav: ['1.25rem', { lineHeight: '1.3' }],
 				newsBody: ['1.4375rem', { lineHeight: '1.3' }],
 				title: ['2.25rem', { lineHeight: '1.3' }],
-				h3: ['3rem', { lineHeight: '1.3' }],
-				h1: ['4rem', { lineHeight: '1.3' }],
 			},
 
 			fontFamily: {
@@ -105,6 +107,7 @@ module.exports = {
 		sizing,
 		commons,
 		decorator,
+		fonts,
 	],
 };
 
@@ -112,6 +115,33 @@ function commons({ addUtilities }) {
 	addUtilities({
 		'.content': {
 			content: '""',
+		},
+	});
+}
+
+function fonts({ addComponents, theme }) {
+	addComponents({
+		'.text-smaller': {
+			fontSize: 'smaller',
+		},
+		'.text-larger': {
+			fontSize: 'larger',
+		},
+		'.text-h1-variants': {
+			fontSize: theme('fontSize.2xl'),
+			lineHeight: 1.3,
+
+			'@screen md': {
+				fontSize: '4rem',
+			},
+		},
+		'.text-h3-variants': {
+			fontSize: theme('fontSize.lg'),
+			lineHeight: 1.3,
+
+			'@screen md': {
+				fontSize: theme('fontSize.5xl'),
+			},
 		},
 	});
 }

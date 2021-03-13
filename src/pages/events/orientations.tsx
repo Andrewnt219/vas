@@ -20,8 +20,8 @@ function Orientations({ className }: Props) {
 
 const data = {
 	imgAlt: "A picture of sourvenirs from one of VAS's orientations",
-	imgLqip: require('images/hero/orientation.png?lqip'),
-	imgSrc: require('images/hero/orientation.png'),
+	imgLqip: require('images/hero/orientation.jpg?lqip'),
+	imgSrc: require('images/hero/orientation.jpg'),
 	title: 'Orientation',
 	subtitle:
 		'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',

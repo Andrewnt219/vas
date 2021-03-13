@@ -13,8 +13,8 @@ const news: VFC<Props> = ({}) => {
 		<MainLayout title="News" tw="">
 			<PageBanner
 				data={{
-					imgSrc: require('images/hero/news.png'),
-					imgLqip: require('images/hero/news.png?lqip'),
+					imgSrc: require('images/hero/news.jpg'),
+					imgLqip: require('images/hero/news.jpg?lqip'),
 					imgAlt: 'A table with various souvenirs from Seneca College',
 					subtitle:
 						'Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.',

@@ -45,7 +45,9 @@ function EventsPage({ data }: Props) {
 				</ul>
 
 				{/* TODO: make a load more component that automatically triggered on intersect */}
-				<Button variant="outline">Load More</Button>
+				<Button variant="outline" tw="block mx-auto">
+					Load More
+				</Button>
 			</div>
 		</>
 	);

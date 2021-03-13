@@ -56,10 +56,10 @@ const card: EventCardModel = {
 	snippet:
 		'The band’s BlizzCon concert was interrupted with royalty-free music to avoid a copyright violation and takedown order.',
 	thumbnail: {
-		url: require('images/hero/about-us.png'),
+		url: require('images/hero/about-us.jpg'),
 		metadata: {
 			height: 100,
-			lqip: require('images/hero/about-us.png?lqip'),
+			lqip: require('images/hero/about-us.jpg?lqip'),
 			ratio: 0.5,
 			width: 100,
 		},

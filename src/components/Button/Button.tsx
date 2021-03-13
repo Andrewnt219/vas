@@ -1,14 +1,23 @@
 import tw, { css, styled } from 'twin.macro';
 
-const base = css``;
+const base = css`
+	${tw`border border-transparent  max-w-max transition-colors `}
+	${tw`xl:text-2xl`}
+	${tw`hocus:(outline-none)`}
+`;
 
-const contain = css``;
+const contain = css`
+	${tw`bg-primary text-white rounded  border-primary px-3 py-1`}
+	${tw`md:(rounded-lg px-5 py-2) xl:( px-9 py-3 rounded-xl)`}
+	${tw`hocus:( bg-white text-primary)`}
+	${tw`active:(bg-primary text-white)`}
+`;
 
 const outline = css`
-	${tw`block mx-auto border border-black rounded-2xl max-w-max px-6 py-1  transition-colors `}
+	${tw`border-black rounded-2xl px-6 py-1`}
 	${tw`hocus:(outline-none text-white bg-primary border-primary)`}
-	${tw`active:(bg-white text-primary)`}
 	${tw`md:(py-2) xl:(text-2xl py-4)`}
+	${tw`active:(bg-white text-primary)`}
 `;
 
 const link = css`

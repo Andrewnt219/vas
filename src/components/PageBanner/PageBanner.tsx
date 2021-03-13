@@ -29,7 +29,7 @@ function PageBanner({ className, data }: Props) {
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
 				css="background: linear-gradient(180deg, rgba(0, 0, 0, 0.088) 0%, rgba(0, 0, 0, 0.4) 100%)"
 			>
-				<h1 tw="font-bold text-2xl md:text-h1">{title}</h1>
+				<h1 tw="font-bold text-h1-variants">{title}</h1>
 				<p tw="hidden md:(block text-center text-subtitle mt-5 max-w-md font-medium)">
 					{subtitle}
 				</p>

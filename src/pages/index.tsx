@@ -46,8 +46,8 @@ const Index: VFC<Props> = () => {
 						src={require('images/friends-with-books.png')}
 						lqip={require('images/friends-with-books.png?lqip')}
 						alt="A group of friends reading books"
-						width={910}
-						height={713}
+						width={2995}
+						height={2331}
 						layout="responsive"
 						sizes="50vw"
 					/>
@@ -68,8 +68,8 @@ const Index: VFC<Props> = () => {
 						src={require('images/woman-with-pencil.png')}
 						lqip={require('images/woman-with-pencil.png?lqip')}
 						alt="A woman holds a human-size pencil"
-						width={251}
-						height={582}
+						width={928}
+						height={2157}
 						layout="responsive"
 						sizes="15vw"
 					/>
@@ -90,8 +90,8 @@ const Index: VFC<Props> = () => {
 						src={require('images/man-with-champion-cup.png')}
 						lqip={require('images/man-with-champion-cup.png?lqip')}
 						alt="A man holds a champion cup"
-						width={336}
-						height={696}
+						width={1297}
+						height={2686}
 						layout="responsive"
 						sizes="25vw"
 					/>
@@ -101,8 +101,8 @@ const Index: VFC<Props> = () => {
 						src={require('images/friends-with-hobbies.png')}
 						lqip={require('images/friends-with-hobbies.png?lqip')}
 						alt="A group of friends with different hobbies"
-						width={831}
-						height={568}
+						width={3233}
+						height={2210}
 						layout="responsive"
 						sizes="50vw"
 					/>

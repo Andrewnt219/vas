@@ -1,6 +1,9 @@
-import { InputGroupProps } from '@components/InputGroup/InputGroup';
 import useTranslation from 'next-translate/useTranslation';
-import type { UseFormReturn } from 'react-hook-form';
+import type {
+	FieldError,
+	RefCallbackHandler,
+	UseFormReturn,
+} from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 type ContactFields = {
@@ -11,10 +14,13 @@ type ContactFields = {
 	message: string;
 };
 
-type TextFields = Record<
-	keyof ContactFields,
-	InputGroupProps<ContactFields>['data']
->;
+type Value = {
+	labelText: string;
+	error?: FieldError;
+	register: RefCallbackHandler;
+};
+
+type TextFields = Record<keyof ContactFields, Value>;
 export const useContactForm = (): [
 	formMethods: UseFormReturn<ContactFields>,
 	textFields: TextFields
