@@ -37,7 +37,7 @@ const DropdownButton: VFC<Props> = ({ data }) => {
 				aria-haspopup={true}
 				as="button"
 			>
-				{t(`navbar.${i18nKey}`, null, { fallback: '...' })} --
+				{t(`navbar.${i18nKey}`, null, { fallback: '...' })}
 			</StyledMenuLink>
 
 			<div tw="relative">

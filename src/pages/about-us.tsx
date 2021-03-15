@@ -10,7 +10,7 @@ type Props = {};
 
 const AboutUs: VFC<Props> = ({}) => {
 	return (
-		<MainLayout title="About us" tw="pb-20 md:pb-36">
+		<MainLayout title="About us" tw="pb-20 mt-0 md:pb-36">
 			<PageBanner
 				tw="mb-0! col-span-full"
 				data={{
@@ -71,72 +71,79 @@ const AboutUs: VFC<Props> = ({}) => {
 					</p>
 				</div>
 
-				<div tw="hidden xl:(block col-span-full)">
-					<EnhancedImage
-						src={require('images/atom-outline.png')}
-						lqip={require('images/atom-outline.png?lqip')}
-						alt="An icon of magnifying glass in red outline"
-						layout="responsive"
-						width={1510}
-						height={1821}
-					/>
-					<EnhancedImage
-						src={require('images/global-outline.png')}
-						lqip={require('images/global-outline.png?lqip')}
-						alt="An icon of magnifying glass in red outline "
-						layout="responsive"
-						width={1856}
-						height={2768}
-					/>
-					<EnhancedImage
-						src={require('images/magnifier-outline.png')}
-						lqip={require('images/magnifier-outline.png?lqip')}
-						alt="An icon of magnifying glass in red outline"
-						layout="responsive"
-						width={931}
-						height={1489}
-					/>
-					<EnhancedImage
-						src={require('images/mark-outline.png')}
-						lqip={require('images/mark-outline.png?lqip')}
-						alt="An icon of a marked place in red outline"
-						layout="responsive"
-						width={1510}
-						height={2412}
-					/>
-					<EnhancedImage
-						src={require('images/pencil-outline.png')}
-						lqip={require('images/pencil-outline.png?lqip')}
-						alt="An icon of a pencil in red outline"
-						layout="responsive"
-						width={1131}
-						height={1915}
-					/>
-					<EnhancedImage
-						src={require('images/ruler-outline.png')}
-						lqip={require('images/ruler-outline.png?lqip')}
-						alt="An icon of a ruler in red outline"
-						layout="responsive"
-						width={1992}
-						height={2227}
-					/>
-					<EnhancedImage
-						src={require('images/torque-outline.png')}
-						lqip={require('images/torque-outline.png?lqip')}
-						alt="An icon of a torque in red outline"
-						layout="responsive"
-						width={1923}
-						height={2481}
-					/>
-					<EnhancedImage
-						src={require('images/triangle-outline.png')}
-						lqip={require('images/triangle-outline.png?lqip')}
-						alt="An icon of a triagle in red outline"
-						layout="responsive"
-						width={1638}
-						height={1638}
-					/>
-				</div>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/atom-outline.png')}
+					lqip={require('images/atom-outline.png?lqip')}
+					alt="An icon of magnifying glass in red outline"
+					layout="responsive"
+					width={1510}
+					height={1821}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/global-outline.png')}
+					lqip={require('images/global-outline.png?lqip')}
+					alt="An icon of magnifying glass in red outline "
+					layout="responsive"
+					width={1856}
+					height={2768}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/magnifier-outline.png')}
+					lqip={require('images/magnifier-outline.png?lqip')}
+					alt="An icon of magnifying glass in red outline"
+					layout="responsive"
+					width={931}
+					height={1489}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/mark-outline.png')}
+					lqip={require('images/mark-outline.png?lqip')}
+					alt="An icon of a marked place in red outline"
+					layout="responsive"
+					width={1510}
+					height={2412}
+				/>
+
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/pencil-outline.png')}
+					lqip={require('images/pencil-outline.png?lqip')}
+					alt="An icon of a pencil in red outline"
+					layout="responsive"
+					width={1131}
+					height={1915}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/ruler-outline.png')}
+					lqip={require('images/ruler-outline.png?lqip')}
+					alt="An icon of a ruler in red outline"
+					layout="responsive"
+					width={1992}
+					height={2227}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/torque-outline.png')}
+					lqip={require('images/torque-outline.png?lqip')}
+					alt="An icon of a torque in red outline"
+					layout="responsive"
+					width={1923}
+					height={2481}
+				/>
+				<EnhancedImage
+					tw="hidden xl:(block col-span-1)"
+					src={require('images/triangle-outline.png')}
+					lqip={require('images/triangle-outline.png?lqip')}
+					alt="An icon of a triagle in red outline"
+					layout="responsive"
+					width={1638}
+					height={1638}
+				/>
 			</Section>
 
 			<Section tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-100 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) ">
