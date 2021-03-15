@@ -13,8 +13,7 @@ function DropDownItemSet({ className, data }: Props) {
 			<ul
 				aria-label="sub navigation links"
 				className={className}
-				// increase z-index to fix suddenly collapse on some page
-				tw="flex flex-col absolute left-5 bg-white  py-4 z-20 shadow-card"
+				tw="flex flex-col absolute left-5 bg-white  py-4 shadow-card"
 			>
 				{renderMenuItems(data)}
 			</ul>

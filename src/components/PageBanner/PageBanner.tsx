@@ -12,7 +12,7 @@ type Props = {
 		imgLqip: string;
 		imgAlt: string;
 		title: ReactNode;
-		subtitle: ReactNode;
+		subtitle?: ReactNode;
 	};
 };
 

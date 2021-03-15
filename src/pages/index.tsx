@@ -59,10 +59,12 @@ const Index: VFC<Props> = () => {
 				aria-labelledby="fact-title"
 			>
 				<header>
-					<SectionH1 id="fact-title">Our facts</SectionH1>
+					<SectionH1 id="fact-title" tw="mb-0 xl:mb-24">
+						Our facts
+					</SectionH1>
 				</header>
 
-				<div tw="grid grid-cols-12 space-y-10 md:space-y-24 xl:(space-y-0 mt-24)">
+				<div tw="grid grid-cols-12 space-y-10 md:space-y-24 xl:(space-y-0)">
 					<EnhancedImage
 						tw="hidden xl:(block col-start-1 col-end-3 relative -top-1/3)"
 						src={require('images/woman-with-pencil.png')}

@@ -11,7 +11,7 @@ type Props = {};
  */
 const Appbar: VFC<Props> = ({}) => {
 	return (
-		<header tw="col-span-full" role="banner">
+		<header tw="col-span-full z-40" role="banner">
 			<nav tw="grid grid-cols-12 ">
 				<a tw="sr-only focus:not-sr-only" href="#skip">
 					Skip to content
