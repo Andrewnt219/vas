@@ -26,9 +26,24 @@ export const routes: (Route | Dropdown)[] = [
 		exact: true,
 	},
 	{
-		type: 'route',
-		i18nKey: 'about-us',
+		type: 'dropdown',
+		i18nKey: 'about-us.index',
 		href: '/about-us',
+
+		children: [
+			{
+				type: 'route',
+				href: '/about-us',
+				i18nKey: 'about-us.index',
+				exact: true,
+			},
+			{ type: 'route', href: '/about-us/members', i18nKey: 'about-us.members' },
+			{
+				type: 'route',
+				href: '/about-us/partners',
+				i18nKey: 'about-us.partners',
+			},
+		],
 	},
 	{
 		type: 'dropdown',
@@ -36,13 +51,13 @@ export const routes: (Route | Dropdown)[] = [
 		exact: false,
 		href: '/events',
 		children: [
+			{ type: 'route', i18nKey: 'events.index', href: '/events', exact: true },
 			{
 				type: 'route',
 				i18nKey: 'events.orientations',
 				href: '/events/orientations',
 			},
 			{ type: 'route', i18nKey: 'events.tet', href: '/events/tet' },
-			{ type: 'route', i18nKey: 'events.index', href: '/events', exact: true },
 		],
 	},
 	{
@@ -52,11 +67,11 @@ export const routes: (Route | Dropdown)[] = [
 	},
 	{
 		type: 'route',
-		i18nKey: 'partners',
-		href: '/partners',
+		i18nKey: 'blog',
+		href: '/blog',
 	},
 	{
-		type: 'route', // eslint-disable-next-line quotes
+		type: 'route',
 		i18nKey: 'contact-us',
 		href: '/contact-us',
 	},

@@ -1,8 +1,9 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
+import MemberAvatar from '@components/MemberInfoSet/components/MemberAvatar/MemberAvatar';
 import PageBanner from '@components/PageBanner/PageBanner';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
+import NextLink from 'next/link';
 import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -245,80 +246,100 @@ const AboutUs: VFC<Props> = ({}) => {
 					<SectionH1>Our team</SectionH1>
 				</header>
 
-				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16)">
+				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16) 2xl:grid-cols-4">
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 					<li>
-						<MemberAvatar>
-							<EnhancedImage
-								tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
-								src={require('images/avatar.jpg')}
-								lqip={require('images/avatar.jpg?lqip')}
-								alt="An icon of a triagle in red outline"
-								layout="fill"
-							/>
-						</MemberAvatar>
+						<MemberAvatar
+							imageData={{
+								url: require('images/avatar.jpg'),
+								metadata: {
+									lqip: require('images/avatar.jpg?lqip'),
+									width: 100,
+									height: 100,
+									ratio: 1,
+								},
+								alt: 'A member avatar',
+							}}
+						/>
 					</li>
 				</ul>
 			</Section>
 
-			<button tw="col-span-full mx-auto   py-1 px-3 border-2 border-black bg-white relative  before:(content -z-10 absolute w-full h-full top-1/4 -left-2 border-2 border-black) transition-colors hocus:(outline-none bg-primary text-white) xl:(py-3 px-6 text-2xl)">
-				<span>And more...</span>
-				<span tw="text-larger inline-block ml-8 md:ml-24 xl:ml-36">&gt;</span>
-			</button>
+			<NextLink href="/about-us/members" passHref>
+				<a tw="col-span-full mx-auto   py-1 px-3 border-2 border-black bg-white relative  before:(content -z-10 absolute w-full h-full top-1/4 -left-2 border-2 border-black) transition-colors hocus:(outline-none bg-primary text-white) xl:(py-3 px-6 text-2xl)">
+					<span>And more...</span>
+					<span tw="text-larger inline-block ml-8 md:ml-24 xl:ml-36">&gt;</span>
+				</a>
+			</NextLink>
 		</MainLayout>
 	);
 };

@@ -53,7 +53,7 @@ type CustomMenuLinkProps = {
 	isActive: boolean;
 };
 const CustomMenuLink = styled(StyledMenuLink)<CustomMenuLinkProps>`
-	${tw`px-0 py-2 hocus:outline-none`}
+	${tw`px-0 py-2 hocus:outline-none w-max`}
 	${(p) =>
 		p.isActive &&
 		css`
