@@ -14,9 +14,9 @@ const Logo: VFC<Props> = ({ className }) => {
 		<NextLink href="/" passHref>
 			<a aria-label="Link to homepage" className={className}>
 				<Image
-					src="/svg/logo.svg"
-					width={125}
-					height={73}
+					src={require('images/logo.png')}
+					width={747}
+					height={466}
 					layout="responsive"
 					alt="Logo with text VAS and Vietnamese Association at Seneca College"
 				/>

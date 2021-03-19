@@ -40,8 +40,8 @@ const AboutUs: VFC<Props> = ({}) => {
 				</div>
 			</Section>
 
-			<Section tw="grid grid-cols-12">
-				<div tw="grid-p-sm xl:grid-p-md">
+			<Section tw="grid grid-cols-12 relative">
+				<div tw="grid-p-sm xl:(grid-p-md)">
 					<header>
 						<SectionH1>Our mission</SectionH1>
 					</header>
@@ -71,79 +71,173 @@ const AboutUs: VFC<Props> = ({}) => {
 					</p>
 				</div>
 
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/atom-outline.png')}
-					lqip={require('images/atom-outline.png?lqip')}
-					alt="An icon of magnifying glass in red outline"
-					layout="responsive"
-					width={1510}
-					height={1821}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/global-outline.png')}
-					lqip={require('images/global-outline.png?lqip')}
-					alt="An icon of magnifying glass in red outline "
-					layout="responsive"
-					width={1856}
-					height={2768}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/magnifier-outline.png')}
-					lqip={require('images/magnifier-outline.png?lqip')}
-					alt="An icon of magnifying glass in red outline"
-					layout="responsive"
-					width={931}
-					height={1489}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/mark-outline.png')}
-					lqip={require('images/mark-outline.png?lqip')}
-					alt="An icon of a marked place in red outline"
-					layout="responsive"
-					width={1510}
-					height={2412}
-				/>
+				<div
+					tw="absolute"
+					css={`
+						top: 35%;
+						right: 0;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 30rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/atom-outline.png')}
+						lqip={require('images/atom-outline.png?lqip')}
+						alt="An icon of an atom in red outline"
+						layout="responsive"
+						width={1510}
+						height={1821}
+					/>
+				</div>
 
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/pencil-outline.png')}
-					lqip={require('images/pencil-outline.png?lqip')}
-					alt="An icon of a pencil in red outline"
-					layout="responsive"
-					width={1131}
-					height={1915}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/ruler-outline.png')}
-					lqip={require('images/ruler-outline.png?lqip')}
-					alt="An icon of a ruler in red outline"
-					layout="responsive"
-					width={1992}
-					height={2227}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/torque-outline.png')}
-					lqip={require('images/torque-outline.png?lqip')}
-					alt="An icon of a torque in red outline"
-					layout="responsive"
-					width={1923}
-					height={2481}
-				/>
-				<EnhancedImage
-					tw="hidden xl:(block col-span-1)"
-					src={require('images/triangle-outline.png')}
-					lqip={require('images/triangle-outline.png?lqip')}
-					alt="An icon of a triagle in red outline"
-					layout="responsive"
-					width={1638}
-					height={1638}
-				/>
+				<div
+					tw="absolute"
+					css={`
+						left: 0;
+						top: 20%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 35rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/global-outline.png')}
+						lqip={require('images/global-outline.png?lqip')}
+						alt="An icon of a globe in red outline "
+						layout="responsive"
+						width={1856}
+						height={2768}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						left: 0;
+						top: -5%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 20rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/magnifier-outline.png')}
+						lqip={require('images/magnifier-outline.png?lqip')}
+						alt="An icon of magnifying glass in red outline"
+						layout="responsive"
+						width={931}
+						height={1489}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						right: 0;
+						top: 10%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 30rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/mark-outline.png')}
+						lqip={require('images/mark-outline.png?lqip')}
+						alt="An icon of a marked place in red outline"
+						layout="responsive"
+						width={1510}
+						height={2412}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						right: 0;
+						top: 50%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 20rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/pencil-outline.png')}
+						lqip={require('images/pencil-outline.png?lqip')}
+						alt="An icon of a pencil in red outline"
+						layout="responsive"
+						width={1131}
+						height={1915}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						left: 0;
+						top: 45%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 35rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/ruler-outline.png')}
+						lqip={require('images/ruler-outline.png?lqip')}
+						alt="An icon of a ruler in red outline"
+						layout="responsive"
+						width={1992}
+						height={2227}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						right: 0;
+						top: -10%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 35rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/torque-outline.png')}
+						lqip={require('images/torque-outline.png?lqip')}
+						alt="An icon of a torque in red outline"
+						layout="responsive"
+						width={1923}
+						height={2481}
+					/>
+				</div>
+
+				<div
+					tw="absolute"
+					css={`
+						left: 5%;
+						top: 20%;
+					`}
+				>
+					<EnhancedImage
+						css={`
+							width: 25rem;
+						`}
+						tw="hidden xl:(block col-span-1)"
+						src={require('images/triangle-outline.png')}
+						lqip={require('images/triangle-outline.png?lqip')}
+						alt="An icon of a triagle in red outline"
+						layout="responsive"
+						width={1638}
+						height={1638}
+					/>
+				</div>
 			</Section>
 
 			<Section tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-100 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) ">
@@ -229,7 +323,8 @@ const AboutUs: VFC<Props> = ({}) => {
 	);
 };
 
-const Section = styled.section(() => [
+type SectionProps = {};
+const Section = styled.section<SectionProps>(() => [
 	tw`py-10 col-span-full   md:py-20 xl:py-32`,
 ]);
 
