@@ -7,7 +7,7 @@ export type ImageModel = {
 	};
 	url: string;
 	alt?: string;
-	caption: string;
+	caption?: string;
 };
 
 export const imageModelQuery = `

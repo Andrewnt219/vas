@@ -74,9 +74,5 @@ export const typographyStyles = css`
 		font-family: 'san-serif';
 	}
 
-	body {
-		${tw`text-body`}
-	}
-
 	${bodyFontFace}
 `;

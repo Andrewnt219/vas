@@ -35,21 +35,16 @@ function PostImage({ node, options }: Props): ReactElement {
 	}
 
 	return (
-		<Container>
+		<figure tw="space-y-2 my-8 flex flex-col items-center justify-center rounded-sm overflow-hidden">
 			<Picture imgHeight={+height} imgWidth={+width} lqip={lqip}>
 				{renderContent}
 			</Picture>
 			<figcaption tw="mx-auto text-sm text-gray-200 text-center">
 				{node.caption}
 			</figcaption>
-		</Container>
+		</figure>
 	);
 }
-
-type ContainerProps = {};
-const Container = styled.figure<ContainerProps>`
-	${tw`space-y-2 my-8 flex flex-col items-center justify-center rounded-sm overflow-hidden`}
-`;
 
 // TODO: zoom on click, brighten on hover
 type PictureProps = {
