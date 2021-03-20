@@ -1,8 +1,7 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { ImageModel } from '@lib/sanity/models/ImageModel';
 import React from 'react';
-import tw, { styled } from 'twin.macro';
-
+import 'twin.macro';
 type Props = {
 	className?: string;
 	// TODO so close ComponentType<ComponentProps<typeof EnhancedImage>>
@@ -16,7 +15,7 @@ function MemberAvatar({ className, imageData }: Props) {
 		url,
 	} = imageData;
 	return (
-		<Container className={className}>
+		<div tw="relative pb-full" className={className}>
 			<EnhancedImage
 				tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
 				src={url}
@@ -24,12 +23,8 @@ function MemberAvatar({ className, imageData }: Props) {
 				alt={alt ?? "A VAS's member avatar"}
 				layout="fill"
 			/>
-		</Container>
+		</div>
 	);
 }
-
-const Container = styled.div`
-	${tw` rounded-lg overflow-hidden relative pb-full xl:rounded-4xl `}//TODO put border around imgs
-`;
 
 export default MemberAvatar;

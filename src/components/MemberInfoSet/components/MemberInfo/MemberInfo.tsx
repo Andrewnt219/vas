@@ -1,4 +1,4 @@
-import MemberAvatar from '@components/MemberInfoSet/components/MemberAvatar/MemberAvatar';
+import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
 import { MemberModel } from '@lib/sanity/models/MemberModel';
 import React from 'react';
 import 'twin.macro';
@@ -11,7 +11,10 @@ function MemberInfo({ className, data }: Props) {
 			className={className}
 			tw="grid gap-x-2 grid-cols-3 md:(grid-cols-1 gap-x-0 gap-y-3) xl:gap-y-7"
 		>
-			<MemberAvatar imageData={data.avatar} />
+			<MemberAvatar
+				tw="overflow-hidden rounded-2xl md:rounded-4xl"
+				imageData={data.avatar}
+			/>
 
 			<div tw="col-span-2">
 				<p tw="font-bold">{data.title}</p>

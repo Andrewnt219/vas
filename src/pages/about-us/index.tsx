@@ -1,8 +1,9 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import MemberAvatar from '@components/MemberInfoSet/components/MemberAvatar/MemberAvatar';
+import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
 import PageBanner from '@components/PageBanner/PageBanner';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
+import { MemberModel } from '@lib/sanity/models/MemberModel';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
@@ -248,88 +249,22 @@ const AboutUs: VFC<Props> = ({}) => {
 
 				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16) 2xl:grid-cols-4">
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 					<li>
-						<MemberAvatar
-							imageData={{
-								url: require('images/avatar.jpg'),
-								metadata: {
-									lqip: require('images/avatar.jpg?lqip'),
-									width: 100,
-									height: 100,
-									ratio: 1,
-								},
-								alt: 'A member avatar',
-							}}
-						/>
+						<MemberInfoHover data={member} />
 					</li>
 				</ul>
 			</Section>
@@ -348,5 +283,24 @@ type SectionProps = {};
 const Section = styled.section<SectionProps>(() => [
 	tw`py-10 col-span-full   md:py-20 xl:py-32`,
 ]);
+
+const member: MemberModel = {
+	avatar: {
+		url: require('images/avatar.jpg'),
+		metadata: {
+			lqip: require('images/avatar.jpg?lqip'),
+			width: 100,
+			height: 100,
+			ratio: 1,
+		},
+		alt: 'A member avatar',
+	},
+	title: 'FirstName Middle LName',
+	contact: {
+		linkedIn: 'linkedin.com',
+	},
+	isActive: true,
+	position: 'President',
+};
 
 export default AboutUs;
