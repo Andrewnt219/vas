@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const {
-	fontFamily,
-	spacing,
-	transitionProperty,
-} = require('tailwindcss/defaultTheme');
+const { fontFamily, transitionProperty } = require('tailwindcss/defaultTheme');
 const _ = require('lodash');
 
 module.exports = {
@@ -65,26 +61,6 @@ module.exports = {
 			fontFamily: {
 				sans: ['DM Sans', ...fontFamily.sans],
 			},
-			typography: (theme) => ({
-				DEFAULT: {
-					css: {
-						color: theme('colors.gray.700'),
-						a: {
-							color: theme('colors.blue.500'),
-							'&:hover': {
-								color: theme('colors.blue.700'),
-							},
-							code: { color: theme('colors.blue.400') },
-						},
-						'h2,h3,h4': {
-							'scroll-margin-top': spacing[32],
-						},
-						code: { color: theme('colors.pink.500') },
-						'blockquote p:first-of-type::before': false,
-						'blockquote p:last-of-type::after': false,
-					},
-				},
-			}),
 		},
 	},
 	variants: {
@@ -100,15 +76,7 @@ module.exports = {
 		clear: false,
 		order: false,
 	},
-	plugins: [
-		require('@tailwindcss/typography'),
-		centers,
-		grid,
-		sizing,
-		commons,
-		decorator,
-		fonts,
-	],
+	plugins: [centers, grid, sizing, commons, decorator, fonts],
 };
 
 function commons({ addUtilities }) {

@@ -22,6 +22,7 @@
 		"jsx": "preserve",
 		"baseUrl": ".",
 		"paths": {
+			"@utils/*": ["src/utils/*"],
 			"@layouts/*": ["src/layouts/*"],
 			"@data/*": ["src/data/*"],
 			"@package/*": ["src/package/*"],
@@ -33,7 +34,13 @@
 			"@mock/*": ["__test__/mock/*"],
 			"@src/*": ["src/*"],
 			"@root/*": ["./*"]
-		}
+		},
+		"plugins": [
+			{
+				"name": "typescript-styled-plugin",
+				"tags": ["styled", "css", "tw", "createGlobalStyle", "keyframes"]
+			}
+		]
 	},
 	"include": [
 		"next-env.d.ts",

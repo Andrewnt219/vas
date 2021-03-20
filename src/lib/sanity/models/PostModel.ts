@@ -20,4 +20,22 @@ export type PostModel = {
 	thumbnail: ImageModel;
 };
 
-export const postModelQuery = `*[_type == 'post'] {...}`;
+export const postModelQuery = `{..., 	body[] {
+			...,
+			_type == "image" => {
+				...,
+				"metadata": @.asset -> metadata {
+					"width": dimensions.width, 
+					"height": dimensions.height,
+					lqip
+				}
+			},
+			markDefs[] {
+				...,
+				_type == "internalLink" => {
+					...,
+					"url": "/" + @.post->slug.current,
+				}
+			}
+		}
+	}`;

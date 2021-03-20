@@ -1,5 +1,8 @@
 import { Response } from '@api-response';
 import { PostModel } from '@lib/sanity/models/PostModel';
+import { sanityClient } from '@lib/sanity/sanity-clients';
+import { postSerializer } from '@lib/sanity/serializers/post-serializer';
+import BlockContent from '@sanity/block-content-to-react';
 import { PostDataService } from '@services/post-data-service';
 import { assertLanguages } from '@src/utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -73,8 +76,15 @@ const Post: VFC<Props> = ({ className, data, error }) => {
 	}
 
 	return (
-		<div className={className} tw="">
+		<div className={className} tw="col-span-full max-w-screen-sm mx-auto">
 			{data.title + data._lang}
+			<BlockContent
+				blocks={data.body}
+				projectId={sanityClient.config().projectId}
+				dataset={sanityClient.config().dataset}
+				serializers={postSerializer}
+				imageOptions={{ fit: 'clip', auto: 'format' }}
+			/>
 		</div>
 	);
 };

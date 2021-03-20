@@ -2,9 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 import tw from 'twin.macro';
 import { typographyStyles } from './_typographyStyles';
 export default createGlobalStyle`
-  ${typographyStyles}     
-  
-  
+  ${typographyStyles}       
+
   html, body {    
     scroll-behavior: smooth;
   }

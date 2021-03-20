@@ -7,12 +7,14 @@ export type ImageModel = {
 	};
 	url: string;
 	alt?: string;
+	caption: string;
 };
 
 export const imageModelQuery = `
 	{
 		url,
 		alt,
+		caption,
 		"metadata": metadata {
 			lqip,
 			"width": dimensions.width,
