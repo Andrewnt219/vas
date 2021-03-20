@@ -18,7 +18,7 @@ function OrientationCard({ className, data, isMain }: Props) {
 			<article className={className}>
 				<ImageContainer isMain={isMain}>
 					<EnhancedImage
-						tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
+						tw="img-absolute"
 						src={data.thumbnail.url}
 						lqip={data.thumbnail.metadata.lqip}
 						alt={data.thumbnail.alt ?? ''}

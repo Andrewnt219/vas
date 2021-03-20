@@ -24,7 +24,7 @@ function EventCard({ className, data }: Props) {
 			<div tw="grid md:grid-cols-2  text-body font-medium md:text-lg">
 				<div tw="relative col-span-full pb-xs mb-4 md:(mb-6 pb-2xs)">
 					<EnhancedImage
-						tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
+						tw="img-absolute"
 						src={data.thumbnail.url}
 						lqip={data.thumbnail.metadata.lqip}
 						alt={data.thumbnail.alt ?? ''}

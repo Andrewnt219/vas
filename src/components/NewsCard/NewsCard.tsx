@@ -16,7 +16,7 @@ function NewsCard({ className, data }: Props) {
 			<div tw="mt-6 grid md:(mt-12 grid-cols-2 gap-x-8)  xl:(grid-cols-3 )">
 				<div tw="relative pb-xs border border-black border-opacity-50 xl:(col-start-1 col-end-2 pb-sm)">
 					<EnhancedImage
-						tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
+						tw="img-absolute"
 						src={data.thumbnail.url}
 						lqip={data.thumbnail.metadata.lqip}
 						alt={data.thumbnail.alt ?? ''}

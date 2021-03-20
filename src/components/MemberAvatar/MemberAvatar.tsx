@@ -17,7 +17,7 @@ function MemberAvatar({ className, imageData }: Props) {
 	return (
 		<div tw="relative pb-full" className={className}>
 			<EnhancedImage
-				tw="absolute-cover all:object-cover bg-no-repeat bg-cover bg-center"
+				tw="img-absolute"
 				src={url}
 				lqip={lqip}
 				alt={alt ?? "A VAS's member avatar"}

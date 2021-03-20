@@ -1,7 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import React, { ReactNode } from 'react';
-import tw, { styled } from 'twin.macro';
-
+import 'twin.macro';
 type Props = {
 	className?: string;
 	data: {
@@ -24,7 +23,14 @@ function PageBanner({ className, data }: Props) {
 			className={className}
 			tw="relative col-span-full pb-2xs mb-10 md:mb-20 xl:grid-p-sm"
 		>
-			<CustomLocalImage src={imgSrc} lqip={imgLqip} alt={imgAlt} sizes="83vw" />
+			<EnhancedImage
+				tw="img-absolute"
+				layout="fill"
+				src={imgSrc}
+				lqip={imgLqip}
+				alt={imgAlt}
+				sizes="83vw"
+			/>
 			<div
 				tw="absolute z-10 w-full h-full flex flex-col items-center justify-center text-white"
 				css="background: linear-gradient(180deg, rgba(0, 0, 0, 0.088) 0%, rgba(0, 0, 0, 0.4) 100%)"
@@ -37,14 +43,5 @@ function PageBanner({ className, data }: Props) {
 		</header>
 	);
 }
-
-// Workaround weird typechecking of next-images
-const CustomLocalImage = styled(EnhancedImage).attrs({ layout: 'fill' })`
-	${tw`absolute-cover`}
-
-	img {
-		${tw`object-cover`}
-	}
-`;
 
 export default PageBanner;
