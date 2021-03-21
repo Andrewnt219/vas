@@ -1,6 +1,5 @@
 import OrientationCard from '@components/OrientationCard/OrientationCard';
 import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
-import { compareDates } from '@src/utils/compare-utils';
 import React from 'react';
 import 'twin.macro';
 type Props = {
@@ -9,9 +8,7 @@ type Props = {
 };
 
 function TripleCardsdGroup({ className, data }: Props) {
-	const sortedData = data.sort((a, b) => compareDates(a.fromDate, b.fromDate));
-
-	const [mainPost, ...sidePosts] = sortedData;
+	const [mainPost, ...sidePosts] = data;
 
 	return (
 		<ul

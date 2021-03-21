@@ -10,6 +10,7 @@ import {
 	getStaticPost,
 	getStaticPostsPathsByCategory,
 } from '@utils/server-utils';
+import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
 import 'twin.macro';
@@ -36,8 +37,8 @@ const EventPost: VFC<Props> = ({ data, error }) => {
 	}
 
 	return (
-		<MainLayout title={data.title} tw="pb-0!">
-			<section tw="col-span-full md:text-2xl">
+		<MainLayout title={data.title} tw="pb-0! md:text-2xl">
+			<section tw="col-span-full ">
 				<Post.Wrapper as="header">
 					<PublishedDate date={new Date(data.publishedAt)} />
 					<Post.Title>{data.title}</Post.Title>
@@ -63,8 +64,29 @@ const EventPost: VFC<Props> = ({ data, error }) => {
 					/>
 				</Post.Wrapper>
 
-				<RelatedPosts tw="mt-24" posts={posts} heading="Related events" />
+				<Post.Wrapper as="footer">
+					<div tw="relative font-medium pl-4 py-px mt-10 before:(content absolute top-0 left-0 block h-full w-1 bg-primary) md:(pl-16 py-2 text-4xl mt-20 space-y-4 before:w-2)">
+						<p>
+							Time:{' '}
+							<time dateTime={dayjs(data.fromDate).format('YYYY-MM-DD')}>
+								{data.fromDate ? dayjs(data.fromDate).format('DD/MM') : '-/-'}
+							</time>{' '}
+							&#8211;{' '}
+							<time dateTime={dayjs(data.toDate).format('YYYY-MM-DD')}>
+								{data.toDate ? dayjs(data.toDate).format('DD/MM') : '-/-'}
+							</time>
+						</p>
+
+						<p>Location: {data.location ?? '--'}</p>
+					</div>
+				</Post.Wrapper>
 			</section>
+
+			<RelatedPosts
+				tw="mt-24 col-span-full"
+				posts={posts}
+				heading="Related events"
+			/>
 		</MainLayout>
 	);
 };
