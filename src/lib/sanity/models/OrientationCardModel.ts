@@ -6,7 +6,7 @@ export type OrientationCardModel = Pick<
 	| 'toDate'
 	| 'title'
 	| 'snippet'
-	| 'locations'
+	| 'location'
 	| 'slug'
 	| 'thumbnail'
 >;

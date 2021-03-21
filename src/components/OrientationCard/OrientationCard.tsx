@@ -43,7 +43,7 @@ function OrientationCard({ className, data, isMain }: Props) {
 									{dayjs(data.toDate).format('DD/MM')}
 								</time>
 							</p>
-							<p>Location: {data.locations.join(' & ')}</p>
+							<p>Location: {data.location}</p>
 						</div>
 
 						<div tw="text-base mt-4 text-gray-200 md:(text-lg mt-6) xl:(mt-10 text-newsBody)">

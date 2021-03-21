@@ -37,7 +37,7 @@ function EventCard({ className, data }: Props) {
 					</time>
 				</p>
 
-				<p tw="md:text-right">Location: {data.locations.join(' & ')}</p>
+				<p tw="md:text-right">Location: {data.location}</p>
 			</div>
 
 			<div tw="text-base text-gray-200 md:text-newsBody">

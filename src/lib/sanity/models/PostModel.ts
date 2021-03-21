@@ -16,7 +16,7 @@ export type PostModel = {
 	_lang: string;
 	publishedAt: string;
 	snippet: string;
-	locations: string[];
+	location: string;
 	fromDate: string;
 	toDate: string;
 	thumbnail: ImageModel;

@@ -5,10 +5,13 @@ import { slugField } from '../fields/common/slugField';
 import { thumbnailField } from '../fields/common/thumbnailField';
 import { titleField } from '../fields/common/titleField';
 import { categoryField } from '../fields/post/categoryField';
+import { fromDateField } from '../fields/post/fromDate';
 import { hashtagField } from '../fields/post/hashtagField';
 import { isArchivedField } from '../fields/post/isArchivedField';
+import { locationField } from '../fields/post/locationField';
 import { seoFields } from '../fields/post/seoFields';
 import { snippetField } from '../fields/post/snippetField';
+import { toDateField } from '../fields/post/toDate';
 import { i18n } from './documentTranslation';
 // TODO generate slug on publish action
 // TODO add missing schema (some are optional) (Location, event time, etc.)
@@ -31,6 +34,9 @@ export default {
 		slugField,
 		categoryField,
 		hashtagField,
+		fromDateField,
+		toDateField,
+		locationField,
 		bodyField,
 		thumbnailField,
 		snippetField,

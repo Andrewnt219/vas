@@ -49,7 +49,7 @@ const Events: VFC<Props> = ({}) => {
 const card: EventCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	publishedAt: new Date().toISOString(),
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
@@ -71,7 +71,7 @@ const card: EventCardModel = {
 const card2: EventCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	publishedAt: new Date().toISOString(),
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
@@ -93,7 +93,7 @@ const card2: EventCardModel = {
 const card3: EventCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	publishedAt: new Date().toISOString(),
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',

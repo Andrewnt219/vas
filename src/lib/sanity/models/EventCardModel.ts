@@ -6,7 +6,7 @@ export type EventCardModel = Pick<
 	| 'publishedAt'
 	| 'snippet'
 	| 'thumbnail'
-	| 'locations'
+	| 'location'
 	| 'fromDate'
 	| 'toDate'
 	| 'slug'

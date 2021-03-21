@@ -30,7 +30,7 @@ const data = {
 const card: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham', 'York'],
+	location: 'Newnham & York',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet: 'Showcasing diverse works by Kaikai Kiki artists.',
@@ -50,7 +50,7 @@ const card: OrientationCardModel = {
 const card1: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet:
@@ -71,7 +71,7 @@ const card1: OrientationCardModel = {
 const card2: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet: 'Summer 2020 Orientation',
@@ -91,7 +91,7 @@ const card2: OrientationCardModel = {
 const card3: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet:
@@ -112,7 +112,7 @@ const card3: OrientationCardModel = {
 const card4: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet:
@@ -133,7 +133,7 @@ const card4: OrientationCardModel = {
 const card5: OrientationCardModel = {
 	fromDate: new Date().toISOString(),
 	toDate: new Date().toISOString(),
-	locations: ['Newnham'],
+	location: 'Newnham',
 	slug:
 		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	snippet:
