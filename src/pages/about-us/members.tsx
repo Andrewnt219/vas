@@ -1,17 +1,15 @@
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
+import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
 import { MemberModel } from '@lib/sanity/models/MemberModel';
 import React from 'react';
 import 'twin.macro';
-type Props = { className?: string };
 
-function Members({ className }: Props) {
+function Members() {
 	return (
 		<MainLayout title="Members" tw="mb-10 md:mb-20">
 			<header tw="grid-p-sm ">
-				<h1 tw="text-h1-variants font-bold text-primary mb-8 md:mb-20 xl:mb-32">
-					VAS member
-				</h1>
+				<PageH1>VAS member</PageH1>
 			</header>
 
 			<MemberInfoSet
