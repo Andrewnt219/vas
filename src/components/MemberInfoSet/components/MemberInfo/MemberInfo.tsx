@@ -1,9 +1,9 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { MemberModel } from '@lib/sanity/models/MemberModel';
+import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import React from 'react';
 import 'twin.macro';
 
-type Props = { className?: string; data: MemberModel };
+type Props = { className?: string; data: AuthorModel };
 
 function MemberInfo({ className, data }: Props) {
 	return (
@@ -13,13 +13,20 @@ function MemberInfo({ className, data }: Props) {
 		>
 			<MemberAvatar
 				tw="overflow-hidden rounded-2xl md:rounded-4xl"
-				imageData={data.avatar}
+				imageData={data.thumbnail}
 			/>
 
 			<div tw="col-span-2">
 				<p tw="font-bold">{data.title}</p>
-				<p>{data.position}</p>
-				<p>{data.contact.linkedIn}</p>
+				<p>{data.positions.join(', ')}</p>
+				<a
+					tw="block underline"
+					href={data.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					LinkedIn
+				</a>
 				<p>Status: {data.isActive ? 'Active' : 'Inactive'}</p>
 			</div>
 		</article>

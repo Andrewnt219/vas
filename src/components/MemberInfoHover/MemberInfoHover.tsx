@@ -1,9 +1,9 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { MemberModel } from '@lib/sanity/models/MemberModel';
+import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import React from 'react';
 import { css } from 'twin.macro';
 
-type Props = { className?: string; data: MemberModel };
+type Props = { className?: string; data: AuthorModel };
 
 function MemberInfoHover({ className, data }: Props) {
 	return (
@@ -16,7 +16,7 @@ function MemberInfoHover({ className, data }: Props) {
 				}
 			`}
 		>
-			<MemberAvatar imageData={data.avatar} />
+			<MemberAvatar imageData={data.thumbnail} />
 
 			<div
 				tw="absolute-cover transition-opacity opacity-0 text-white text-lg p-6 flex flex-col justify-end"
@@ -29,7 +29,7 @@ function MemberInfoHover({ className, data }: Props) {
 				`}
 			>
 				<p tw="font-bold">{data.title}</p>
-				<p>{data.position}</p>
+				<p>{data.positions.join(', ')}</p>
 			</div>
 		</article>
 	);

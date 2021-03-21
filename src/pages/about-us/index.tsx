@@ -1,16 +1,45 @@
+import { Response } from '@api-response';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
 import PageBanner from '@components/PageBanner/PageBanner';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
-import { MemberModel } from '@lib/sanity/models/MemberModel';
+import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import { AuthorDataService } from '@services/author-data-service';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
+/* -------------------------------------------------------------------------- */
+/*                                   SERVER                                   */
+/* -------------------------------------------------------------------------- */
+type StaticProps = Response<AuthorModel[]>;
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+	const authors = await AuthorDataService.getActiveAuthors();
 
-type Props = {};
+	return {
+		props: {
+			data: authors,
+			error: null,
+		},
+	};
+};
 
-const AboutUs: VFC<Props> = ({}) => {
+/* -------------------------------------------------------------------------- */
+/*                                   CLIENT                                   */
+/* -------------------------------------------------------------------------- */
+
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const AboutUs: VFC<Props> = ({ data, error }) => {
+	if (!data) {
+		return <h1>Fetching members...</h1>;
+	}
+
+	if (error) {
+		return <h1>{error.message}</h1>;
+	}
+
 	return (
 		<MainLayout title="About us" tw="pb-20 mt-0 md:pb-36">
 			<PageBanner
@@ -248,29 +277,17 @@ const AboutUs: VFC<Props> = ({}) => {
 				</header>
 
 				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16) 2xl:grid-cols-4">
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
-					<li>
-						<MemberInfoHover data={member} />
-					</li>
+					{data.map((member) => (
+						<li key={member.slug}>
+							<MemberInfoHover data={member} />
+						</li>
+					))}
 				</ul>
 			</Section>
 
+			{/* TODO fix the after notshowing because of z0index */}
 			<NextLink href="/about-us/members" passHref>
-				<a tw="col-span-full mx-auto   py-1 px-3 border-2 border-black bg-white relative  before:(content -z-10 absolute w-full h-full top-1/4 -left-2 border-2 border-black) transition-colors hocus:(outline-none bg-primary text-white) xl:(py-3 px-6 text-2xl)">
+				<a tw="col-span-full mx-auto  py-1 px-3 border-2 border-black bg-white relative  after:(content -z-10 absolute w-full h-full top-1/4 -left-2 border-2 border-black) transition-colors hocus:(outline-none bg-primary text-white) xl:(py-3 px-6 text-2xl)">
 					<span>And more...</span>
 					<span tw="text-larger inline-block ml-8 md:ml-24 xl:ml-36">&gt;</span>
 				</a>
@@ -283,24 +300,5 @@ type SectionProps = {};
 const Section = styled.section<SectionProps>(() => [
 	tw`py-10 col-span-full   md:py-20 xl:py-32`,
 ]);
-
-const member: MemberModel = {
-	avatar: {
-		url: require('images/avatar.jpg'),
-		metadata: {
-			lqip: require('images/avatar.jpg?lqip'),
-			width: 100,
-			height: 100,
-			ratio: 1,
-		},
-		alt: 'A member avatar',
-	},
-	title: 'FirstName Middle LName',
-	contact: {
-		linkedIn: 'linkedin.com',
-	},
-	isActive: true,
-	position: 'President',
-};
 
 export default AboutUs;
