@@ -7,7 +7,7 @@ import { ImageModel } from '../models/ImageModel';
 import { urlFor } from '../utils/sanity-api-utils';
 
 type Props = {
-	node: Omit<ImageModel, 'url'> & {
+	node: Pick<ImageModel, 'alt' | 'caption' | 'metadata'> & {
 		asset: any;
 	};
 	options: {
@@ -16,7 +16,7 @@ type Props = {
 };
 
 function PostImage({ node, options }: Props): ReactElement {
-	const { width, height, lqip } = node.metadata;
+	const { lqip, ratio } = node.metadata;
 	const imgSrc = urlFor(node.asset).withOptions(options.imageOptions).url();
 
 	let renderContent: ReactNode = <LoadingIndicator />;
@@ -34,11 +34,11 @@ function PostImage({ node, options }: Props): ReactElement {
 	}
 
 	return (
-		<figure tw="space-y-2 my-8 flex flex-col items-center justify-center rounded-sm overflow-hidden">
-			<Picture imgHeight={+height} imgWidth={+width} lqip={lqip}>
+		<figure tw="my-9 flex flex-col items-center justify-center rounded-sm overflow-hidden md:my-12">
+			<Picture ratio={ratio} lqip={lqip}>
 				{renderContent}
 			</Picture>
-			<figcaption tw="mx-auto text-smaller text-gray-200 text-center">
+			<figcaption tw="mx-auto text-smaller mt-2 text-gray-200 text-center">
 				{node.caption}
 			</figcaption>
 		</figure>
@@ -48,13 +48,12 @@ function PostImage({ node, options }: Props): ReactElement {
 // TODO: zoom on click, brighten on hover
 type PictureProps = {
 	lqip?: string;
-	imgWidth: number;
-	imgHeight: number;
+	ratio: number;
 };
 const Picture = styled.div<PictureProps>`
 	${tw` relative`}
 	width: 100%;
-	padding-bottom: calc(100% / ${(p) => p.imgWidth / p.imgHeight});
+	padding-bottom: calc(100% / ${(p) => p.ratio});
 
 	div {
 		width: 100%;

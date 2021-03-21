@@ -27,7 +27,11 @@ function ListRenderer({ type, children }: Props): ReactNode {
 }
 
 const listCss = css`
-	${tw`ml-8 my-6 space-y-3`}
+	${tw`ml-8 my-6 space-y-3 md:(ml-11 my-10 space-y-6)`}
+
+	li {
+		${tw`pl-2 md:pl-3`}
+	}
 `;
 
 type BulletProps = {};
@@ -36,7 +40,6 @@ const Bullet = styled.ul<BulletProps>`
 
 	li {
 		list-style: disc;
-		${tw`pl-2`}
 
 		::marker {
 			${tw`text-gray-200`}

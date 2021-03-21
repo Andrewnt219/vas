@@ -9,7 +9,7 @@ function Breaker(): ReactElement {
 type ContainerProps = {};
 const Container = styled.hr<ContainerProps>`
 	border: none;
-	${tw`my-8`}
+	${tw`my-10 md:my-16`}
 	${tw`flex justify-center items-center`}
 	height: auto; // need for before
 

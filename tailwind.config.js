@@ -79,6 +79,8 @@ module.exports = {
 	plugins: [centers, grid, sizing, commons, decorator, fonts],
 };
 
+// TODO move to tailwindcss/typography
+
 function commons({ addUtilities }) {
 	addUtilities({
 		'.content': {

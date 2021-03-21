@@ -1,6 +1,6 @@
 // TODO move to @types
 
-import { ImageModel, imageModelQuery } from './ImageModel';
+import { imageMetadataQuery, ImageModel, imageModelQuery } from './ImageModel';
 
 /**
  * @description the stucture of sanity quired post
@@ -28,11 +28,7 @@ export const postModelQuery = `{
 			...,			
 			_type == "image" => {
 				...,
-				"metadata": @.asset -> metadata {
-					"width": dimensions.width, 
-					"height": dimensions.height,
-					lqip
-				}
+				"metadata": @.asset -> metadata ${imageMetadataQuery}
 			},
 			markDefs[] {
 				...,

@@ -1,19 +1,17 @@
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 import React, { AnchorHTMLAttributes, ReactElement, ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
-	nextLinkProps: LinkProps;
 	children: ReactNode;
+	mark: {
+		url: string;
+	};
 };
 
-function InternalLink({
-	nextLinkProps,
-	children,
-	...anchorProps
-}: Props): ReactElement {
+function InternalLink({ children, mark, ...anchorProps }: Props): ReactElement {
 	return (
-		<Link {...nextLinkProps} passHref>
+		<Link href={mark.url} passHref>
 			<StyledInternalLink {...anchorProps}>{children}</StyledInternalLink>
 		</Link>
 	);
@@ -21,22 +19,14 @@ function InternalLink({
 
 type StyledInternalLinkProps = {};
 export const StyledInternalLink = styled.a<StyledInternalLinkProps>`
-	${tw`underline`}
-	text-decoration-color: var(--accent-color);
-
-	transition: text-decoration-color 200ms ease, color 200ms ease;
+	${tw`underline transition-colors decorator-primary`}
 
 	:visited {
-		${tw`text-gray-200`}
-		text-decoration-color: var(--text-color-light);
+		${tw` text-gray-200 decorator-current`}
 	}
 
 	// NOTE must be after :visited
-	:hover,
-	:focus {
-		text-decoration-color: transparent;
-		${tw`text-primary`}
-	}
+	${tw`hocus:text-primary`}
 `;
 
 export default InternalLink;

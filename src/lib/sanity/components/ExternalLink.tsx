@@ -1,50 +1,56 @@
+import NextLink from 'next/link';
 import React, { AnchorHTMLAttributes, ReactElement, ReactNode } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import tw, { styled } from 'twin.macro';
+import tw, { css, styled, theme } from 'twin.macro';
 import { StyledInternalLink } from './InternalLink';
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
 	children: ReactNode;
-	blank?: boolean;
+	mark: {
+		href: string;
+	};
 };
 
-function ExternalLink({
-	children,
-	blank,
-	...anchorProps
-}: Props): ReactElement {
-	const renderedContent = (
-		<>
-			{children} <FaExternalLinkAlt />
-		</>
-	);
-
-	if (blank)
-		return (
-			<CustomLink
-				{...{ ...anchorProps, target: '_blank', rel: 'noopener noreferrer' }}
+function ExternalLink({ children, mark, ...anchorProps }: Props): ReactElement {
+	return (
+		<NextLink href={mark.href} passHref>
+			<CustomInternalLink
+				{...anchorProps}
+				target="_blank"
+				rel="noopener noreferrer"
 			>
-				{renderedContent}
-			</CustomLink>
-		);
-
-	return <CustomLink {...anchorProps}>{renderedContent}</CustomLink>;
+				{children}
+				<FaExternalLinkAlt />
+			</CustomInternalLink>
+		</NextLink>
+	);
 }
 
-const CustomLink = styled(StyledInternalLink)`
-	${tw`inline-flex items-center cursor-pointer`}
+// Thank for being weird TypeScript, error if put in directly with theme``
+// And then, tw`` doesn't work, only happens with :visit
+const visitedCss = css`
+	&:visited {
+		color: ${theme`colors.gray.200`};
 
-	:hover, :focus {
 		svg {
-			${tw`text-primary`}
+			color: ${theme`colors.gray.200`};
 		}
 	}
+`;
 
-	svg {
-		transition: color 200ms ease;
-		${tw`text-primary text-opacity-80 ml-1`}
-		font-size: smaller;
+const CustomInternalLink = styled(StyledInternalLink)`
+	${tw`svg:(transition-all ease-linear text-primary ml-2 text-smaller)`}
+	${tw`inline-flex items-center cursor-pointer`}
+	
+	&:hover,
+	&:focus,
+	&:visited:hover,
+	&:visited:focus {
+		${tw`text-primary`}
+		${tw`svg:(transform text-primary scale-125)`}
 	}
+
+	${visitedCss}
 `;
 
 export default ExternalLink;

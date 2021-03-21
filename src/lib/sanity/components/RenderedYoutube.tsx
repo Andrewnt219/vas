@@ -1,31 +1,22 @@
+import getYouTubeID from 'get-youtube-id';
 import React, { ReactElement } from 'react';
 import Youtube from 'react-youtube';
-import { styled } from 'twin.macro';
+import 'twin.macro';
 
 type Props = {
-	youtubeVideoId: string;
+	node: {
+		url: string;
+	};
 };
 
-function RenderedYoutube({ youtubeVideoId }: Props): ReactElement {
+function RenderedYoutube({ node: { url } }: Props): ReactElement {
+	const id = getYouTubeID(url);
+
 	return (
-		<VideoContainer>
-			<StyledYoutube videoId={youtubeVideoId} />
-		</VideoContainer>
+		<div tw="w-full pb-xs relative mb-7 md:mb-10">
+			<Youtube tw="absolute-cover" videoId={id ?? 'dQw4w9WgXcQ'} />
+		</div>
 	);
 }
-
-const VideoContainer = styled.div`
-	width: 100%;
-	padding-bottom: 56.25%;
-	position: relative;
-`;
-
-const StyledYoutube = styled(Youtube)`
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-`;
 
 export default RenderedYoutube;
