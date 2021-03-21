@@ -8,6 +8,7 @@ import author from './author';
 import blockContent from './blockContent';
 import breaker from './breaker.js';
 import category from './category';
+import hashtag from './hashtag';
 import post from './post';
 import youtube from './youtube';
 
@@ -21,11 +22,12 @@ export default createSchema({
 	types: schemaTypes.concat([
 		// The following are document types which will appear
 		// in the studio.
+		// When added to this list, object types can be used as
+		// { type: 'typename' } in other document schemas
 		post,
 		author,
 		category,
-		// When added to this list, object types can be used as
-		// { type: 'typename' } in other document schemas
+		hashtag,
 		blockContent,
 		youtube,
 		breaker,

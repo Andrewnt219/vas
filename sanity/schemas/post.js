@@ -5,6 +5,7 @@ import { slugField } from '../fields/common/slugField';
 import { thumbnailField } from '../fields/common/thumbnailField';
 import { titleField } from '../fields/common/titleField';
 import { categoryField } from '../fields/post/categoryField';
+import { hashtagField } from '../fields/post/hashtagField';
 import { isArchivedField } from '../fields/post/isArchivedField';
 import { seoFields } from '../fields/post/seoFields';
 import { snippetField } from '../fields/post/snippetField';
@@ -29,6 +30,7 @@ export default {
 		titleField,
 		slugField,
 		categoryField,
+		hashtagField,
 		bodyField,
 		thumbnailField,
 		snippetField,
