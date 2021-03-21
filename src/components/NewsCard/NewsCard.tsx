@@ -1,6 +1,8 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
+import { getControllerFromPath } from '@utils/route-utils';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
 
@@ -10,6 +12,9 @@ type Props = {
 };
 
 function NewsCard({ className, data }: Props) {
+	const { asPath } = useRouter();
+	const controller = getControllerFromPath(asPath) ?? '';
+
 	return (
 		<article className={className} tw="">
 			<hr tw="border-black border-opacity-50" />
@@ -30,7 +35,7 @@ function NewsCard({ className, data }: Props) {
 						<p tw="text-primary md:text-xl">{data.subcategory}</p>
 
 						<h2 tw="font-bold text-xl  md:text-3xl hover:(underline text-primary) xl:(text-4xl mt-5)">
-							<NextLink href={`/news/posts/${data.slug}`}>
+							<NextLink href={`/${controller}/posts/${data.slug}`}>
 								<a>{data.title}</a>
 							</NextLink>
 						</h2>

@@ -68,7 +68,7 @@ export const routes: (Route | Dropdown)[] = [
 	{
 		type: 'route',
 		i18nKey: 'blog',
-		href: '/blog',
+		href: '/blogs',
 	},
 	{
 		type: 'route',
