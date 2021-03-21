@@ -17,6 +17,7 @@ function InternalLink({ children, mark, ...anchorProps }: Props): ReactElement {
 	);
 }
 
+// TODO this also need to go to the correct controller
 type StyledInternalLinkProps = {};
 export const StyledInternalLink = styled.a<StyledInternalLinkProps>`
 	${tw`underline transition-colors decorator-primary`}

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import tw, { styled } from 'twin.macro';
 
-// Breaker is not centered on mobile
+// TODO Breaker is not centered on mobile
 function Breaker(): ReactElement {
 	return <Container />;
 }

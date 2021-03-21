@@ -31,8 +31,18 @@ export class PostDataService {
 		return this.cms.fetch(
 			`*[_type == 'post'] {
 					"slug": slug.current
+			}`
+		);
+	}
+
+	public static async getPostSlugsByCategory(
+		categorySlug: string
+	): Promise<{ slug: string }[]> {
+		return this.cms.fetch(
+			`*[_type == 'post' && categories[] -> slug.current match $categorySlug] {
+					"slug": slug.current
 			}`,
-			{ lang: this.language }
+			{ categorySlug }
 		);
 	}
 

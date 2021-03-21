@@ -5,8 +5,5 @@ export const hashtagField = {
 	title: 'Hashtags',
 	type: 'array',
 	of: [{ type: 'reference', to: { type: hashtag.name } }],
-	validation: (Rule) => [
-		Rule.required().min(1).error('Cần thiết'),
-		Rule.unique().error('Có category trùng lặp'),
-	],
+	validation: (Rule) => [Rule.unique().error('Có hashtag trùng lặp')],
 };

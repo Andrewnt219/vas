@@ -1,83 +1,32 @@
-import { Response } from '@api-response';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
+import Post from '@components/Post/Post';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import MainLayout from '@layouts/MainLayout';
-import { PostModel } from '@lib/sanity/models/PostModel';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
 import BlockContent from '@sanity/block-content-to-react';
-import { PostDataService } from '@services/post-data-service';
-import { assertLanguages } from '@src/utils/validate-utils';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import {
+	getStaticPost,
+	getStaticPostsPathsByCategory,
+} from '@utils/server-utils';
+import { InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
-import tw, { styled } from 'twin.macro';
-
+import 'twin.macro';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
 
-type StaticProps = Response<PostModel>;
-type Params = {
-	slug: string;
-};
+export const getStaticProps = getStaticPost;
 
-export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
-	params,
-	locale,
-}) => {
-	assertLanguages(locale);
-
-	PostDataService.switchLanguage(locale);
-
-	if (!params?.slug) {
-		return {
-			props: {
-				data: null,
-				error: { message: 'Missing slug' },
-			},
-		};
-	}
-
-	const post = await PostDataService.getPostBySlug(params.slug);
-
-	if (!post) {
-		return {
-			props: {
-				data: null,
-				error: { message: 'Post not found' },
-			},
-		};
-	}
-
-	return {
-		props: {
-			data: post,
-			error: null,
-		},
-		revalidate: 60,
-	};
-};
-
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
-	const slugs = await PostDataService.getPostSlugs();
-
-	const paths = slugs.map(({ slug }) => ({ params: { slug } }));
-
-	return {
-		paths,
-		fallback: true,
-	};
-};
+export const getStaticPaths = getStaticPostsPathsByCategory('events');
 
 /* -------------------------------------------------------------------------- */
 /*                                   CLIENT                                   */
 /* -------------------------------------------------------------------------- */
-type Props = InferGetStaticPropsType<typeof getStaticProps> & {
-	className?: string;
-};
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Post: VFC<Props> = ({ className, data, error }) => {
+const EventPost: VFC<Props> = ({ data, error }) => {
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -88,15 +37,13 @@ const Post: VFC<Props> = ({ className, data, error }) => {
 
 	return (
 		<MainLayout title={data.title} tw="pb-0!">
-			<section className={className} tw="col-span-full md:text-2xl">
-				<StyledContainer as="header">
+			<section tw="col-span-full md:text-2xl">
+				<Post.Wrapper as="header">
 					<PublishedDate date={new Date(data.publishedAt)} />
-					<h1 tw="font-bold text-2xl mt-5 transition-colors hover:text-primary md:(text-4xl mt-10)  xl:(text-5xl mt-14)">
-						{data.title}
-					</h1>
-				</StyledContainer>
+					<Post.Title>{data.title}</Post.Title>
+				</Post.Wrapper>
 
-				<StyledContainer tw="relative pb-2xs my-10 md:my-16 xl:(my-20 transform scale-x-125)">
+				<Post.Wrapper tw="relative pb-2xs my-10 md:my-16 xl:(my-20 transform scale-x-125)">
 					<EnhancedImage
 						tw="img-absolute"
 						src={data.thumbnail.url}
@@ -104,9 +51,9 @@ const Post: VFC<Props> = ({ className, data, error }) => {
 						alt={data.thumbnail.alt ?? 'Alt text is unfortunately missing'}
 						layout="fill"
 					/>
-				</StyledContainer>
+				</Post.Wrapper>
 
-				<div tw="px-4 max-w-prose mx-auto md:px-8">
+				<Post.Wrapper>
 					<BlockContent
 						blocks={data.body}
 						projectId={sanityClient.config().projectId}
@@ -114,7 +61,7 @@ const Post: VFC<Props> = ({ className, data, error }) => {
 						serializers={postSerializer}
 						imageOptions={{ fit: 'clip', auto: 'format' }}
 					/>
-				</div>
+				</Post.Wrapper>
 
 				<RelatedPosts tw="mt-24" posts={posts} heading="Related events" />
 			</section>
@@ -167,9 +114,4 @@ const posts = [
 	},
 ];
 
-type StyledContainerProps = {};
-const StyledContainer = styled.div<StyledContainerProps>`
-	${tw`px-4 md:px-8 max-w-prose mx-auto`}
-`;
-
-export default Post;
+export default EventPost;

@@ -1,5 +1,7 @@
 // TODO move to @types
 
+import { CategoryModel, categoryModelQuery } from './CategoryModel';
+import { HashtagModel, hashtagModelQuery } from './HashtagModel';
 import { imageMetadataQuery, ImageModel, imageModelQuery } from './ImageModel';
 
 /**
@@ -18,12 +20,16 @@ export type PostModel = {
 	fromDate: string;
 	toDate: string;
 	thumbnail: ImageModel;
+	hashtags: HashtagModel[];
+	categories: CategoryModel[];
 };
 
 // TODO make a class with public class fields to prepare all the data
 export const postModelQuery = `{
 	...,
-	"thumbnail": thumbnail.asset -> ${imageModelQuery}, 	
+	"thumbnail": thumbnail.asset -> ${imageModelQuery},
+	"categories": categories[] -> ${categoryModelQuery},
+	"hashtags": hashtags[] -> ${hashtagModelQuery},
 	body[] {
 			...,			
 			_type == "image" => {
@@ -34,7 +40,7 @@ export const postModelQuery = `{
 				...,
 				_type == "internalLink" => {
 					...,
-					"url": "/" + @.post->slug.current,
+					"url": "/" + @.post-> categories[0]->slug.current + "/posts/" + @.post -> slug.current,
 				}
 			}
 		}
