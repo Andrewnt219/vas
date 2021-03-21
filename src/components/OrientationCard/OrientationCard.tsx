@@ -49,7 +49,7 @@ function OrientationCard({ className, data, isMain }: Props) {
 						<div tw="text-base mt-4 text-gray-200 md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
 							<p tw="mb-2 xl:mb-4">{data.snippet}</p>
 
-							<NextLink href={`/posts/${data.slug}`} passHref>
+							<NextLink href={`/events/posts/${data.slug}`} passHref>
 								<Button variant="link" as="a" tw="mt-9 italic">
 									Read more...
 								</Button>

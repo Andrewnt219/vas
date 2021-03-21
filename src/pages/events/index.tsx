@@ -1,4 +1,4 @@
-import EventCard from '@components/EnhancedImage/EventCard/EventCard';
+import EventCard from '@components/EventCard/EventCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
 import { EventCardModel } from '@lib/sanity/models/EventCardModel';

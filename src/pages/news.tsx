@@ -47,6 +47,8 @@ const news: VFC<Props> = ({}) => {
 };
 
 const card1: ComponentProps<typeof NewsCard>['data'] = {
+	slug:
+		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	comments: 20,
 	snippet:
 		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',
@@ -64,6 +66,8 @@ const card1: ComponentProps<typeof NewsCard>['data'] = {
 	views: 12,
 };
 const card2: ComponentProps<typeof NewsCard>['data'] = {
+	slug:
+		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	comments: 0,
 	snippet:
 		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',
@@ -81,6 +85,8 @@ const card2: ComponentProps<typeof NewsCard>['data'] = {
 	views: 0,
 };
 const card3: ComponentProps<typeof NewsCard>['data'] = {
+	slug:
+		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
 	comments: 3,
 	snippet:
 		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',

@@ -26,7 +26,6 @@ function PostImage({ node, options }: Props): ReactElement {
 			<Image
 				layout="fill"
 				src={imgSrc}
-				sizes="(min-width: 1280px) 45.64vw, 90vw"
 				alt={
 					node.alt ?? node.caption ?? 'There is no alt text for this picture'
 				}
@@ -39,7 +38,7 @@ function PostImage({ node, options }: Props): ReactElement {
 			<Picture imgHeight={+height} imgWidth={+width} lqip={lqip}>
 				{renderContent}
 			</Picture>
-			<figcaption tw="mx-auto text-sm text-gray-200 text-center">
+			<figcaption tw="mx-auto text-smaller text-gray-200 text-center">
 				{node.caption}
 			</figcaption>
 		</figure>

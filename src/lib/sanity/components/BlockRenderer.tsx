@@ -34,13 +34,13 @@ export const BlockRenderer = (props: any) => {
 	return <Block>{props.children}</Block>;
 };
 
-const Normal = styled.p(() => [tw`mb-6`]);
+const Normal = tw.p`mb-6`;
 
-const Heading2 = styled.h2(() => [tw`text-2xl font-bold  mb-3 mt-12`]);
+const Heading2 = tw.h2`text-2xl font-bold  mb-3 mt-12`;
 
-const Heading3 = styled.h3(() => [tw`mt-10 mb-3 font-bold text-xl`]);
+const Heading3 = tw.h3`mt-10 mb-3 font-bold text-xl`;
 
-const Heading4 = styled.h4(() => [tw`mt-8 mb-3 font-bold text-lg`]);
+const Heading4 = tw.h4`mt-8 mb-3 font-bold text-lg`;
 
 const Blockquote = styled.blockquote`
 	${tw`font-medium text-2xl text-center leading-snug`}

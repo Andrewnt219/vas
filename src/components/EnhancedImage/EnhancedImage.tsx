@@ -14,7 +14,6 @@ type Props = ImageProps & {
  */
 const EnhancedImage: VFC<Props> = ({ className, lqip, ...imageProps }) => {
 	const lqipRef = useRef<HTMLImageElement | null>(null);
-	// const fixedSrc = src.startsWith('/') ? src.replace('/', '') : src;
 
 	// Switch display with placeholder
 	const handleImageLoad = (ev: SyntheticEvent<HTMLImageElement, Event>) => {

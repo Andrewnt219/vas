@@ -1,5 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
+import NextLink from 'next/link';
 import React from 'react';
 import 'twin.macro';
 
@@ -27,8 +28,11 @@ function NewsCard({ className, data }: Props) {
 				<div tw="mt-4 md:mt-0 xl:(col-start-2 col-end-4 flex flex-col justify-between)">
 					<header>
 						<p tw="text-primary md:text-xl">{data.subcategory}</p>
-						<h2 tw="font-bold text-xl  md:text-3xl xl:(text-4xl mt-5)">
-							{data.title}
+
+						<h2 tw="font-bold text-xl  md:text-3xl hover:(underline text-primary) xl:(text-4xl mt-5)">
+							<NextLink href={`/news/posts/${data.slug}`}>
+								<a>{data.title}</a>
+							</NextLink>
 						</h2>
 						<p tw="mt-4 text-gray-200 md:text-newsBody xl:mt-8">
 							{data.snippet}

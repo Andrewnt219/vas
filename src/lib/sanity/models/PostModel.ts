@@ -1,6 +1,6 @@
 // TODO move to @types
 
-import { ImageModel } from './ImageModel';
+import { ImageModel, imageModelQuery } from './ImageModel';
 
 /**
  * @description the stucture of sanity quired post
@@ -20,8 +20,12 @@ export type PostModel = {
 	thumbnail: ImageModel;
 };
 
-export const postModelQuery = `{..., 	body[] {
-			...,
+// TODO make a class with public class fields to prepare all the data
+export const postModelQuery = `{
+	...,
+	"thumbnail": thumbnail.asset -> ${imageModelQuery}, 	
+	body[] {
+			...,			
 			_type == "image" => {
 				...,
 				"metadata": @.asset -> metadata {
