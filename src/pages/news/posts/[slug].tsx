@@ -33,7 +33,7 @@ const NewsPost = ({ data, error }: Props) => {
 
 	const { post } = data;
 
-	const displayedHashtag = post.hashtags[0];
+	const displayedHashtag = post.hashtags?.[0];
 
 	return (
 		<MainLayout title={post.title} tw="pb-0!">

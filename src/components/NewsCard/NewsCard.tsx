@@ -38,7 +38,7 @@ function NewsCard({ className, data }: Props) {
 				<div tw="mt-4 md:mt-0 xl:(col-start-2 col-end-4 flex flex-col justify-between)">
 					<header>
 						<p tw="text-primary md:text-xl">
-							{data.hashtags[0]?.title ?? '--'}
+							{data.hashtags?.[0]?.title ?? '--'}
 						</p>
 
 						<h2 tw="font-bold text-xl  md:text-3xl hocus:(underline text-primary) xl:(text-4xl mt-5)">

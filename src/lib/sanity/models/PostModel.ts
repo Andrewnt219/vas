@@ -20,7 +20,7 @@ export type PostModel = {
 	fromDate?: string;
 	toDate?: string;
 	thumbnail: ImageModel;
-	hashtags: HashtagModel[];
+	hashtags?: HashtagModel[];
 	categories: CategoryModel[];
 };
 
