@@ -1,13 +1,53 @@
+import { Response } from '@api-response';
 import NewsCard from '@components/NewsCard/NewsCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
+import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
+import { LocaleDataService } from '@services/locale-data-service';
+import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/layouts/MainLayout';
-import { ComponentProps } from '@utils';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
+/* -------------------------------------------------------------------------- */
+/*                                   SERVER                                   */
+/* -------------------------------------------------------------------------- */
+type StaticProps = Response<NewsCardModel[]>;
 
-type Props = {};
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+	locale,
+}) => {
+	LocaleDataService.setLocale(locale);
 
-const BlogIndex: VFC<Props> = ({}) => {
+	const posts = await PostDataService.getPostsByCategory('blog');
+
+	const newsPost: NewsCardModel[] = await Promise.all(
+		posts.map(async (post) => {
+			const meta = await PostDataService.getFsPost(post.slug);
+			return { ...post, ...meta };
+		})
+	);
+
+	return {
+		props: { data: newsPost, error: null },
+		revalidate: 60,
+	};
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   CLIENT                                   */
+/* -------------------------------------------------------------------------- */
+
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const BlogIndex: VFC<Props> = ({ data, error }) => {
+	if (error) {
+		return <h1>{error.message}</h1>;
+	}
+
+	if (!data) {
+		return <h1>Fetching posts...</h1>;
+	}
+
 	return (
 		<MainLayout title="Blogs" tw="">
 			<PageBanner
@@ -21,87 +61,28 @@ const BlogIndex: VFC<Props> = ({}) => {
 				}}
 			/>
 
-			<ul
-				tw="grid-p-sm flex flex-col space-y-6 md:(space-y-12)"
-				aria-label="articles about VAS' news"
-			>
-				<li>
-					<NewsCard data={card1} />
-				</li>
-				<li>
-					<NewsCard data={card2} />
-				</li>
-				<li>
-					<NewsCard data={card3} />
-				</li>
-			</ul>
+			{data.length > 0 && (
+				<>
+					<ul
+						tw="grid-p-sm flex flex-col space-y-6 md:(space-y-12)"
+						aria-label="articles about VAS' news"
+					>
+						{data.map((post) => (
+							<li key={post.slug}>
+								<NewsCard data={post} />
+							</li>
+						))}
+					</ul>
 
-			<Pagination
-				tw="col-span-full"
-				count={1}
-				onItemClicked={(ev, page) => console.log(page)}
-			/>
+					<Pagination
+						tw="col-span-full"
+						total={data.length}
+						onItemClicked={(ev, page) => console.log(page)}
+					/>
+				</>
+			)}
 		</MainLayout>
 	);
-};
-
-const card1: ComponentProps<typeof NewsCard>['data'] = {
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	comments: 20,
-	snippet:
-		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',
-	title: 'Best Look Yet at the adidas YEEZY 1020 Boot',
-	subcategory: 'Footwear',
-	thumbnail: {
-		url: require('images/hero/events.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/events.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-	},
-	views: 12,
-};
-const card2: ComponentProps<typeof NewsCard>['data'] = {
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	comments: 0,
-	snippet:
-		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',
-	title: 'Best Look Yet at the adidas YEEZY 1020 Boot',
-	subcategory: 'Footwear',
-	thumbnail: {
-		url: require('images/hero/tet.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/tet.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-	},
-	views: 0,
-};
-const card3: ComponentProps<typeof NewsCard>['data'] = {
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	comments: 3,
-	snippet:
-		'Get a clear glimpse of the futuristic footwear option from ‘Ye and the Trefoil.',
-	title:
-		'Bianca Saunders Superimposes Creased Denim Onto Wrangler Pieces for FW21',
-	subcategory: 'Footwear',
-	thumbnail: {
-		url: require('images/hero/orientation.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/orientation.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-	},
-	views: 1,
 };
 
 export default BlogIndex;

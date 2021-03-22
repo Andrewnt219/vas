@@ -1,4 +1,4 @@
-import firestore from '@lib/firestore';
+import firestore from '@lib/firestore/firestore';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 export class StatsDataService {
 	private static collection = firestore.collection('stats');

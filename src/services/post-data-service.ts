@@ -1,29 +1,27 @@
-import { FireBasePost as PostMeta } from '@firebase';
-import firestore from '@lib/firestore';
+import firestore from '@lib/firestore/firestore';
+import { FsPost } from '@lib/firestore/models/FsPost';
+import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
-import i18nConfig from '@root/i18n.json';
-import { Languages } from '@src/data/localization-data';
 import firebase from 'firebase-admin';
+import { LocaleDataService } from './locale-data-service';
+
+// TODO what if the translation is not available?
 export class PostDataService {
 	private static collection = firestore.collection('posts');
 	private static cms = localizedSanityClient;
-	private static language: Languages = i18nConfig.defaultLocale as Languages;
 
-	public static switchLanguage(lang: Languages): void {
-		this.language = lang;
-	}
 	public static async getPostBySlug(slug: string): Promise<PostModel | null> {
 		return this.cms.fetch(
 			`*[_type == 'post' && slug.current == $slug && _lang == $lang   ] ${postModelQuery}[0]`,
-			{ slug, lang: this.language }
+			{ slug, lang: LocaleDataService.getLocale() }
 		);
 	}
 
 	public static async getPosts(): Promise<PostModel[]> {
 		return this.cms.fetch(
 			`*[_type == 'post' && _lang == $lang] ${postModelQuery}`,
-			{ lang: this.language }
+			{ lang: LocaleDataService.getLocale() }
 		);
 	}
 
@@ -36,7 +34,7 @@ export class PostDataService {
 	}
 
 	public static async getPostSlugsByCategory(
-		categorySlug: string
+		categorySlug: CategorySlug
 	): Promise<{ slug: string }[]> {
 		return this.cms.fetch(
 			`*[_type == 'post' && categories[] -> slug.current match $categorySlug] {
@@ -46,7 +44,25 @@ export class PostDataService {
 		);
 	}
 
-	public static async increaseViews(slug: string): Promise<PostMeta | null> {
+	public static async getPostsByCategory(
+		categorySlug: CategorySlug
+	): Promise<PostModel[]> {
+		return this.cms.fetch(
+			`
+			*[_type == 'post' 
+					&& _lang == $lang 
+					&& !isArchived 
+					&& categories[] -> slug.current match $categorySlug
+				] ${postModelQuery}
+		`,
+			{
+				categorySlug,
+				lang: LocaleDataService.getLocale(),
+			}
+		);
+	}
+
+	public static async increaseViews(slug: string): Promise<FsPost> {
 		const postMetaRef = this.collection.doc(slug);
 
 		await postMetaRef.update({
@@ -56,19 +72,23 @@ export class PostDataService {
 		const postMetaDoc = await postMetaRef.get();
 
 		if (!postMetaDoc.exists) {
-			return null;
+			// TODO add a way to create default FsPost
+			this.collection.doc(slug).create({ comments: [], views: 0 });
+			return { comments: [], views: 0 };
 		}
 
-		return postMetaDoc.data() as PostMeta;
+		return postMetaDoc.data() as FsPost;
 	}
 
-	public static async getPostMeta(slug: string): Promise<PostMeta | null> {
+	public static async getFsPost(slug: string): Promise<FsPost> {
 		const postMetaDoc = await this.collection.doc(slug).get();
 
 		if (!postMetaDoc.exists) {
-			return null;
+			// TODO add a way to create default FsPost
+			this.collection.doc(slug).create({ comments: [], views: 0 });
+			return { comments: [], views: 0 };
 		}
 
-		return postMetaDoc.data() as PostMeta;
+		return postMetaDoc.data() as FsPost;
 	}
 }

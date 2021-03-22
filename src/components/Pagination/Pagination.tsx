@@ -6,7 +6,8 @@ import React, { ReactElement } from 'react';
 import tw, { css, styled } from 'twin.macro';
 
 type Props = {
-	count: NonNullable<UsePaginationProps['count']>;
+	total: number;
+	perPage?: number;
 	usePaginationProps?: Omit<UsePaginationProps, 'count'>;
 	onItemClicked?(
 		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -18,12 +19,13 @@ type Props = {
 function Pagination({
 	className,
 	onItemClicked,
-	count,
+	total,
+	perPage = 5,
 	usePaginationProps,
 }: Props) {
 	// passing in `items` doesn't work properly
 	const { items } = usePagination({
-		count,
+		count: Math.ceil(total / perPage),
 		...usePaginationProps,
 	});
 	const Buttons = renderControllers(items, onItemClicked);

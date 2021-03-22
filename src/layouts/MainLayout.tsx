@@ -18,7 +18,7 @@ export default function MainLayout({
 	title,
 	className,
 }: Props) {
-	const router = useRouter();
+	const { asPath } = useRouter();
 
 	// TODO replace banner.png with vas
 	const meta = {
@@ -34,10 +34,7 @@ export default function MainLayout({
 				<title>{title}</title>
 				<meta name="robots" content="follow, index" />
 				<meta content={meta.description} name="description" />
-				<meta
-					property="og:url"
-					content={`https://vasseneca.com${router.asPath}`}
-				/>
+				<meta property="og:url" content={`https://vasseneca.com${asPath}`} />
 				<meta property="og:type" content={meta.type} />
 				<meta property="og:site_name" content="VAS Seneca" />
 				<meta property="og:description" content={meta.description} />

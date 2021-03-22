@@ -30,12 +30,12 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Members({ data, error }: Props) {
-	if (!data) {
-		return <h1>Fetching members...</h1>;
-	}
-
 	if (error) {
 		return <h1>{error.message}</h1>;
+	}
+
+	if (!data) {
+		return <h1>Fetching members...</h1>;
 	}
 
 	return (

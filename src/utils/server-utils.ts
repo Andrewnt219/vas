@@ -1,9 +1,9 @@
 import { Response } from '@api-response';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel } from '@lib/sanity/models/PostModel';
+import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { assertLanguages } from './validate-utils';
 
 type StaticPostProps = Response<PostModel>;
 type StaticPostParams = {
@@ -13,10 +13,6 @@ export const getStaticPost: GetStaticProps<
 	StaticPostProps,
 	StaticPostParams
 > = async ({ params, locale }) => {
-	assertLanguages(locale);
-
-	PostDataService.switchLanguage(locale);
-
 	if (!params?.slug) {
 		return {
 			props: {
@@ -26,6 +22,7 @@ export const getStaticPost: GetStaticProps<
 		};
 	}
 
+	LocaleDataService.setLocale(locale);
 	const post = await PostDataService.getPostBySlug(params.slug);
 
 	if (!post) {

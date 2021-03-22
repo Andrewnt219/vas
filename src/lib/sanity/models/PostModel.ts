@@ -27,6 +27,7 @@ export type PostModel = {
 // TODO make a class with public class fields to prepare all the data
 export const postModelQuery = `{
 	...,
+	"slug": slug.current,
 	"thumbnail": thumbnail.asset -> ${imageModelQuery},
 	"categories": categories[] -> ${categoryModelQuery},
 	"hashtags": hashtags[] -> ${hashtagModelQuery},

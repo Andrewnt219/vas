@@ -1,4 +1,4 @@
-import firestore from '@lib/firestore';
+import firestore from '@lib/firestore/firestore';
 import { AuthorModel, authorModelQuery } from '@lib/sanity/models/AuthorModel';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 export class AuthorDataService {

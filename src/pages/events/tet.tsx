@@ -1,19 +1,53 @@
+import { Response } from '@api-response';
 import EventsPage from '@layouts/EventsPage';
 import MainLayout from '@layouts/MainLayout';
-import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
+import { PostModel } from '@lib/sanity/models/PostModel';
+import { LocaleDataService } from '@services/locale-data-service';
+import { PostDataService } from '@services/post-data-service';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
 
-type Props = { className?: string };
+/* -------------------------------------------------------------------------- */
+/*                                   SERVER                                   */
+/* -------------------------------------------------------------------------- */
+type StaticProps = Response<PostModel[]>;
 
-function Tet({ className }: Props) {
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+	locale,
+}) => {
+	LocaleDataService.setLocale(locale);
+
+	const posts = await PostDataService.getPostsByCategory('tet');
+
+	return {
+		props: { data: posts, error: null },
+		revalidate: 60,
+	};
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   CLIENT                                   */
+/* -------------------------------------------------------------------------- */
+
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+function Tet({ data, error }: Props) {
+	if (error) {
+		return <h1>{error.message}</h1>;
+	}
+
+	if (!data) {
+		return <h1>Fetching posts...</h1>;
+	}
+
 	return (
-		<MainLayout title="Tet" className={className}>
-			<EventsPage data={{ bannerProps: data, posts: cards }} />
+		<MainLayout title="Tet">
+			<EventsPage data={{ bannerProps, posts: data }} />
 		</MainLayout>
 	);
 }
 
-const data = {
+const bannerProps = {
 	imgAlt: "A picture of sourvenirs from one of VAS's orientations",
 	imgLqip: require('images/hero/tet.png?lqip'),
 	imgSrc: require('images/hero/tet.png'),
@@ -21,130 +55,5 @@ const data = {
 	subtitle:
 		'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.',
 };
-
-const card: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham & York',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet: 'Showcasing diverse works by Kaikai Kiki artists.',
-	thumbnail: {
-		url: require('images/hero/about-us.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/about-us.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'The most recent Tet',
-};
-
-const card1: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet:
-		'The band’s BlizzCon concert was interrupted with royalty-free music to avoid a copyright violation and takedown order.',
-	thumbnail: {
-		url: require('images/hero/events.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/events.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'Tet 2021',
-};
-
-const card2: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet: 'Summer 2020 Orientation',
-	thumbnail: {
-		url: require('images/hero/news.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/news.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'Tet 2020',
-};
-
-const card3: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet:
-		'The band’s BlizzCon concert was interrupted with royalty-free music to avoid a copyright violation and takedown order.',
-	thumbnail: {
-		url: require('images/hero/orientation.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/orientation.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'Tet 2019',
-};
-
-const card4: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet:
-		'The band’s BlizzCon concert was interrupted with royalty-free music to avoid a copyright violation and takedown order.',
-	thumbnail: {
-		url: require('images/hero/tet.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/tet.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'Tet 2018',
-};
-
-const card5: OrientationCardModel = {
-	fromDate: new Date().toISOString(),
-	toDate: new Date().toISOString(),
-	location: 'Newnham',
-	slug:
-		'en-us-takashi-murakami-curates-new-healing-group-exhibition-at-perrotin-shanghai',
-	snippet:
-		'The band’s BlizzCon concert was interrupted with royalty-free music to avoid a copyright violation and takedown order.',
-	thumbnail: {
-		url: require('images/hero/about-us.png'),
-		metadata: {
-			height: 100,
-			lqip: require('images/hero/about-us.png?lqip'),
-			ratio: 0.5,
-			width: 100,
-		},
-		alt: 'dasdasdas',
-	},
-	title: 'Tet 2017',
-};
-const cards = [card, card1, card2, card3, card4, card5];
 
 export default Tet;

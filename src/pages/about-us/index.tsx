@@ -33,12 +33,12 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AboutUs: VFC<Props> = ({ data, error }) => {
-	if (!data) {
-		return <h1>Fetching members...</h1>;
-	}
-
 	if (error) {
 		return <h1>{error.message}</h1>;
+	}
+
+	if (!data) {
+		return <h1>Fetching members...</h1>;
 	}
 
 	return (

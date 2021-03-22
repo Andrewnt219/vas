@@ -26,7 +26,7 @@ const handler: NextApiHandler<GetPostResponse> = async (req, res) => {
 		});
 	}
 
-	const postMeta = await PostDataService.getPostMeta(slug);
+	const postMeta = await PostDataService.getFsPost(slug);
 
 	if (!postMeta) {
 		return res.status(404).json({
