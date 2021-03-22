@@ -24,7 +24,7 @@ const Index: VFC<Props> = () => {
 	const { t } = useTranslation();
 
 	return (
-		<MainLayout title="VAS" tw="pb-0">
+		<MainLayout title="VAS" tw="pb-0!">
 			<section
 				tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
 				aria-labelledby="hero-title"

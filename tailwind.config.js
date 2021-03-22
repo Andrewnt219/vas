@@ -156,7 +156,7 @@ function sizing({ addComponents }) {
 			height: '100%',
 		},
 		'.img-absolute': {
-			position: 'absolute',
+			position: 'absolute !important',
 			top: 0,
 			left: 0,
 			width: '100%',
