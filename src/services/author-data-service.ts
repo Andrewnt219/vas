@@ -1,9 +1,9 @@
 import firestore from '@lib/firestore';
 import { AuthorModel, authorModelQuery } from '@lib/sanity/models/AuthorModel';
-import { localizedSanityClient } from '@lib/sanity/sanity-clients';
+import { sanityClient } from '@lib/sanity/sanity-clients';
 export class AuthorDataService {
 	private static collection = firestore.collection('authors');
-	private static cms = localizedSanityClient;
+	private static cms = sanityClient;
 
 	public static async getAuthors(): Promise<AuthorModel[]> {
 		return this.cms.fetch(`*[_type == 'author'] ${authorModelQuery}`);
@@ -13,5 +13,11 @@ export class AuthorDataService {
 		return this.cms.fetch(
 			`*[_type == 'author' && isActive] ${authorModelQuery}`
 		);
+	}
+
+	public static countActiveAuthors(): Promise<number> {
+		return this.cms.fetch(`
+			count(*[_type == 'author' && isActive])
+		`);
 	}
 }

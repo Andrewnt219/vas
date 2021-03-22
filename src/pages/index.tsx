@@ -1,27 +1,56 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import FactTile from '@components/FactTile/FactTile';
 import SectionH1 from '@components/SectionH1/SectionH1';
+import { AuthorDataService } from '@services/author-data-service';
+import { StatsDataService } from '@services/stats-data-service';
 import MainLayout from '@src/layouts/MainLayout';
 import { ComponentProps } from '@utils';
+import { padZero } from '@utils/number-utils';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
-import 'twin.macro';
 
-const FACTS: ComponentProps<typeof FactTile>['data'][] = [
-	{
-		key: 'members',
-		value: '08',
-	},
-	{
-		key: 'projects',
-		value: '30',
-	},
-];
+// TODO use loadLocaleFrom in i18n.json to load translation files
+// Maybe add some next.js api for fetching files from fire storage/firestore
+/* -------------------------------------------------------------------------- */
+/*                                   SERVER                                   */
+/* -------------------------------------------------------------------------- */
+type StaticProps = { membersCount: number; projectsCount: number };
 
-type Props = {};
+type Params = {};
 
-const Index: VFC<Props> = () => {
+export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
+	const projectsCount = await StatsDataService.countProjects();
+	const membersCount = await AuthorDataService.countActiveAuthors();
+
+	return {
+		props: {
+			projectsCount,
+			membersCount,
+		},
+
+		revalidate: 60,
+	};
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   CLIENT                                   */
+/* -------------------------------------------------------------------------- */
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 	const { t } = useTranslation();
+
+	const FACTS: ComponentProps<typeof FactTile>['data'][] = [
+		{
+			key: 'members',
+			value: padZero(membersCount),
+		},
+		{
+			key: 'projects',
+			value: padZero(projectsCount),
+		},
+	];
 
 	return (
 		<MainLayout title="VAS" tw="pb-0!">
