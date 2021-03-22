@@ -5,7 +5,10 @@ import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-type StaticPostProps = Response<PostModel>;
+type StaticPostProps = Response<{
+	post: PostModel;
+	relatedPosts: PostModel[];
+}>;
 type StaticPostParams = {
 	slug: string;
 };
@@ -34,9 +37,16 @@ export const getStaticPost: GetStaticProps<
 		};
 	}
 
+	const relatedPosts = await PostDataService.getPostsByCategory(
+		post.categories[0]?.title
+	);
+
 	return {
 		props: {
-			data: post,
+			data: {
+				post,
+				relatedPosts,
+			},
 			error: null,
 		},
 		revalidate: 60,

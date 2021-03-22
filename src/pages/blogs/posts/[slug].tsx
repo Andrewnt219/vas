@@ -31,10 +31,12 @@ const NewsPost = ({ data, error }: Props) => {
 		return <h1>Fetching post...</h1>;
 	}
 
-	const displayedHashtag = data.hashtags[0];
+	const { post } = data;
+
+	const displayedHashtag = post.hashtags[0];
 
 	return (
-		<MainLayout title={data.title} tw="pb-0!">
+		<MainLayout title={post.title} tw="pb-0!">
 			<section tw="col-span-full md:text-2xl">
 				<Post.Wrapper as="header">
 					{displayedHashtag && (
@@ -45,19 +47,19 @@ const NewsPost = ({ data, error }: Props) => {
 						</NextLink>
 					)}
 
-					<Post.Title tw="my-2 md:my-5">{data.title}</Post.Title>
+					<Post.Title tw="my-2 md:my-5">{post.title}</Post.Title>
 
 					<time
 						tw="text-gray-200 text-smaller italic"
-						dateTime={dayjs(data.publishedAt).format('YYYY-MM-DD')}
+						dateTime={dayjs(post.publishedAt).format('YYYY-MM-DD')}
 					>
-						{dayjs(data.publishedAt).format('MMMM DD, YYYY')}
+						{dayjs(post.publishedAt).format('MMMM DD, YYYY')}
 					</time>
 				</Post.Wrapper>
 
 				<Post.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
 					<BlockContent
-						blocks={data.body}
+						blocks={post.body}
 						projectId={sanityClient.config().projectId}
 						dataset={sanityClient.config().dataset}
 						serializers={postSerializer}

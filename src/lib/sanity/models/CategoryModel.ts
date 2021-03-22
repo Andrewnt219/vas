@@ -7,7 +7,14 @@ export type CategoryModel = {
 	title: string;
 };
 
-export type CategorySlug = 'news' | 'events' | 'orientaion' | 'tet' | 'blog';
+export const categorySlugs = [
+	'news',
+	'events',
+	'orientation',
+	'tet',
+	'blog',
+] as const;
+export type CategorySlug = typeof categorySlugs[number];
 
 export const categoryModelQuery = `
 	{

@@ -3,6 +3,7 @@ import { FsPost } from '@lib/firestore/models/FsPost';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
+import { isValidCategorySlug } from '@utils/validate-utils';
 import firebase from 'firebase-admin';
 import { LocaleDataService } from './locale-data-service';
 
@@ -45,8 +46,12 @@ export class PostDataService {
 	}
 
 	public static async getPostsByCategory(
-		categorySlug: CategorySlug
+		categorySlug: unknown
 	): Promise<PostModel[]> {
+		if (!isValidCategorySlug(categorySlug)) {
+			return [];
+		}
+
 		return this.cms.fetch(
 			`
 			*[_type == 'post' 
