@@ -3,8 +3,8 @@ import InputGroup from '@components/InputGroup/InputGroup';
 import { InputLabel } from '@components/InputLabel/InputLabel';
 import TextField from '@components/TextField/TextField';
 import axios from 'axios';
-import 'twin.macro';
 import { useContactForm } from './hooks/useContactForm';
+
 type FormProps = { className?: string };
 
 function ContactForm({ className }: FormProps) {

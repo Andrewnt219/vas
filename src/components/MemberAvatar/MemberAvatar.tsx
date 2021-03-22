@@ -1,7 +1,7 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { ImageModel } from '@lib/sanity/models/ImageModel';
 import React from 'react';
-import 'twin.macro';
+
 type Props = {
 	className?: string;
 	// TODO so close ComponentType<ComponentProps<typeof EnhancedImage>>

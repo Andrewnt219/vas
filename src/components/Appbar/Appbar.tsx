@@ -3,8 +3,8 @@ import Logo from '@components/Logo/Logo';
 import Slider from '@components/Slider/Slider';
 import { routes } from '@src/data/routes-data';
 import React, { useState, VFC } from 'react';
-import 'twin.macro';
 import MenuItemSet from './components/MenuItemSet/MenuItemSet';
+
 type Props = {};
 
 // TODO responsive

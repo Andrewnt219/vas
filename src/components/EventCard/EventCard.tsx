@@ -5,7 +5,7 @@ import { EventCardModel } from '@lib/sanity/models/EventCardModel';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
-import 'twin.macro';
+
 type Props = { className?: string; data: EventCardModel };
 
 function EventCard({ className, data }: Props) {

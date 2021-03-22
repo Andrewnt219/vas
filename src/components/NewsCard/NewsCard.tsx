@@ -4,7 +4,6 @@ import { getControllerFromPath } from '@utils/route-utils';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import 'twin.macro';
 
 type Props = {
 	className?: string;

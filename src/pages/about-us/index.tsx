@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 			data: authors,
 			error: null,
 		},
+		revalidate: 60,
 	};
 };
 

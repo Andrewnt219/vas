@@ -1,6 +1,5 @@
 import NextImage, { ImageProps } from 'next/image';
 import React, { SyntheticEvent, useRef, VFC } from 'react';
-import 'twin.macro';
 
 // For some reasons, using Omit src cause error
 type Props = ImageProps & {

@@ -4,7 +4,6 @@ import Pagination from '@components/Pagination/Pagination';
 import { EventCardModel } from '@lib/sanity/models/EventCardModel';
 import MainLayout from '@src/layouts/MainLayout';
 import React, { VFC } from 'react';
-import 'twin.macro';
 
 type Props = {};
 

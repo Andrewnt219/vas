@@ -4,9 +4,9 @@ import { Dropdown } from '@src/data/routes-data';
 import { motion } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useRef, VFC } from 'react';
-import 'twin.macro';
 import DropDownItemSet from '../DropdownItemSet/DropDownItemSet';
 import { StyledMenuLink } from '../MenuItem/MenuItem';
+
 type Props = {
 	data: Dropdown;
 };

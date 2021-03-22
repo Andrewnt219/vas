@@ -1,7 +1,6 @@
 import { Semester } from '@data/common-data';
 import dayjs from 'dayjs';
 import React from 'react';
-import 'twin.macro';
 
 type Props = { className?: string; date: Date; format?: string };
 

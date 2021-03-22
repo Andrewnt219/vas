@@ -6,7 +6,7 @@ import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
-import 'twin.macro';
+
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
@@ -19,6 +19,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 			data: authors,
 			error: null,
 		},
+		revalidate: 60,
 	};
 };
 

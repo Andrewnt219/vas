@@ -1,7 +1,6 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
 import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import React from 'react';
-import 'twin.macro';
 
 type Props = { className?: string; data: AuthorModel };
 

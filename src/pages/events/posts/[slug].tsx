@@ -13,7 +13,7 @@ import {
 import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
-import 'twin.macro';
+
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */

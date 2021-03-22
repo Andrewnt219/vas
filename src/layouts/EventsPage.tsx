@@ -7,7 +7,6 @@ import TripleCardsdGroup, {
 } from '@src/layouts/TripleCardsGroup';
 import { ComponentProps } from '@utils';
 import React from 'react';
-import 'twin.macro';
 
 type Props = {
 	data: {

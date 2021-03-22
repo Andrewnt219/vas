@@ -1,7 +1,6 @@
 import MemberInfo from '@components/MemberInfoSet/components/MemberInfo/MemberInfo';
 import { ComponentProps } from '@utils';
 import React from 'react';
-import 'twin.macro';
 
 type Props = {
 	className?: string;

@@ -1,7 +1,6 @@
 import { routes } from '@data/routes-data';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-import 'twin.macro';
 
 type Props = { className?: string };
 

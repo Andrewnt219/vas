@@ -1,6 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import React, { ReactNode } from 'react';
-import 'twin.macro';
+
 type Props = {
 	className?: string;
 	data: {

@@ -1,7 +1,7 @@
 import OrientationCard from '@components/OrientationCard/OrientationCard';
 import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
 import React from 'react';
-import 'twin.macro';
+
 type Props = {
 	className?: string;
 	data: [OrientationCardModel, OrientationCardModel, OrientationCardModel];

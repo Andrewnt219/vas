@@ -1,4 +1,3 @@
-import 'twin.macro';
 import Author from '../components/Author';
 import { BlockRenderer } from '../components/BlockRenderer';
 import Breaker from '../components/Breaker';

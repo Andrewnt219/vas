@@ -2,7 +2,7 @@ import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import NextLink from 'next/link';
 import React from 'react';
-import 'twin.macro';
+
 type Post = Pick<PostModel, 'title' | 'slug' | 'thumbnail'>;
 function Post({ data }: { data: Post }) {
 	const { title, slug, thumbnail } = data;

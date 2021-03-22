@@ -1,7 +1,6 @@
 import { routes } from '@data/routes-data';
 import { AnimateSharedLayout } from 'framer-motion';
 import React from 'react';
-import 'twin.macro';
 import DropdownButton from '../DropDownButton/DropDownButton';
 import DropDownItem from '../DropDownItem/DropDownItem';
 

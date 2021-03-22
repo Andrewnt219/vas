@@ -1,5 +1,4 @@
 import { VFC } from 'react';
-import 'twin.macro';
 
 type Props = {
 	data: {

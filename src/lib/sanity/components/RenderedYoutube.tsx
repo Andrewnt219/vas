@@ -1,7 +1,6 @@
 import getYouTubeID from 'get-youtube-id';
 import React, { ReactElement } from 'react';
 import Youtube from 'react-youtube';
-import 'twin.macro';
 
 type Props = {
 	node: {

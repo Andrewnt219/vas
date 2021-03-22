@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import 'twin.macro';
 
 type Props = {
 	children: ReactNode;

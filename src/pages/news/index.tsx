@@ -4,7 +4,6 @@ import Pagination from '@components/Pagination/Pagination';
 import MainLayout from '@src/layouts/MainLayout';
 import { ComponentProps } from '@utils';
 import React, { VFC } from 'react';
-import 'twin.macro';
 
 type Props = {};
 
