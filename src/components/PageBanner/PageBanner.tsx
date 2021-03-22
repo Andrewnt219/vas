@@ -24,8 +24,9 @@ function PageBanner({ className, data }: Props) {
 			className={className}
 			tw="relative col-span-full pb-2xs mb-10 md:mb-20 xl:grid-p-sm"
 		>
+			{/* absolute! to fix a weird override that only happens in deployment (not even production) */}
 			<EnhancedImage
-				tw="img-absolute"
+				tw="img-absolute absolute!"
 				layout="fill"
 				src={imgSrc}
 				lqip={imgLqip}
