@@ -20,6 +20,7 @@ function PageBanner({ className, data }: Props) {
 
 	return (
 		<header
+			key={data.imgSrc}
 			className={className}
 			tw="relative col-span-full pb-2xs mb-10 md:mb-20 xl:grid-p-sm"
 		>
