@@ -18,14 +18,16 @@ function MemberInfo({ className, data }: Props) {
 			<div tw="col-span-2">
 				<p tw="font-bold">{data.title}</p>
 				<p>{data.positions.join(', ')}</p>
-				<a
-					tw="block underline"
-					href={data.linkedin}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					LinkedIn
-				</a>
+				{data.linkedin && (
+					<a
+						tw="block underline"
+						href={data.linkedin}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						LinkedIn
+					</a>
+				)}
 				<p>Status: {data.isActive ? 'Active' : 'Inactive'}</p>
 			</div>
 		</article>

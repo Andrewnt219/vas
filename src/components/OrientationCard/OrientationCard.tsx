@@ -1,6 +1,7 @@
 import Button from '@components/Button/Button';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
+import { scaleImageCss } from '@styles/apply';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
@@ -17,17 +18,26 @@ function OrientationCard({ className, data, isMain }: Props) {
 		<div className={className} tw="">
 			<article className={className}>
 				<ImageContainer isMain={isMain}>
-					<EnhancedImage
-						tw="img-absolute"
-						src={data.thumbnail.url}
-						lqip={data.thumbnail.metadata.lqip}
-						alt={data.thumbnail.alt ?? ''}
-						layout="fill"
-					/>
+					<NextLink href={`/events/posts/${data.slug}`}>
+						<a>
+							<EnhancedImage
+								css={scaleImageCss}
+								tw="img-absolute"
+								src={data.thumbnail.url}
+								lqip={data.thumbnail.metadata.lqip}
+								alt={data.thumbnail.alt ?? ''}
+								layout="fill"
+							/>
+						</a>
+					</NextLink>
 				</ImageContainer>
 
 				<header tw="mt-2  md:(mt-4 mb-2) xl:(mt-7 mb-6)">
-					<h2 tw="font-bold text-lg md:text-2xl xl:text-4xl">{data.title}</h2>
+					<h2 tw="font-bold text-lg md:text-2xl xl:text-4xl">
+						<NextLink href={`/events/posts/${data.slug}`}>
+							<a>{data.title}</a>
+						</NextLink>
+					</h2>
 				</header>
 
 				{isMain && (

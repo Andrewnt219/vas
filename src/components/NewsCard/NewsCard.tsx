@@ -1,5 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
+import { scaleImageCss } from '@styles/apply';
 import { getControllerFromPath } from '@utils/route-utils';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -20,13 +21,18 @@ function NewsCard({ className, data }: Props) {
 
 			<div tw="mt-6 grid md:(mt-12 grid-cols-2 gap-x-8)  xl:(grid-cols-3 )">
 				<div tw="relative pb-xs border border-black border-opacity-50 xl:(col-start-1 col-end-2 pb-sm)">
-					<EnhancedImage
-						tw="img-absolute"
-						src={data.thumbnail.url}
-						lqip={data.thumbnail.metadata.lqip}
-						alt={data.thumbnail.alt ?? ''}
-						layout="fill"
-					/>
+					<NextLink href={`/${controller}/posts/${data.slug}`}>
+						<a>
+							<EnhancedImage
+								tw="img-absolute"
+								css={scaleImageCss}
+								src={data.thumbnail.url}
+								lqip={data.thumbnail.metadata.lqip}
+								alt={data.thumbnail.alt ?? ''}
+								layout="fill"
+							/>
+						</a>
+					</NextLink>
 				</div>
 
 				<div tw="mt-4 md:mt-0 xl:(col-start-2 col-end-4 flex flex-col justify-between)">
@@ -35,7 +41,7 @@ function NewsCard({ className, data }: Props) {
 							{data.hashtags[0]?.title ?? '--'}
 						</p>
 
-						<h2 tw="font-bold text-xl  md:text-3xl hover:(underline text-primary) xl:(text-4xl mt-5)">
+						<h2 tw="font-bold text-xl  md:text-3xl hocus:(underline text-primary) xl:(text-4xl mt-5)">
 							<NextLink href={`/${controller}/posts/${data.slug}`}>
 								<a>{data.title}</a>
 							</NextLink>

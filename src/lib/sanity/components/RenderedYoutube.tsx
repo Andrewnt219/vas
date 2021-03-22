@@ -8,6 +8,7 @@ type Props = {
 	};
 };
 
+// TODO put a placeholoder while fetching
 function RenderedYoutube({ node: { url } }: Props): ReactElement {
 	const id = getYouTubeID(url);
 

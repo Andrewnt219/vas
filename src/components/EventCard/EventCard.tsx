@@ -13,17 +13,25 @@ function EventCard({ className, data }: Props) {
 		<article className={className} tw="space-y-4 xl:space-y-14">
 			<PublishedDate date={new Date(data.publishedAt)} />
 
-			<h2 tw=" font-bold text-xl md:text-title">{data.title}</h2>
+			<h2 tw=" font-bold text-xl md:text-title">
+				<NextLink href={`/events/posts/${data.slug}`}>
+					<a>{data.title}</a>
+				</NextLink>
+			</h2>
 
 			<div tw="grid md:grid-cols-2  text-body font-medium md:text-lg">
 				<div tw="relative col-span-full pb-xs mb-4 md:(mb-6 pb-2xs)">
-					<EnhancedImage
-						tw="img-absolute"
-						src={data.thumbnail.url}
-						lqip={data.thumbnail.metadata.lqip}
-						alt={data.thumbnail.alt ?? ''}
-						layout="fill"
-					/>
+					<NextLink href={`/events/posts/${data.slug}`}>
+						<a>
+							<EnhancedImage
+								tw="img-absolute"
+								src={data.thumbnail.url}
+								lqip={data.thumbnail.metadata.lqip}
+								alt={data.thumbnail.alt ?? ''}
+								layout="fill"
+							/>
+						</a>
+					</NextLink>
 				</div>
 
 				<p>
