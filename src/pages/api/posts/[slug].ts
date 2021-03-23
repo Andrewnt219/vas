@@ -27,15 +27,16 @@ const handler: NextApiHandler<GetPostResponse> = async (req, res) => {
 	}
 
 	const postMeta = await PostDataService.getFsPost(slug);
+	const post = await PostDataService.getPostBySlug(slug);
 
-	if (!postMeta) {
+	if (!post || !postMeta) {
 		return res.status(404).json({
 			data: null,
 			error: { message: 'Post not found' },
 		});
 	}
 
-	return res.status(200).json({ data: postMeta, error: null });
+	return res.status(200).json({ data: { ...postMeta, ...post }, error: null });
 };
 
 export default handler;

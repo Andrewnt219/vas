@@ -1,5 +1,8 @@
 declare module '@api-response' {
-	import type { FireBasePost } from '@firebase';
+	import { PostWihMeta } from '@common';
+	import { FsPost } from '@lib/firestore/models/FsPost';
+	import { PostModel } from '@lib/sanity/models/PostModel';
+
 	type Error = {
 		message: string;
 	};
@@ -9,6 +12,8 @@ declare module '@api-response' {
 		data: Data | null;
 	};
 
-	type IncreaseViewResponse = Response<number>;
-	type GetPostResponse = Response<FireBasePost>;
+	type IncreaseViewResponse = Response<FsPost>;
+	type GetPostResponse = Response<PostWihMeta>;
+
+	type RelatedPostResponse = Response<PostModel[]>;
 }

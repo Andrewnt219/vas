@@ -20,15 +20,15 @@ const handler: NextApiHandler<IncreaseViewResponse> = async (req, res) => {
 			});
 		}
 
-		const post = await PostDataService.increaseViews(slug);
+		const fsPost = await PostDataService.increaseViews(slug);
 
-		if (!post) {
+		if (!fsPost) {
 			return res
 				.status(404)
 				.json({ data: null, error: { message: 'Post not found' } });
 		}
 
-		return res.status(200).json({ data: post.views, error: null });
+		return res.status(200).json({ data: fsPost, error: null });
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({

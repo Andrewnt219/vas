@@ -6,13 +6,14 @@ import MainLayout from '@layouts/MainLayout';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
 import BlockContent from '@sanity/block-content-to-react';
+import { usePost } from '@src/hooks/usePost';
 import {
 	getStaticPost,
 	getStaticPostsPathsByCategory,
 } from '@utils/server-utils';
 import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
-import React, { VFC } from 'react';
+import React from 'react';
 
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
@@ -27,7 +28,13 @@ export const getStaticPaths = getStaticPostsPathsByCategory('events');
 /* -------------------------------------------------------------------------- */
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const EventPost: VFC<Props> = ({ data, error }) => {
+const EventPost = ({ data: serverData, error: serverError }: Props) => {
+	const { data, error } = usePost(serverData?.post.slug, serverData);
+
+	if (serverError) {
+		return <h1>{serverError.message}</h1>;
+	}
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -72,11 +79,16 @@ const EventPost: VFC<Props> = ({ data, error }) => {
 							Time:{' '}
 							<time dateTime={dayjs(post.fromDate).format('YYYY-MM-DD')}>
 								{post.fromDate ? dayjs(post.fromDate).format('DD/MM') : '-/-'}
-							</time>{' '}
-							&#8211;{' '}
-							<time dateTime={dayjs(post.toDate).format('YYYY-MM-DD')}>
-								{post.toDate ? dayjs(post.toDate).format('DD/MM') : '-/-'}
 							</time>
+							{post.toDate && (
+								<>
+									{' '}
+									&#8211;{' '}
+									<time dateTime={dayjs(post.toDate).format('YYYY-MM-DD')}>
+										{post.toDate ? dayjs(post.toDate).format('DD/MM ') : '-/-'}
+									</time>
+								</>
+							)}
 						</p>
 
 						<p>Location: {post.location ?? '--'}</p>

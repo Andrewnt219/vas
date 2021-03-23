@@ -11,6 +11,7 @@ type Props = {
 	data: NewsCardModel;
 };
 
+// TODO add author below title
 function NewsCard({ className, data }: Props) {
 	const { asPath } = useRouter();
 	const controller = getControllerFromPath(asPath) ?? '';

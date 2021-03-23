@@ -3,7 +3,6 @@ import { FsPost } from '@lib/firestore/models/FsPost';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
-import { isValidCategorySlug } from '@utils/validate-utils';
 import firebase from 'firebase-admin';
 import { LocaleDataService } from './locale-data-service';
 
@@ -21,7 +20,7 @@ export class PostDataService {
 
 	public static async getPosts(): Promise<PostModel[]> {
 		return this.cms.fetch(
-			`*[_type == 'post' && _lang == $lang] ${postModelQuery}`,
+			`*[_type == 'post' && _lang == $lang] | order(_updatedAt desc) ${postModelQuery}`,
 			{ lang: LocaleDataService.getLocale() }
 		);
 	}
@@ -46,19 +45,15 @@ export class PostDataService {
 	}
 
 	public static async getPostsByCategory(
-		categorySlug: unknown
+		categorySlug: CategorySlug
 	): Promise<PostModel[]> {
-		if (!isValidCategorySlug(categorySlug)) {
-			return [];
-		}
-
 		return this.cms.fetch(
 			`
 			*[_type == 'post' 
 					&& _lang == $lang 
 					&& !isArchived 
 					&& categories[] -> slug.current match $categorySlug
-				] ${postModelQuery}
+				] | order(_updatedAt desc) ${postModelQuery}
 		`,
 			{
 				categorySlug,

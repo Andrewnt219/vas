@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
 }) => {
 	LocaleDataService.setLocale(locale);
 
-	const posts = await PostDataService.getPostsByCategory('orientaion');
+	const posts = await PostDataService.getPostsByCategory('orientation');
 
 	return {
 		props: { data: posts, error: null },

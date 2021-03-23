@@ -3,6 +3,7 @@ import MainLayout from '@layouts/MainLayout';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
 import BlockContent from '@sanity/block-content-to-react';
+import { usePost } from '@src/hooks/usePost';
 import * as ServerUtils from '@utils/server-utils';
 import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
@@ -22,7 +23,13 @@ export const getStaticPaths = ServerUtils.getStaticPostsPathsByCategory('news');
 /* -------------------------------------------------------------------------- */
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const NewsPost = ({ data, error }: Props) => {
+const NewsPost = ({ data: serverData, error: serverError }: Props) => {
+	const { data, error } = usePost(serverData?.post.slug, serverData);
+
+	if (serverError) {
+		return <h1>{serverError.message}</h1>;
+	}
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -32,8 +39,7 @@ const NewsPost = ({ data, error }: Props) => {
 	}
 
 	const { post } = data;
-
-	const displayedHashtag = post.hashtags?.[0];
+	const displayedHashtag = data.post.hashtags?.[0];
 
 	return (
 		<MainLayout title={post.title} tw="pb-0!">

@@ -9,6 +9,7 @@ import MainLayout from '@src/layouts/MainLayout';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
 
+// TODO add an api to fetch posts and swr instead of ssr
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
