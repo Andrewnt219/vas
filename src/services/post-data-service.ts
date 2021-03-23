@@ -1,51 +1,57 @@
+import { Language } from '@data/localization-data';
 import firestore from '@lib/firestore/firestore';
 import { FsPost } from '@lib/firestore/models/FsPost';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
 import firebase from 'firebase-admin';
-import { LocaleDataService } from './locale-data-service';
 
-// TODO what if the translation is not available?
 export class PostDataService {
 	private static collection = firestore.collection('posts');
 	private static cms = localizedSanityClient;
 
 	public static async getPostBySlug(slug: string): Promise<PostModel | null> {
 		return this.cms.fetch(
-			`*[_type == 'post' && slug.current == $slug && _lang == $lang   ] ${postModelQuery}[0]`,
-			{ slug, lang: LocaleDataService.getLocale() }
+			`*[_type == 'post' && slug.current == $slug] ${postModelQuery}[0]`,
+			{ slug }
 		);
 	}
 
-	public static async getPosts(): Promise<PostModel[]> {
+	public static async getPosts(lang: Language): Promise<PostModel[]> {
 		return this.cms.fetch(
 			`*[_type == 'post' && _lang == $lang] | order(_updatedAt desc) ${postModelQuery}`,
-			{ lang: LocaleDataService.getLocale() }
+			{ lang }
 		);
 	}
 
-	public static async getPostSlugs(): Promise<{ slug: string }[]> {
+	public static async getPostSlugs(
+		lang: Language
+	): Promise<{ slug: string }[]> {
 		return this.cms.fetch(
 			`*[_type == 'post'] {
 					"slug": slug.current
-			}`
+			}`,
+			{ lang }
 		);
 	}
 
 	public static async getPostSlugsByCategory(
-		categorySlug: CategorySlug
+		categorySlug: CategorySlug,
+		lang: Language
 	): Promise<{ slug: string }[]> {
 		return this.cms.fetch(
-			`*[_type == 'post' && categories[] -> slug.current match $categorySlug] {
+			`*[_type == 'post' 
+					&& _lang == $lang
+					&& categories[] -> slug.current match $categorySlug] {
 					"slug": slug.current
 			}`,
-			{ categorySlug }
+			{ categorySlug, lang }
 		);
 	}
 
 	public static async getPostsByCategory(
-		categorySlug: CategorySlug
+		categorySlug: CategorySlug,
+		lang: Language
 	): Promise<PostModel[]> {
 		return this.cms.fetch(
 			`
@@ -57,7 +63,7 @@ export class PostDataService {
 		`,
 			{
 				categorySlug,
-				lang: LocaleDataService.getLocale(),
+				lang,
 			}
 		);
 	}
