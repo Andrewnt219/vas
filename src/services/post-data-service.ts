@@ -1,3 +1,4 @@
+import { PostWihMeta } from '@common';
 import { Language } from '@data/localization-data';
 import firestore from '@lib/firestore/firestore';
 import { FsPost } from '@lib/firestore/models/FsPost';
@@ -87,6 +88,41 @@ export class PostDataService {
 				lang,
 			}
 		);
+	}
+
+	public static async getPostsWithMeta(lang: Language): Promise<PostWihMeta[]> {
+		try {
+			const posts = await this.getPosts(lang);
+
+			return await Promise.all(
+				posts.map(async (post) => {
+					const meta = await PostDataService.getFsPost(post.slug);
+					return { ...post, ...meta };
+				})
+			);
+		} catch (error) {
+			console.log(error);
+			return [];
+		}
+	}
+
+	public static async getPostsWithMetaByCategory(
+		categorySlug: CategorySlug,
+		lang: Language
+	): Promise<PostWihMeta[]> {
+		try {
+			const posts = await this.getPostsByCategory(categorySlug, lang);
+
+			return await Promise.all(
+				posts.map(async (post) => {
+					const meta = await PostDataService.getFsPost(post.slug);
+					return { ...post, ...meta };
+				})
+			);
+		} catch (error) {
+			console.log(error);
+			return [];
+		}
 	}
 
 	public static getRelatedPost(postSlug: string, lang: Language) {

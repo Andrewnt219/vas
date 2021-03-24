@@ -7,10 +7,7 @@ import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
 import BlockContent from '@sanity/block-content-to-react';
 import { usePost } from '@src/hooks/usePost';
-import {
-	getStaticPost,
-	getStaticPostsPathsByCategory,
-} from '@utils/server-utils';
+import { postPage } from '@src/server/utils/page-utils';
 import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
 import React from 'react';
@@ -19,9 +16,9 @@ import React from 'react';
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
 
-export const getStaticProps = getStaticPost;
+export const getStaticProps = postPage.getStaticProps;
 
-export const getStaticPaths = getStaticPostsPathsByCategory('events');
+export const getStaticPaths = postPage.getStaticPathsByCategorySlug('events');
 
 /* -------------------------------------------------------------------------- */
 /*                                   CLIENT                                   */

@@ -4,6 +4,7 @@ import EventsPage from '@layouts/EventsPage';
 import MainLayout from '@layouts/MainLayout';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { PostDataService } from '@services/post-data-service';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
@@ -15,15 +16,17 @@ type StaticProps = Response<PostModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	const posts = await PostDataService.getPostsByCategory(
-		'orientation',
-		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
-	);
+	try {
+		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
+		const posts = await PostDataService.getPostsByCategory('orientation', lang);
 
-	return {
-		props: { data: posts, error: null },
-		revalidate: 60,
-	};
+		return {
+			props: { data: posts, error: null },
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */

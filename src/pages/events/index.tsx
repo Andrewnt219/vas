@@ -6,6 +6,7 @@ import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/layouts/MainLayout';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
@@ -17,15 +18,17 @@ type StaticProps = Response<PostModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	const posts = await PostDataService.getPostsByCategory(
-		'events',
-		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
-	);
+	try {
+		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
+		const posts = await PostDataService.getPostsByCategory('events', lang);
 
-	return {
-		props: { data: posts, error: null },
-		revalidate: 60,
-	};
+		return {
+			props: { data: posts, error: null },
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */

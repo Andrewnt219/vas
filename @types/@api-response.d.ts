@@ -7,10 +7,17 @@ declare module '@api-response' {
 		message: string;
 	};
 
-	type Response<Data> = {
-		error: Error | null;
-		data: Data | null;
+	type ErrorResponse = {
+		error: Error;
+		data: null;
 	};
+
+	type SuccessResponse<Data> = {
+		error: null;
+		data: Data;
+	};
+
+	type Response<Data> = ErrorResponse | SuccessResponse<Data>;
 
 	type IncreaseViewResponse = Response<FsPost>;
 	type GetPostResponse = Response<PostWihMeta>;

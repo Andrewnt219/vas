@@ -3,8 +3,8 @@ import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import EventsPage from '@layouts/EventsPage';
 import MainLayout from '@layouts/MainLayout';
 import { PostModel } from '@lib/sanity/models/PostModel';
-import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
@@ -17,17 +17,17 @@ type StaticProps = Response<PostModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	LocaleDataService.setLocale(locale);
+	try {
+		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
+		const posts = await PostDataService.getPostsByCategory('tet', lang);
 
-	const posts = await PostDataService.getPostsByCategory(
-		'tet',
-		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
-	);
-
-	return {
-		props: { data: posts, error: null },
-		revalidate: 60,
-	};
+		return {
+			props: { data: posts, error: null },
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */

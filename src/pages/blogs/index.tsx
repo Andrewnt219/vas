@@ -6,6 +6,7 @@ import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
 import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/layouts/MainLayout';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
@@ -17,22 +18,20 @@ type StaticProps = Response<NewsCardModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	const posts = await PostDataService.getPostsByCategory(
-		'blog',
-		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
-	);
+	try {
+		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
+		const posts = await PostDataService.getPostsWithMetaByCategory(
+			'blog',
+			lang
+		);
 
-	const newsPost: NewsCardModel[] = await Promise.all(
-		posts.map(async (post) => {
-			const meta = await PostDataService.getFsPost(post.slug);
-			return { ...post, ...meta };
-		})
-	);
-
-	return {
-		props: { data: newsPost, error: null },
-		revalidate: 60,
-	};
+		return {
+			props: { data: posts, error: null },
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */
