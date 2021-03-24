@@ -1,45 +1,31 @@
-import { Response } from '@api-response';
 import EventCard from '@components/EventCard/EventCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
-import { DEFAULT_LANGUAGE } from '@data/localization-data';
-import { PostModel } from '@lib/sanity/models/PostModel';
-import { PostDataService } from '@services/post-data-service';
+import { CategorySlug } from '@lib/sanity/models/CategoryModel';
+import { usePostsWithMeta as usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import MainLayout from '@src/layouts/MainLayout';
-import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
-import { isValidLocale } from '@utils/validate-utils';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { categoryPage } from '@src/server/utils/page-utils';
+import { InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
+
+const PAGE_CATEGORY: CategorySlug = 'events';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Response<PostModel[]>;
-
-export const getStaticProps: GetStaticProps<StaticProps> = async ({
-	locale,
-}) => {
-	try {
-		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
-		const posts = await PostDataService.getPostsByCategory('events', lang);
-
-		return {
-			props: { data: posts, error: null },
-			revalidate: 60,
-		};
-	} catch (error) {
-		return errorStatcPropsHandler(error);
-	}
-};
-
+export const getStaticProps = categoryPage.getStaticProps(PAGE_CATEGORY);
 /* -------------------------------------------------------------------------- */
 /*                                   CLIENT                                   */
 /* -------------------------------------------------------------------------- */
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Events: VFC<Props> = ({ data, error }) => {
-	if (error) {
-		return <h1>{error.message}</h1>;
+const Events: VFC<Props> = ({ data: initialData, error: serverError }) => {
+	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+
+	if (serverError || error) {
+		const message = serverError?.message ?? error?.message;
+
+		return <h1>{message}</h1>;
 	}
 
 	if (!data) {

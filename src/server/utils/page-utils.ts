@@ -108,3 +108,27 @@ export const postPage: PostPage = {
 		};
 	},
 };
+
+type CategoryPage = {
+	getStaticProps: (
+		categorySlug: CategorySlug
+	) => GetStaticProps<Response<PostWihMeta[]>>;
+};
+export const categoryPage: CategoryPage = {
+	getStaticProps: (categorySlug) => async ({ locale }) => {
+		try {
+			const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
+			const posts = await PostDataService.getPostsWithMetaByCategory(
+				categorySlug,
+				lang
+			);
+
+			return {
+				props: { data: posts, error: null },
+				revalidate: 60,
+			};
+		} catch (error) {
+			return errorStatcPropsHandler(error);
+		}
+	},
+};

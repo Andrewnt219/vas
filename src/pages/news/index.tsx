@@ -1,40 +1,18 @@
-import { Response } from '@api-response';
 import NewsCard from '@components/NewsCard/NewsCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
-import { DEFAULT_LANGUAGE } from '@data/localization-data';
-import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
-import { PostDataService } from '@services/post-data-service';
+import { CategorySlug } from '@lib/sanity/models/CategoryModel';
+import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import MainLayout from '@src/layouts/MainLayout';
-import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
-import { isValidLocale } from '@utils/validate-utils';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { categoryPage } from '@src/server/utils/page-utils';
+import { InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
 
-// TODO add an api to fetch posts and swr instead of ssr
+const PAGE_CATEGORY: CategorySlug = 'news';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Response<NewsCardModel[]>;
-
-export const getStaticProps: GetStaticProps<StaticProps> = async ({
-	locale,
-}) => {
-	try {
-		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
-		const posts = await PostDataService.getPostsWithMetaByCategory(
-			'news',
-			lang
-		);
-
-		return {
-			props: { data: posts, error: null },
-			revalidate: 60,
-		};
-	} catch (error) {
-		return errorStatcPropsHandler(error);
-	}
-};
+export const getStaticProps = categoryPage.getStaticProps(PAGE_CATEGORY);
 
 /* -------------------------------------------------------------------------- */
 /*                                   CLIENT                                   */
@@ -42,9 +20,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const news: VFC<Props> = ({ data, error }) => {
-	if (error) {
-		return <h1>{error.message}</h1>;
+const News: VFC<Props> = ({ data: initialData, error: serverError }) => {
+	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+
+	if (serverError || error) {
+		const message = serverError?.message ?? error?.message;
+
+		return <h1>{message}</h1>;
 	}
 
 	if (!data) {
@@ -88,4 +70,4 @@ const news: VFC<Props> = ({ data, error }) => {
 	);
 };
 
-export default news;
+export default News;

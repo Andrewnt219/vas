@@ -1,6 +1,6 @@
 import { PostResponse, Response } from '@api-response';
 import { PostModel } from '@lib/sanity/models/PostModel';
-import { toError } from '@utils/convert-utils';
+import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import useSWR from 'swr';
 
@@ -25,7 +25,7 @@ export const useRelatedPosts = (
 	if (error) {
 		return {
 			data: null,
-			error: toError(error),
+			error: { message: getErrorMessage(error) },
 		};
 	}
 

@@ -7,6 +7,7 @@ import { AuthorDataService } from '@services/author-data-service';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
 
+// TODO catch errors in staticProps
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */

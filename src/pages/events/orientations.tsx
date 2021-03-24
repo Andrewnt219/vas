@@ -1,33 +1,17 @@
-import { Response } from '@api-response';
-import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import EventsPage from '@layouts/EventsPage';
 import MainLayout from '@layouts/MainLayout';
-import { PostModel } from '@lib/sanity/models/PostModel';
-import { PostDataService } from '@services/post-data-service';
-import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
-import { isValidLocale } from '@utils/validate-utils';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { CategorySlug } from '@lib/sanity/models/CategoryModel';
+import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
+import { categoryPage } from '@src/server/utils/page-utils';
+import { InferGetStaticPropsType } from 'next';
 import React from 'react';
+
+const PAGE_CATEGORY: CategorySlug = 'orientation';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Response<PostModel[]>;
 
-export const getStaticProps: GetStaticProps<StaticProps> = async ({
-	locale,
-}) => {
-	try {
-		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
-		const posts = await PostDataService.getPostsByCategory('orientation', lang);
-
-		return {
-			props: { data: posts, error: null },
-			revalidate: 60,
-		};
-	} catch (error) {
-		return errorStatcPropsHandler(error);
-	}
-};
+export const getStaticProps = categoryPage.getStaticProps(PAGE_CATEGORY);
 
 /* -------------------------------------------------------------------------- */
 /*                                   CLIENT                                   */
@@ -35,11 +19,14 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function Orientations({ data, error }: Props) {
-	if (error) {
-		return <h1>{error.message}</h1>;
-	}
+function Orientations({ data: intiialData, error: serverError }: Props) {
+	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, intiialData);
 
+	if (serverError || error) {
+		const message = serverError?.message ?? error?.message;
+
+		return <h1>{message}</h1>;
+	}
 	if (!data) {
 		return <h1>Fetching posts...</h1>;
 	}

@@ -1,16 +1,18 @@
 import { PostResponse, Response } from '@api-response';
 import { PostWihMeta } from '@common';
 import { PostModel } from '@lib/sanity/models/PostModel';
-import { toError } from '@utils/convert-utils';
+import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import useSWR from 'swr';
 import { useIncreaseView } from './useIncreaseView';
 import { useRelatedPosts } from './useRelatedPosts';
 
-const postFetcher = (endpoint: string) =>
-	axios.get<PostResponse.GetSlug>(endpoint).then((res) => res.data.data);
-
 type UsePostData = { post: PostWihMeta; relatedPosts: PostModel[] };
+type ApiResponse = PostResponse.GetSlug;
+type FetcherError = AxiosError<ApiResponse>;
+
+const postFetcher = (endpoint: string) =>
+	axios.get<ApiResponse>(endpoint).then((res) => res.data.data);
 
 export const usePost = (
 	postSlug: string | undefined,
@@ -24,8 +26,8 @@ export const usePost = (
 	);
 
 	const { data: postData, error: postError } = useSWR<
-		PostWihMeta | null,
-		AxiosError<PostResponse.GetRelatedPost>
+		UsePostData['post'] | null,
+		FetcherError
 	>(postSlug ? `/api/posts/${postSlug}` : null, postFetcher, {
 		initialData: initialData?.post,
 	});
@@ -40,7 +42,7 @@ export const usePost = (
 	if (postError) {
 		return {
 			data: null,
-			error: toError(postError),
+			error: { message: getErrorMessage(postError) },
 		};
 	}
 
