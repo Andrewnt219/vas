@@ -16,11 +16,10 @@ export const usePost = (
 	postSlug: string | undefined,
 	initialData?: UsePostData | null
 ): Response<UsePostData> => {
-	const categorySlug = initialData?.post.categories[0]?.slug;
-
 	const views = useIncreaseView(postSlug);
+
 	const { data: relatedPosts, error: relatedPostError } = useRelatedPosts(
-		categorySlug,
+		initialData?.post.slug,
 		initialData?.relatedPosts
 	);
 

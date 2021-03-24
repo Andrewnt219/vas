@@ -5,21 +5,42 @@ import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { PostModel, postModelQuery } from '@lib/sanity/models/PostModel';
 import { localizedSanityClient } from '@lib/sanity/sanity-clients';
 import firebase from 'firebase-admin';
+import { LocaleDataService } from './locale-data-service';
+
+const match = {
+	post: "_type == 'post'",
+	categorySlug: 'categories[] -> slug.current match $categorySlug',
+	notDraft: "!(_id in path('drafts.**'))",
+	notArchived: '!isArchived',
+	slug: 'slug.current == $slug',
+	notSlug: 'slug.current != $slug',
+	lang: '_lang == $lang',
+	combine: (...matchers: string[]) => matchers.join('&&'),
+};
+
+const order = {
+	updateAtDesc: 'order(_updatedAt desc)',
+};
 
 export class PostDataService {
-	private static collection = firestore.collection('posts');
-	private static cms = localizedSanityClient;
+	private static readonly BASE_QUERY = match.combine(
+		match.post,
+		match.notArchived,
+		match.notDraft
+	);
+	private static readonly collection = firestore.collection('posts');
+	private static readonly cms = localizedSanityClient;
 
 	public static async getPostBySlug(slug: string): Promise<PostModel | null> {
 		return this.cms.fetch(
-			`*[_type == 'post' && slug.current == $slug] ${postModelQuery}[0]`,
+			`*[${this.BASE_QUERY} && ${match.slug}] ${postModelQuery}[0]`,
 			{ slug }
 		);
 	}
 
 	public static async getPosts(lang: Language): Promise<PostModel[]> {
 		return this.cms.fetch(
-			`*[_type == 'post' && _lang == $lang] | order(_updatedAt desc) ${postModelQuery}`,
+			`*[${this.BASE_QUERY} && ${match.lang}] | ${order.updateAtDesc} ${postModelQuery}`,
 			{ lang }
 		);
 	}
@@ -27,8 +48,10 @@ export class PostDataService {
 	public static async getPostSlugs(
 		lang: Language
 	): Promise<{ slug: string }[]> {
+		LocaleDataService.setLocale(lang);
+
 		return this.cms.fetch(
-			`*[_type == 'post'] {
+			`*[${match.combine(this.BASE_QUERY, match.lang)} ] {
 					"slug": slug.current
 			}`,
 			{ lang }
@@ -40,9 +63,7 @@ export class PostDataService {
 		lang: Language
 	): Promise<{ slug: string }[]> {
 		return this.cms.fetch(
-			`*[_type == 'post' 
-					&& _lang == $lang
-					&& categories[] -> slug.current match $categorySlug] {
+			`*[${match.combine(this.BASE_QUERY, match.categorySlug)}] {
 					"slug": slug.current
 			}`,
 			{ categorySlug, lang }
@@ -53,16 +74,39 @@ export class PostDataService {
 		categorySlug: CategorySlug,
 		lang: Language
 	): Promise<PostModel[]> {
+		LocaleDataService.setLocale(lang);
+
 		return this.cms.fetch(
 			`
-			*[_type == 'post' 
-					&& _lang == $lang 
-					&& !isArchived 
-					&& categories[] -> slug.current match $categorySlug
-				] | order(_updatedAt desc) ${postModelQuery}
+			*[${match.combine(this.BASE_QUERY, match.lang, match.categorySlug)}] | ${
+				order.updateAtDesc
+			} ${postModelQuery}
 		`,
 			{
 				categorySlug,
+				lang,
+			}
+		);
+	}
+
+	public static getRelatedPost(postSlug: string, lang: Language) {
+		LocaleDataService.setLocale(lang);
+
+		// Weird bug cannot directly get value of reference like this `[0].categories[0]->slug.current`
+		// Freaking genius btw
+		const getCategorySlugOfPost = `
+			*[_type == 'post' && slug.current == $slug][0] 
+				{"categorySlug": categories[0]->slug.current}.categorySlug
+		`;
+
+		return this.cms.fetch(
+			`
+			*[${match.combine(this.BASE_QUERY, match.lang, match.notSlug)}
+				&& categories[] -> slug.current match ${getCategorySlugOfPost}					
+			] | ${order.updateAtDesc} ${postModelQuery}
+		`,
+			{
+				slug: postSlug,
 				lang,
 			}
 		);

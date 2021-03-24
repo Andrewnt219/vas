@@ -2,10 +2,11 @@ import { Response } from '@api-response';
 import NewsCard from '@components/NewsCard/NewsCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
+import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
-import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/layouts/MainLayout';
+import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
 /* -------------------------------------------------------------------------- */
@@ -16,9 +17,10 @@ type StaticProps = Response<NewsCardModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	LocaleDataService.setLocale(locale);
-
-	const posts = await PostDataService.getPostsByCategory('blog');
+	const posts = await PostDataService.getPostsByCategory(
+		'blog',
+		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
+	);
 
 	const newsPost: NewsCardModel[] = await Promise.all(
 		posts.map(async (post) => {

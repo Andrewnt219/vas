@@ -2,10 +2,11 @@ import { Response } from '@api-response';
 import EventCard from '@components/EventCard/EventCard';
 import PageBanner from '@components/PageBanner/PageBanner';
 import Pagination from '@components/Pagination/Pagination';
+import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostModel } from '@lib/sanity/models/PostModel';
-import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
 import MainLayout from '@src/layouts/MainLayout';
+import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { VFC } from 'react';
 /* -------------------------------------------------------------------------- */
@@ -16,9 +17,10 @@ type StaticProps = Response<PostModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async ({
 	locale,
 }) => {
-	LocaleDataService.setLocale(locale);
-
-	const posts = await PostDataService.getPostsByCategory('events');
+	const posts = await PostDataService.getPostsByCategory(
+		'events',
+		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
+	);
 
 	return {
 		props: { data: posts, error: null },

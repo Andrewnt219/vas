@@ -1,9 +1,11 @@
 import { Response } from '@api-response';
+import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import EventsPage from '@layouts/EventsPage';
 import MainLayout from '@layouts/MainLayout';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { LocaleDataService } from '@services/locale-data-service';
 import { PostDataService } from '@services/post-data-service';
+import { isValidLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
 
@@ -17,7 +19,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
 }) => {
 	LocaleDataService.setLocale(locale);
 
-	const posts = await PostDataService.getPostsByCategory('tet');
+	const posts = await PostDataService.getPostsByCategory(
+		'tet',
+		isValidLocale(locale) ? locale : DEFAULT_LANGUAGE
+	);
 
 	return {
 		props: { data: posts, error: null },

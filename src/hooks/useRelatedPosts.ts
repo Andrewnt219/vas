@@ -4,23 +4,23 @@ import { toError } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import useSWR from 'swr';
 
-const fetcher = (endpoint: string, categorySlug: string) =>
+const fetcher = (endpoint: string, postSlug: string) =>
 	axios
 		.get<RelatedPostResponse>(endpoint, {
 			params: {
-				categorySlug,
+				postSlug,
 			},
 		})
 		.then((res) => res.data.data);
 
 export const useRelatedPosts = (
-	categorySlug: string | undefined,
+	postSlug: string | undefined,
 	initialData?: PostModel[]
 ): Response<PostModel[]> => {
 	const { data, error } = useSWR<
 		PostModel[] | null,
 		AxiosError<RelatedPostResponse>
-	>(['/api/posts/relatedPosts', categorySlug], fetcher, { initialData });
+	>(['/api/posts/relatedPosts', postSlug], fetcher, { initialData });
 
 	if (error) {
 		return {
