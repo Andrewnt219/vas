@@ -25,7 +25,7 @@ function NewsCard({ className, data }: Props) {
 					<NextLink href={`/${controller}/posts/${data.slug}`}>
 						<a>
 							<EnhancedImage
-								tw="img-absolute"
+								tw="img-absolute absolute!"
 								css={scaleImageCss}
 								src={data.thumbnail.url}
 								lqip={data.thumbnail.metadata.lqip}

@@ -24,7 +24,7 @@ function EventCard({ className, data }: Props) {
 					<NextLink href={`/events/posts/${data.slug}`}>
 						<a>
 							<EnhancedImage
-								tw="img-absolute"
+								tw="img-absolute absolute!"
 								src={data.thumbnail.url}
 								lqip={data.thumbnail.metadata.lqip}
 								alt={data.thumbnail.alt ?? ''}

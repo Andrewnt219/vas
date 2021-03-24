@@ -50,7 +50,7 @@ const EventPost = ({ data: serverData, error: serverError }: Props) => {
 
 				<Post.Wrapper tw="relative pb-2xs my-10 md:my-16 xl:(my-20 transform scale-x-125)">
 					<EnhancedImage
-						tw="img-absolute"
+						tw="img-absolute absolute!"
 						src={post.thumbnail.url}
 						lqip={post.thumbnail.metadata.lqip}
 						alt={post.thumbnail.alt ?? 'Alt text is unfortunately missing'}

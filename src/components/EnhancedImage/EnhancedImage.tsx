@@ -11,6 +11,7 @@ type Props = ImageProps & {
 /**
  * @description Enhanced local images loading with next-optimized-images
  */
+// NOTE there is an error where relative overwrites absolute from img-absolute in deployed version
 const EnhancedImage: VFC<Props> = ({ className, lqip, ...imageProps }) => {
 	const lqipRef = useRef<HTMLImageElement | null>(null);
 

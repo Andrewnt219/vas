@@ -89,8 +89,8 @@ function commons({ addUtilities }) {
 	});
 }
 
-function fonts({ addComponents, theme }) {
-	addComponents({
+function fonts({ addUtilities, theme }) {
+	addUtilities({
 		'.text-smaller': {
 			fontSize: 'smaller',
 		},
@@ -116,8 +116,8 @@ function fonts({ addComponents, theme }) {
 	});
 }
 
-function centers({ addComponents }) {
-	addComponents({
+function centers({ addUtilities }) {
+	addUtilities({
 		'.position-center': {
 			position: 'absolute',
 			top: '50%',
@@ -132,8 +132,8 @@ function centers({ addComponents }) {
 	});
 }
 
-function grid({ addComponents }) {
-	addComponents({
+function grid({ addUtilities }) {
+	addUtilities({
 		'.grid-p-sm': {
 			'grid-column': '2/12',
 		},
@@ -146,8 +146,8 @@ function grid({ addComponents }) {
 	});
 }
 
-function sizing({ addComponents }) {
-	addComponents({
+function sizing({ addUtilities }) {
+	addUtilities({
 		'.absolute-cover': {
 			position: 'absolute',
 			top: 0,
@@ -156,7 +156,7 @@ function sizing({ addComponents }) {
 			height: '100%',
 		},
 		'.img-absolute': {
-			position: 'absolute !important',
+			position: 'absolute',
 			top: 0,
 			left: 0,
 			width: '100%',

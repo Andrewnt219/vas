@@ -11,7 +11,7 @@ function Post({ data }: { data: Post }) {
 		<article>
 			<div tw="relative pb-xs md:pb-sm">
 				<EnhancedImage
-					tw="img-absolute"
+					tw="img-absolute absolute!"
 					lqip={thumbnail.metadata.lqip}
 					src={thumbnail.url}
 					alt={thumbnail.alt ?? 'A thumbnail for the post'}

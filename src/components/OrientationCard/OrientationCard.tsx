@@ -22,7 +22,7 @@ function OrientationCard({ className, data, isMain }: Props) {
 						<a>
 							<EnhancedImage
 								css={scaleImageCss}
-								tw="img-absolute"
+								tw="img-absolute absolute!"
 								src={data.thumbnail.url}
 								lqip={data.thumbnail.metadata.lqip}
 								alt={data.thumbnail.alt ?? ''}
