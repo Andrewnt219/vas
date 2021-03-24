@@ -46,9 +46,16 @@ export const usePost = (
 		};
 	}
 
-	if (!postData || !views || !relatedPosts) {
+	if (!postData || !relatedPosts) {
 		return {
 			data: null,
+			error: null,
+		};
+	}
+
+	if (!views) {
+		return {
+			data: { post: postData, relatedPosts: relatedPosts },
 			error: null,
 		};
 	}

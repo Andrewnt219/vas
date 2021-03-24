@@ -46,6 +46,7 @@ export default {
 		seoFields,
 	],
 
+	// TODO: preview categories
 	preview: {
 		select: {
 			title: titleField.name,
