@@ -6,6 +6,7 @@ import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
 import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import { AuthorDataService } from '@services/author-data-service';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
@@ -15,15 +16,19 @@ import tw, { styled } from 'twin.macro';
 /* -------------------------------------------------------------------------- */
 type StaticProps = Response<AuthorModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-	const authors = await AuthorDataService.getActiveAuthors();
+	try {
+		const authors = await AuthorDataService.getActiveAuthors();
 
-	return {
-		props: {
-			data: authors,
-			error: null,
-		},
-		revalidate: 60,
-	};
+		return {
+			props: {
+				data: authors,
+				error: null,
+			},
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */

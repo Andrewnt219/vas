@@ -4,24 +4,28 @@ import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
 import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import { AuthorDataService } from '@services/author-data-service';
+import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import React from 'react';
 
-// TODO catch errors in staticProps
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
 type StaticProps = Response<AuthorModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-	const authors = await AuthorDataService.getAuthors();
+	try {
+		const authors = await AuthorDataService.getAuthors();
 
-	return {
-		props: {
-			data: authors,
-			error: null,
-		},
-		revalidate: 60,
-	};
+		return {
+			props: {
+				data: authors,
+				error: null,
+			},
+			revalidate: 60,
+		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
+	}
 };
 
 /* -------------------------------------------------------------------------- */
