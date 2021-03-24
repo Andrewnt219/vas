@@ -1,4 +1,4 @@
-import { GetPostResponse, Response } from '@api-response';
+import { PostResponse, Response } from '@api-response';
 import { PostDataService } from '@services/post-data-service';
 import { errorHandler } from '@src/server/utils/api-utils';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
@@ -24,7 +24,7 @@ const handler: NextApiHandler<Response<any>> = (req, res) => {
 
 async function getHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<GetPostResponse>
+	res: NextApiResponse<PostResponse.GetSlug>
 ) {
 	const { slug } = req.query;
 

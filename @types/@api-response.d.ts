@@ -2,7 +2,6 @@ declare module '@api-response' {
 	import { PostWihMeta } from '@common';
 	import { FsPost } from '@lib/firestore/models/FsPost';
 	import { PostModel } from '@lib/sanity/models/PostModel';
-
 	type Error = {
 		message: string;
 	};
@@ -17,10 +16,19 @@ declare module '@api-response' {
 		data: Data;
 	};
 
-	type Response<Data> = ErrorResponse | SuccessResponse<Data>;
+	type LoadingResponse = {
+		data: null;
+		error: null;
+	};
 
-	type IncreaseViewResponse = Response<FsPost>;
-	type GetPostResponse = Response<PostWihMeta>;
+	type Response<Data> = LoadingResponse | ErrorResponse | SuccessResponse<Data>;
 
-	type RelatedPostResponse = Response<PostModel[]>;
+	namespace PostResponse {
+		type PatchIncreaseView = Response<FsPost>;
+		type GetSlug = Response<PostWihMeta>;
+
+		type GetRelatedPost = Response<PostModel[]>;
+
+		type GetIndex = Response<PostWihMeta[]>;
+	}
 }

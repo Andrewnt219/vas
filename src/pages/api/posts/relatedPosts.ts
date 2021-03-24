@@ -1,11 +1,14 @@
-import { RelatedPostResponse } from '@api-response';
+import { PostResponse } from '@api-response';
 import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostDataService } from '@services/post-data-service';
 import { errorHandler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { NextApiHandler } from 'next';
 
-const handler: NextApiHandler<RelatedPostResponse> = async (req, res) => {
+const handler: NextApiHandler<PostResponse.GetRelatedPost> = async (
+	req,
+	res
+) => {
 	try {
 		if (req.method !== 'GET') {
 			return res.status(405).json({
