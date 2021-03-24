@@ -1,4 +1,5 @@
 {
+	"fallback": "...",
 	"navbar": {
 		"home": "Home",
 		"about-us": {

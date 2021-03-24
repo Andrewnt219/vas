@@ -42,7 +42,7 @@ const DropDownItem: VFC<Props> = ({ data }) => {
 					isActive={isActive}
 					onKeyDownCapture={keyDownCaptureHandler}
 				>
-					{t(`navbar.${i18nKey}`, null, { fallback: '...' })}
+					{t(`navbar.${i18nKey}`, null, { fallback: 'common:fallback' })}
 				</CustomMenuLink>
 			</NextLink>
 		</>

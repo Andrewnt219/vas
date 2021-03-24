@@ -11,7 +11,7 @@ function Slider({ className }: Props) {
 			{routes.map((route) => (
 				<h1 key={route.href.toString()}>
 					{' '}
-					{t(`navbar.${route.i18nKey}`, null, { fallback: '...' })}
+					{t(`navbar.${route.i18nKey}`, null, { fallback: 'common:fallback' })}
 				</h1>
 			))}
 		</div>

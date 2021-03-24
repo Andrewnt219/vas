@@ -29,7 +29,7 @@ const MenuItem: VFC<Props> = ({ data }) => {
 			)}
 			<NextLink href={href} passHref>
 				<StyledMenuLink>
-					{t(`navbar.${i18nKey}`, null, { fallback: '...' })}
+					{t(`navbar.${i18nKey}`, null, { fallback: 'common:fallback' })}
 				</StyledMenuLink>
 			</NextLink>
 		</div>
