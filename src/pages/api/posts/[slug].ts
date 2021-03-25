@@ -1,26 +1,7 @@
-import { PostResponse, Response } from '@api-response';
+import { PostResponse } from '@api-response';
 import { PostDataService } from '@services/post-data-service';
-import { errorHandler } from '@src/server/utils/api-utils';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-
-const handler: NextApiHandler<Response<any>> = (req, res) => {
-	try {
-		switch (req.method?.toLowerCase()) {
-			case 'get':
-				return getHandler(req, res);
-
-			default:
-				return res.status(405).json({
-					data: null,
-					error: {
-						message: 'Method Not Allowed',
-					},
-				});
-		}
-	} catch (error) {
-		errorHandler(req, res, error);
-	}
-};
+import { apiHanler } from '@src/server/utils/api-utils';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 async function getHandler(
 	req: NextApiRequest,
@@ -55,4 +36,4 @@ async function getHandler(
 	return res.status(200).json({ data: { ...postMeta, ...post }, error: null });
 }
 
-export default handler;
+export default apiHanler({ get: getHandler });

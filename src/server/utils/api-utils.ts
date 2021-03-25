@@ -1,6 +1,7 @@
-import { ErrorResponse } from '@api-response';
+import { ErrorResponse, Response } from '@api-response';
+import { Handler, isValidHttpMethod } from '@utils/validate-utils';
 import cookie from 'cookie';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 export function runMiddleware(
 	req: NextApiRequest,
@@ -18,6 +19,7 @@ export function runMiddleware(
 	});
 }
 
+/* -------------------------------------------------------------------------- */
 export function errorHandler(
 	req: NextApiRequest,
 	res: NextApiResponse,
@@ -30,11 +32,49 @@ export function errorHandler(
 		error: { message: 'Something went wrong' },
 	};
 
+	if (error instanceof Error) {
+		response.error = error;
+	}
+
 	return res.status(500).json(response);
 }
 
+/* -------------------------------------------------------------------------- */
 export function getLocaleCookie(req: NextApiRequest): string {
 	const { NEXT_LOCALE } = cookie.parse(req.headers.cookie ?? '');
 
 	return NEXT_LOCALE ?? '';
 }
+
+/* -------------------------------------------------------------------------- */
+/**
+ * Wrap handler in try catch and check if the incoming request is allowed. I'm proud of this.
+ * @example
+ * const get = <T>(req: NextApiRequest, res: NextApiResponse<T>) => {...}
+ * export default apiHandler({ get });
+ */
+export const apiHanler = <T>(
+	handlers: Partial<Record<Handler, NextApiHandler<Response<T>>>>
+) => (req: NextApiRequest, res: NextApiResponse<Response<T>>) => {
+	try {
+		const method = req.method?.toLowerCase();
+		if (!isValidHttpMethod(method)) {
+			return res.status(400).json({
+				data: null,
+				error: { message: 'Unexpected HTTP method' },
+			});
+		}
+
+		const handler = handlers[method];
+		if (!handler) {
+			return res.status(403).json({
+				data: null,
+				error: { message: 'Method Not Allowed' },
+			});
+		}
+
+		return handler(req, res);
+	} catch (error) {
+		return errorHandler(req, res, error);
+	}
+};

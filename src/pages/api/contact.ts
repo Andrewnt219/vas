@@ -1,17 +1,11 @@
 import { Response } from '@api-response';
 import sgMail from '@lib/sendgrid';
 import { MailDataRequired } from '@sendgrid/mail';
+import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiHandler } from 'next';
 
 // TODO sendgrid
-const handler: NextApiHandler<Response<string>> = async (req, res) => {
-	if (req.method !== 'POST') {
-		return res.status(405).json({
-			data: null,
-			error: { message: 'Only GET' },
-		});
-	}
-
+const post: NextApiHandler<Response<string>> = async (req, res) => {
 	const { email, subject, message } = req.body;
 
 	if (!email || !subject || !message) {
@@ -39,4 +33,4 @@ const handler: NextApiHandler<Response<string>> = async (req, res) => {
 	}
 };
 
-export default handler;
+export default apiHanler({ post });
