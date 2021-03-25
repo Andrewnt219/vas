@@ -4,8 +4,7 @@ export const slugField = {
 	type: 'slug',
 	description: 'Một khi đã publish, hỏi developers trước khi chỉnh ô này',
 	options: {
-		source: (doc, options) => {
-			console.log({ doc, options });
+		source: (doc) => {
 			if (doc._lang) return `${doc._lang}-${doc.title}`;
 
 			return doc.title;

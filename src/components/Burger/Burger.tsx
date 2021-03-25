@@ -30,7 +30,7 @@ const Burger: VFC<Props> = ({ className }) => {
 type LineProps = {};
 const Line = styled.div<LineProps>`
 	${tw`w-full h-1 rounded-full md:h-1.5`}
-	${tw`bg-black dark:bg-white `}
+	${tw`bg-black `}
   ${tw`transition`}
   transform-origin: .3rem;
 `;

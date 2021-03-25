@@ -27,7 +27,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const EventPost = ({ data: serverData, error: serverError }: Props) => {
 	const { data, error } = usePost(serverData?.post.slug, serverData);
-	console.log({ data });
+
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
 

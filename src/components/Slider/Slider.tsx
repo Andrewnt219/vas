@@ -11,7 +11,7 @@ type Props = { className?: string };
 function Slider({ className }: Props) {
 	return (
 		<motion.div
-			tw="fixed top-0 left-0 w-full h-full bg-white overflow-y-auto flex flex-col md:(text-2xl) "
+			tw="fixed top-0 left-0 w-screen h-screen bg-white overflow-y-auto flex flex-col md:(text-2xl) "
 			css={css`
 				will-change: transform;
 			`}
@@ -25,7 +25,8 @@ function Slider({ className }: Props) {
 				<Logo tw="w-1/3 mx-auto block" />
 			</div>
 
-			<ul className={className} tw="p-6 md:(p-10)">
+			{/* Weird bug, must have overflow at both places */}
+			<ul className={className} tw="p-6 md:(p-10) overflow-y-auto">
 				{routes.map((route) => (
 					<li key={route.i18nKey}>
 						<SliderItem tw="p-2 font-medium md:(p-5)" data={route} />
