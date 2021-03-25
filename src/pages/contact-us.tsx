@@ -2,7 +2,6 @@ import ContactForm from '@components/ContactForm/ContactForm';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import MainLayout from '@layouts/MainLayout';
 import React, { VFC } from 'react';
-import tw, { styled } from 'twin.macro';
 
 type Props = {};
 
@@ -15,7 +14,7 @@ const ContactUs: VFC<Props> = ({}) => {
 			>
 				Let&apos;s connect
 			</h1>
-			<div tw="hidden xl:(block top-20 relative z-10 col-span-7 row-start-2 row-end-3 self-end)">
+			<div tw="col-span-full xl:(block top-20 relative z-10 col-span-7 row-start-2 row-end-3 self-end)">
 				<EnhancedImage
 					src={require('images/contact-us.png')}
 					width={4072}
@@ -25,13 +24,9 @@ const ContactUs: VFC<Props> = ({}) => {
 					alt="3 friends who are opens for communication"
 				/>
 			</div>
-			<ContactForm tw="row-span-2 grid-p-sm  relative  xl:( -left-32 col-span-5 z-20 )" />
+			<ContactForm tw="mt-10 row-span-2 grid-p-sm  relative  xl:(mt-0 -left-32 col-span-5 z-20 )" />
 		</MainLayout>
 	);
 };
 
-type ContainerProps = {};
-const Container = styled.div<ContainerProps>`
-	${tw``}
-`;
 export default ContactUs;
