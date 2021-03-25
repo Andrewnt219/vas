@@ -4,7 +4,7 @@ import { typographyStyles } from './_typographyStyles';
 export default createGlobalStyle`
   ${typographyStyles}       
 
-  html, body {    
+  html, body {        
     scroll-behavior: smooth;
     ${tw`bg-gray-400`}
   }

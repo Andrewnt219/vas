@@ -1,4 +1,5 @@
 import Appbar from '@components/Appbar/Appbar';
+import { SliderProvider } from '@components/Appbar/SliderContext';
 import Footer from '@components/Footer/Footer';
 import { useLocaleSerivce } from '@src/hooks/useLocaleService';
 import GlobalStyles from '@styles/GlobalStyles';
@@ -10,14 +11,14 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 	useLocaleSerivce();
 
 	return (
-		<>
+		<SliderProvider>
 			<TwGlobalStyles />
 			<GlobalStyles />
 
 			<Appbar />
 			<Component {...pageProps} />
 			<Footer />
-		</>
+		</SliderProvider>
 	);
 }
 

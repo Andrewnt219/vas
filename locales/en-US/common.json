@@ -3,11 +3,13 @@
 	"navbar": {
 		"home": "Home",
 		"about-us": {
+			"text": "About us",
 			"index": "What is VAS",
 			"partners": "Our Partners",
 			"members": "Members"
 		},
 		"events": {
+			"text": "Events",
 			"index": "Events",
 			"orientations": "Orientations",
 			"tet": "Tet"

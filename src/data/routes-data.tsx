@@ -27,7 +27,7 @@ export const routes: (Route | Dropdown)[] = [
 	},
 	{
 		type: 'dropdown',
-		i18nKey: 'about-us.index',
+		i18nKey: 'about-us.text',
 		href: '/about-us',
 
 		children: [
@@ -47,7 +47,7 @@ export const routes: (Route | Dropdown)[] = [
 	},
 	{
 		type: 'dropdown',
-		i18nKey: 'events.index',
+		i18nKey: 'events.text',
 		exact: false,
 		href: '/events',
 		children: [
