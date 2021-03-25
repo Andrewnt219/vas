@@ -4,6 +4,7 @@ import Slider from '@components/Slider/Slider';
 import { routes } from '@src/data/routes-data';
 import { AnimatePresence } from 'framer-motion';
 import React, { useEffect, VFC } from 'react';
+import { css } from 'twin.macro';
 import MenuItemSet from './components/MenuItemSet/MenuItemSet';
 import { useSlider } from './SliderContext';
 
@@ -26,7 +27,13 @@ const Appbar: VFC<Props> = ({}) => {
 	}, [isActive]);
 
 	return (
-		<header tw="col-span-full z-40" role="banner">
+		<header
+			tw="col-span-full z-40 sticky top-0 bg-white"
+			role="banner"
+			css={css`
+				will-change: transform;
+			`}
+		>
 			<nav tw="grid grid-cols-12">
 				<a tw="sr-only focus:not-sr-only" href="#skip">
 					Skip to content

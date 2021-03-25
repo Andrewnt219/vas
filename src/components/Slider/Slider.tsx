@@ -3,6 +3,7 @@ import Logo from '@components/Logo/Logo';
 import { routes } from '@data/routes-data';
 import { motion, Transition, Variants } from 'framer-motion';
 import React from 'react';
+import { css } from 'twin.macro';
 import SliderItem from './components/SliderItem/SliderItem';
 
 type Props = { className?: string };
@@ -10,7 +11,10 @@ type Props = { className?: string };
 function Slider({ className }: Props) {
 	return (
 		<motion.div
-			tw="fixed top-0 left-0 w-full h-full bg-white overflow-y-auto flex flex-col md:(text-2xl)"
+			tw="fixed top-0 left-0 w-full h-full bg-white overflow-y-auto flex flex-col md:(text-2xl) "
+			css={css`
+				will-change: transform;
+			`}
 			variants={variants}
 			animate="visible"
 			initial="hidden"
