@@ -31,9 +31,6 @@ module.exports = {
 			current: 'currentColor',
 		},
 		extend: {
-			zIndex: {
-				'-10': '-10',
-			},
 			borderRadius: {
 				'4xl': '3.125rem',
 			},

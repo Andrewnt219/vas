@@ -58,7 +58,6 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					title: 'What is VAS ?',
 				}}
 			/>
-
 			<Section tw="bg-gray-100 grid grid-cols-12">
 				<div tw="grid-p-sm xl:grid-p-md">
 					<header>
@@ -76,7 +75,6 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					</header>
 				</div>
 			</Section>
-
 			<Section tw="grid grid-cols-12 relative">
 				<div tw="grid-p-sm xl:(grid-p-md)">
 					<header>
@@ -276,7 +274,6 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					/>
 				</div>
 			</Section>
-
 			<Section tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-100 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) ">
 				<header>
 					<SectionH1>Our team</SectionH1>
@@ -291,13 +288,16 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 				</ul>
 			</Section>
 
-			{/* TODO fix the after notshowing because of z0index */}
-			<NextLink href="/about-us/members" passHref>
-				<a tw="col-span-full mx-auto  py-1 px-3 border-2 border-black bg-white relative  after:(content -z-10 absolute w-full h-full top-1/4 -left-2 border-2 border-black) transition-colors hocus:(outline-none bg-primary text-white) xl:(py-3 px-6 text-2xl)">
-					<span>And more...</span>
-					<span tw="text-larger inline-block ml-8 md:ml-24 xl:ml-36">&gt;</span>
-				</a>
-			</NextLink>
+			<div tw="col-span-full mx-auto relative before:(content absolute w-full h-full top-2 -left-2 border-2 border-black)  ">
+				<NextLink href="/about-us/members" passHref>
+					<a tw="relative block z-10 border-2 border-black bg-white py-1 px-3 transition-colors hocus:(outline-none bg-primary text-white)  xl:(py-3 px-6 text-2xl)">
+						And more...{' '}
+						<span tw="text-larger inline-block ml-6 md:ml-20 xl:ml-32">
+							&gt;
+						</span>
+					</a>
+				</NextLink>
+			</div>
 		</MainLayout>
 	);
 };
