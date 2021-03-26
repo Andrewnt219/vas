@@ -1,11 +1,11 @@
-import { PostResponse } from '@api-response';
+import { PostResult } from '@api-response';
 import { PostDataService } from '@services/post-data-service';
 import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function patchHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<PostResponse.PatchIncreaseView>
+	res: NextApiResponse<PostResult.PatchIncreaseView>
 ) {
 	const { slug } = req.body;
 

@@ -1,11 +1,11 @@
-import { Response } from '@api-response';
+import { Result } from '@api-response';
 import sgMail from '@lib/sendgrid';
 import { MailDataRequired } from '@sendgrid/mail';
 import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiHandler } from 'next';
 
 // TODO sendgrid
-const post: NextApiHandler<Response<string>> = async (req, res) => {
+const post: NextApiHandler<Result<string>> = async (req, res) => {
 	const { email, subject, message } = req.body;
 
 	if (!email || !subject || !message) {

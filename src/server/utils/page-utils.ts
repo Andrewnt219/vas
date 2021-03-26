@@ -1,4 +1,4 @@
-import { ErrorResponse, Response } from '@api-response';
+import { Result, ResultError } from '@api-response';
 import { PostWihMeta } from '@common';
 import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
@@ -9,7 +9,7 @@ import { isValidCategorySlug, isValidLocale } from '../../utils/validate-utils';
 
 export function errorStatcPropsHandler(
 	error: unknown
-): GetStaticPropsResult<ErrorResponse> {
+): GetStaticPropsResult<ResultError> {
 	console.log(error);
 
 	return {
@@ -23,7 +23,7 @@ export function errorStatcPropsHandler(
 
 type PostPage = {
 	getStaticProps: GetStaticProps<
-		Response<{
+		Result<{
 			post: PostWihMeta;
 			relatedPosts: PostModel[];
 		}>,
@@ -112,7 +112,7 @@ export const postPage: PostPage = {
 type CategoryPage = {
 	getStaticProps: (
 		categorySlug: CategorySlug
-	) => GetStaticProps<Response<PostWihMeta[]>>;
+	) => GetStaticProps<Result<PostWihMeta[]>>;
 };
 export const categoryPage: CategoryPage = {
 	getStaticProps: (categorySlug) => async ({ locale }) => {

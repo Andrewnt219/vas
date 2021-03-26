@@ -1,11 +1,11 @@
-import { PostResponse } from '@api-response';
+import { PostResult } from '@api-response';
 import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostDataService } from '@services/post-data-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { isValidLocale } from '@utils/validate-utils';
 import { NextApiHandler } from 'next';
 
-const get: NextApiHandler<PostResponse.GetRelatedPost> = async (req, res) => {
+const get: NextApiHandler<PostResult.GetRelatedPost> = async (req, res) => {
 	const { postSlug } = req.query;
 	const NEXT_LOCALE = getLocaleCookie(req);
 

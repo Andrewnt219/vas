@@ -6,29 +6,22 @@ declare module '@api-response' {
 		message: string;
 	};
 
-	type ErrorResponse = {
+	type ResultError = {
 		error: Error;
 		data: null;
 	};
 
-	type SuccessResponse<Data> = {
-		error: null;
-		data: Data;
+	type Result<Data> = {
+		error: Error | null;
+		data: Data | null;
 	};
 
-	type LoadingResponse = {
-		data: null;
-		error: null;
-	};
+	namespace PostResult {
+		type PatchIncreaseView = Result<FsPost>;
+		type GetSlug = Result<PostWihMeta>;
 
-	type Response<Data> = LoadingResponse | ErrorResponse | SuccessResponse<Data>;
+		type GetRelatedPost = Result<PostModel[]>;
 
-	namespace PostResponse {
-		type PatchIncreaseView = Response<FsPost>;
-		type GetSlug = Response<PostWihMeta>;
-
-		type GetRelatedPost = Response<PostModel[]>;
-
-		type GetIndex = Response<PostWihMeta[]>;
+		type GetIndex = Result<PostWihMeta[]>;
 	}
 }

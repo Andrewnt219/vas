@@ -1,4 +1,4 @@
-import { Response } from '@api-response';
+import { Result } from '@api-response';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
 import PageBanner from '@components/PageBanner/PageBanner';
@@ -14,7 +14,7 @@ import tw, { styled } from 'twin.macro';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Response<AuthorModel[]>;
+type StaticProps = Result<AuthorModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 	try {
 		const authors = await AuthorDataService.getActiveAuthors();

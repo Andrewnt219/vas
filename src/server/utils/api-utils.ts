@@ -1,4 +1,4 @@
-import { ErrorResponse, Response } from '@api-response';
+import { Result, ResultError } from '@api-response';
 import { Handler, isValidHttpMethod } from '@utils/validate-utils';
 import cookie from 'cookie';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
@@ -27,7 +27,7 @@ export function errorHandler(
 ) {
 	console.log(error);
 
-	const response: ErrorResponse = {
+	const response: ResultError = {
 		data: null,
 		error: { message: 'Something went wrong' },
 	};
@@ -54,8 +54,8 @@ export function getLocaleCookie(req: NextApiRequest): string {
  * export default apiHandler({ get });
  */
 export const apiHanler = <T>(
-	handlers: Partial<Record<Handler, NextApiHandler<Response<T>>>>
-) => (req: NextApiRequest, res: NextApiResponse<Response<T>>) => {
+	handlers: Partial<Record<Handler, NextApiHandler<Result<T>>>>
+) => (req: NextApiRequest, res: NextApiResponse<Result<T>>) => {
 	try {
 		const method = req.method?.toLowerCase();
 		if (!isValidHttpMethod(method)) {

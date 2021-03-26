@@ -1,4 +1,4 @@
-import { PostResponse, Response } from '@api-response';
+import { PostResult, Result } from '@api-response';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
@@ -6,7 +6,7 @@ import useSWR from 'swr';
 
 const fetcher = (endpoint: string, postSlug: string) =>
 	axios
-		.get<PostResponse.GetRelatedPost>(endpoint, {
+		.get<PostResult.GetRelatedPost>(endpoint, {
 			params: {
 				postSlug,
 			},
@@ -16,10 +16,10 @@ const fetcher = (endpoint: string, postSlug: string) =>
 export const useRelatedPosts = (
 	postSlug: string | undefined,
 	initialData?: PostModel[]
-): Response<PostModel[]> => {
+): Result<PostModel[]> => {
 	const { data, error } = useSWR<
 		PostModel[] | null,
-		AxiosError<PostResponse.GetRelatedPost>
+		AxiosError<PostResult.GetRelatedPost>
 	>(['/api/posts/relatedPosts', postSlug], fetcher, { initialData });
 
 	if (error) {

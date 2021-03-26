@@ -1,4 +1,4 @@
-import { Response } from '@api-response';
+import { Result } from '@api-response';
 import { PostWihMeta } from '@common';
 import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostDataService } from '@services/post-data-service';
@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 async function getHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<Response<PostWihMeta[]>>
+	res: NextApiResponse<Result<PostWihMeta[]>>
 ) {
 	const { categorySlug } = req.query;
 

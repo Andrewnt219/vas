@@ -1,4 +1,4 @@
-import { Response } from '@api-response';
+import { Result } from '@api-response';
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
 import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
@@ -11,7 +11,7 @@ import React from 'react';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Response<AuthorModel[]>;
+type StaticProps = Result<AuthorModel[]>;
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 	try {
 		const authors = await AuthorDataService.getAuthors();

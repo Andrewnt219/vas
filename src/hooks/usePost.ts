@@ -1,4 +1,4 @@
-import { PostResponse, Response } from '@api-response';
+import { PostResult, Result } from '@api-response';
 import { PostWihMeta } from '@common';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { getErrorMessage } from '@utils/convert-utils';
@@ -8,7 +8,7 @@ import { useIncreaseView } from './useIncreaseView';
 import { useRelatedPosts } from './useRelatedPosts';
 
 type UsePostData = { post: PostWihMeta; relatedPosts: PostModel[] };
-type ApiResponse = PostResponse.GetSlug;
+type ApiResponse = PostResult.GetSlug;
 type FetcherError = AxiosError<ApiResponse>;
 
 const postFetcher = (endpoint: string) =>
@@ -17,7 +17,7 @@ const postFetcher = (endpoint: string) =>
 export const usePost = (
 	postSlug: string | undefined,
 	initialData?: UsePostData | null
-): Response<UsePostData> => {
+): Result<UsePostData> => {
 	const views = useIncreaseView(postSlug);
 
 	const { data: relatedPosts, error: relatedPostError } = useRelatedPosts(
