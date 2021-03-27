@@ -4,7 +4,7 @@ import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiHandler } from 'next';
 
 const client = sanityClient({
-	projectId: process.env.SANITY_CLIENT_ID as string,
+	projectId: process.env.NEXT_PUBLIC_SANITY_CLIENT_ID as string,
 	dataset: 'production',
 	// Need a write token in order to read schedule metadata and publish documents
 	token: process.env.SANITY_PUBLISHING_CRON as string,
@@ -55,7 +55,7 @@ const publish = async (metadata: any, client: any) => {
 const get: NextApiHandler<Result<string>> = async (req, res) => {
 	const response = await client.fetch(query);
 	await Promise.all(response.map((metadata: any) => publish(metadata, client)));
-
+	console.log(response);
 	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	res.status(200).json({

@@ -12,7 +12,7 @@ const match = {
 	post: "_type == 'post'",
 	categorySlug: 'categories[] -> slug.current match $categorySlug',
 	notDraft: "!(_id in path('drafts.**'))",
-	notArchived: '!isArchived',
+	notArchived: '(!isArchived || !defined(isArchived))', // Thanks for being weird, groq
 	slug: 'slug.current == $slug',
 	notSlug: 'slug.current != $slug',
 	lang: '_lang == $lang',
@@ -76,7 +76,11 @@ export class PostDataService {
 		lang: Language
 	): Promise<PostModel[]> {
 		LocaleDataService.setLocale(lang);
-
+		console.log(`
+			*[${match.combine(this.BASE_QUERY, match.lang, match.categorySlug)}] | ${
+			order.updateAtDesc
+		} ${postModelQuery}
+		`);
 		return this.cms.fetch(
 			`
 			*[${match.combine(this.BASE_QUERY, match.lang, match.categorySlug)}] | ${
