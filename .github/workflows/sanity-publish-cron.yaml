@@ -1,0 +1,12 @@
+name: sanity-publish-scheduled-cron
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call publish-cron
+        run: |
+          curl --request GET \
+          --url 'https://vas-canary.vercel.app/api/crons/publish-cron'
