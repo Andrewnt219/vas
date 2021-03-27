@@ -1,18 +1,13 @@
-import { Buffer } from 'buffer';
 import admin, { ServiceAccount } from 'firebase-admin';
+import { getDecryptedServiceAccount } from './decrypt-service-account';
 
 if (!admin.apps.length) {
 	try {
-		if (!process.env.FIRESTORE_SERVICE_ACCOUNT_BASE64) {
+		const serviceAccountKeyJSON: ServiceAccount = getDecryptedServiceAccount();
+
+		if (!serviceAccountKeyJSON) {
 			throw new Error('Missing serviceAccountKey env');
 		}
-
-		const serviceAccountKeyJSON: ServiceAccount = JSON.parse(
-			Buffer.from(
-				process.env.FIRESTORE_SERVICE_ACCOUNT_BASE64,
-				'base64'
-			).toString('ascii')
-		);
 
 		admin.initializeApp({
 			credential: admin.credential.cert(serviceAccountKeyJSON),
