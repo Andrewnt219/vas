@@ -9,7 +9,6 @@ import { fromDateField } from '../fields/post/fromDate';
 import { hashtagField } from '../fields/post/hashtagField';
 import { isArchivedField } from '../fields/post/isArchivedField';
 import { locationField } from '../fields/post/locationField';
-import { seoFields } from '../fields/post/seoFields';
 import { snippetField } from '../fields/post/snippetField';
 import { toDateField } from '../fields/post/toDate';
 import { i18n } from './documentTranslation';
@@ -43,7 +42,6 @@ export default {
 		publishedAtField,
 		authorField,
 		isArchivedField,
-		seoFields,
 	],
 
 	// TODO: preview categories

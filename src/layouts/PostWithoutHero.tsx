@@ -14,7 +14,6 @@ import React from 'react';
 type Props = Result<{ post: PostWihMeta; relatedPosts: PostModel[] }>;
 
 const PostWithoutHero = ({ data, error }: Props) => {
-	console.log(data);
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
