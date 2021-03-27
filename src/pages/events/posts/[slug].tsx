@@ -91,11 +91,7 @@ const EventPost = ({ data: serverData, error: serverError }: Props) => {
 				</Post.Wrapper>
 			</section>
 
-			<RelatedPosts
-				tw="mt-24 col-span-full"
-				posts={relatedPosts}
-				heading="Related events"
-			/>
+			<RelatedPosts posts={relatedPosts} heading="Related events" />
 		</MainLayout>
 	);
 };

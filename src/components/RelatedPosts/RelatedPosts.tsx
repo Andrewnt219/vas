@@ -3,25 +3,29 @@ import { PostModel } from '@lib/sanity/models/PostModel';
 import NextLink from 'next/link';
 import React from 'react';
 
-type Post = Pick<PostModel, 'title' | 'slug' | 'thumbnail'>;
+type Post = Pick<PostModel, 'title' | 'slug' | 'thumbnail' | 'postUrl'>;
 function Post({ data }: { data: Post }) {
-	const { title, slug, thumbnail } = data;
+	const { title, thumbnail } = data;
 
 	return (
 		<article>
 			<div tw="relative pb-xs md:pb-sm">
-				<EnhancedImage
-					tw="img-absolute absolute!"
-					lqip={thumbnail.metadata.lqip}
-					src={thumbnail.url}
-					alt={thumbnail.alt ?? 'A thumbnail for the post'}
-					layout="fill"
-				/>
+				<NextLink href={data.postUrl} passHref>
+					<a>
+						<EnhancedImage
+							tw="img-absolute absolute!"
+							lqip={thumbnail.metadata.lqip}
+							src={thumbnail.url}
+							alt={thumbnail.alt ?? 'A thumbnail for the post'}
+							layout="fill"
+						/>
+					</a>
+				</NextLink>
 			</div>
 
 			<header>
 				<h1 tw="mt-2 md:mt-4">
-					<NextLink href={`/events/posts/${slug}`} passHref>
+					<NextLink href={data.postUrl} passHref>
 						<a tw="font-medium ">{title}</a>
 					</NextLink>
 				</h1>
@@ -36,7 +40,7 @@ function RelatedPosts({ className, heading, posts }: Props) {
 		<section
 			aria-label="Related posts"
 			className={className}
-			tw="bg-gray-100 px-8 py-10 md:(px-12) xl:(px-44 py-24)"
+			tw="mt-24 col-span-full bg-gray-100 px-8 py-10 md:(px-12) xl:(px-44 py-24)"
 		>
 			<h1 tw="font-bold text-larger mx-auto max-w-max uppercase relative after:(content block w-sm h-px bg-black bg-opacity-50 mx-auto my-2 md:my-5)">
 				{heading}

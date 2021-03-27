@@ -1,13 +1,7 @@
-import Post from '@components/Post/Post';
-import MainLayout from '@layouts/MainLayout';
-import { sanityClient } from '@lib/sanity/sanity-clients';
-import { postSerializer } from '@lib/sanity/serializers/post-serializer';
-import BlockContent from '@sanity/block-content-to-react';
+import PostWithoutHero from '@layouts/PostWithoutHero';
 import { usePost } from '@src/hooks/usePost';
 import { postPage } from '@src/server/utils/page-utils';
-import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
-import NextLink from 'next/link';
 import React from 'react';
 
 /* -------------------------------------------------------------------------- */
@@ -25,55 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const NewsPost = ({ data: serverData, error: serverError }: Props) => {
 	const { data, error } = usePost(serverData?.post.slug, serverData);
-
-	if (serverError || error) {
-		const message = serverError?.message ?? error?.message;
-
-		return <h1>{message}</h1>;
-	}
-
-	if (!data) {
-		return <h1>Fetching post...</h1>;
-	}
-
-	const { post } = data;
-
-	const displayedHashtag = post.hashtags?.[0];
-
-	return (
-		<MainLayout title={post.title} tw="pb-0!">
-			<section tw="col-span-full md:text-2xl">
-				<Post.Wrapper as="header">
-					{displayedHashtag && (
-						<NextLink href={`/categories/${displayedHashtag.slug}`} passHref>
-							<a tw="block transition-colors text-primary underline decorator-transparent hocus:(decorator-primary) xl:(font-bold text-primary)">
-								{displayedHashtag.title}
-							</a>
-						</NextLink>
-					)}
-
-					<Post.Title tw="my-2 md:my-5">{post.title}</Post.Title>
-
-					<time
-						tw="text-gray-200 text-smaller italic"
-						dateTime={dayjs(post.publishedAt).format('YYYY-MM-DD')}
-					>
-						{dayjs(post.publishedAt).format('MMMM DD, YYYY')}
-					</time>
-				</Post.Wrapper>
-
-				<Post.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
-					<BlockContent
-						blocks={post.body}
-						projectId={sanityClient.config().projectId}
-						dataset={sanityClient.config().dataset}
-						serializers={postSerializer}
-						imageOptions={{ fit: 'clip', auto: 'format' }}
-					/>
-				</Post.Wrapper>
-			</section>
-		</MainLayout>
-	);
+	return <PostWithoutHero data={data} error={error} />;
 };
 
 export default NewsPost;
