@@ -50,7 +50,7 @@ export function getLocaleCookie(req: NextApiRequest): string {
 /**
  * Wrap handler in try catch and check if the incoming request is allowed. I'm proud of this.
  * @example
- * const get = <T>(req: NextApiRequest, res: NextApiResponse<T>) => {...}
+ * const get:NextApiHandler<Result<string>> = (req, res) => {...}
  * export default apiHandler({ get });
  */
 export const apiHanler = <T>(

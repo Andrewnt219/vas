@@ -1,5 +1,7 @@
+import { Result } from '@api-response';
 import sanityClient from '@sanity/client';
-import { CronJob } from 'cron';
+import { apiHanler } from '@src/server/utils/api-utils';
+import { NextApiHandler } from 'next';
 
 const client = sanityClient({
 	projectId: process.env.SANITY_CLIENT_ID as string,
@@ -50,12 +52,16 @@ const publish = async (metadata: any, client: any) => {
 	);
 };
 
-const job = new CronJob('*/1 * * * *', () => {
-	client
-		.fetch(query)
-		.then((response) =>
-			Promise.all(response.map((metadata: any) => publish(metadata, client)))
-		);
-});
+const get: NextApiHandler<Result<string>> = async (req, res) => {
+	const response = await client.fetch(query);
+	await Promise.all(response.map((metadata: any) => publish(metadata, client)));
 
-job.start();
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	res.status(200).json({
+		data: 'OK',
+		error: null,
+	});
+};
+
+export default apiHanler({ get });
