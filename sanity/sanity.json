@@ -16,7 +16,8 @@
     "@sanity/rich-date-input",
     "@sanity/vision",
     "intl-input",
-    "seo-tools"
+    "seo-tools",
+    "content-calendar"
   ],
   "env": {
     "development": {
