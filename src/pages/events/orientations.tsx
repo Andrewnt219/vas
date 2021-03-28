@@ -4,6 +4,7 @@ import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import { categoryPage } from '@src/server/utils/page-utils';
 import { InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 const PAGE_CATEGORY: CategorySlug = 'orientation';
@@ -21,6 +22,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Orientations({ data: intiialData, error: serverError }: Props) {
 	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, intiialData);
+	const { t } = useTranslation();
 
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
@@ -32,19 +34,21 @@ function Orientations({ data: intiialData, error: serverError }: Props) {
 	}
 
 	return (
-		<MainLayout title="Orientations">
-			<EventsPage data={{ posts: data, bannerProps }} />
+		<MainLayout title={t('orientation:title')}>
+			<EventsPage
+				data={{
+					posts: data,
+					bannerProps: {
+						imgAlt: "A picture of sourvenirs from one of VAS's orientations",
+						imgLqip: require('images/hero/orientation.jpg?lqip'),
+						imgSrc: require('images/hero/orientation.jpg'),
+						title: t('orientation:title'),
+						subtitle: t('orientation:subtitle'),
+					},
+				}}
+			/>
 		</MainLayout>
 	);
 }
-
-const bannerProps = {
-	imgAlt: "A picture of sourvenirs from one of VAS's orientations",
-	imgLqip: require('images/hero/orientation.jpg?lqip'),
-	imgSrc: require('images/hero/orientation.jpg'),
-	title: 'Orientation',
-	subtitle:
-		'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',
-};
 
 export default Orientations;

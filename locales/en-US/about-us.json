@@ -1,1 +1,18 @@
-{}
+{
+	"title": "What is VAS",
+	"about-us": {
+		"title": "About Us",
+		"subtitle": "<0>Vietnamese Association at Seneca (VAS) is a club that operates cultural, educational, and entertaining events for Vietnamese students at Seneca College. We create a platform where students can freely discuss different issues regarding study and life in Canada, while providing useful tips and help for Vietnamese students to support their studies.</0><0>As a club, we understand how important culture is to international students at Seneca as well as in Canada. VAS is committed to bring Vietnamese and Canadian culture closer to our students to support their mental wellness while studying abroad. As being said, VAS organizes various cultural events for our students besides entertaining events. We are aiming to make students’ time at Seneca and in Canada meaningful and successful with full of experience andachievements.</0>"
+	},
+	"our-mission": {
+		"title": "Our Mission",
+		"one": "Create a platform where students can exchange information, share their thoughts, and discuss different issues regarding study and life in Canada.",
+		"two": "Provide service to support students about studying at Seneca. Give academic advice and answers relating to service for international students at Seneca College.",
+		"three": "Create a friendly, energetic, and helpful environment where Vietnamese students feel belonged. Stimulate cultural adaptation for newcomers.",
+		"four": "Create different events, minigames, activities besides acedemic projects to help students to get rid of stresses."
+	},
+	"our-team": {
+		"title": "Our team",
+		"more-button": "And more..."
+	}
+}

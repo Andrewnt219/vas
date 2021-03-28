@@ -7,7 +7,7 @@ type Props = {};
 
 const ContactUs: VFC<Props> = ({}) => {
 	return (
-		<MainLayout title="Contact Us" tw="" css="grid-template-rows: auto 1fr">
+		<MainLayout title="Let's connect" tw="" css="grid-template-rows: auto 1fr">
 			<h1
 				id="contact-title"
 				tw=" text-h1-variants grid-p-sm text-primary font-bold mb-2 xl:(mb-0 col-start-2 col-end-6 row-span-1)"

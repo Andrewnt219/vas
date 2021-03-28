@@ -88,6 +88,9 @@ function commons({ addUtilities }) {
 
 function fonts({ addUtilities, theme }) {
 	addUtilities({
+		'.font-inherit': {
+			font: 'inherit',
+		},
 		'.text-smaller': {
 			fontSize: 'smaller',
 		},
@@ -95,7 +98,7 @@ function fonts({ addUtilities, theme }) {
 			fontSize: 'larger',
 		},
 		'.text-h1-variants': {
-			fontSize: theme('fontSize.2xl'),
+			fontSize: theme('fontSize.3xl'),
 			lineHeight: 1.3,
 
 			'@screen md': {

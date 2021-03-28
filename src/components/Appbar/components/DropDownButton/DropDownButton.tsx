@@ -1,6 +1,6 @@
-import { useDropdown } from '@components/Appbar/hooks/useDropdown';
 import { useRouteMatch } from '@package/hooks/useRouteMatch/useRouteMatch';
 import { Dropdown } from '@src/data/routes-data';
+import { useDropdown } from '@src/hooks/useDropdown';
 import { motion } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useRef, VFC } from 'react';
@@ -36,6 +36,7 @@ const DropdownButton: VFC<Props> = ({ data }) => {
 				aria-expanded={isVisibleDropdown}
 				aria-haspopup={true}
 				as="button"
+				tw="font-inherit focus:(underline)"
 			>
 				{t(`navbar.${i18nKey}`, null, { fallback: 'common:fallback' })}
 			</StyledMenuLink>

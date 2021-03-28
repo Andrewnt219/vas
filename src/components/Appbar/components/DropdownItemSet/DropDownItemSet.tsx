@@ -1,6 +1,7 @@
 import { routes } from '@data/routes-data';
-import { AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout, motion, Variants } from 'framer-motion';
 import React from 'react';
+import tw, { styled } from 'twin.macro';
 import DropdownButton from '../DropDownButton/DropDownButton';
 import DropDownItem from '../DropDownItem/DropDownItem';
 
@@ -9,20 +10,19 @@ type Props = { className?: string; data: typeof routes };
 function DropDownItemSet({ className, data }: Props) {
 	return (
 		<AnimateSharedLayout>
-			<ul
+			<DropDownContainer
 				aria-label="sub navigation links"
 				className={className}
-				tw="flex flex-col absolute left-5 bg-white  py-4 shadow-card"
 			>
 				{renderMenuItems(data)}
-			</ul>
+			</DropDownContainer>
 		</AnimateSharedLayout>
 	);
 }
 
 function renderMenuItems(items: typeof routes) {
 	return items.map((item, index) => (
-		<li key={index} tw="relative pl-6  pr-4">
+		<li key={index}>
 			{item.type === 'route' ? (
 				<DropDownItem data={item} />
 			) : (
@@ -31,5 +31,31 @@ function renderMenuItems(items: typeof routes) {
 		</li>
 	));
 }
+
+const variants: Variants = {
+	hidden: {
+		y: 5,
+		opacity: 0,
+	},
+	visible: {
+		y: 0,
+		opacity: 100,
+		transition: {
+			type: 'tween',
+		},
+	},
+};
+
+export const DropDownContainer = styled(motion.ul).attrs(() => ({
+	variants,
+	animate: 'visible',
+	initial: 'hidden',
+}))`
+	${tw`flex flex-col absolute left-5  bg-white rounded  py-4 shadow-card`}
+
+	& > li {
+		${tw`relative pl-6  pr-4 py-2`}
+	}
+`;
 
 export default DropDownItemSet;

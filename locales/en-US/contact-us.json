@@ -1,14 +1,16 @@
 {
+	"title": "<0>We would <1>love to <3/>hear from you</1></0>",
+	"subtitle": "If you would like to partner with us or have any question for us, please fill out the form below and one of our executive members will get back to you shortly.",
+	"submit-response": {
+		"title": "Sent!",
+		"subtitle": "Thank you"
+	},
 	"form": {
-		"errors": {
-			"required": "Required",
-			"minLength": "Too short, {{length}}",
-			"maxLength": "Too long, {{length}}"
-		},
 		"first-name": "First Name",
 		"last-name": "Last Name",
 		"email": "Email",
 		"subject": "Subject",
-		"message": "Message"
+		"message": "Message",
+		"submit-button": "Submit"
 	}
 }

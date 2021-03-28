@@ -6,7 +6,9 @@ import {
 	useState,
 } from 'react';
 
-export const useDropdown = (ref: MutableRefObject<HTMLElement | null>) => {
+export const useDropdown = (
+	ref: MutableRefObject<HTMLElement | null>
+): boolean => {
 	const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
 	const blurTimerId = useRef<NodeJS.Timeout | null>(null);
 

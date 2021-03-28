@@ -1,10 +1,13 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
 import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 type Props = { className?: string; data: AuthorModel };
 
 function MemberInfo({ className, data }: Props) {
+	const { t } = useTranslation();
+
 	return (
 		<article
 			className={className}
@@ -28,7 +31,10 @@ function MemberInfo({ className, data }: Props) {
 						LinkedIn
 					</a>
 				)}
-				<p>Status: {data.isActive ? 'Active' : 'Inactive'}</p>
+				<p>
+					{t('common:status')}:{' '}
+					{data.isActive ? t('common:active') : t('common:inactive')}
+				</p>
 			</div>
 		</article>
 	);

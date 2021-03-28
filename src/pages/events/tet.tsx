@@ -4,6 +4,7 @@ import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import { categoryPage } from '@src/server/utils/page-utils';
 import { InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 const PAGE_CATEGORY: CategorySlug = 'tet';
@@ -20,6 +21,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Tet({ data: initialData, error: serverError }: Props) {
 	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+	const { t } = useTranslation();
 
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
@@ -32,19 +34,21 @@ function Tet({ data: initialData, error: serverError }: Props) {
 	}
 
 	return (
-		<MainLayout title="Tet">
-			<EventsPage data={{ bannerProps, posts: data }} />
+		<MainLayout title={t`tet:title`}>
+			<EventsPage
+				data={{
+					bannerProps: {
+						imgAlt: "A picture of sourvenirs from one of VAS's orientations",
+						imgLqip: require('images/hero/tet.png?lqip'),
+						imgSrc: require('images/hero/tet.png'),
+						title: t`tet:title`,
+						subtitle: t`tet:subtitle`,
+					},
+					posts: data,
+				}}
+			/>
 		</MainLayout>
 	);
 }
-
-const bannerProps = {
-	imgAlt: "A picture of sourvenirs from one of VAS's orientations",
-	imgLqip: require('images/hero/tet.png?lqip'),
-	imgSrc: require('images/hero/tet.png'),
-	title: 'Tet',
-	subtitle:
-		'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.',
-};
 
 export default Tet;

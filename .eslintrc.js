@@ -38,6 +38,7 @@ module.exports = {
 		'import/no-unresolved': 'off',
 		'no-empty-pattern': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 0,
+		'jsx-a11y/heading-has-content': 0,
 	},
 	settings: {
 		react: {

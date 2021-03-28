@@ -6,6 +6,7 @@ import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import MainLayout from '@src/layouts/MainLayout';
 import { categoryPage } from '@src/server/utils/page-utils';
 import { InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
 
 const PAGE_CATEGORY: CategorySlug = 'blog';
@@ -22,6 +23,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const BlogIndex: VFC<Props> = ({ data: initialData, error: serverError }) => {
 	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+	const { t } = useTranslation();
 
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
@@ -34,15 +36,14 @@ const BlogIndex: VFC<Props> = ({ data: initialData, error: serverError }) => {
 	}
 
 	return (
-		<MainLayout title="Blogs" tw="">
+		<MainLayout title={t`blog:title`} tw="">
 			<PageBanner
 				data={{
 					imgSrc: require('images/hero/news.jpg'),
 					imgLqip: require('images/hero/news.jpg?lqip'),
 					imgAlt: 'A table with various souvenirs from Seneca College',
-					subtitle:
-						'Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.',
-					title: 'Blogs',
+					subtitle: t`blog:subtitle`,
+					title: t`blog:title`,
 				}}
 			/>
 
@@ -50,7 +51,7 @@ const BlogIndex: VFC<Props> = ({ data: initialData, error: serverError }) => {
 				<>
 					<ul
 						tw="grid-p-sm flex flex-col space-y-6 md:(space-y-12)"
-						aria-label="articles about VAS' news"
+						aria-label="articles about VAS' blogs"
 					>
 						{data.map((post) => (
 							<li key={post.slug}>

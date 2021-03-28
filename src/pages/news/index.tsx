@@ -6,6 +6,8 @@ import { usePostsWithMeta } from '@src/hooks/usePostsWithMeta';
 import MainLayout from '@src/layouts/MainLayout';
 import { categoryPage } from '@src/server/utils/page-utils';
 import { InferGetStaticPropsType } from 'next';
+import Trans from 'next-translate/Trans';
+import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
 
 const PAGE_CATEGORY: CategorySlug = 'news';
@@ -22,6 +24,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const News: VFC<Props> = ({ data: initialData, error: serverError }) => {
 	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+	const { t } = useTranslation();
 
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
@@ -34,15 +37,16 @@ const News: VFC<Props> = ({ data: initialData, error: serverError }) => {
 	}
 
 	return (
-		<MainLayout title="News" tw="">
+		<MainLayout title={t`news:title`} tw="">
 			<PageBanner
 				data={{
 					imgSrc: require('images/hero/news.jpg'),
 					imgLqip: require('images/hero/news.jpg?lqip'),
 					imgAlt: 'A table with various souvenirs from Seneca College',
-					subtitle:
-						'Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.',
-					title: 'News',
+					subtitle: (
+						<Trans i18nKey="news:subtitle" components={[<br key="br" />]} />
+					),
+					title: t`news:title`,
 				}}
 			/>
 

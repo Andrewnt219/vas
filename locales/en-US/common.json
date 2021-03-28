@@ -1,5 +1,19 @@
 {
 	"fallback": "...",
+	"status": "Status",
+	"active": "Active",
+	"inactive": "Inactive",
+	"form": {
+		"errors": {
+			"required": "Required",
+			"minLength": "Too short, minimum {{length}} characters",
+			"maxLength": "Quá dài, maximum {{length}} characters"
+		}
+	},
+	"locales": {
+		"en-US": "English",
+		"vi-VN": "Vietnamese"
+	},
 	"navbar": {
 		"home": "Home",
 		"about-us": {

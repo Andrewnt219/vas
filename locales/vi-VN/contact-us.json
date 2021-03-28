@@ -1,12 +1,16 @@
 {
+	"title": "<0>Tụi mình <1>muốn <3/>lắng nghe bạn</1></0>",
+	"subtitle": "Nếu bạn muốn hợp tác cùng VAS hay có bất kì câu hỏi nào, vui lòng điền vào đơn bên dưới đây, một thành viên trong số ban quản lý sẽ trả lời bạn sớm nhất!",
+	"submit-response": {
+		"title": "Đã gửi!",
+		"subtitle": "Cảm ơn bạn"
+	},
 	"form": {
-		"errors": {
-			"required": "Can thiet",
-			"minLength": "Qua ngan, {{length}}",
-			"maxLength": "Qua dai, {{length}}"
-		},
-		"first-name": "Ho",
-		"last-name": "Ten",
-		"phone": "Dien thoai"
+		"first-name": "Tên",
+		"last-name": "Họ",
+		"email": "Email",
+		"subject": "Tiêu đề",
+		"message": "Nội dung",
+		"submit-button": "Gửi"
 	}
 }

@@ -1,11 +1,35 @@
 {
 	"fallback": "...",
+	"status": "Trạng thái",
+	"active": "Hoạt động",
+	"inactive": "Ngừng",
+	"form": {
+		"errors": {
+			"required": "Cần thiết",
+			"minLength": "Quá ngắn, ít nhất {{length}} chữ",
+			"maxLength": "Quá dài, tối đa {{length}} chữ"
+		}
+	},
+	"locales": {
+		"en-US": "Tiếng Anh",
+		"vi-VN": "Tiếng Việt"
+	},
 	"navbar": {
-		"home": "Home",
-		"about-us": "VAS là ai",
-		"events": "Sự kiện",
-		"news": "Tin Tức",
-		"partners": "Đối tác",
-		"contact-us": "Liên lạc"
+		"home": "Trang chủ",
+		"about-us": {
+			"text": "VAS là gì",
+			"index": "VAS là gì",
+			"partners": "Đói tác",
+			"members": "Thành viên"
+		},
+		"events": {
+			"text": "Sự kiện",
+			"index": "Sự kiện",
+			"orientations": "Định hướng",
+			"tet": "Tết"
+		},
+		"news": "Tin tức",
+		"blog": "Blogs",
+		"contact-us": "Kết nối"
 	}
 }

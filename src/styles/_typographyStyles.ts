@@ -71,7 +71,7 @@ export const typographyStyles = css`
 	} */
 
 	html:lang(vi-VN) {
-		font-family: 'san-serif';
+		/* font-family: 'san-serif'; */
 	}
 
 	${bodyFontFace}

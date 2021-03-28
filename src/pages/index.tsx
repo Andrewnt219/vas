@@ -43,17 +43,17 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 
 	const FACTS: ComponentProps<typeof FactTile>['data'][] = [
 		{
-			key: 'members',
+			key: t`home:our-facts.members.key`,
 			value: padZero(membersCount),
 		},
 		{
-			key: 'projects',
+			key: t`home:our-facts.projects.key`,
 			value: padZero(projectsCount),
 		},
 	];
 
 	return (
-		<MainLayout title="VAS" tw="pb-0!">
+		<MainLayout title={t('home:hero.title')} tw="pb-0!">
 			<section
 				tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
 				aria-labelledby="hero-title"
