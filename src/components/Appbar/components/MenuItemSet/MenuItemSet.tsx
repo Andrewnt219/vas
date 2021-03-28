@@ -1,3 +1,4 @@
+import LocaleButton from '@components/LocaleButton/LocaleButton';
 import { routes } from '@src/data/routes-data';
 import { AnimateSharedLayout } from 'framer-motion';
 import React, { VFC } from 'react';
@@ -16,7 +17,12 @@ type Props = {
 const MenuItemSet: VFC<Props> = ({ data, className }) => {
 	return (
 		<AnimateSharedLayout>
-			<Container className={className}>{renderMenuItems(data)}</Container>
+			<Container className={className} tw="text-xl leading-tight font-bold">
+				{renderMenuItems(data)}{' '}
+				<li>
+					<LocaleButton />
+				</li>
+			</Container>
 		</AnimateSharedLayout>
 	);
 };
@@ -36,7 +42,7 @@ type ContainerProps = {};
 const Container = styled.ul<ContainerProps>`
 	${tw`space-x-10 flex`}
 
-	& > li:last-of-type a {
+	& > li:nth-last-child(2) a {
 		${tw`text-primary`}
 
 		${tw`hocus:text-black`}

@@ -10,6 +10,10 @@
 			"maxLength": "Quá dài, tối đa {{length}} chữ"
 		}
 	},
+	"locales": {
+		"en-US": "Tiếng Anh",
+		"vi-VN": "Tiếng Việt"
+	},
 	"navbar": {
 		"home": "Trang chủ",
 		"about-us": {

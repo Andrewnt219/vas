@@ -88,6 +88,9 @@ function commons({ addUtilities }) {
 
 function fonts({ addUtilities, theme }) {
 	addUtilities({
+		'.font-inherit': {
+			font: 'inherit',
+		},
 		'.text-smaller': {
 			fontSize: 'smaller',
 		},

@@ -1,4 +1,5 @@
 import Footer from '@components/Footer/Footer';
+import LocaleButton from '@components/LocaleButton/LocaleButton';
 import Logo from '@components/Logo/Logo';
 import { routes } from '@data/routes-data';
 import { motion, Transition, Variants } from 'framer-motion';
@@ -21,8 +22,9 @@ function Slider({ className }: Props) {
 			exit="hidden"
 			transition={transition}
 		>
-			<div tw="sticky top-0 w-full bg-white">
+			<div tw="sticky top-0 w-full bg-white flex flex-col items-center">
 				<Logo tw="w-1/3 mx-auto block" />
+				<LocaleButton tw="" />
 			</div>
 
 			{/* Weird bug, must have overflow at both places */}

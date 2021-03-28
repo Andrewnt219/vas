@@ -38,12 +38,12 @@ const DropDownItem: VFC<Props> = ({ data }) => {
 				/>
 			)}
 			<NextLink href={href} passHref>
-				<CustomMenuLink
+				<StyledDropDownItem
 					isActive={isActive}
 					onKeyDownCapture={keyDownCaptureHandler}
 				>
 					{t(`navbar.${i18nKey}`, null, { fallback: 'common:fallback' })}
-				</CustomMenuLink>
+				</StyledDropDownItem>
 			</NextLink>
 		</>
 	);
@@ -52,8 +52,8 @@ const DropDownItem: VFC<Props> = ({ data }) => {
 type CustomMenuLinkProps = {
 	isActive: boolean;
 };
-const CustomMenuLink = styled(StyledMenuLink)<CustomMenuLinkProps>`
-	${tw`px-0 py-2 hocus:outline-none w-max`}
+export const StyledDropDownItem = styled(StyledMenuLink)<CustomMenuLinkProps>`
+	${tw`hocus:outline-none w-max mt-0!`}
 	${(p) =>
 		p.isActive &&
 		css`
