@@ -38,7 +38,7 @@ const MenuItem: VFC<Props> = ({ data }) => {
 
 export const StyledMenuLink = styled.a`
 	${tw`mt-5 inline-block border-t-4 border-transparent transition-colors hocus:(text-primary)`}
-	${tw` hocus:(outline-none)`}
+	${tw` focus:(outline-none underline)`}
 `;
 
 export default MenuItem;

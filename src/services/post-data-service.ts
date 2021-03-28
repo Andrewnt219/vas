@@ -76,11 +76,7 @@ export class PostDataService {
 		lang: Language
 	): Promise<PostModel[]> {
 		LocaleDataService.setLocale(lang);
-		console.log(`
-			*[${match.combine(this.BASE_QUERY, match.lang, match.categorySlug)}] | ${
-			order.updateAtDesc
-		} ${postModelQuery}
-		`);
+
 		return this.cms.fetch(
 			`
 			*[${match.combine(this.BASE_QUERY, match.lang, match.categorySlug)}] | ${

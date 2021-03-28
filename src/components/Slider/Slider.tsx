@@ -24,7 +24,7 @@ function Slider({ className }: Props) {
 		>
 			<div tw="sticky top-0 w-full bg-white flex flex-col items-center">
 				<Logo tw="w-1/3 mx-auto block" />
-				<LocaleButton tw="" />
+				<LocaleButton />
 			</div>
 
 			{/* Weird bug, must have overflow at both places */}
@@ -42,8 +42,8 @@ function Slider({ className }: Props) {
 }
 
 const transition: Transition = {
-	type: 'spring',
-	stiffness: 50,
+	type: 'tween',
+	duration: 0.3,
 };
 const variants: Variants = {
 	hidden: {

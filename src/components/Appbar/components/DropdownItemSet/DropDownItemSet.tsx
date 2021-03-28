@@ -1,5 +1,5 @@
 import { routes } from '@data/routes-data';
-import { AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout, motion, Variants } from 'framer-motion';
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 import DropdownButton from '../DropDownButton/DropDownButton';
@@ -32,8 +32,26 @@ function renderMenuItems(items: typeof routes) {
 	));
 }
 
-export const DropDownContainer = styled.ul`
-	${tw`flex flex-col absolute left-5 bg-white rounded  py-4 shadow-card`}
+const variants: Variants = {
+	hidden: {
+		y: 5,
+		opacity: 0,
+	},
+	visible: {
+		y: 0,
+		opacity: 100,
+		transition: {
+			type: 'tween',
+		},
+	},
+};
+
+export const DropDownContainer = styled(motion.ul).attrs(() => ({
+	variants,
+	animate: 'visible',
+	initial: 'hidden',
+}))`
+	${tw`flex flex-col absolute left-5  bg-white rounded  py-4 shadow-card`}
 
 	& > li {
 		${tw`relative pl-6  pr-4 py-2`}

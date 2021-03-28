@@ -58,7 +58,7 @@ export const StyledDropDownItem = styled(StyledMenuLink)<CustomMenuLinkProps>`
 		p.isActive &&
 		css`
 			${tw`text-primary`}
-			${tw`hocus:text-black`}
+			${tw`hocus:text-black!`}
 		`}
 `;
 

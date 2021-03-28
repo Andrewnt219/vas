@@ -34,7 +34,7 @@ function LocaleButton({ className }: Props) {
 
 	return (
 		<div className={className} tw="relative mt-4" ref={containerRef}>
-			<button tw="flex space-x-2 font-bold shadow-card px-5 py-2 rounded-full bg-primary text-white">
+			<button tw="flex space-x-2 font-bold shadow-card px-5 py-2 rounded-full bg-primary text-white focus:(outline-none underline)">
 				<span>{currentLocale.text}</span>
 			</button>
 

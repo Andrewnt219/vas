@@ -36,7 +36,7 @@ const DropdownButton: VFC<Props> = ({ data }) => {
 				aria-expanded={isVisibleDropdown}
 				aria-haspopup={true}
 				as="button"
-				tw="font-inherit"
+				tw="font-inherit focus:(underline)"
 			>
 				{t(`navbar.${i18nKey}`, null, { fallback: 'common:fallback' })}
 			</StyledMenuLink>
