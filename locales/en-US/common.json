@@ -1,5 +1,15 @@
 {
 	"fallback": "...",
+	"status": "Status",
+	"active": "Active",
+	"inactive": "Inactive",
+	"form": {
+		"errors": {
+			"required": "Required",
+			"minLength": "Too short, minimum {{length}} characters",
+			"maxLength": "Quá dài, maximum {{length}} characters"
+		}
+	},
 	"navbar": {
 		"home": "Home",
 		"about-us": {

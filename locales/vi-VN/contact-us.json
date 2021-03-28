@@ -1,12 +1,16 @@
 {
+	"title": "We would love to hear from you ",
+	"subtitle": "If you would like to partner with us or have any question for us, please fill out the form below and one of our executive members will get back to you shortly.",
+	"submit-response": {
+		"title": "Đã gửi!",
+		"subtitle": "Cảm ơn bạn"
+	},
 	"form": {
-		"errors": {
-			"required": "Can thiet",
-			"minLength": "Qua ngan, {{length}}",
-			"maxLength": "Qua dai, {{length}}"
-		},
-		"first-name": "Ho",
-		"last-name": "Ten",
-		"phone": "Dien thoai"
+		"first-name": "Tên",
+		"last-name": "Họ",
+		"email": "Email",
+		"subject": "Tiêu đề",
+		"message": "Nội dung",
+		"submit-button": "Gửi"
 	}
 }
