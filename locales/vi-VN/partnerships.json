@@ -4,7 +4,7 @@
 	},
 	"why": {
 		"title": "<0>Lý do đồng hành cùng <1>VAS</1></0>",
-		"subtitle": "Vietnamese Association at Seneca College (VAS), là một trong những cộng đồng Du học sinh Việt Nam lớn nhất tại Toronto, Canada. V Hiện nay, VAS đang nắm giữ các vai trò tổ chức các sự kiện lớn nhỏ cho cộng đồng DHS Việt không chỉ tại Seneca mà còn ở khắp các trường trên địa bàn Toronto. Có thể nói, rất nhiều các hoạt động và sự kiện do VAS tổ chức đã và đang thu hút đông đảo các bạn DHS Việt Nam tại Seneca nói riêng và Toronto nói chung."
+		"subtitle": "Vietnamese Association at Seneca College (VAS), là một trong những cộng đồng Du học sinh Việt Nam lớn nhất tại Toronto, Canada. <0/>Hiện nay, VAS đang nắm giữ các vai trò tổ chức các sự kiện lớn nhỏ cho cộng đồng DHS Việt không chỉ tại Seneca mà còn ở khắp các trường trên địa bàn Toronto. Có thể nói, rất nhiều các hoạt động và sự kiện do VAS tổ chức đã và đang thu hút đông đảo các bạn DHS Việt Nam tại Seneca nói riêng và Toronto nói chung."
 	},
 	"benefits": {
 		"build": {
@@ -21,7 +21,7 @@
 		},
 		"spark": {
 			"title": "Thu hút",
-			"subtitle": "Thu hút sự thích thú của những thế tiếp theo tại Seneca, bên cạnh đó, phát triển thêm những nhân tố tài năng để thành công hơn trong tương lai của họ."
+			"subtitle": "Thu hút sự thích thú của những thế hệ tiếp theo tại Seneca, bên cạnh đó, phát triển thêm những nhân tố tài năng để thành công hơn trong tương lai của họ."
 		}
 	},
 	"title": "Đối tác"

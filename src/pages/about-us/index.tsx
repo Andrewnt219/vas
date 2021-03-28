@@ -42,6 +42,13 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const AboutUs: VFC<Props> = ({ data, error }) => {
 	const { t } = useTranslation();
 
+	const missions = [
+		t`about-us:our-mission.one`,
+		t`about-us:our-mission.two`,
+		t`about-us:our-mission.three`,
+		t`about-us:our-mission.four`,
+	];
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -91,9 +98,13 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 						height={1804}
 					/>
 
-					<p tw="mt-7 md:mt-14 xl:text-center">
-						{t('about-us:about-us.subtitle')}
-					</p>
+					<ul tw="mt-7 md:mt-14 space-y-8 xl:text-center">
+						{missions.map((mission, index) => (
+							<li key={index}>
+								<p>{mission}</p>
+							</li>
+						))}
+					</ul>
 				</div>
 
 				<div

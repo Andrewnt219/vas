@@ -21,7 +21,7 @@ type Params = {};
 
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async () => {
 	const projectsCount = await StatsDataService.countProjects();
-	const membersCount = await AuthorDataService.countActiveAuthors();
+	const membersCount = await AuthorDataService.countAuthors();
 
 	return {
 		props: {
@@ -48,7 +48,7 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 		},
 		{
 			key: t`home:our-facts.projects.key`,
-			value: padZero(projectsCount),
+			value: padZero(projectsCount) + '+',
 		},
 	];
 
@@ -89,7 +89,7 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 			>
 				<header>
 					<SectionH1 id="fact-title" tw="mb-0 xl:mb-24">
-						Our facts
+						{t`home:our-facts.title`}
 					</SectionH1>
 				</header>
 

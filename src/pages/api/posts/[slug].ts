@@ -7,6 +7,7 @@ async function getHandler(
 	req: NextApiRequest,
 	res: NextApiResponse<PostResult.GetSlug>
 ) {
+	// TODO check documentations for getting params
 	const { slug } = req.query;
 
 	if (!slug) {

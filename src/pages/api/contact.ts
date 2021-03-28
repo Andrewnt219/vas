@@ -9,7 +9,7 @@ const post: NextApiHandler<Result<string>> = async (req, res) => {
 	const { email, subject, message } = req.body;
 
 	if (!email || !subject || !message) {
-		return res.status(404).json({
+		return res.status(400).json({
 			data: null,
 			error: { message: 'Missing data' },
 		});
