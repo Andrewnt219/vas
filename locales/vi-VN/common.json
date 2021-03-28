@@ -1,8 +1,8 @@
 {
 	"fallback": "...",
-	"status": "Status",
-	"active": "Active",
-	"inactive": "Inactive",
+	"status": "Trạng thái",
+	"active": "Hoạt động",
+	"inactive": "Ngừng",
 	"form": {
 		"errors": {
 			"required": "Cần thiết",

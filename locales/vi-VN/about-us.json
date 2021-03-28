@@ -1,7 +1,7 @@
 {
 	"about-us": {
-		"title": "Về chúng tớ",
-		"subtitle": "Hội sinh viên Việt Nam tại Seneca (VAS) là một câu lạc bộ hoạt động các sự kiện văn hóa, giáo dục và giải trí dành cho sinh viên Việt Nam tại Trường Cao đẳng Seneca. Được thành lập vào năm 2017 bởi các sinh viên Việt Nam của trường, VAS đã tạo ra nhiều sự kiện và chuỗi giáo dục hữu ích và thú vị, bao gồm The Hub, các đánh giá khóa học hoặc hội thảo định hướng, cung cấp các thông tin chi tiết về các chương trình khác nhau tại Seneca nhằm nâng cao kiến thức trong các lĩnh vực nghề nghiệp cụ thể và quyết định lựa chọn chương trình. <0> Là một câu lạc bộ, chúng tôi hiểu văn hóa quan trọng như thế nào đối với sinh viên quốc tế tại Seneca cũng như ở Canada. VAS cam kết mang văn hóa Việt Nam và Canada đến gần hơn với du học sinh để hỗ trợ tinh thần của mọi người khi đi du học. Chúng tôi đang hướng tới việc biến những quãng thời gian của sinh viên tại Seneca và ở Canada trở nên ý nghĩa và thành công nhất với đầy đủ kinh nghiệm và thành tích."
+		"title": "Về chúng tôi",
+		"subtitle": "<0>Hội sinh viên Việt Nam tại Seneca (VAS) là một câu lạc bộ hoạt động các sự kiện văn hóa, giáo dục và giải trí dành cho sinh viên Việt Nam tại Trường Cao đẳng Seneca. Được thành lập vào năm 2017 bởi các sinh viên Việt Nam của trường, VAS đã tạo ra nhiều sự kiện và chuỗi giáo dục hữu ích và thú vị, bao gồm The Hub, các đánh giá khóa học hoặc hội thảo định hướng, cung cấp các thông tin chi tiết về các chương trình khác nhau tại Seneca nhằm nâng cao kiến thức trong các lĩnh vực nghề nghiệp cụ thể và quyết định lựa chọn chương trình. </0><0>Là một câu lạc bộ, chúng tôi hiểu văn hóa quan trọng như thế nào đối với sinh viên quốc tế tại Seneca cũng như ở Canada. VAS cam kết mang văn hóa Việt Nam và Canada đến gần hơn với du học sinh để hỗ trợ tinh thần của mọi người khi đi du học. Chúng tôi đang hướng tới việc biến những quãng thời gian của sinh viên tại Seneca và ở Canada trở nên ý nghĩa và thành công nhất với đầy đủ kinh nghiệm và thành tích.</0>"
 	},
 	"our-mission": {
 		"title": "Sứ mệnh",
@@ -9,5 +9,10 @@
 		"two": "Cung cấp các dịch vụ hỗ trợ sinh viên về việc học tập tại trường cao đẳng Seneca. Đưa ra lời khuyên học tập và giải đáp liên quan đến những dịch vụ khác cho sinh viên quốc tế tại Seneca College.",
 		"three": "Tạo ra một môi trường thân thiện, năng động và hữu ích, nơi sinh viên Việt Nam cảm thấy thoải mái và ấm áp. Kích thích sự thích nghi văn hóa cho những người bạn du học sinh mới đến.",
 		"four": "Create different events, minigames, activities besides acedemic projects to help students to get rid of stresses."
+	},
+	"title": "VAS là gì",
+	"our-team": {
+		"more-button": "Xem thêm...",
+		"title": "Thành viên"
 	}
 }

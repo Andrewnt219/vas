@@ -3,6 +3,19 @@
 	"defaultLocale": "en-US",
 	"pages": {
 		"/contact-us": ["contact-us"],
+
+		"/about-us": ["about-us"],
+		"/about-us/members": ["members"],
+		"/about-us/partners": ["partnerships"],
+
+		"/events": ["events"],
+		"/events/orientations": ["orientation"],
+		"/events/tet": ["tet"],
+
+		"/news": ["news"],
+
+		"/blogs": ["blog"],
+
 		"/": ["home"],
 		"*": ["common"]
 	}

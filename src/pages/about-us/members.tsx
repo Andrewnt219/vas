@@ -6,6 +6,7 @@ import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 /* -------------------------------------------------------------------------- */
@@ -35,6 +36,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Members({ data, error }: Props) {
+	const { t } = useTranslation();
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -44,19 +47,19 @@ function Members({ data, error }: Props) {
 	}
 
 	return (
-		<MainLayout title="Members" tw="mb-10 md:mb-20">
+		<MainLayout title={t('members:title')} tw="mb-10 md:mb-20">
 			<header tw="grid-p-sm ">
-				<PageH1>VAS member</PageH1>
+				<PageH1>{t('members:title')}</PageH1>
 			</header>
 
 			<MemberInfoSet
-				heading="Current"
+				heading={t('members:current')}
 				members={data.filter((member) => member.isActive)}
 				tw="grid-p-sm "
 			/>
 
 			<MemberInfoSet
-				heading="Former"
+				heading={t('members:former')}
 				members={data.filter((member) => !member.isActive)}
 				tw="grid-p-sm mt-8 md:mt-14 xl:mt-20"
 			/>

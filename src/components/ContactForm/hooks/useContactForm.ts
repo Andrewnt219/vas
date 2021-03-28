@@ -35,34 +35,34 @@ export const useContactForm = (): [
 			labelText: t('contact-us:form.first-name'),
 			error: errors['first-name'],
 			register: register('first-name', {
-				required: t('contact-us:form.errors.required'),
+				required: t('common:form.errors.required'),
 			}),
 		},
 		'last-name': {
 			labelText: t('contact-us:form.last-name'),
 			register: register('last-name', {
-				required: t('contact-us:form.errors.required'),
+				required: t('common:form.errors.required'),
 			}),
 			error: errors['last-name'],
 		},
 		email: {
 			labelText: t('contact-us:form.email'),
 			register: register('email', {
-				required: t('contact-us:form.errors.required'),
+				required: t('common:form.errors.required'),
 			}),
 			error: errors['email'],
 		},
 		message: {
 			labelText: t('contact-us:form.message'),
 			register: register('message', {
-				required: t('contact-us:form.errors.required'),
+				required: t('common:form.errors.required'),
 			}),
 			error: errors['message'],
 		},
 		subject: {
 			labelText: t('contact-us:form.subject'),
 			register: register('subject', {
-				required: t('contact-us:form.errors.required'),
+				required: t('common:form.errors.required'),
 			}),
 
 			error: errors['subject'],

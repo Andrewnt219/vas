@@ -6,6 +6,7 @@ import { usePostsWithMeta as usePostsWithMeta } from '@src/hooks/usePostsWithMet
 import MainLayout from '@src/layouts/MainLayout';
 import { categoryPage } from '@src/server/utils/page-utils';
 import { InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
 
 const PAGE_CATEGORY: CategorySlug = 'events';
@@ -21,6 +22,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Events: VFC<Props> = ({ data: initialData, error: serverError }) => {
 	const { data, error } = usePostsWithMeta(PAGE_CATEGORY, initialData);
+	const { t } = useTranslation();
 
 	if (serverError || error) {
 		const message = serverError?.message ?? error?.message;
@@ -39,9 +41,8 @@ const Events: VFC<Props> = ({ data: initialData, error: serverError }) => {
 					imgSrc: require('images/hero/events.jpg'),
 					imgLqip: require('images/hero/events.jpg?lqip'),
 					imgAlt: 'a group of students attending an event at Senece College',
-					subtitle:
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-					title: 'Events',
+					subtitle: t('events:subtitle'),
+					title: t('events:title'),
 				}}
 			/>
 

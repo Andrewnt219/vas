@@ -8,6 +8,8 @@ import { AuthorModel } from '@lib/sanity/models/AuthorModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Trans from 'next-translate/Trans';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React, { VFC } from 'react';
 import tw, { styled } from 'twin.macro';
@@ -38,6 +40,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AboutUs: VFC<Props> = ({ data, error }) => {
+	const { t } = useTranslation();
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -47,7 +51,7 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 	}
 
 	return (
-		<MainLayout title="About us" tw="pb-20 mt-0 md:pb-36">
+		<MainLayout title={t('about-us:title')} tw="pb-20 mt-0 md:pb-36">
 			<PageBanner
 				tw="mb-0! col-span-full"
 				data={{
@@ -55,30 +59,27 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 						'A cheerful group photo of Vietnamese students in an Orientation',
 					imgLqip: require('images/hero/about-us.jpg?lqip'),
 					imgSrc: require('images/hero/about-us.jpg'),
-					title: 'What is VAS ?',
+					title: t('about-us:title'),
 				}}
 			/>
+
 			<Section tw="bg-gray-100 grid grid-cols-12">
 				<div tw="grid-p-sm xl:grid-p-md">
 					<header>
-						<SectionH1>About us</SectionH1>
-						<p tw="xl:text-center">
-							Lorem Ipsum has been the industry&apos;s standard dummy text ever
-							since the 1500s, when an unknown printer took a galley of type and
-							scrambled it to make a type specimen book. It has survived not
-							only five centuries, but also the leap into electronic
-							typesetting, remaining essentially unchanged. It was popularised
-							in the 1960s with the release of Letraset sheets containing Lorem
-							Ipsum passages, and more recently with desktop publishing software
-							like Aldus PageMaker including versions of Lorem Ipsum.
-						</p>
+						<SectionH1>{t('about-us:about-us.title')}</SectionH1>
+
+						<Trans
+							i18nKey="about-us:about-us.subtitle"
+							components={[<p key="p" tw="mb-8 xl:text-center" />]}
+						/>
 					</header>
 				</div>
 			</Section>
+
 			<Section tw="grid grid-cols-12 relative">
 				<div tw="grid-p-sm xl:(grid-p-md)">
 					<header>
-						<SectionH1>Our mission</SectionH1>
+						<SectionH1>{t('about-us:our-mission.title')}</SectionH1>
 					</header>
 
 					<EnhancedImage
@@ -91,18 +92,7 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					/>
 
 					<p tw="mt-7 md:mt-14 xl:text-center">
-						Contrary to popular belief, Lorem Ipsum is not simply random text.
-						It has roots in a piece of classical Latin literature from 45 BC,
-						making it over 2000 years old. Richard McClintock, a Latin professor
-						at Hampden-Sydney College in Virginia, looked up one of the more
-						obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-						going through the cites of the word in classical literature,
-						discovered the undoubtable source. Lorem Ipsum comes from sections
-						1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot;
-						(The Extremes of Good and Evil) by Cicero, written in 45 BC. This
-						book is a treatise on the theory of ethics, very popular during the
-						Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor
-						sit amet..&quot;, comes from a line in section 1.10.32.
+						{t('about-us:about-us.subtitle')}
 					</p>
 				</div>
 
@@ -274,9 +264,10 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					/>
 				</div>
 			</Section>
+
 			<Section tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-100 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) ">
 				<header>
-					<SectionH1>Our team</SectionH1>
+					<SectionH1>{t('about-us:our-team.title')}</SectionH1>
 				</header>
 
 				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16) 2xl:grid-cols-4">
@@ -291,7 +282,7 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 			<div tw="col-span-full mx-auto relative before:(content absolute w-full h-full top-2 -left-2 border-2 border-black)  ">
 				<NextLink href="/about-us/members" passHref>
 					<a tw="relative block z-10 border-2 border-black bg-white py-1 px-3 transition-colors hocus:(outline-none bg-primary text-white)  xl:(py-3 px-6 text-2xl)">
-						And more...{' '}
+						{t('about-us:our-team.more-button')}{' '}
 						<span tw="text-larger inline-block ml-6 md:ml-20 xl:ml-32">
 							&gt;
 						</span>

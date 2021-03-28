@@ -2,5 +2,16 @@
 	"hero": {
 		"title": "Vietnamese Association at Seneca College",
 		"subtitle": "The passenger flight no VN63 has landed safely in the \"promised\" land exploited and managed by VAS. Thanks for coming here! Let's visit and discover interesting things together in this land! If you come here with many questions that need to be answered, please visit the \"Let's Connect\" section right away, or book one of the super cute VAS tour-guides at the VAS \"Members\" section!"
+	},
+	"our-facts": {
+		"title": "Our facts",
+		"members": {
+			"value": "{{value}}",
+			"key": "members"
+		},
+		"projects": {
+			"value": "{{value}}",
+			"key": "projects"
+		}
 	}
 }

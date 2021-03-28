@@ -1,24 +1,28 @@
 {
-	"why": {
-		"title": "Why partner with VAS",
-		"subtitle": "Vietnamese Association at Seneca College (VAS) is one of the biggest Vietnamese Student Communities in Toronto, Canada.<0>Currently, VAS is holding the role of organizing different events from small to large scales for the Vietnamese Students not only Seneca but also other Toronto colleges. Therefore, many activities and events organized by VAS are now attracting a large number of students in different colleges in Toronto."
-	},
-	"benefits": {
-		"build": {
-			"title": "Build",
-			"subtitle": "Support our partner in approaching to Vietnamese Student at Seneca as well as other colleges in Toronto."
-		},
-		"expand": {
-			"title": "Expand",
-			"subtitle": " Help our partner in creating ideas and launching creative campaigns with our hard-working and dynamic teams."
-		},
-		"innovate": {
-			"title": "Innovate",
-			"subtitle": "Support each other in increasing new and unique solutions and strategies in approaching students."
-		},
-		"speak": {
-			"title": "Spark",
-			"subtitle": " Spark the interest of the next generation of Seneca College innovators and develop their talents in order to succeed in their futures."
-		}
-	}
+  "title": "Partnerships",
+  "why": {
+    "title": "<0>Why partner with <1>VAS</1></0>",
+    "subtitle": "Vietnamese Association at Seneca College (VAS) is one of the biggest Vietnamese Student Communities in Toronto, Canada.<0>Currently, VAS is holding the role of organizing different events from small to large scales for the Vietnamese Students not only Seneca but also other Toronto colleges. Therefore, many activities and events organized by VAS are now attracting a large number of students in different colleges in Toronto."
+  },
+  "benefits": {
+    "build": {
+      "title": "Build",
+      "subtitle": "Support our partner in approaching to Vietnamese Student at Seneca as well as other colleges in Toronto."
+    },
+    "expand": {
+      "title": "Expand",
+      "subtitle": " Help our partner in creating ideas and launching creative campaigns with our hard-working and dynamic teams."
+    },
+    "innovate": {
+      "title": "Innovate",
+      "subtitle": "Support each other in increasing new and unique solutions and strategies in approaching students."
+    },
+    "spark": {
+      "title": "Spark",
+      "subtitle": " Spark the interest of the next generation of Seneca College innovators and develop their talents in order to succeed in their futures."
+    }
+  },
+  "our-partners": {
+    "title": "Our partners"
+  }
 }
