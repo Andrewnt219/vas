@@ -22,7 +22,7 @@ export default {
 
 	initialValue: {
 		[isArchivedField.name]: false,
-		[publishedAtField.name]: new Date().toISOString(),
+		[publishedAtField.name]: new Date().toLocaleString(),
 		[authorField.name]: {
 			_ref: '683e1c33-cde6-4179-a0f3-586b8670dbe4', // dang-mai-phuong
 		},
