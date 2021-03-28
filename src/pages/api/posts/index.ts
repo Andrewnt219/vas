@@ -25,6 +25,7 @@ async function getHandler(
 	} else {
 		posts = await PostDataService.getPostsWithMeta(lang);
 	}
+
 	return res.status(200).json({
 		data: posts,
 		error: null,

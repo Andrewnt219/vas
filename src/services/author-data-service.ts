@@ -15,6 +15,12 @@ export class AuthorDataService {
 		);
 	}
 
+	public static countAuthors(): Promise<number> {
+		return this.cms.fetch(`
+			count(*[_type == 'author'])
+		`);
+	}
+
 	public static countActiveAuthors(): Promise<number> {
 		return this.cms.fetch(`
 			count(*[_type == 'author' && isActive])

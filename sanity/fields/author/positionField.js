@@ -8,6 +8,8 @@ export const positionField = {
 		list: [
 			{ title: 'President', value: 'President' },
 			{ title: 'Vice President', value: 'Vice President' },
+			{ title: 'Advisor', value: 'Advisor' },
+			{ title: 'Secretary', value: 'Secretary' },
 			{ title: 'Treasurer', value: 'Treasurer' },
 			{ title: 'Content Creator', value: 'Content Creator' },
 			{ title: 'Video Editor', value: 'Video Editor' },
