@@ -18,7 +18,7 @@ const pwaConfig = {
 	pwa: {
 		dest: 'public',
 		disable: process.env.NODE_ENV === 'development',
-		publicExcludes: ['!*.jpg', '!*.png', '!*.svg', '!svg', '!images', '!fonts'],
+		publicExcludes: ['!*.jpg', '!*.png', '!*.svg', '!svg', '!images'],
 		buildExcludes: [/chunks\/images\/.*$/, /static\/images\/.*$/],
 	},
 };
