@@ -23,13 +23,16 @@ const Partners: VFC<Props> = ({}) => {
 					<Trans
 						i18nKey="partnerships:why.title"
 						components={[
-							<h1 key="h1" tw="text-h3-variants" />,
+							<h1 key="h1" tw="text-h3-variants font-medium" />,
 							<span key="span" tw="text-primary" />,
 						]}
 					/>
 
 					<p tw="mt-4 md:(mt-10 ) xl:(w-1/2 mx-auto)">
-						{t`partnerships:why.subtitle`}
+						<Trans
+							i18nKey="partnerships:why.subtitle"
+							components={[<p key="p" tw="mb-8" />]}
+						/>
 					</p>
 				</header>
 

@@ -5,8 +5,8 @@ import tw, { styled } from 'twin.macro';
  */
 type SectionH1Props = {};
 const SectionH1 = styled.h1<SectionH1Props>`
-	${tw`mb-10 text-2xl md:text-4xl mx-auto max-w-max relative pb-2 md:(pb-4 mb-20)`}
-	${tw`lg:(text-5xl pb-8)`}
+	${tw`font-medium mb-10 text-2xl md:text-4xl mx-auto max-w-max relative pb-2 md:(pb-4 mb-20)`}
+	${tw`lg:(text-5xl pb-8 font-normal)`}
 
 	::after {
 		content: '';
