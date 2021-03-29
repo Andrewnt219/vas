@@ -57,6 +57,7 @@ module.exports = {
 
 			fontFamily: {
 				sans: ['DM Sans', ...fontFamily.sans],
+				viSans: ['Inter', ...fontFamily.sans],
 			},
 		},
 	},

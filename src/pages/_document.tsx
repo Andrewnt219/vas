@@ -69,22 +69,7 @@ export default class MyDocument extends Document {
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d73732" />
 					<meta name="msapplication-TileColor" content="#d73732" />
 					<meta name="theme-color" content="#d73732"></meta>
-
-					<link
-						rel="preload"
-						href="/fonts/dm-sans-v6-latin-500.woff2"
-						as="font"
-						type="font/woff2"
-						crossOrigin="anonymous"
-					/>
-
-					<link
-						rel="preload"
-						href="/fonts/dm-sans-v6-latin-700.woff2"
-						as="font"
-						type="font/woff2"
-						crossOrigin="anonymous"
-					/>
+					{/* TODO: preload web fonts based on lang and pages */}
 				</Head>
 				<body>
 					<Main />

@@ -65,14 +65,49 @@ export const bodyFontFace = css`
 	}
 `;
 
+const viFont = css`
+	/* inter-regular - vietnamese */
+	@font-face {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 400;
+		src: local(''),
+			url('/fonts/inter-v3-vietnamese-regular.woff2') format('woff2'),
+			/* Chrome 26+, Opera 23+, Firefox 39+ */
+				url('/fonts/inter-v3-vietnamese-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	}
+	/* inter-500 - vietnamese */
+	@font-face {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 500;
+		src: local(''), url('/fonts/inter-v3-vietnamese-500.woff2') format('woff2'),
+			/* Chrome 26+, Opera 23+, Firefox 39+ */
+				url('/fonts/inter-v3-vietnamese-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	}
+	/* inter-700 - vietnamese */
+	@font-face {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 700;
+		src: local(''), url('/fonts/inter-v3-vietnamese-700.woff2') format('woff2'),
+			/* Chrome 26+, Opera 23+, Firefox 39+ */
+				url('/fonts/inter-v3-vietnamese-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	}
+`;
+
 export const typographyStyles = css`
 	/* :root {
 		${tw`md:text-xl xl:text-2xl 2xl:text-3xl`}
 	} */
 
 	html:lang(vi-VN) {
-		/* font-family: 'san-serif'; */
+		${tw`font-viSans`}
+		${viFont}
 	}
 
-	${bodyFontFace}
+	html:lang(en-US) {
+		${tw`font-sans`}
+		${bodyFontFace}
+	}
 `;
