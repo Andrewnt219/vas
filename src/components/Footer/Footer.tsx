@@ -22,7 +22,7 @@ const Footer: VFC<Props> = ({ className }) => {
 				>
 					<li>
 						<MediaIconAnchor
-							href="https://facebook.com"
+							href="https://www.facebook.com/vasteam"
 							target="_blank"
 							rel="noreferrer noopener"
 							aria-label="Link to VAS's Facebook"
@@ -46,7 +46,7 @@ const Footer: VFC<Props> = ({ className }) => {
 
 					<li>
 						<MediaIconAnchor
-							href="https://youtube.com"
+							href="https://www.youtube.com/channel/UCHVaw94Zlf7vHrQIR8-cW7w"
 							target="_blank"
 							rel="noreferrer noopener"
 							aria-label="Link to VAS's Youtube"
@@ -65,7 +65,7 @@ const Footer: VFC<Props> = ({ className }) => {
 
 					<li>
 						<MediaIconAnchor
-							href="https://linkedin.com"
+							href="https://www.linkedin.com/company/vas-seneca"
 							target="_blank"
 							rel="noreferrer noopener"
 							aria-label="Link to VAS's LinkedIn"
@@ -92,8 +92,11 @@ const Footer: VFC<Props> = ({ className }) => {
 					</li>
 				</ul>
 
-				<a tw="mt-4 hocus:(underline outline-none)" href="mailto:vas@seneca.ca">
-					vas@seneca.ca
+				<a
+					tw="mt-4 hocus:(underline outline-none)"
+					href="mailto:vas.seneca@gmail.com"
+				>
+					vas.seneca@gmail.com
 				</a>
 			</div>
 		</footer>
