@@ -3,6 +3,7 @@ import { PostWihMeta } from '@common';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 import { useIncreaseView } from './useIncreaseView';
 import { useRelatedPosts } from './useRelatedPosts';
@@ -25,12 +26,16 @@ export const usePost = (
 		initialData?.relatedPosts
 	);
 
-	const { data: postData, error: postError } = useSWR<
+	const { data: postData, error: postError, revalidate } = useSWR<
 		UsePostData['post'] | null,
 		FetcherError
 	>(postSlug ? `/api/posts/${postSlug}` : null, postFetcher, {
 		initialData: initialData?.post,
 	});
+
+	useEffect(() => {
+		revalidate();
+	}, [revalidate]);
 
 	if (relatedPostError) {
 		return {

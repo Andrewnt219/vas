@@ -42,14 +42,14 @@ const EnhancedImage: VFC<Props> = ({ className, lqip, ...imageProps }) => {
 	return (
 		<div tw="relative" className={className}>
 			<img
-				tw="h-full w-full object-cover absolute top-0 left-0 opacity-100 duration-500 "
+				tw="h-full w-full object-cover absolute top-0 left-0 opacity-100 duration-500"
 				aria-hidden="true"
 				alt=""
 				ref={lqipRef}
 				src={lqip}
 			/>
 			<NextImage
-				tw="opacity-0 transition-opacity duration-300 "
+				tw="opacity-0 transition-opacity  duration-500"
 				onLoad={handleImageLoad}
 				onError={handleErrorLoad}
 				{...imageProps}

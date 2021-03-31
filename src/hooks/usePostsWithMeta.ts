@@ -2,6 +2,7 @@ import { PostResult, Result } from '@api-response';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
+import { useEffect } from 'react';
 import useSWR from 'swr';
 
 type ApiResponse = PostResult.GetIndex;
@@ -20,13 +21,17 @@ export const usePostsWithMeta = (
 	categorySlug: CategorySlug,
 	initialData?: UsePostsData | null
 ): Result<UsePostsData> => {
-	const { data, error } = useSWR<UsePostsData, FetcherError>(
+	const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(
 		['/api/posts', categorySlug],
 		fetcher,
 		{
 			initialData,
 		}
 	);
+
+	useEffect(() => {
+		revalidate();
+	}, [revalidate]);
 
 	if (error) {
 		return {

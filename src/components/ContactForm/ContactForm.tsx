@@ -14,7 +14,7 @@ function ContactForm({ className }: FormProps) {
 	const [formMethods, textFields] = useContactForm();
 
 	const { t } = useTranslation();
-	const [error, setError] = useState<string>();
+	const [error, setError] = useState<string>('');
 
 	const onSubmit = formMethods.handleSubmit((data) => {
 		axios
