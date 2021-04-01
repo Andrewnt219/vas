@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import React from 'react';
 
 type Props = { className?: string; date: Date; format?: string };
-
 function PublishedDate({ className, date, format = 'DD MMMM YYYY' }: Props) {
 	return (
 		<div

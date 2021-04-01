@@ -39,10 +39,14 @@ function EventCard({ className, data }: Props) {
 					<time dateTime={dayjs(data.fromDate).format('MMM DD')}>
 						{dayjs(data.fromDate).format('MMM DD')}
 					</time>{' '}
-					&#8211;{' '}
-					<time dateTime={dayjs(data.toDate).format('MMM DD')}>
-						{dayjs(data.toDate).format('MMM DD')}
-					</time>
+					{data.toDate && (
+						<>
+							&#8211;{' '}
+							<time dateTime={dayjs(data.toDate).format('MMM DD')}>
+								{dayjs(data.toDate).format('MMM DD')}
+							</time>
+						</>
+					)}
 				</p>
 
 				<p tw="md:text-right">Location: {data.location}</p>
