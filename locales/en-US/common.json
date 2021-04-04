@@ -12,7 +12,7 @@
 	},
 	"locales": {
 		"en-US": "English",
-		"vi-VN": "Vietnamese"
+		"vi": "Vietnamese"
 	},
 	"navbar": {
 		"home": "Home",

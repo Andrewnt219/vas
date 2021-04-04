@@ -1,5 +1,5 @@
 {
-	"locales": ["en-US", "vi-VN"],
+	"locales": ["en-US", "vi"],
 	"defaultLocale": "en-US",
 	"pages": {
 		"/contact-us": ["contact-us"],

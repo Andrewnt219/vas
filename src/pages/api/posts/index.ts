@@ -1,9 +1,8 @@
 import { Result } from '@api-response';
 import { PostWihMeta } from '@common';
-import { DEFAULT_LANGUAGE } from '@data/localization-data';
 import { PostDataService } from '@services/post-data-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
-import { isValidCategorySlug, isValidLocale } from '@utils/validate-utils';
+import { isValidCategorySlug } from '@utils/validate-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function getHandler(
@@ -12,8 +11,7 @@ async function getHandler(
 ) {
 	const { categorySlug } = req.query;
 
-	const NEXT_LOCALE = getLocaleCookie(req);
-	const lang = isValidLocale(NEXT_LOCALE) ? NEXT_LOCALE : DEFAULT_LANGUAGE;
+	const lang = getLocaleCookie(req);
 
 	let posts: PostWihMeta[];
 

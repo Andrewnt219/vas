@@ -101,7 +101,7 @@ export const typographyStyles = css`
 		${tw`md:text-xl xl:text-2xl 2xl:text-3xl`}
 	} */
 
-	html:lang(vi-VN) {
+	html:lang(vi) {
 		${tw`font-viSans`}
 		${viFont}
 	}

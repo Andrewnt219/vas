@@ -1,5 +1,10 @@
 import { Result, ResultError } from '@api-response';
-import { Handler, isValidHttpMethod } from '@utils/validate-utils';
+import { Language } from '@data/localization-data';
+import {
+	Handler,
+	isValidHttpMethod,
+	tryParseLocale,
+} from '@utils/validate-utils';
 import cookie from 'cookie';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
@@ -40,10 +45,10 @@ export function errorHandler(
 }
 
 /* -------------------------------------------------------------------------- */
-export function getLocaleCookie(req: NextApiRequest): string {
+export function getLocaleCookie(req: NextApiRequest): Language {
 	const { NEXT_LOCALE } = cookie.parse(req.headers.cookie ?? '');
 
-	return NEXT_LOCALE ?? '';
+	return tryParseLocale(NEXT_LOCALE);
 }
 
 /* -------------------------------------------------------------------------- */

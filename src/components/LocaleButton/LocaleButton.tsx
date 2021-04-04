@@ -22,8 +22,8 @@ function LocaleButton({ className }: Props) {
 			text: t('common:locales.en-US'),
 			iconSrc: '/svg/american-flag.svg',
 		},
-		'vi-VN': {
-			text: t('common:locales.vi-VN'),
+		vi: {
+			text: t('common:locales.vi'),
 			iconSrc: '/svg/vietnam-flag.svg',
 		},
 	};

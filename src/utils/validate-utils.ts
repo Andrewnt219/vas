@@ -1,8 +1,18 @@
 import { CategorySlug, categorySlugs } from '@lib/sanity/models/CategoryModel';
-import { Language, languages } from '@src/data/localization-data';
+import {
+	DEFAULT_LANGUAGE,
+	Language,
+	languages,
+} from '@src/data/localization-data';
 
 export function isValidLocale(locale: any): locale is Language {
 	return languages.includes(locale);
+}
+
+/* -------------------------------------------------------------------------- */
+
+export function tryParseLocale(locale: any): Language {
+	return isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
 }
 /* -------------------------------------------------------------------------- */
 
