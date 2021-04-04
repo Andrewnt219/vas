@@ -12,7 +12,7 @@ import { css } from 'twin.macro';
 type Props = { className?: string };
 
 function LocaleButton({ className }: Props) {
-	const { locale, asPath } = useRouter();
+	const { locale, pathname, query, asPath } = useRouter();
 	const { t } = useTranslation();
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -50,7 +50,12 @@ function LocaleButton({ className }: Props) {
 									height: 1.25em;
 								`}
 							/>
-							<NextLink href={{ href: asPath }} locale={key} passHref>
+							<NextLink
+								href={{ pathname, query }}
+								as={asPath}
+								locale={key}
+								passHref
+							>
 								<StyledDropDownItem isActive={locale == key}>
 									{value.text}
 								</StyledDropDownItem>

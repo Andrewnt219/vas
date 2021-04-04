@@ -11,7 +11,7 @@ export const useLocaleSerivce = (): Language => {
 		const lang = isValidLocale(locale) ? locale : DEFAULT_LANGUAGE;
 
 		LocaleDataService.setLocale(lang);
-		document.cookie = `NEXT_LOCALE=${lang};max-age=60*60*24*365`;
+		document.cookie = `NEXT_LOCALE=${lang};max-age=60*60*24*365;path=/`;
 	}, [locale]);
 
 	return LocaleDataService.getLocale();
