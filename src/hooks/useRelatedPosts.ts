@@ -2,6 +2,7 @@ import { PostResult, Result } from '@api-response';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
@@ -23,9 +24,11 @@ export const useRelatedPosts = (
 		AxiosError<PostResult.GetRelatedPost>
 	>(['/api/posts/relatedPosts', postSlug], fetcher, { initialData });
 
+	const { locale } = useRouter();
+
 	useEffect(() => {
 		revalidate();
-	}, [revalidate]);
+	}, [revalidate, locale]);
 
 	if (error) {
 		return {

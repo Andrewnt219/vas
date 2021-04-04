@@ -3,6 +3,7 @@ import { PostWihMeta } from '@common';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 import { useIncreaseView } from './useIncreaseView';
@@ -33,9 +34,11 @@ export const usePost = (
 		initialData: initialData?.post,
 	});
 
+	const { locale, asPath } = useRouter();
+
 	useEffect(() => {
 		revalidate();
-	}, [revalidate]);
+	}, [revalidate, locale]);
 
 	if (relatedPostError) {
 		return {

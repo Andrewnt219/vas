@@ -2,6 +2,7 @@ import { PostResult, Result } from '@api-response';
 import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
@@ -29,9 +30,11 @@ export const usePostsWithMeta = (
 		}
 	);
 
+	const { locale } = useRouter();
+
 	useEffect(() => {
 		revalidate();
-	}, [revalidate]);
+	}, [revalidate, locale]);
 
 	if (error) {
 		return {
