@@ -18,8 +18,8 @@ function LocaleButton({ className }: Props) {
 
 	const isVisibleDropdown = useDropdown(containerRef);
 	const locales: Record<Language, { text: string; iconSrc: string }> = {
-		'en-US': {
-			text: t('common:locales.en-US'),
+		'en-us': {
+			text: t('common:locales.en-us'),
 			iconSrc: '/svg/american-flag.svg',
 		},
 		vi: {
@@ -30,7 +30,7 @@ function LocaleButton({ className }: Props) {
 
 	const currentLocale = isValidLocale(locale)
 		? locales[locale]
-		: locales['en-US'];
+		: locales['en-us'];
 
 	return (
 		<div className={className} tw="relative mt-4" ref={containerRef}>

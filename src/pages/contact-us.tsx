@@ -14,6 +14,7 @@ const ContactUs: VFC<Props> = ({}) => {
 			>
 				Let&apos;s connect
 			</h1>
+
 			<div tw="col-span-full xl:(block top-20 relative z-10 col-span-7 row-start-2 row-end-3 self-end)">
 				<EnhancedImage
 					src={require('images/contact-us.png')}

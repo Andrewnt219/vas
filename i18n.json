@@ -1,6 +1,6 @@
 {
-	"locales": ["en-US", "vi"],
-	"defaultLocale": "en-US",
+	"locales": ["en-us", "vi"],
+	"defaultLocale": "en-us",
 	"pages": {
 		"/contact-us": ["contact-us"],
 
