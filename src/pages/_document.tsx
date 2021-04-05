@@ -1,3 +1,4 @@
+import GAscripts from '@components/scripts/GAscripts';
 import Document, {
 	DocumentContext,
 	Head,
@@ -69,6 +70,7 @@ export default class MyDocument extends Document {
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d73732" />
 					<meta name="msapplication-TileColor" content="#d73732" />
 					<meta name="theme-color" content="#d73732"></meta>
+					<GAscripts />
 					{/* TODO: preload web fonts based on lang and pages */}
 				</Head>
 				<body>
