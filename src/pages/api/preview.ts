@@ -1,59 +1,59 @@
-import { Result } from "@api-response";
-import { Client, linkResolver } from "@root/prismic-configuration";
-import { isNullOrUndefined } from "@utils/validate-utils";
-import { NextApiRequest, NextApiResponse } from "next";
+import { Result } from '@api-response';
+import { Client, linkResolver } from '@root/prismic-configuration';
+import { isNullOrUndefined } from '@utils/validate-utils';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const preview = async (
-  req: NextApiRequest,
-  res: NextApiResponse<Result<void>>
+	req: NextApiRequest,
+	res: NextApiResponse<Result<void>>
 ) => {
-  const { query } = req;
+	const { query } = req;
 
-  if (!isValidQuery(query)) {
-    return res
-      .status(400)
-      .json({ data: null, error: { message: "Invalid token or documentId" } });
-  }
+	if (!isValidQuery(query)) {
+		return res
+			.status(400)
+			.json({ data: null, error: { message: 'Invalid token or documentId' } });
+	}
 
-  const { token: ref, documentId } = query;
+	const { token: ref, documentId } = query;
 
-  const redirectUrl = await Client(req)
-    .getPreviewResolver(ref, documentId)
-    .resolve(linkResolver, "/");
+	const redirectUrl = await Client(req)
+		.getPreviewResolver(ref, documentId)
+		.resolve(linkResolver, '/');
 
-  if (!redirectUrl) {
-    return res
-      .status(401)
-      .json({ data: null, error: { message: "Invalid token" } });
-  }
+	if (!redirectUrl) {
+		return res
+			.status(401)
+			.json({ data: null, error: { message: 'Invalid token' } });
+	}
 
-  res.setPreviewData({ ref });
+	res.setPreviewData({ ref });
 
-  // Redirect the user to the share endpoint from same origin. This is
-  // necessary due to a Chrome bug:
-  // https://bugs.chromium.org/p/chromium/issues/detail?id=696204
-  res.write(
-    `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${redirectUrl}" />
+	// Redirect the user to the share endpoint from same origin. This is
+	// necessary due to a Chrome bug:
+	// https://bugs.chromium.org/p/chromium/issues/detail?id=696204
+	res.write(
+		`<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${redirectUrl}" />
     <script>window.location.href = '${redirectUrl}'</script>
     </head>`
-  );
+	);
 
-  res.end();
+	res.end();
 };
 
 type ValidQuery = {
-  token: string;
-  documentId: string;
+	token: string;
+	documentId: string;
 };
 
-function isValidQuery(query: NextApiRequest["query"]): query is ValidQuery {
-  const { token: ref, documentId } = query;
+function isValidQuery(query: NextApiRequest['query']): query is ValidQuery {
+	const { token: ref, documentId } = query;
 
-  return (
-    !isNullOrUndefined(ref) &&
-    !Array.isArray(ref) &&
-    !isNullOrUndefined(documentId)
-  );
+	return (
+		!isNullOrUndefined(ref) &&
+		!Array.isArray(ref) &&
+		!isNullOrUndefined(documentId)
+	);
 }
 
 export default preview;
