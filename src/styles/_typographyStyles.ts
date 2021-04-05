@@ -106,7 +106,7 @@ export const typographyStyles = css`
 		${viFont}
 	}
 
-	html:lang(en-US) {
+	html:lang(en-us) {
 		${tw`font-sans`}
 		${bodyFontFace}
 	}

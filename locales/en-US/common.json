@@ -11,7 +11,7 @@
 		}
 	},
 	"locales": {
-		"en-US": "English",
+		"en-us": "English",
 		"vi": "Vietnamese"
 	},
 	"navbar": {

@@ -11,7 +11,7 @@
 		}
 	},
 	"locales": {
-		"en-US": "Tiếng Anh",
+		"en-us": "Tiếng Anh",
 		"vi": "Tiếng Việt"
 	},
 	"navbar": {
