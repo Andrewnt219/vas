@@ -1,6 +1,7 @@
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import { uid } from 'uid/single';
 import HyperlinkSerializer from './components/serializers/HyperlinkSerializer/HyperlinkSerializer';
+import ImageSerializer from './components/serializers/ImageSerializer/ImageSerializer';
 import ListItemSerializer from './components/serializers/ListItemSerializer/ListItemSerializer';
 import ListSerializer from './components/serializers/ListSerializer/ListSerializer';
 import TextSerializer from './components/serializers/TextSerializer/TextSerializer';
@@ -50,6 +51,8 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 				</ListItemSerializer>
 			);
 
+		case Elements.image:
+			return <ImageSerializer data={element} />;
 		default:
 			return null;
 	}

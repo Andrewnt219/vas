@@ -42,7 +42,7 @@ const nextConfig = {
 	},
 	images: {
 		imageSizes: [],
-		domains: ['cdn.sanity.io'],
+		domains: ['cdn.sanity.io', 'images.prismic.io'],
 	},
 };
 
