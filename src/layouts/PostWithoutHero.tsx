@@ -6,14 +6,19 @@ import MainLayout from '@layouts/MainLayout';
 import { PostModel } from '@lib/sanity/models/PostModel';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
+import { urlFor } from '@lib/sanity/utils/sanity-api-utils';
 import BlockContent from '@sanity/block-content-to-react';
+import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import dayjs from 'dayjs';
+import Head from 'next/head';
 import NextLink from 'next/link';
 import React from 'react';
 
 type Props = Result<{ post: PostWihMeta; relatedPosts: PostModel[] }>;
 
 const PostWithoutHero = ({ data, error }: Props) => {
+	const location = useCurrentLocation();
+
 	if (error) {
 		return <h1>{error.message}</h1>;
 	}
@@ -27,6 +32,45 @@ const PostWithoutHero = ({ data, error }: Props) => {
 
 	return (
 		<MainLayout title={post.title} tw="pb-0!">
+			<Head>
+				<meta property="og:url" content={location} />
+				<meta property="og:type" content="article" />
+				<meta property="og:title" content={data.post.title} />
+				<meta property="og:description" content={data.post.snippet} />
+				<meta
+					property="og:image"
+					content={urlFor(data.post.thumbnail.url)
+						.format('jpg')
+						.width(1500)
+						.url()
+						?.toString()}
+				/>
+				<meta
+					property="og:image:width"
+					content={data.post.thumbnail.metadata.width.toString()}
+				/>
+				<meta
+					property="og:image:height"
+					content={data.post.thumbnail.metadata.height.toString()}
+				/>
+
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={data.post.title} />
+				<meta name="twitter:description" content={data.post.snippet} />
+				<meta
+					name="twitter:image"
+					content={urlFor(data.post.thumbnail.url)
+						.format('jpg')
+						.width(1500)
+						.url()
+						?.toString()}
+				/>
+
+				<meta
+					property="article:published_time"
+					content={new Date(data.post.publishedAt).toISOString()}
+				/>
+			</Head>
 			<section tw="col-span-full md:text-2xl">
 				<Post.Wrapper as="header">
 					{displayedHashtag && (

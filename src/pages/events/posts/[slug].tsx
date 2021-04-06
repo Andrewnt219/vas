@@ -5,11 +5,14 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import MainLayout from '@layouts/MainLayout';
 import { sanityClient } from '@lib/sanity/sanity-clients';
 import { postSerializer } from '@lib/sanity/serializers/post-serializer';
+import { urlFor } from '@lib/sanity/utils/sanity-api-utils';
 import BlockContent from '@sanity/block-content-to-react';
+import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { usePost } from '@src/hooks/usePost';
 import { postPage } from '@src/server/utils/page-utils';
 import dayjs from 'dayjs';
 import { InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import React from 'react';
 
 /* -------------------------------------------------------------------------- */
@@ -26,6 +29,8 @@ export const getStaticPaths = postPage.getStaticPathsByCategorySlug('events');
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const EventPost = ({ data: serverData, error: serverError }: Props) => {
+	const location = useCurrentLocation();
+
 	const { data, error } = usePost(serverData?.post.slug, serverData);
 
 	if (serverError || error) {
@@ -42,6 +47,46 @@ const EventPost = ({ data: serverData, error: serverError }: Props) => {
 
 	return (
 		<MainLayout title={post.title} tw="pb-0! md:text-2xl">
+			<Head>
+				<meta property="og:url" content={location} />
+				<meta property="og:type" content="article" />
+				<meta property="og:title" content={data.post.title} />
+				<meta property="og:description" content={data.post.snippet} />
+				<meta
+					property="og:image"
+					content={urlFor(data.post.thumbnail.url)
+						.format('jpg')
+						.width(1500)
+						.url()
+						?.toString()}
+				/>
+				<meta
+					property="og:image:width"
+					content={data.post.thumbnail.metadata.width.toString()}
+				/>
+				<meta
+					property="og:image:height"
+					content={data.post.thumbnail.metadata.height.toString()}
+				/>
+
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={data.post.title} />
+				<meta name="twitter:description" content={data.post.snippet} />
+				<meta
+					name="twitter:image"
+					content={urlFor(data.post.thumbnail.url)
+						.format('jpg')
+						.width(1500)
+						.url()
+						?.toString()}
+				/>
+
+				<meta
+					property="article:published_time"
+					content={new Date(data.post.publishedAt).toISOString()}
+				/>
+			</Head>
+
 			<section tw="col-span-full ">
 				<Post.Wrapper as="header">
 					<PublishedDate date={new Date(post.publishedAt)} />
