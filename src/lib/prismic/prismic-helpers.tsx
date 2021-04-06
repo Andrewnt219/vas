@@ -1,6 +1,9 @@
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import { uid } from 'uid/single';
-import { Serializer } from './components/Serializers/Serializer';
+import HyperlinkSerializer from './components/serializers/HyperlinkSerializer/HyperlinkSerializer';
+import ListItemSerializer from './components/serializers/ListItemSerializer/ListItemSerializer';
+import ListSerializer from './components/serializers/ListSerializer/ListSerializer';
+import TextSerializer from './components/serializers/TextSerializer/TextSerializer';
 /* -------------------------------------------------------------------------- */
 
 export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
@@ -13,9 +16,38 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 	switch (type) {
 		case Elements.hyperlink:
 			return (
-				<Serializer.Hyperlink data={element.data} key={uid(8)}>
+				<HyperlinkSerializer data={element.data} key={uid(8)}>
 					{children}
-				</Serializer.Hyperlink>
+				</HyperlinkSerializer>
+			);
+
+		case Elements.heading1:
+		case Elements.heading2:
+		case Elements.heading3:
+		case Elements.heading4:
+		case Elements.heading5:
+		case Elements.heading6:
+		case Elements.paragraph:
+			return (
+				<TextSerializer data={element} key={uid(8)}>
+					{children}
+				</TextSerializer>
+			);
+
+		case Elements.list:
+		case Elements.oList:
+			return (
+				<ListSerializer data={element} key={uid(8)}>
+					{children}
+				</ListSerializer>
+			);
+
+		case Elements.oListItem:
+		case Elements.listItem:
+			return (
+				<ListItemSerializer data={element} key={uid(8)}>
+					{children}
+				</ListItemSerializer>
 			);
 
 		default:

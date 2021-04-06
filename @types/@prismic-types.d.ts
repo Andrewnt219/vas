@@ -1,8 +1,23 @@
 declare module '@prismic-types' {
 	import { Language } from '@data/localization-data';
 	import { Document } from '@prismicio/client/types/documents';
+	import { RichTextBlock as PMrichTextBlock } from 'prismic-reactjs';
 
 	type CustomType = 'post' | 'member' | 'category' | 'hashtag' | 'page';
+
+	type RichTextBlock<T extends string> = Omit<PMrichTextBlock, 'type'> & {
+		type: T;
+	};
+
+	type TextBlock = RichTextBlock<
+		| 'heading1'
+		| 'heading2'
+		| 'heading3'
+		| 'heading4'
+		| 'heading5'
+		| 'heading6'
+		| 'paragraph'
+	>;
 
 	type LinkedItem = Pick<Document, 'id' | 'tags' | 'slug' | 'uid'> & {
 		link_type: 'Document';
@@ -45,4 +60,61 @@ declare module '@prismic-types' {
 	type Document<T> = Omit<Document, 'data'> & {
 		data: T;
 	};
+
+	type LinkEmbed = {
+		type: 'link';
+		embed_url: string;
+		prover_name: string;
+		thumbnail_url: string;
+		version: string;
+		url: string;
+		html: string;
+	};
+
+	type VideoEmbed = {
+		type: 'video';
+		embed_url: string;
+		provider_name: string;
+		thumbnail_url: string;
+		provider_url: string;
+		author_name: string;
+		author_url: string;
+		height: number;
+		width: number;
+		version: string;
+		thumbnail_height: number;
+		thumbnail_width: number;
+		html: string;
+	};
+
+	type RichEmbed = {
+		type: 'rich';
+		embed_url: string;
+		title: string | null;
+		provider_name: string; // Spotify
+		thumbnail_url: string;
+		provider_url: string;
+		html: string;
+		width: number;
+		height: number;
+		version: string;
+		thumbnail_width: number;
+		thumbnail_height: number;
+		author_name?: string;
+	};
+
+	type Embed = {
+		type: 'embed';
+		oembed: RichEmbed | LinkEmbed | VideoEmbed;
+	};
+
+	type OList = RichTextBlock<'group-o-list-item'>;
+	type UList = RichTextBlock<'group-list-item'>;
+
+	type List = OList | UList;
+
+	type OListItem = RichTextBlock<'o-list-item'>;
+	type UListItem = RichTextBlock<'list-item'>;
+
+	type ListItem = OListItem | UListItem;
 }

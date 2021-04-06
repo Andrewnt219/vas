@@ -1,4 +1,5 @@
 import { Result } from '@api-response';
+import Post from '@components/Post/Post';
 import MainLayout from '@layouts/MainLayout';
 import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
 import {
@@ -10,35 +11,59 @@ import { Document } from '@prismic-types';
 import Prismic from '@prismicio/client';
 import { PMclient } from '@root/prismic-configuration';
 import { isString, tryParseLocale } from '@utils/validate-utils';
+import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
-import 'twin.macro';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function Post({ data, error, preview }: Props) {
+function PostUid({ data: postDoc, error, preview }: Props) {
 	if (error) {
 		return <h1>Something went wrong</h1>;
 	}
 
-	if (!data) {
+	if (!postDoc) {
 		return <h2>Loading</h2>;
 	}
 
-	return (
-		<MainLayout
-			title={RichText.asText(data.data.title)}
-			isPreviewMode={preview}
-		>
-			<section tw="col-span-full">
-				<header>
-					<h2>{RichText.asText(data.data.title)}</h2>
-				</header>
+	const displayedHashtag = postDoc.data.hashtags?.[0].hashtag;
+	const { data: postData } = postDoc;
 
-				{data.data.body.map((slice, index) => (
-					<SliceZone slice={slice} key={`slice-${index}`} />
-				))}
+	return (
+		<MainLayout title={RichText.asText(postData.title)} isPreviewMode={preview}>
+			<section tw="col-span-full leading-relaxed! md:text-lg xl:text-xl">
+				<Post.Wrapper as="header">
+					{displayedHashtag && (
+						<NextLink href={`/hashtags/${displayedHashtag.uid}`} passHref>
+							<a tw="block transition-colors text-primary underline decorator-transparent hocus:(decorator-primary) xl:(font-bold text-primary)">
+								{RichText.asText(displayedHashtag.data.title)}
+							</a>
+						</NextLink>
+					)}
+
+					<Post.Title tw="my-2 md:my-5">
+						{RichText.asText(postData.title)}
+					</Post.Title>
+
+					<time
+						tw="text-gray-200 text-smaller italic"
+						dateTime={dayjs(postDoc.last_publication_date ?? Date.now()).format(
+							'YYYY-MM-DD'
+						)}
+					>
+						{dayjs(postDoc.last_publication_date ?? Date.now()).format(
+							'MMMM DD, YYYY'
+						)}
+					</time>
+				</Post.Wrapper>
+
+				<Post.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
+					{postData.body.map((slice, index) => (
+						<SliceZone slice={slice} key={`slice-${index}`} />
+					))}
+				</Post.Wrapper>
 			</section>
 		</MainLayout>
 	);
@@ -115,4 +140,4 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 		fallback: true,
 	};
 };
-export default Post;
+export default PostUid;
