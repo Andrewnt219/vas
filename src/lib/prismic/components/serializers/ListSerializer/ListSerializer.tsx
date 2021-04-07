@@ -8,7 +8,6 @@ type Props = {
 };
 
 function ListSerializer({ data, children }: Props) {
-	console.log(data.type);
 	return (
 		<StyledList as={data.type === 'group-o-list-item' ? 'ol' : 'ul'}>
 			{children}

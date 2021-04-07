@@ -5,7 +5,6 @@ import ImageSerializer from './components/serializers/ImageSerializer/ImageSeria
 import ListItemSerializer from './components/serializers/ListItemSerializer/ListItemSerializer';
 import ListSerializer from './components/serializers/ListSerializer/ListSerializer';
 import TextSerializer from './components/serializers/TextSerializer/TextSerializer';
-/* -------------------------------------------------------------------------- */
 
 export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 	type,
@@ -52,7 +51,7 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 			);
 
 		case Elements.image:
-			return <ImageSerializer data={element} />;
+			return <ImageSerializer data={element} key={uid(8)} />;
 		default:
 			return null;
 	}
