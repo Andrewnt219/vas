@@ -17,7 +17,6 @@ function ImageSerializer({ className, data }: Props) {
 			src={getLqip(imgSrc)}
 			data-srcset={getSrcSet(imgSrc)}
 			data-src={imgSrc}
-			// TODO change sizes here
 			sizes="(min-width: 65ch) 65ch, 100vw"
 			tw="w-full"
 			className={className}

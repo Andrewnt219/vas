@@ -1,6 +1,15 @@
 {
 	"headers": [
 		{
+			"source": "/sw.js",
+			"headers": [
+				{
+					"key": "x-robots-tag",
+					"value": ""
+				}
+			]
+		},
+		{
 			"source": "/(.*)",
 			"headers": [
 				{ "key": "Access-Control-Allow-Credentials", "value": "true" },

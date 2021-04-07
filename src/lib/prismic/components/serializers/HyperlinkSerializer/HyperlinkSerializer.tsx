@@ -1,7 +1,9 @@
+import StyledLink from '@components/StyledLink/StyledLink';
 import { Hyperlink } from '@prismic-types';
 import { hrefResolver, linkResolver } from '@root/prismic-configuration';
 import NextLink from 'next/link';
 import { ReactNode } from 'react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 type HyperlinkProps = {
 	className?: string;
 	data: Hyperlink;
@@ -12,13 +14,13 @@ function HyperlinkSerializer({ className, data, children }: HyperlinkProps) {
 	if (data.link_type === 'Document') {
 		return (
 			<NextLink href={hrefResolver(data)} as={linkResolver(data)} passHref>
-				<a className={className}>{children}</a>
+				<StyledLink className={className}>{children}</StyledLink>
 			</NextLink>
 		);
 	}
 
 	return (
-		<a
+		<StyledLink
 			href={data.url}
 			target="_blank"
 			rel="noopener noreferrer"
@@ -26,7 +28,8 @@ function HyperlinkSerializer({ className, data, children }: HyperlinkProps) {
 			tw=""
 		>
 			{children}
-		</a>
+			<FaExternalLinkAlt />
+		</StyledLink>
 	);
 }
 

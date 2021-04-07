@@ -40,10 +40,6 @@ const nextConfig = {
 
 		return config;
 	},
-	images: {
-		imageSizes: [],
-		domains: ['cdn.sanity.io', 'images.prismic.io'],
-	},
 };
 
 module.exports = withPlugins(
