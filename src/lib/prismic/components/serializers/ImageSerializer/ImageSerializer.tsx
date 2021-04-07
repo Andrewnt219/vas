@@ -1,5 +1,6 @@
 import { Asset } from '@prismic-types';
 import { useImageSwap } from '@src/hooks/useImageSwap';
+import { getLqip, getSrcSet } from '@utils/imgix-utils';
 import React from 'react';
 import 'twin.macro';
 
@@ -9,20 +10,15 @@ function ImageSerializer({ className, data }: Props) {
 	const imgSrc = `${data.url}&fm=webp`;
 	const imgRef = useImageSwap();
 
-	// TODO create a utility for srcset and data
-	// TODO do we even need responsive blur
 	return (
 		<img
-			srcSet={`${imgSrc}&w=500&px=10&blur=200`}
-			src={`${imgSrc}&w=500&px=10&blur=200`}
-			data-srcset={`
-				${imgSrc}&w=1024 1024w,
-				${imgSrc}&w=640 640w,
-				${imgSrc}&w=480 480w
-			`}
-			data-src={imgSrc}
-			sizes="(min-width: 36em) 33.3vw, 100vw"
 			ref={imgRef}
+			srcSet={getLqip(imgSrc)}
+			src={getLqip(imgSrc)}
+			data-srcset={getSrcSet(imgSrc)}
+			data-src={imgSrc}
+			// TODO change sizes here
+			sizes="(min-width: 65ch) 65ch, 100vw"
 			tw="w-full"
 			className={className}
 			alt={data.alt ?? 'Missing alternative text'}
