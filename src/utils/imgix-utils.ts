@@ -7,7 +7,8 @@ export const getSrcSet = (imgSrc: string): string => {
     ${imgSrc}&w=1080 1080w,
     ${imgSrc}&w=828 828w,
     ${imgSrc}&w=750 750w,
-    ${imgSrc}&w=640 640w
+    ${imgSrc}&w=640 640w,
+    ${imgSrc}&w=480 480w
   `;
 };
 

@@ -18,7 +18,7 @@ function ImageSerializer({ className, data }: Props) {
 			data-srcset={getSrcSet(imgSrc)}
 			data-src={imgSrc}
 			sizes="(min-width: 65ch) 65ch, 100vw"
-			tw="w-full"
+			tw="w-full rounded"
 			className={className}
 			alt={data.alt ?? 'Missing alternative text'}
 			width={data.dimensions.width}
