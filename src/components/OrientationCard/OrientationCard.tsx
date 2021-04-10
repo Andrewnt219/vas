@@ -1,7 +1,8 @@
 import Button from '@components/Button/Button';
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
-import { scaleImageCss } from '@styles/apply';
+import Image from '@components/Image/Image';
+import { Format } from '@data/common-data';
+import { Post } from '@model';
+import { getPostLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
@@ -9,24 +10,25 @@ import tw, { styled } from 'twin.macro';
 
 type Props = {
 	className?: string;
-	data: OrientationCardModel;
+	data: Post;
 	isMain?: boolean;
 };
 
-function OrientationCard({ className, data, isMain }: Props) {
+function OrientationCard({ className, data: post, isMain }: Props) {
+	const postLink = getPostLink(post.uid ?? '');
+	const fromDate = dayjs(post.data.from_date ?? Date.now());
+	const toDate = dayjs(post.data.to_date ?? Date.now());
+
 	return (
 		<div className={className} tw="">
 			<article className={className}>
 				<ImageContainer isMain={isMain}>
-					<NextLink href={`/events/posts/${data.slug}`}>
+					<NextLink href={postLink}>
 						<a>
-							<EnhancedImage
-								css={scaleImageCss}
+							<Image
 								tw="img-absolute absolute!"
-								src={data.thumbnail.url}
-								lqip={data.thumbnail.metadata.lqip}
-								alt={data.thumbnail.alt ?? ''}
-								layout="fill"
+								imgSrc={post.data.thumbnail.url}
+								alt={post.data.thumbnail.alt ?? 'Missing alternative text'}
 							/>
 						</a>
 					</NextLink>
@@ -34,8 +36,8 @@ function OrientationCard({ className, data, isMain }: Props) {
 
 				<header tw="mt-2  md:(mt-4 mb-2) xl:(mt-7 mb-6)">
 					<h2 tw="font-bold text-lg md:text-2xl xl:text-4xl">
-						<NextLink href={`/events/posts/${data.slug}`}>
-							<a>{data.title}</a>
+						<NextLink href={postLink}>
+							<a>{post.data.title}</a>
 						</NextLink>
 					</h2>
 				</header>
@@ -45,21 +47,21 @@ function OrientationCard({ className, data, isMain }: Props) {
 						<div tw="font-medium text-lg">
 							<p>
 								Time:{' '}
-								<time dateTime={dayjs(data.fromDate).format('DD/MM')}>
-									{dayjs(data.fromDate).format('DD/MM')}
+								<time dateTime={fromDate.format(Format.DATE)}>
+									{fromDate.format(Format.SHORT_DATE)}
 								</time>{' '}
 								&#8211;{' '}
-								<time dateTime={dayjs(data.toDate).format('DD/MM')}>
-									{dayjs(data.toDate).format('DD/MM')}
+								<time dateTime={toDate.format(Format.DATE)}>
+									{toDate.format(Format.SHORT_DATE)}
 								</time>
 							</p>
-							<p>Location: {data.location}</p>
+							<p>Location: {post.data.location}</p>
 						</div>
 
 						<div tw="text-base mt-4 text-gray-200 md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
-							<p tw="mb-2 xl:mb-4">{data.snippet}</p>
+							<p tw="mb-2 xl:mb-4">{post.data.snippet}</p>
 
-							<NextLink href={`/events/posts/${data.slug}`} passHref>
+							<NextLink href={postLink} passHref>
 								<Button variant="link" as="a" tw="mt-9 italic">
 									Read more...
 								</Button>

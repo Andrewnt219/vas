@@ -6,7 +6,7 @@ import { HashtagModel } from './HashtagModel';
 import { MemberModel } from './MemberModel';
 
 export type PostModel = {
-	title: RichTextBlock[];
+	title: string;
 	author: LinkedData<MemberModel>;
 	categories: [{ category: LinkedData<CategoryModel> }];
 	hashtags: [{ hashtag: LinkedData<HashtagModel> }];
@@ -15,6 +15,7 @@ export type PostModel = {
 	to_date: string | null;
 	location: string | null;
 	thumbnail: Asset;
+	snippet: RichTextBlock[];
 };
 
 export type PostDocument = Document<PostModel>;

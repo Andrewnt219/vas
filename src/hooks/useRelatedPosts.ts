@@ -1,5 +1,5 @@
 import { PostResult, Result } from '@api-response';
-import { PostModel } from '@lib/sanity/models/PostModel';
+import { RelatedPostsResult } from '@services/post-service';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -17,10 +17,10 @@ const fetcher = (endpoint: string, postSlug: string) =>
 
 export const useRelatedPosts = (
 	postSlug: string | undefined,
-	initialData?: PostModel[]
-): Result<PostModel[]> => {
+	initialData?: RelatedPostsResult
+): Result<RelatedPostsResult> => {
 	const { data, error, revalidate } = useSWR<
-		PostModel[] | null,
+		RelatedPostsResult | null,
 		AxiosError<PostResult.GetRelatedPost>
 	>(['/api/posts/relatedPosts', postSlug], fetcher, { initialData });
 

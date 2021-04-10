@@ -1,20 +1,20 @@
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import { NewsCardModel } from '@lib/sanity/models/NewsCardModel';
+import Image from '@components/Image/Image';
+import { Post } from '@model';
 import { scaleImageCss } from '@styles/apply';
-import { getControllerFromPath } from '@utils/route-utils';
+import { getPostLink } from '@utils/route-utils';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+import { RichText } from 'prismic-reactjs';
 import React from 'react';
 
 type Props = {
 	className?: string;
-	data: NewsCardModel;
+	post: Post;
 };
 
 // TODO add author below title
-function NewsCard({ className, data }: Props) {
-	const { asPath } = useRouter();
-	const controller = getControllerFromPath(asPath) ?? '';
+function NewsCard({ className, post }: Props) {
+	const postLink = getPostLink(post.uid ?? post.id);
+	const hashtag = post.data.hashtags?.[0]?.hashtag;
 
 	return (
 		<article className={className} tw="">
@@ -22,15 +22,13 @@ function NewsCard({ className, data }: Props) {
 
 			<div tw="mt-6 grid md:(mt-12 grid-cols-2 gap-x-8)  xl:(grid-cols-3 )">
 				<div tw="relative pb-xs border border-black border-opacity-50 xl:(col-start-1 col-end-2 pb-sm)">
-					<NextLink href={`/${controller}/posts/${data.slug}`}>
+					<NextLink href={postLink}>
 						<a>
-							<EnhancedImage
+							<Image
 								tw="img-absolute absolute!"
 								css={scaleImageCss}
-								src={data.thumbnail.url}
-								lqip={data.thumbnail.metadata.lqip}
-								alt={data.thumbnail.alt ?? ''}
-								layout="fill"
+								imgSrc={post.data.thumbnail.url}
+								alt={post.data.thumbnail.alt ?? ''}
 							/>
 						</a>
 					</NextLink>
@@ -38,22 +36,21 @@ function NewsCard({ className, data }: Props) {
 
 				<div tw="mt-4 md:mt-0 xl:(col-start-2 col-end-4 flex flex-col justify-between)">
 					<header>
-						<p tw="text-primary md:text-xl">
-							{data.hashtags?.[0]?.title ?? '--'}
-						</p>
+						<p tw="text-primary md:text-xl">{hashtag.data.title ?? '--'}</p>
 
 						<h2 tw="font-bold text-xl  md:text-3xl hocus:(underline text-primary) xl:(text-4xl mt-5)">
-							<NextLink href={`/${controller}/posts/${data.slug}`}>
-								<a>{data.title}</a>
+							<NextLink href={postLink}>
+								<a>{post.data.title}</a>
 							</NextLink>
 						</h2>
 						<p tw="mt-4 text-gray-200 md:text-newsBody xl:mt-8">
-							{data.snippet}
+							<RichText render={post.data.snippet} />
 						</p>
 					</header>
 
 					<p tw="mt-8 text-right text-gray-200 md:text-xl xl:(mt-0 text-left)">
-						{data.views} views &#47; {data.comments.length} comments
+						{post.meta?.views ?? 0} views &#47;{' '}
+						{post.meta?.comments.length ?? 0} comments
 					</p>
 				</div>
 			</div>

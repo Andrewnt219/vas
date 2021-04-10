@@ -1,5 +1,4 @@
 import { PostResult, Result } from '@api-response';
-import { CategorySlug } from '@lib/sanity/models/CategoryModel';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -10,7 +9,7 @@ type ApiResponse = PostResult.GetIndex;
 type FetcherError = AxiosError<ApiResponse>;
 type UsePostsData = ApiResponse['data'];
 
-const fetcher = (endpoint: string, categorySlug: CategorySlug) =>
+const fetcher = (endpoint: string, categorySlug: string) =>
 	axios
 		.get<ApiResponse>(endpoint, {
 			params: {
@@ -19,7 +18,7 @@ const fetcher = (endpoint: string, categorySlug: CategorySlug) =>
 		})
 		.then((res) => res.data.data);
 export const usePostsWithMeta = (
-	categorySlug: CategorySlug,
+	categorySlug: string,
 	initialData?: UsePostsData | null
 ): Result<UsePostsData> => {
 	const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(

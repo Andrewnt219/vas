@@ -1,17 +1,25 @@
+import { Language } from '@data/localization-data';
 import firestore from '@lib/firestore/firestore';
 import {
-	HashtagModel,
-	hashtagModelQuery,
-} from '@lib/sanity/models/HashtagModel';
-import { sanityClient } from '@lib/sanity/sanity-clients';
+	HashtagDocument,
+	hashtagQuery,
+} from '@lib/prismic/models/HashtagModel';
+import {
+	defaultQueryOptionsFactory,
+	Predicates,
+} from '@lib/prismic/prismic-helpers';
+import { PMclient } from '@root/prismic-configuration';
 
 export class HashtagDataService {
 	private static collection = firestore.collection('hashtags');
-	private static cms = sanityClient;
+	private static cms = PMclient;
 
-	public static async getHashtags(): Promise<HashtagModel[]> {
-		return this.cms.fetch(`
-      *[_type = 'hashtag'] ${hashtagModelQuery}
-    `);
+	public static async getHashtags(lang: Language): Promise<HashtagDocument[]> {
+		const query = Predicates.at('document.type', 'hashtag');
+		const options = getDefaultQuery(lang);
+
+		return (await this.cms.query(query, options)).results as HashtagDocument[];
 	}
 }
+
+const getDefaultQuery = defaultQueryOptionsFactory(hashtagQuery);

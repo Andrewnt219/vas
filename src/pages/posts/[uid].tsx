@@ -1,143 +1,131 @@
 import { Result } from '@api-response';
-import Post from '@components/Post/Post';
-import MainLayout from '@layouts/MainLayout';
-import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
+import PostWithoutHero from '@layouts/PostWithoutHero';
+import { Post } from '@model';
+import { PostService } from '@services/post-service';
 import {
-	PostDocument,
-	PostModel,
-	postQuery,
-} from '@lib/prismic/models/PostModel';
-import { Document } from '@prismic-types';
-import Prismic from '@prismicio/client';
-import { PMclient } from '@root/prismic-configuration';
-import { isString, tryParseLocale } from '@utils/validate-utils';
-import dayjs from 'dayjs';
+	errorStatcPropsHandler,
+	errorStaticPathsHandler,
+} from '@src/server/utils/page-utils';
+import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import NextLink from 'next/link';
-import { RichText } from 'prismic-reactjs';
 import React from 'react';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function PostUid({ data: postDoc, error, preview }: Props) {
+function PostUid({ data, error, preview, meta }: Props) {
 	if (error) {
-		return <h1>Something went wrong</h1>;
+		return <h1>{error.message}</h1>;
 	}
 
-	if (!postDoc) {
+	if (!data) {
 		return <h2>Loading</h2>;
 	}
 
-	const displayedHashtag = postDoc.data.hashtags?.[0].hashtag;
-	const { data: postData } = postDoc;
+	const categoryUID = data.post.data.categories?.[0].category.uid;
+	switch (categoryUID) {
+		case 'blog':
+		case 'news':
+			return (
+				<PostWithoutHero
+					post={data.post}
+					relatedPosts={data.relatedPosts}
+					isPreviewMode={preview}
+				/>
+			);
 
-	return (
-		<MainLayout title={RichText.asText(postData.title)} isPreviewMode={preview}>
-			<section tw="col-span-full leading-relaxed! md:text-lg xl:text-xl">
-				<Post.Wrapper as="header">
-					{displayedHashtag && (
-						<NextLink href={`/hashtags/${displayedHashtag.uid}`} passHref>
-							<a tw="block transition-colors text-primary underline decorator-transparent hocus:(decorator-primary) xl:(font-bold text-primary)">
-								{RichText.asText(displayedHashtag.data.title)}
-							</a>
-						</NextLink>
-					)}
+		case 'events':
+		case 'orientation':
+		case 'tet':
+			return (
+				<PostWithoutHero
+					isPreviewMode={preview}
+					post={data.post}
+					relatedPosts={data.relatedPosts}
+				/>
+			);
 
-					<Post.Title tw="my-2 md:my-5">
-						{RichText.asText(postData.title)}
-					</Post.Title>
-
-					<time
-						tw="text-gray-200 text-smaller italic"
-						dateTime={dayjs(postDoc.last_publication_date ?? Date.now()).format(
-							'YYYY-MM-DD'
-						)}
-					>
-						{dayjs(postDoc.last_publication_date ?? Date.now()).format(
-							'MMMM DD, YYYY'
-						)}
-					</time>
-				</Post.Wrapper>
-
-				<Post.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
-					{postData.body.map((slice, index) => (
-						<SliceZone slice={slice} key={`slice-${index}`} />
-					))}
-				</Post.Wrapper>
-			</section>
-		</MainLayout>
-	);
+		default:
+			return <h1>Fail to get post</h1>;
+	}
 }
-
-type StaticProps = Result<Document<PostModel>> & {
+type StaticProps = Result<{ post: Post; relatedPosts: Post[] }> & {
 	preview: boolean;
 };
 
 type Params = {
 	uid: string;
 };
+
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 	params,
 	locale,
 	preview = false,
 	previewData = {},
 }) => {
-	const { ref } = previewData;
+	try {
+		const { ref } = previewData;
 
-	const uid = params?.uid;
+		const uid = params?.uid;
 
-	if (!uid) {
+		if (!uid) {
+			return {
+				props: {
+					data: null,
+					error: {
+						message: 'Missing uid',
+					},
+					preview,
+				},
+			};
+		}
+
+		const { main, relatedPosts } = await PostService.getRelatedPosts(
+			uid,
+			tryParseLocale(locale),
+			ref
+		);
+
+		if (!main) {
+			return {
+				props: {
+					data: null,
+					error: { message: 'Post not found' },
+					preview: preview,
+				},
+			};
+		}
+
 		return {
 			props: {
-				data: null,
-				error: {
-					message: 'Missing uid',
+				data: {
+					post: main,
+					relatedPosts,
 				},
+				error: null,
 				preview,
 			},
+			revalidate: 60,
 		};
+	} catch (error) {
+		return errorStatcPropsHandler(error);
 	}
-
-	const post = (await PMclient.getByUID('post', uid, {
-		graphQuery: postQuery,
-		lang: tryParseLocale(locale),
-		ref,
-	})) as Document<PostModel>;
-
-	if (!post) {
-		return {
-			props: {
-				data: null,
-				error: { message: 'Post not found' },
-				preview: preview,
-			},
-		};
-	}
-
-	return {
-		props: {
-			data: post,
-			error: null,
-			preview: preview,
-		},
-		revalidate: 60,
-	};
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-	const response = await PMclient.query(
-		Prismic.Predicates.at('document.type', 'post'),
-		{ graphQuery: postQuery }
-	);
+	try {
+		const posts = await PostService.getPosts('*');
 
-	const uids = response.results
-		.map((result: PostDocument) => result.uid)
-		.filter(isString);
-	const paths = uids.map((uid) => ({ params: { uid } }));
+		const paths = posts.map((post) => ({
+			params: { uid: post.uid ?? '' },
+			locale: post.lang,
+		}));
 
-	return {
-		paths,
-		fallback: true,
-	};
+		return {
+			paths,
+			fallback: true,
+		};
+	} catch (error) {
+		return errorStaticPathsHandler(error);
+	}
 };
 export default PostUid;

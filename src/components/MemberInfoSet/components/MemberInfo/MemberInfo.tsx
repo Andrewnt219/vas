@@ -1,11 +1,11 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import { MemberDocument } from '@lib/prismic/models/MemberModel';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-type Props = { className?: string; data: AuthorModel };
+type Props = { className?: string; data: MemberDocument };
 
-function MemberInfo({ className, data }: Props) {
+function MemberInfo({ className, data: { data } }: Props) {
 	const { t } = useTranslation();
 
 	return (
@@ -21,10 +21,10 @@ function MemberInfo({ className, data }: Props) {
 			<div tw="col-span-2">
 				<p tw="font-bold">{data.title}</p>
 				<p>{data.positions.join(', ')}</p>
-				{data.linkedin && (
+				{data.linked_in && (
 					<a
 						tw="block underline"
-						href={data.linkedin}
+						href={data.linked_in}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -33,7 +33,7 @@ function MemberInfo({ className, data }: Props) {
 				)}
 				<p>
 					{t('common:status')}:{' '}
-					{data.isActive ? t('common:active') : t('common:inactive')}
+					{data.is_active ? t('common:active') : t('common:inactive')}
 				</p>
 			</div>
 		</article>

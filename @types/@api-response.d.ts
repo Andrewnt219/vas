@@ -1,7 +1,9 @@
 declare module '@api-response' {
-	import { PostWihMeta } from '@common';
 	import { FsPost } from '@lib/firestore/models/FsPost';
-	import { PostModel } from '@lib/sanity/models/PostModel';
+	import { Post } from '@model';
+	import { RelatedPostsResult } from '@services/post-service';
+	import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
+
 	type Error = {
 		message: string;
 	};
@@ -11,17 +13,24 @@ declare module '@api-response' {
 		data: null;
 	};
 
-	type Result<Data> = {
+	type StaticPropsError = GetStaticPropsResult<
+		ResultError & { preview: boolean }
+	>;
+
+	type StaticPathError = GetStaticPathsResult<any>;
+
+	type Result<Data, Meta = {}> = {
 		error: Error | null;
 		data: Data | null;
+		meta?: Meta;
 	};
 
 	namespace PostResult {
 		type PatchIncreaseView = Result<FsPost>;
-		type GetSlug = Result<PostWihMeta>;
+		type GetUID = Result<Post>;
 
-		type GetRelatedPost = Result<PostModel[]>;
+		type GetRelatedPost = Result<RelatedPostsResult>;
 
-		type GetIndex = Result<PostWihMeta[]>;
+		type GetIndex = Result<Post[]>;
 	}
 }

@@ -9,7 +9,7 @@ const QuoteSlice = ({ slice }: Props) => (
 		<StyledBlockquote>{RichText.asText(slice.primary.quote)}</StyledBlockquote>
 
 		<figcaption tw="text-gray-200  text-center uppercase">
-			{RichText.asText(slice.primary.name_of_the_author)}
+			{RichText.render(slice.primary.name_of_the_author)}
 		</figcaption>
 	</figure>
 );

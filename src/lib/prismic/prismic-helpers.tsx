@@ -1,3 +1,5 @@
+import { Language } from '@data/localization-data';
+import Prismic from '@prismicio/client';
 import { Elements, HTMLSerializer } from 'prismic-reactjs';
 import { uid } from 'uid/single';
 import HyperlinkSerializer from './components/serializers/HyperlinkSerializer/HyperlinkSerializer';
@@ -5,7 +7,6 @@ import ImageSerializer from './components/serializers/ImageSerializer/ImageSeria
 import ListItemSerializer from './components/serializers/ListItemSerializer/ListItemSerializer';
 import ListSerializer from './components/serializers/ListSerializer/ListSerializer';
 import TextSerializer from './components/serializers/TextSerializer/TextSerializer';
-
 export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 	type,
 	element,
@@ -56,3 +57,10 @@ export const htmlSerializer: HTMLSerializer<React.ReactNode> = (
 			return null;
 	}
 };
+
+export const Predicates = Prismic.Predicates;
+
+export const defaultQueryOptionsFactory = (modelQuery: string) => (
+	lang: Language,
+	otherOptions?: Record<string, any>
+) => ({ graphQuery: modelQuery, lang, ...otherOptions });

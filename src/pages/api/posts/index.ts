@@ -1,27 +1,22 @@
-import { Result } from '@api-response';
-import { PostWihMeta } from '@common';
-import { PostDataService } from '@services/post-data-service';
+import { PostResult } from '@api-response';
+import { Post } from '@model';
+import { PostService } from '@services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
-import { isValidCategorySlug } from '@utils/validate-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function getHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<Result<PostWihMeta[]>>
+	res: NextApiResponse<PostResult.GetIndex>
 ) {
-	const { categorySlug } = req.query;
-
+	const { categoryUID } = req.query;
 	const lang = getLocaleCookie(req);
 
-	let posts: PostWihMeta[];
+	let posts: Post[];
 
-	if (categorySlug && isValidCategorySlug(categorySlug)) {
-		posts = await PostDataService.getPostsWithMetaByCategory(
-			categorySlug,
-			lang
-		);
+	if (categoryUID && !Array.isArray(categoryUID)) {
+		posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
 	} else {
-		posts = await PostDataService.getPostsWithMeta(lang);
+		posts = await PostService.getPosts(lang);
 	}
 
 	return res.status(200).json({

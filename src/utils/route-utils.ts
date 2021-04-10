@@ -11,3 +11,8 @@ export function getControllerFromPath(path: string) {
 
 	return null;
 }
+
+/* -------------------------------------------------------------------------- */
+export const getHashtagLink = (hashtagUID: string) => `/hashtags/${hashtagUID}`;
+export const getPostLink = (postUID: string) => `/posts/${postUID}`;
+export const getCategoryLink = (categoryUID: string) => `/${categoryUID}`;

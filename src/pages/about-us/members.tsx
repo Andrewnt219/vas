@@ -2,9 +2,10 @@ import { Result } from '@api-response';
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
 import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
-import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import { MemberDocument } from '@lib/prismic/models/MemberModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
+import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -12,10 +13,12 @@ import React from 'react';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Result<AuthorModel[]>;
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+type StaticProps = Result<MemberDocument[]>;
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+	locale,
+}) => {
 	try {
-		const authors = await AuthorDataService.getAuthors();
+		const authors = await AuthorDataService.getAuthors(tryParseLocale(locale));
 
 		return {
 			props: {
@@ -54,13 +57,13 @@ function Members({ data, error }: Props) {
 
 			<MemberInfoSet
 				heading={t('members:current')}
-				members={data.filter((member) => member.isActive)}
+				members={data.filter((doc) => doc.data.is_active)}
 				tw="grid-p-sm "
 			/>
 
 			<MemberInfoSet
 				heading={t('members:former')}
-				members={data.filter((member) => !member.isActive)}
+				members={data.filter((doc) => !doc.data.is_active)}
 				tw="grid-p-sm mt-8 md:mt-14 xl:mt-20"
 			/>
 		</MainLayout>

@@ -1,9 +1,17 @@
-import { Asset } from "@prismic-types";
-import { RichTextBlock } from "prismic-reactjs";
+import { Asset, Document } from '@prismic-types';
+import { RichTextBlock } from 'prismic-reactjs';
 
 export type CategoryModel = {
-  uid: string;
-  title: RichTextBlock[];
-  description: string;
-  thumbnail: Asset;
+	uid: string;
+	title: string;
+	description: RichTextBlock[] | null;
+	thumbnail: Asset;
 };
+
+export const categoryQuery = `{
+  category {
+    ...categoryFields
+  }
+}`;
+
+export type CategoryDocument = Document<CategoryModel>;

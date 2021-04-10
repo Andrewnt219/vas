@@ -49,26 +49,31 @@ export const routes: (Route | Dropdown)[] = [
 		type: 'dropdown',
 		i18nKey: 'events.text',
 		exact: false,
-		href: '/events',
+		href: '/categories/event',
 		children: [
-			{ type: 'route', i18nKey: 'events.index', href: '/events', exact: true },
+			{
+				type: 'route',
+				i18nKey: 'events.index',
+				href: '/categories/event',
+				exact: true,
+			},
 			{
 				type: 'route',
 				i18nKey: 'events.orientations',
-				href: '/events/orientations',
+				href: '/categories/orientation',
 			},
-			{ type: 'route', i18nKey: 'events.tet', href: '/events/tet' },
+			{ type: 'route', i18nKey: 'events.tet', href: '/categories/tet' },
 		],
 	},
 	{
 		type: 'route',
 		i18nKey: 'news',
-		href: '/news',
+		href: '/categories/news',
 	},
 	{
 		type: 'route',
 		i18nKey: 'blog',
-		href: '/blogs',
+		href: '/categories/blog',
 	},
 	{
 		type: 'route',

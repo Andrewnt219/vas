@@ -1,61 +1,60 @@
-import { Result } from '@api-response';
-import { PostWihMeta } from '@common';
-import Post from '@components/Post/Post';
+import PostComponents from '@components/Post/Post';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
+import { Format } from '@data/common-data';
 import MainLayout from '@layouts/MainLayout';
-import { PostModel } from '@lib/sanity/models/PostModel';
-import { sanityClient } from '@lib/sanity/sanity-clients';
-import { postSerializer } from '@lib/sanity/serializers/post-serializer';
-import BlockContent from '@sanity/block-content-to-react';
+import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
+import { Post } from '@model';
+import { getHashtagLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
 
-type Props = Result<{ post: PostWihMeta; relatedPosts: PostModel[] }>;
+type Props = { post: Post; relatedPosts: Post[]; isPreviewMode?: boolean };
 
-const PostWithoutHero = ({ data, error }: Props) => {
-	if (error) {
-		return <h1>{error.message}</h1>;
-	}
+const PostWithoutHero = ({
+	post,
+	relatedPosts,
+	isPreviewMode = false,
+}: Props) => {
+	// FIXME
+	// const { data, error } = usePost(serverData?.post.slug, serverData);
 
-	if (!data) {
-		return <h1>Fetching post...</h1>;
-	}
-
-	const { post, relatedPosts } = data;
-	const displayedHashtag = post.hashtags?.[0];
+	const displayedHashtag = post.data.hashtags[0]?.hashtag;
+	const publishDate = dayjs(post.first_publication_date ?? Date.now());
 
 	return (
-		<MainLayout title={post.title} tw="pb-0!">
+		<MainLayout
+			title={post.data.title}
+			tw="pb-0!"
+			isPreviewMode={isPreviewMode}
+		>
 			<section tw="col-span-full md:text-2xl">
-				<Post.Wrapper as="header">
+				<PostComponents.Wrapper as="header">
 					{displayedHashtag && (
-						<NextLink href={post.hashtagUrl} passHref>
+						<NextLink href={getHashtagLink(displayedHashtag.data.uid)} passHref>
 							<a tw="block transition-colors text-primary underline decorator-transparent hocus:(decorator-primary) xl:(font-bold text-primary)">
-								{displayedHashtag.title}
+								{displayedHashtag.data.title}
 							</a>
 						</NextLink>
 					)}
 
-					<Post.Title tw="my-2 md:my-5">{post.title}</Post.Title>
+					<PostComponents.Title tw="my-2 md:my-5">
+						{post.data.title}
+					</PostComponents.Title>
 
 					<time
 						tw="text-gray-200 text-smaller italic"
-						dateTime={dayjs(post.publishedAt).format('YYYY-MM-DD')}
+						dateTime={publishDate.format(Format.DATE)}
 					>
-						{dayjs(post.publishedAt).format('MMMM DD, YYYY')}
+						{publishDate.format(Format.DATE_TEXT)}
 					</time>
-				</Post.Wrapper>
+				</PostComponents.Wrapper>
 
-				<Post.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
-					<BlockContent
-						blocks={post.body}
-						projectId={sanityClient.config().projectId}
-						dataset={sanityClient.config().dataset}
-						serializers={postSerializer}
-						imageOptions={{ fit: 'clip', auto: 'format' }}
-					/>
-				</Post.Wrapper>
+				<PostComponents.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
+					{post.data.body.map((slice, index) => (
+						<SliceZone slice={slice} key={`slice-${index}`} />
+					))}
+				</PostComponents.Wrapper>
 			</section>
 
 			<RelatedPosts posts={relatedPosts} heading="read more" />

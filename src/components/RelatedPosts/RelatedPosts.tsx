@@ -1,23 +1,24 @@
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import { PostModel } from '@lib/sanity/models/PostModel';
+import { Post } from '@model';
 import NextLink from 'next/link';
 import React from 'react';
 
-type Post = Pick<PostModel, 'title' | 'slug' | 'thumbnail' | 'postUrl'>;
-function Post({ data }: { data: Post }) {
-	const { title, thumbnail } = data;
+type PostItemProps = {
+	data: Post;
+};
+function PostItem({ data }: PostItemProps) {
+	const postData = data.data;
+	const postUrl = `/posts/${data.uid ?? ''}`;
 
 	return (
 		<article>
 			<div tw="relative pb-xs md:pb-sm">
-				<NextLink href={data.postUrl} passHref>
+				<NextLink href={postUrl} passHref>
 					<a>
-						<EnhancedImage
+						<img
+							// TODO recreate enhaned image
 							tw="img-absolute absolute!"
-							lqip={thumbnail.metadata.lqip}
-							src={thumbnail.url}
-							alt={thumbnail.alt ?? 'A thumbnail for the post'}
-							layout="fill"
+							src={postData.thumbnail.url}
+							alt={postData.thumbnail.url ?? 'A thumbnail for the post'}
 						/>
 					</a>
 				</NextLink>
@@ -25,8 +26,8 @@ function Post({ data }: { data: Post }) {
 
 			<header>
 				<h1 tw="mt-2 md:mt-4">
-					<NextLink href={data.postUrl} passHref>
-						<a tw="font-medium ">{title}</a>
+					<NextLink href={postUrl} passHref>
+						<a tw="font-medium ">{postData.title}</a>
 					</NextLink>
 				</h1>
 			</header>
@@ -48,8 +49,8 @@ function RelatedPosts({ className, heading, posts }: Props) {
 
 			<ul tw="mt-8 grid grid-cols-1 gap-y-6 md:(grid-cols-2 gap-x-4 mt-10) xl:(grid-cols-3 gap-x-12 ) 2xl:(grid-cols-4)">
 				{posts.map((post) => (
-					<li key={post.slug}>
-						<Post data={post} />
+					<li key={post.id}>
+						<PostItem data={post} />
 					</li>
 				))}
 			</ul>

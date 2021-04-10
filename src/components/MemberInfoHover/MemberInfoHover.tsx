@@ -1,9 +1,9 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import { MemberModel } from '@lib/prismic/models/MemberModel';
 import React from 'react';
 import { css } from 'twin.macro';
 
-type Props = { className?: string; data: AuthorModel };
+type Props = { className?: string; data: MemberModel };
 
 function MemberInfoHover({ className, data }: Props) {
 	return (

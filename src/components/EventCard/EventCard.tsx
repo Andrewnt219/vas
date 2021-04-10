@@ -1,34 +1,40 @@
 import Button from '@components/Button/Button';
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
+import Image from '@components/Image/Image';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
-import { EventCardModel } from '@lib/sanity/models/EventCardModel';
+import { Format } from '@data/common-data';
+import { Post } from '@model';
+import { getPostLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
+import { RichText } from 'prismic-reactjs';
 import React from 'react';
 
-type Props = { className?: string; data: EventCardModel };
+type Props = { className?: string; data: Post };
 
-function EventCard({ className, data }: Props) {
+function EventCard({ className, data: postDoc }: Props) {
+	const publishedAt = new Date(postDoc.first_publication_date ?? '');
+	const fromDate = dayjs(postDoc.data.from_date ?? Date.now());
+	const toDate = dayjs(postDoc.data.from_date ?? Date.now());
+	const postLink = getPostLink(postDoc.uid ?? '');
+
 	return (
 		<article className={className} tw="space-y-4 xl:space-y-14">
-			<PublishedDate date={new Date(data.publishedAt)} />
+			<PublishedDate date={new Date(publishedAt)} />
 
 			<h2 tw=" font-bold text-xl md:text-title">
-				<NextLink href={`/events/posts/${data.slug}`}>
-					<a>{data.title}</a>
+				<NextLink href={postLink}>
+					<a>{postDoc.data.title}</a>
 				</NextLink>
 			</h2>
 
 			<div tw="grid md:grid-cols-2  text-body font-medium md:text-lg">
 				<div tw="relative col-span-full pb-xs mb-4 md:(mb-6 pb-2xs)">
-					<NextLink href={`/events/posts/${data.slug}`}>
+					<NextLink href={postLink}>
 						<a>
-							<EnhancedImage
+							<Image
 								tw="img-absolute absolute!"
-								src={data.thumbnail.url}
-								lqip={data.thumbnail.metadata.lqip}
-								alt={data.thumbnail.alt ?? ''}
-								layout="fill"
+								imgSrc={postDoc.data.thumbnail.url}
+								alt={postDoc.data.thumbnail.alt ?? ''}
 							/>
 						</a>
 					</NextLink>
@@ -36,26 +42,28 @@ function EventCard({ className, data }: Props) {
 
 				<p>
 					Time:{' '}
-					<time dateTime={dayjs(data.fromDate).format('MMM DD')}>
-						{dayjs(data.fromDate).format('MMM DD')}
+					<time dateTime={fromDate.format(Format.SHORT_TEXT_DATE)}>
+						{fromDate.format(Format.SHORT_TEXT_DATE)}
 					</time>{' '}
-					{data.toDate && (
+					{postDoc.data.to_date && (
 						<>
 							&#8211;{' '}
-							<time dateTime={dayjs(data.toDate).format('MMM DD')}>
-								{dayjs(data.toDate).format('MMM DD')}
+							<time dateTime={toDate.format(Format.SHORT_TEXT_DATE)}>
+								{toDate.format(Format.SHORT_TEXT_DATE)}
 							</time>
 						</>
 					)}
 				</p>
 
-				<p tw="md:text-right">Location: {data.location}</p>
+				<p tw="md:text-right">Location: {postDoc.data.location}</p>
 			</div>
 
 			<div tw="text-base text-gray-200 md:text-newsBody">
-				<p tw="mb-4 md:mb-6">{data.snippet}</p>
+				<div tw="mb-4 md:mb-6">
+					<RichText render={postDoc.data.snippet} />
+				</div>
 
-				<NextLink href={`/events/posts/${data.slug}`} passHref>
+				<NextLink href={postLink} passHref>
 					<Button as="a" variant="link" tw="italic">
 						Read more ...
 					</Button>

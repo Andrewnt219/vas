@@ -1,23 +1,8 @@
 declare module '@prismic-types' {
 	import { Language } from '@data/localization-data';
 	import { Document } from '@prismicio/client/types/documents';
-	import { RichTextBlock as PMrichTextBlock } from 'prismic-reactjs';
-
+	import { RichTextBlock } from 'prismic-reactjs';
 	type CustomType = 'post' | 'member' | 'category' | 'hashtag' | 'page';
-
-	type RichTextBlock<T extends string> = Omit<PMrichTextBlock, 'type'> & {
-		type: T;
-	};
-
-	type TextBlock = RichTextBlock<
-		| 'heading1'
-		| 'heading2'
-		| 'heading3'
-		| 'heading4'
-		| 'heading5'
-		| 'heading6'
-		| 'paragraph'
-	>;
 
 	type LinkedItem = Pick<Document, 'id' | 'tags' | 'slug' | 'uid'> & {
 		link_type: 'Document';
@@ -108,13 +93,13 @@ declare module '@prismic-types' {
 		oembed: RichEmbed | LinkEmbed | VideoEmbed;
 	};
 
-	type OList = RichTextBlock<'group-o-list-item'>;
-	type UList = RichTextBlock<'group-list-item'>;
+	type OList = RichTextBlock;
+	type UList = RichTextBlock;
 
 	type List = OList | UList;
 
-	type OListItem = RichTextBlock<'o-list-item'>;
-	type UListItem = RichTextBlock<'list-item'>;
+	type OListItem = RichTextBlock;
+	type UListItem = RichTextBlock;
 
 	type ListItem = OListItem | UListItem;
 }

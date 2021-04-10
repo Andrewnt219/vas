@@ -1,5 +1,6 @@
 declare module '@prismic-slices' {
-	import { Asset, RichText } from '@prismic-types';
+	import { Asset } from '@prismic-types';
+	import { RichTextBlock } from 'prismic-reactjs';
 
 	export type Slice = QuoteSlice | TextSlice | ImageWithCaptionSlice;
 
@@ -8,7 +9,7 @@ declare module '@prismic-slices' {
 		slice_label: null;
 		items: unknown[];
 		primary: {
-			text: RichText[];
+			text: RichTextBlock[];
 		};
 	};
 
@@ -27,8 +28,8 @@ declare module '@prismic-slices' {
 		slice_label: null;
 		items: unknown[];
 		primary: {
-			quote: RichText[];
-			name_of_the_author: RichText[];
+			quote: RichTextBlock[];
+			name_of_the_author: RichTextBlock[];
 			portrait_author: Asset;
 		};
 	};

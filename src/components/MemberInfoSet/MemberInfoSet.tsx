@@ -23,10 +23,7 @@ function MemberInfoSet({ className, heading, members }: Props) {
 
 			<ul tw="grid grid-cols-12 gap-y-4 md:(gap-y-8 gap-x-4) xl:(gap-y-16 gap-x-8)">
 				{members.map((member) => (
-					<li
-						tw="col-span-full md:col-span-4 2xl:col-span-3"
-						key={member.title}
-					>
+					<li tw="col-span-full md:col-span-4 2xl:col-span-3" key={member.id}>
 						<MemberInfo data={member} />
 					</li>
 				))}

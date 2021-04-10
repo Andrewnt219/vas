@@ -1,29 +1,26 @@
 import Button from '@components/Button/Button';
 import OrientationCard from '@components/OrientationCard/OrientationCard';
 import PageBanner from '@components/PageBanner/PageBanner';
-import { OrientationCardModel } from '@lib/sanity/models/OrientationCardModel';
+import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
+import { Post } from '@model';
 import TripleCardsdGroup, {
 	validateTripleCardsGroup,
 } from '@src/layouts/TripleCardsGroup';
-import { ComponentProps } from '@utils';
 import React from 'react';
 
 type Props = {
-	data: {
-		posts: OrientationCardModel[];
-		bannerProps: ComponentProps<typeof PageBanner>['data'];
-	};
+	categoryDoc: CategoryDocument;
+	posts: Post[];
+	className?: string;
 };
 
-function EventsPage({ data }: Props) {
-	const { posts, bannerProps } = data;
-
+function EventsPageFeature({ className, categoryDoc, posts }: Props) {
 	const featuredPosts = posts.slice(0, 3);
 	const otherPosts = posts.slice(2);
 
 	return (
 		<>
-			<PageBanner data={bannerProps} />
+			<PageBanner data={categoryDoc.data} />
 
 			{posts.length > 0 && (
 				<div tw="grid-p-sm space-y-10 xl:space-y-14">
@@ -39,7 +36,7 @@ function EventsPage({ data }: Props) {
 					>
 						{otherPosts.map((post) => (
 							<li
-								key={post.slug}
+								key={post.uid}
 								tw="col-span-full md:col-span-6 xl:col-span-4 "
 							>
 								<OrientationCard data={post} />
@@ -57,4 +54,4 @@ function EventsPage({ data }: Props) {
 	);
 }
 
-export default EventsPage;
+export default EventsPageFeature;

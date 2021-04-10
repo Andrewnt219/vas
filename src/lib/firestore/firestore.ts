@@ -1,4 +1,4 @@
-import admin, { ServiceAccount } from 'firebase-admin';
+import admin, { firestore, ServiceAccount } from 'firebase-admin';
 import { getDecryptedServiceAccount } from './decrypt-service-account';
 
 if (!admin.apps.length) {
@@ -16,5 +16,5 @@ if (!admin.apps.length) {
 		console.error('Firebase admin initialization error:' + error);
 	}
 }
-
+export const fsOperands = firestore;
 export default admin.firestore();

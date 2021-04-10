@@ -1,9 +1,9 @@
-import { TextBlock } from '@prismic-types';
+import { RichTextBlock } from 'prismic-reactjs';
 import { ReactNode } from 'react';
 
 type TextProps = {
 	className?: string;
-	data: TextBlock;
+	data: RichTextBlock;
 	children: ReactNode;
 };
 

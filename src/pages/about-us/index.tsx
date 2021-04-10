@@ -1,12 +1,12 @@
 import { Result } from '@api-response';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
-import PageBanner from '@components/PageBanner/PageBanner';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
-import { AuthorModel } from '@lib/sanity/models/AuthorModel';
+import { MemberDocument } from '@lib/prismic/models/MemberModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
+import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,10 +16,14 @@ import tw, { styled } from 'twin.macro';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = Result<AuthorModel[]>;
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+type StaticProps = Result<MemberDocument[]>;
+export const getStaticProps: GetStaticProps<StaticProps> = async ({
+	locale,
+}) => {
 	try {
-		const authors = await AuthorDataService.getActiveAuthors();
+		const authors = await AuthorDataService.getActiveAuthors(
+			tryParseLocale(locale)
+		);
 
 		return {
 			props: {
@@ -59,7 +63,8 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 
 	return (
 		<MainLayout title={t('about-us:title')} tw="pb-20 mt-0 md:pb-36">
-			<PageBanner
+			{/* FIXME switch to page on Prismic */}
+			{/* <PageBanner
 				tw="mb-0! col-span-full"
 				data={{
 					imgAlt:
@@ -68,7 +73,7 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 					imgSrc: require('images/hero/about-us.jpg'),
 					title: t('about-us:title'),
 				}}
-			/>
+			/> */}
 
 			<Section tw="bg-gray-100 grid grid-cols-12">
 				<div tw="grid-p-sm xl:grid-p-md">
@@ -283,8 +288,8 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 
 				<ul tw="grid gap-y-8 md:(grid-cols-3 gap-x-8 gap-y-16) 2xl:grid-cols-4">
 					{data.map((member) => (
-						<li key={member.slug}>
-							<MemberInfoHover data={member} />
+						<li key={member.id}>
+							<MemberInfoHover data={member.data} />
 						</li>
 					))}
 				</ul>
