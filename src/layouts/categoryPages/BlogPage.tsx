@@ -1,11 +1,10 @@
+import { CategoryUIDPage } from '@common';
 import NewsCard from '@components/NewsCard/NewsCard';
 import Pagination from '@components/Pagination/Pagination';
-import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
-import { Post } from '@model';
 import { VFC } from 'react';
 import CategoryPageLayout from './CategoryPageLayout';
 
-type Props = { categoryDoc: CategoryDocument; posts: Post[] };
+type Props = CategoryUIDPage;
 
 const BlogPage: VFC<Props> = ({ categoryDoc, posts }) => {
 	// FIXME

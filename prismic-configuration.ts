@@ -30,13 +30,16 @@ export const PMclient = Prismic.client(
 export const linkResolver = (doc: LinkedItem) => {
 	switch (doc.type) {
 		case 'page':
-			return `/${doc.uid}`;
+			return `/${doc.lang}/${doc.uid}`;
 
 		case 'post':
-			return `/posts/${doc.uid}`;
+			return `/${doc.lang}/posts/${doc.uid}`;
+
+		case 'category':
+			return `/${doc.lang}/categories/${doc.uid}`;
 
 		default:
-			return '/';
+			return `/${doc.lang}`;
 	}
 };
 
@@ -45,6 +48,9 @@ export const hrefResolver = (doc: LinkedItem) => {
 	switch (doc.type) {
 		case 'post':
 			return `/posts/[uid]`;
+
+		case 'category':
+			return `/categories/[uid]`;
 
 		default:
 			return '/';

@@ -1,13 +1,13 @@
+import { usePreview } from '@contexts/PreviewContext';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-
 type Props = {
 	children: ReactNode;
 	title: string;
 	customMeta?: { date: string; title: never } & Record<string, string>;
 	className?: string;
-	isPreviewMode?: boolean;
 };
 
 /**
@@ -18,9 +18,9 @@ export default function MainLayout({
 	customMeta,
 	title,
 	className,
-	isPreviewMode,
 }: Props) {
-	const { asPath } = useRouter();
+	const { asPath, query, locale, pathname } = useRouter();
+	const isPreviewMode = usePreview();
 
 	// TODO replace banner.png with vas
 	const meta = {
@@ -58,9 +58,20 @@ export default function MainLayout({
 				id="skip"
 			>
 				{isPreviewMode && (
-					<div tw="text-center text-xl w-1/4 fixed bg-primary shadow-card bg-opacity-50 text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 z-50">
+					<div tw="flex flex-col space-y-3 text-center  md:text-2xl  fixed bg-black bg-opacity-50 text-white top-0 left-0 px-20 py-4 z-50 transition-opacity hover:bg-opacity-100">
+						<NextLink
+							href={{ pathname, query }}
+							as={asPath}
+							locale={locale === 'vi' ? 'en-us' : 'vi'}
+							passHref
+						>
+							<a tw="hocus:underline">
+								Switch to: {locale === 'vi' ? 'EN' : 'VI'}
+							</a>
+						</NextLink>
+
 						<a
-							tw="underline"
+							tw="hocus:underline"
 							href="/api/exit-preview"
 							className="underline hover:text-cyan duration-200 transition-colors"
 						>

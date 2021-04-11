@@ -27,11 +27,13 @@ export class CategoryService {
 
 	public static async getCategoryByUID(
 		categoryUID: string,
-		lang: Language
+		lang: Language,
+		previewRef = ''
 	): Promise<CategoryDocument | null> {
 		const categoryDocs: CategoryDocument[] = await this.getCategoriesByUIDs(
 			[categoryUID],
-			lang
+			lang,
+			previewRef
 		);
 
 		return categoryDocs[0] ?? null;
@@ -39,9 +41,10 @@ export class CategoryService {
 
 	public static async getCategoriesByUIDs(
 		categoryUIDs: string[],
-		lang: Language
+		lang: Language,
+		previewRef = ''
 	): Promise<CategoryDocument[]> {
-		const options = getQueryOptions(lang);
+		const options = getQueryOptions(lang, { ref: previewRef });
 		const query = Predicates.in('my.category.uid', categoryUIDs);
 
 		const categoryDocs: CategoryDocument[] = (

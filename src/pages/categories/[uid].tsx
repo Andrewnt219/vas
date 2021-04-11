@@ -1,10 +1,12 @@
 import { Result } from '@api-response';
+import { PreviewProvider } from '@contexts/PreviewContext';
 import BlogPage from '@layouts/categoryPages/BlogPage';
 import NewsPage from '@layouts/categoryPages/NewsPage';
 import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
 import { Post } from '@model';
 import { CategoryService } from '@services/category-data-service';
 import { PostService } from '@services/post-service';
+import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
 import {
 	errorStatcPropsHandler,
 	errorStaticPathsHandler,
@@ -18,15 +20,19 @@ import 'twin.macro';
 type StaticProps = Result<
 	Post[],
 	{ categoryUID: string; categoryDoc: CategoryDocument }
->;
+> & { preview: boolean };
 type Params = {
 	uid: string;
 };
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 	locale,
 	params,
+	previewData = {},
+	preview = false,
 }) => {
 	try {
+		const { ref } = previewData;
+
 		const categoryUID = params?.uid;
 		const lang = tryParseLocale(locale);
 
@@ -35,6 +41,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 				props: {
 					data: null,
 					error: { message: "Missing category's UID" },
+					preview,
 				},
 				revalidate: 60,
 			};
@@ -42,7 +49,8 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 
 		const categoryDoc = await CategoryService.getCategoryByUID(
 			categoryUID,
-			lang
+			lang,
+			ref
 		);
 
 		if (!categoryDoc) {
@@ -50,6 +58,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 				props: {
 					data: null,
 					error: { message: 'Category not found' },
+					preview,
 				},
 			};
 		}
@@ -61,6 +70,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 				data: posts,
 				error: null,
 				meta: { categoryDoc, categoryUID },
+				preview,
 			},
 			revalidate: 60,
 		};
@@ -91,34 +101,48 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function CategoryUID({ data, error, meta }: Props) {
-	if (error) {
-		return <h1>{error.message}</h1>;
+function CategoryUID({
+	data: initialData,
+	error: serverError,
+	meta,
+	preview,
+}: Props) {
+	const { data, error } = useCategoryPosts(meta?.categoryUID, initialData);
+
+	if (error || serverError) {
+		return <h1>{error?.message ?? serverError?.message}</h1>;
 	}
 
 	if (!data || !meta) {
 		return <h1>Fetching posts...</h1>;
 	}
 
-	// TODO make these page in Prismic
+	let renderedCategoryPage = <h1>This category is not available</h1>;
+
 	switch (meta.categoryUID) {
 		case 'blog':
-			return <BlogPage categoryDoc={meta.categoryDoc} posts={data} />;
+			renderedCategoryPage = (
+				<BlogPage categoryDoc={meta.categoryDoc} posts={data} />
+			);
+			break;
 
 		case 'news':
-			return <NewsPage categoryDoc={meta.categoryDoc} posts={data} />;
+			renderedCategoryPage = (
+				<NewsPage categoryDoc={meta.categoryDoc} posts={data} />
+			);
+			break;
 
 		case 'events':
-			return;
-
 		case 'orientation':
-			return;
-
 		case 'tet':
-			return;
-
 		default:
 			break;
 	}
+
+	return (
+		<PreviewProvider initialValue={preview}>
+			{renderedCategoryPage}
+		</PreviewProvider>
+	);
 }
 export default CategoryUID;
