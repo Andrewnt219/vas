@@ -1,6 +1,9 @@
 import { Result } from '@api-response';
 import { PreviewProvider } from '@contexts/PreviewContext';
 import BlogPage from '@layouts/categoryPages/BlogPage';
+import CategoryPageLayout from '@layouts/categoryPages/CategoryPageLayout';
+import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
+import EventsPageList from '@layouts/categoryPages/EventsPageList';
 import NewsPage from '@layouts/categoryPages/NewsPage';
 import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
 import { Post } from '@model';
@@ -13,7 +16,7 @@ import {
 } from '@src/server/utils/page-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
@@ -117,31 +120,40 @@ function CategoryUID({
 		return <h1>Fetching posts...</h1>;
 	}
 
-	let renderedCategoryPage = <h1>This category is not available</h1>;
+	let renderedCategoryPage: ReactElement;
 
 	switch (meta.categoryUID) {
 		case 'blog':
-			renderedCategoryPage = (
-				<BlogPage categoryDoc={meta.categoryDoc} posts={data} />
-			);
+			renderedCategoryPage = <BlogPage posts={data} />;
 			break;
 
 		case 'news':
-			renderedCategoryPage = (
-				<NewsPage categoryDoc={meta.categoryDoc} posts={data} />
-			);
+			renderedCategoryPage = <NewsPage posts={data} />;
 			break;
 
-		case 'events':
+		case 'event':
+			renderedCategoryPage = <EventsPageList posts={data} />;
+			break;
+
 		case 'orientation':
 		case 'tet':
+			renderedCategoryPage = <EventsPageFeature posts={data} />;
+			break;
+
 		default:
+			renderedCategoryPage = <h1>This category is not available yet</h1>;
 			break;
 	}
 
 	return (
 		<PreviewProvider initialValue={preview}>
-			{renderedCategoryPage}
+			<CategoryPageLayout categoryDoc={meta.categoryDoc}>
+				{data.length == 0 ? (
+					<p tw="grid-p-sm">Check back soon for more interesting articles</p>
+				) : (
+					renderedCategoryPage
+				)}
+			</CategoryPageLayout>
 		</PreviewProvider>
 	);
 }

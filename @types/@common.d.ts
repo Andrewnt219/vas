@@ -1,6 +1,6 @@
 declare module '@common' {
 	type CategoryUIDPage = {
-		categoryDoc: CategoryDocument;
+		className?: string;
 		posts: Post[];
 	};
 }
