@@ -1,5 +1,5 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { MemberDocument } from '@lib/prismic/models/MemberModel';
+import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 

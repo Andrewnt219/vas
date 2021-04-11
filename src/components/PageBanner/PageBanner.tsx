@@ -1,5 +1,5 @@
 import Image from '@components/Image/Image';
-import { CategoryModel } from '@lib/prismic/models/CategoryModel';
+import { CategoryModel } from '@lib/prismic/component-types/category/CategoryModel';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 

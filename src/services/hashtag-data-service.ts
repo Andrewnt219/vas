@@ -3,7 +3,7 @@ import firestore from '@lib/firestore/firestore';
 import {
 	HashtagDocument,
 	hashtagQuery,
-} from '@lib/prismic/models/HashtagModel';
+} from '@lib/prismic/component-types/hashtag/HashtagModel';
 import {
 	defaultQueryOptionsFactory,
 	Predicates,

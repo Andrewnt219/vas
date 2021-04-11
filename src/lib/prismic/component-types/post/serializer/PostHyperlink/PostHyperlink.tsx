@@ -10,7 +10,7 @@ type HyperlinkProps = {
 	children: ReactNode;
 };
 
-function HyperlinkSerializer({ className, data, children }: HyperlinkProps) {
+function PostHyperlink({ className, data, children }: HyperlinkProps) {
 	if (data.link_type === 'Document') {
 		return (
 			<NextLink href={hrefResolver(data)} as={linkResolver(data)} passHref>
@@ -33,4 +33,4 @@ function HyperlinkSerializer({ className, data, children }: HyperlinkProps) {
 	);
 }
 
-export default HyperlinkSerializer;
+export default PostHyperlink;

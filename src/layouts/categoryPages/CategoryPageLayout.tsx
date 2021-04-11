@@ -1,6 +1,6 @@
 import PageBanner from '@components/PageBanner/PageBanner';
 import MainLayout from '@layouts/MainLayout';
-import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
+import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import React, { ReactNode } from 'react';
 import 'twin.macro';
 

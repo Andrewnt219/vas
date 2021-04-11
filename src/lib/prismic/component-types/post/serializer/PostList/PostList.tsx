@@ -7,7 +7,7 @@ type Props = {
 	children: ReactNode;
 };
 
-function ListSerializer({ data, children }: Props) {
+function PostList({ data, children }: Props) {
 	return (
 		<StyledList as={data.type === 'group-o-list-item' ? 'ol' : 'ul'}>
 			{children}
@@ -20,4 +20,4 @@ const StyledList = styled.ul<StyledListProps>`
 	${tw`ml-8 my-6 space-y-3 md:(ml-11 my-10 space-y-6)`}
 `;
 
-export default ListSerializer;
+export default PostList;

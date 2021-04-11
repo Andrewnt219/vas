@@ -1,10 +1,21 @@
-import { QuoteSlice as QuoteSliceProps } from '@prismic-slices';
-import { RichText } from 'prismic-reactjs';
+import { SliceComponentProps } from '@prismic-slices';
+import { Asset } from '@prismic-types';
+import { RichText, RichTextBlock } from 'prismic-reactjs';
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 
-type Props = { className?: string; slice: QuoteSliceProps };
-const QuoteSlice = ({ slice }: Props) => (
+type SliceProps = {
+	slice_type: 'quote';
+	slice_label: null;
+	items: unknown[];
+	primary: {
+		quote: RichTextBlock[];
+		name_of_the_author: RichTextBlock[];
+		portrait_author: Asset;
+	};
+};
+type Props = SliceComponentProps<SliceProps>;
+const PostQuoteSlice = ({ slice }: Props) => (
 	<figure>
 		<StyledBlockquote>{RichText.asText(slice.primary.quote)}</StyledBlockquote>
 
@@ -36,4 +47,4 @@ const StyledBlockquote = styled.blockquote`
 
 	${tw`xl:px-8`}
 `;
-export default QuoteSlice;
+export default PostQuoteSlice;

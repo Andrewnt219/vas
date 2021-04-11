@@ -1,13 +1,13 @@
 import { RichTextBlock } from 'prismic-reactjs';
 import { ReactNode } from 'react';
 
-type TextProps = {
+type Props = {
 	className?: string;
 	data: RichTextBlock;
 	children: ReactNode;
 };
 
-function TextSerializer({ className, data, children }: TextProps) {
+function PostRichText({ className, data, children }: Props) {
 	switch (data.type) {
 		case 'heading2':
 			return (
@@ -48,4 +48,4 @@ function TextSerializer({ className, data, children }: TextProps) {
 	}
 }
 
-export default TextSerializer;
+export default PostRichText;

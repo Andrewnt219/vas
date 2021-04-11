@@ -1,8 +1,11 @@
 import { Language } from '@data/localization-data';
 import firestore, { fsOperands } from '@lib/firestore/firestore';
 import { FsPost } from '@lib/firestore/models/FsPost';
-import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
-import { PostDocument, postQuery } from '@lib/prismic/models/PostModel';
+import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
+import {
+	PostDocument,
+	postQuery,
+} from '@lib/prismic/component-types/post/PostModel';
 import {
 	defaultQueryOptionsFactory,
 	Predicates,

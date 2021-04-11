@@ -1,6 +1,9 @@
 import { Language } from '@data/localization-data';
 import firestore from '@lib/firestore/firestore';
-import { MemberDocument, memberQuery } from '@lib/prismic/models/MemberModel';
+import {
+	MemberDocument,
+	memberQuery,
+} from '@lib/prismic/component-types/member/MemberModel';
 import {
 	defaultQueryOptionsFactory,
 	Predicates,

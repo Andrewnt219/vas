@@ -2,7 +2,7 @@ import { Result } from '@api-response';
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
 import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
-import { MemberDocument } from '@lib/prismic/models/MemberModel';
+import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { tryParseLocale } from '@utils/validate-utils';

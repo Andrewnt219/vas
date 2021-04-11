@@ -1,5 +1,5 @@
 import MemberAvatar from '@components/MemberAvatar/MemberAvatar';
-import { MemberModel } from '@lib/prismic/models/MemberModel';
+import { MemberModel } from '@lib/prismic/component-types/member/MemberModel';
 import React from 'react';
 import { css } from 'twin.macro';
 

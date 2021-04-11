@@ -1,13 +1,23 @@
-import type { ImageWithCaptionSlice as ImageWithCaptionSliceProps } from '@prismic-slices';
+import { SliceComponentProps } from '@prismic-slices';
+import { Asset } from '@prismic-types';
 import { useImageSwap } from '@src/hooks/useImageSwap';
 import { getLqip, getSrcSet } from '@utils/imgix-utils';
 import React from 'react';
 import 'twin.macro';
 
-type Props = { className?: string; slice: ImageWithCaptionSliceProps };
+type SliceProps = {
+	slice_type: 'image_with_caption';
+	slice_label: null;
+	items: unknown[];
+	primary: {
+		image: Asset;
+		caption?: string;
+	};
+};
+type Props = SliceComponentProps<SliceProps>;
 
 // TODO maybe add config (label) in prismic for full-width or not, so we can set the sizes accordingly
-function ImageWithCaptionSlice({ className, slice }: Props) {
+function PostImageWithCaptionSlice({ className, slice }: Props) {
 	const data = slice.primary;
 	const imgRef = useImageSwap();
 
@@ -34,4 +44,4 @@ function ImageWithCaptionSlice({ className, slice }: Props) {
 	);
 }
 
-export default ImageWithCaptionSlice;
+export default PostImageWithCaptionSlice;

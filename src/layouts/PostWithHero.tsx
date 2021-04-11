@@ -2,7 +2,7 @@ import PostComponents from '@components/Post/Post';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
-import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
+import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@model';
 import dayjs from 'dayjs';
 import React from 'react';
@@ -38,7 +38,7 @@ const EventPost = ({ post, relatedPosts, className }: Props) => {
 
 				<PostComponents.Wrapper>
 					{post.data.body.map((slice, index) => (
-						<SliceZone slice={slice} key={`slice-${index}`} />
+						<PostSliceZone slice={slice} key={`slice-${index}`} />
 					))}
 				</PostComponents.Wrapper>
 

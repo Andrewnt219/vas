@@ -5,7 +5,7 @@ import tw, { css } from 'twin.macro';
 
 type Props = { data: ListItem; className?: string; children: ReactNode };
 
-function ListItemSerializer({ data, className, children }: Props) {
+function PostListItem({ data, className, children }: Props) {
 	switch (data.type) {
 		case 'list-item':
 			return <Bullet className={className}>{children}</Bullet>;
@@ -38,4 +38,4 @@ const Number = styled.li<NumberProps>`
 	list-style: decimal;
 `;
 
-export default ListItemSerializer;
+export default PostListItem;

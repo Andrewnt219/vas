@@ -5,7 +5,7 @@ import CategoryPageLayout from '@layouts/categoryPages/CategoryPageLayout';
 import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
 import EventsPageList from '@layouts/categoryPages/EventsPageList';
 import NewsPage from '@layouts/categoryPages/NewsPage';
-import { CategoryDocument } from '@lib/prismic/models/CategoryModel';
+import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import { Post } from '@model';
 import { CategoryService } from '@services/category-data-service';
 import { PostService } from '@services/post-service';

@@ -5,7 +5,7 @@ import 'twin.macro';
 
 type Props = { className?: string; data: Asset };
 
-function ImageSerializer({ className, data }: Props) {
+function PostImage({ className, data }: Props) {
 	const imgSrc = `${data.url}&fm=webp`;
 
 	return (
@@ -21,4 +21,4 @@ function ImageSerializer({ className, data }: Props) {
 	);
 }
 
-export default ImageSerializer;
+export default PostImage;

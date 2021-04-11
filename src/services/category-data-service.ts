@@ -3,7 +3,7 @@ import firestore from '@lib/firestore/firestore';
 import {
 	CategoryDocument,
 	categoryQuery,
-} from '@lib/prismic/models/CategoryModel';
+} from '@lib/prismic/component-types/category/CategoryModel';
 import {
 	defaultQueryOptionsFactory,
 	Predicates,

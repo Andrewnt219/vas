@@ -1,7 +1,7 @@
 import PostComponents from '@components/Post/Post';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
-import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
+import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@model';
 import { getHashtagLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
@@ -42,7 +42,7 @@ const PostWithoutHero = ({ className, post, relatedPosts }: Props) => {
 
 				<PostComponents.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
 					{post.data.body.map((slice, index) => (
-						<SliceZone slice={slice} key={`slice-${index}`} />
+						<PostSliceZone slice={slice} key={`slice-${index}`} />
 					))}
 				</PostComponents.Wrapper>
 			</section>
