@@ -1,11 +1,12 @@
-import { PostResult, Result } from '@api-response';
+import { Result } from '@common';
+import { PostsGetIndex } from '@src/pages/api/posts';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR, { keyInterface } from 'swr';
 
-type ApiResponse = PostResult.GetIndex;
+type ApiResponse = PostsGetIndex;
 type FetcherError = AxiosError<ApiResponse>;
 type UsePostsData = ApiResponse['data'];
 

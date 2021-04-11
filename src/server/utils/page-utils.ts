@@ -1,4 +1,4 @@
-import { StaticPathError, StaticPropsError } from '@api-response';
+import { StaticPathError, StaticPropsError } from '@common';
 
 export function errorStatcPropsHandler(
 	error: unknown,

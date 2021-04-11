@@ -1,4 +1,4 @@
-import { Result, ResultError } from '@api-response';
+import { Result, ResultError } from '@common';
 import { Language } from '@data/localization-data';
 import {
 	Handler,

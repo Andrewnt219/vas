@@ -10,7 +10,6 @@ import {
 	defaultQueryOptionsFactory,
 	Predicates,
 } from '@lib/prismic/prismic-helpers';
-import { Post } from '@model';
 import { PMclient } from '@root/prismic-configuration';
 import { isString } from '@utils/validate-utils';
 import { CategoryService } from './category-data-service';
@@ -228,6 +227,8 @@ export type RelatedPostsResult = {
 	main: Post | null;
 	relatedPosts: Post[];
 };
+
+export type Post = PostDocument & { meta: FsPost | null };
 
 const getQueryOptions = defaultQueryOptionsFactory(postQuery);
 

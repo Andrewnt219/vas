@@ -3,7 +3,7 @@ import PublishedDate from '@components/PublishedDate/PublishedDate';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import dayjs from 'dayjs';
 import React from 'react';
 

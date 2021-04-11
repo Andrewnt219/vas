@@ -1,10 +1,10 @@
-import { CategoryUIDPage } from '@common';
 import EventCard from '@components/EventCard/EventCard';
 import Pagination from '@components/Pagination/Pagination';
 import React from 'react';
 import 'twin.macro';
+import { CategoryUIDPageProps } from './CategoryUIDlayout';
 
-type Props = CategoryUIDPage;
+type Props = CategoryUIDPageProps;
 
 function EventsPageList({ className, posts }: Props) {
 	return (

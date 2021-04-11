@@ -1,9 +1,8 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import { PreviewProvider } from '@contexts/PreviewContext';
 import MainLayout from '@layouts/MainLayout';
 import PostWithoutHero from '@layouts/PostWithoutHero';
-import { Post } from '@model';
-import { PostService } from '@services/post-service';
+import { Post, PostService } from '@services/post-service';
 import { useRelatedPosts } from '@src/hooks/useRelatedPosts';
 import {
 	errorStatcPropsHandler,

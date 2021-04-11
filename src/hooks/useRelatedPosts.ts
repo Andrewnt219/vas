@@ -1,5 +1,6 @@
-import { PostResult, Result } from '@api-response';
+import { Result } from '@common';
 import { RelatedPostsResult } from '@services/post-service';
+import { PostsGetRelatedPosts } from '@src/pages/api/posts/relatedPosts';
 import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -8,7 +9,7 @@ import useSWR from 'swr';
 
 const fetcher = (endpoint: string, postUID: string) =>
 	axios
-		.get<PostResult.GetRelatedPost>(endpoint, {
+		.get<PostsGetRelatedPosts>(endpoint, {
 			params: {
 				postUID,
 			},
@@ -16,7 +17,7 @@ const fetcher = (endpoint: string, postUID: string) =>
 		.then((res) => res.data.data);
 
 type SWRdata = RelatedPostsResult | null;
-type SWRerror = AxiosError<PostResult.GetRelatedPost>;
+type SWRerror = AxiosError<PostsGetRelatedPosts>;
 export const useRelatedPosts = (
 	postUID: string | undefined,
 	initialData?: RelatedPostsResult | null

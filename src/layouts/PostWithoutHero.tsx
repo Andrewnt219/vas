@@ -2,7 +2,7 @@ import PostComponents from '@components/Post/Post';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import { getHashtagLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';

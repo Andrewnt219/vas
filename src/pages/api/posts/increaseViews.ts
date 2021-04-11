@@ -1,11 +1,14 @@
-import { PostResult } from '@api-response';
+import { Result } from '@common';
+import { FsPost } from '@lib/firestore/models/FsPost';
 import { PostService } from '@services/post-service';
 import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+export type PostsPatchIncreaseView = Result<FsPost>;
+
 async function patchHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<PostResult.PatchIncreaseView>
+	res: NextApiResponse<PostsPatchIncreaseView>
 ) {
 	const { id } = req.body;
 

@@ -1,4 +1,4 @@
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import NextLink from 'next/link';
 import React from 'react';
 

@@ -1,12 +1,12 @@
-import { PostResult } from '@api-response';
-import { Post } from '@model';
-import { PostService } from '@services/post-service';
+import { Result } from '@common';
+import { Post, PostService } from '@services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+export type PostsGetIndex = Result<Post[]>;
 async function getHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<PostResult.GetIndex>
+	res: NextApiResponse<PostsGetIndex>
 ) {
 	const { categoryUID } = req.query;
 	const lang = getLocaleCookie(req);

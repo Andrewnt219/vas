@@ -1,4 +1,4 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
 import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';

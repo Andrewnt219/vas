@@ -2,7 +2,13 @@ declare module '@prismic-types' {
 	import { Language } from '@data/localization-data';
 	import { Document } from '@prismicio/client/types/documents';
 	import { RichTextBlock } from 'prismic-reactjs';
-	type CustomType = 'post' | 'member' | 'category' | 'hashtag' | 'page';
+	type CustomType =
+		| 'post'
+		| 'member'
+		| 'category'
+		| 'hashtag'
+		| 'page'
+		| 'about-us';
 
 	type LinkedItem = Pick<Document, 'id' | 'tags' | 'slug' | 'uid'> & {
 		link_type: 'Document';

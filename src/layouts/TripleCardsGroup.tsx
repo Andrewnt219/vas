@@ -1,5 +1,5 @@
 import OrientationCard from '@components/OrientationCard/OrientationCard';
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import React from 'react';
 
 type Props = {

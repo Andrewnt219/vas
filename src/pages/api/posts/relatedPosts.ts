@@ -1,9 +1,11 @@
-import { PostResult } from '@api-response';
-import { PostService } from '@services/post-service';
+import { Result } from '@common';
+import { PostService, RelatedPostsResult } from '@services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { NextApiHandler } from 'next';
 
-const get: NextApiHandler<PostResult.GetRelatedPost> = async (req, res) => {
+export type PostsGetRelatedPosts = Result<RelatedPostsResult>;
+
+const get: NextApiHandler<PostsGetRelatedPosts> = async (req, res) => {
 	const { postUID } = req.query;
 	const lang = getLocaleCookie(req);
 

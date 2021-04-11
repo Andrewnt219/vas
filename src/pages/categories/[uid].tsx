@@ -1,22 +1,22 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import { PreviewProvider } from '@contexts/PreviewContext';
 import BlogPage from '@layouts/categoryPages/BlogPage';
-import CategoryPageLayout from '@layouts/categoryPages/CategoryPageLayout';
+import CategoryUIDlayout from '@layouts/categoryPages/CategoryUIDlayout';
 import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
 import EventsPageList from '@layouts/categoryPages/EventsPageList';
 import NewsPage from '@layouts/categoryPages/NewsPage';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
-import { Post } from '@model';
 import { CategoryService } from '@services/category-data-service';
-import { PostService } from '@services/post-service';
+import { Post, PostService } from '@services/post-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
 import {
 	errorStatcPropsHandler,
 	errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
+import { ComponentProps } from '@utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
@@ -120,7 +120,9 @@ function CategoryUID({
 		return <h1>Fetching posts...</h1>;
 	}
 
-	let renderedCategoryPage: ReactElement;
+	let renderedCategoryPage: ComponentProps<
+		typeof CategoryUIDlayout
+	>['children'];
 
 	switch (meta.categoryUID) {
 		case 'blog':
@@ -147,13 +149,9 @@ function CategoryUID({
 
 	return (
 		<PreviewProvider initialValue={preview}>
-			<CategoryPageLayout categoryDoc={meta.categoryDoc}>
-				{data.length == 0 ? (
-					<p tw="grid-p-sm">Check back soon for more interesting articles</p>
-				) : (
-					renderedCategoryPage
-				)}
-			</CategoryPageLayout>
+			<CategoryUIDlayout categoryDoc={meta.categoryDoc}>
+				{renderedCategoryPage}
+			</CategoryUIDlayout>
 		</PreviewProvider>
 	);
 }

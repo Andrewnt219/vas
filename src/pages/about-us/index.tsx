@@ -1,4 +1,4 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
 import SectionH1 from '@components/SectionH1/SectionH1';

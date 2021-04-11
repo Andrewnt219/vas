@@ -1,4 +1,4 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import sgMail from '@lib/sendgrid';
 import { MailDataRequired } from '@sendgrid/mail';
 import { apiHanler } from '@src/server/utils/api-utils';

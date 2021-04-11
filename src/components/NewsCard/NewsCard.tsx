@@ -1,5 +1,5 @@
 import Image from '@components/Image/Image';
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import { scaleImageCss } from '@styles/apply';
 import { getPostLink } from '@utils/route-utils';
 import NextLink from 'next/link';

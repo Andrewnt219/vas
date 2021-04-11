@@ -1,9 +1,9 @@
-import { CategoryUIDPage } from '@common';
 import NewsCard from '@components/NewsCard/NewsCard';
 import Pagination from '@components/Pagination/Pagination';
 import { VFC } from 'react';
+import { CategoryUIDPageProps } from './CategoryUIDlayout';
 
-type Props = CategoryUIDPage;
+type Props = CategoryUIDPageProps;
 
 const BlogPage: VFC<Props> = ({ posts }) => {
 	return (

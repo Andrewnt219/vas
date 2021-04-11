@@ -1,4 +1,4 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import { Client, linkResolver } from '@root/prismic-configuration';
 import { isNullOrUndefined } from '@utils/validate-utils';
 import { NextApiRequest, NextApiResponse } from 'next';

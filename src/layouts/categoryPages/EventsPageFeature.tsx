@@ -1,12 +1,12 @@
-import { CategoryUIDPage } from '@common';
 import Button from '@components/Button/Button';
 import OrientationCard from '@components/OrientationCard/OrientationCard';
 import TripleCardsdGroup, {
 	validateTripleCardsGroup,
 } from '@src/layouts/TripleCardsGroup';
 import React from 'react';
+import { CategoryUIDPageProps } from './CategoryUIDlayout';
 
-type Props = CategoryUIDPage;
+type Props = CategoryUIDPageProps;
 
 function EventsPageFeature({ className, posts }: Props) {
 	const featuredPosts = posts.slice(0, 3);

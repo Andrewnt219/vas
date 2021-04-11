@@ -1,4 +1,4 @@
-import { Result } from '@api-response';
+import { Result } from '@common';
 import { AxiosError } from 'axios';
 
 export function getErrorMessage(error?: AxiosError<Result<any>>): string {

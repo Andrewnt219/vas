@@ -2,7 +2,7 @@ import Button from '@components/Button/Button';
 import Image from '@components/Image/Image';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import { Format } from '@data/common-data';
-import { Post } from '@model';
+import { Post } from '@services/post-service';
 import { getPostLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';

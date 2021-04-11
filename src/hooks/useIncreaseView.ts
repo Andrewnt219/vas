@@ -1,4 +1,4 @@
-import { PostResult } from '@api-response';
+import { PostsPatchIncreaseView } from '@src/pages/api/posts/increaseViews';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -9,7 +9,7 @@ export const useIncreaseView = (
 
 	useEffect(() => {
 		axios
-			.patch<PostResult.PatchIncreaseView>('/api/posts/increaseViews', {
+			.patch<PostsPatchIncreaseView>('/api/posts/increaseViews', {
 				slug: postSlug,
 			})
 			.then((res) => setViews(res.data.data?.views ?? null))
