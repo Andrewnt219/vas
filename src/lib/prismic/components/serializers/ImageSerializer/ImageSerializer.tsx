@@ -12,7 +12,7 @@ function ImageSerializer({ className, data }: Props) {
 		<Image
 			imgSrc={imgSrc}
 			sizes="(min-width: 65ch) 65ch, 100vw"
-			tw="w-full rounded"
+			tw="w-full my-9 flex flex-col items-center justify-center rounded-sm overflow-hidden md:my-12"
 			className={className}
 			alt={data.alt ?? 'Missing alternative text'}
 			width={data.dimensions.width}

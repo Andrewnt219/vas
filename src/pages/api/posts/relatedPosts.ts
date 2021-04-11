@@ -4,17 +4,20 @@ import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { NextApiHandler } from 'next';
 
 const get: NextApiHandler<PostResult.GetRelatedPost> = async (req, res) => {
-	const { uid } = req.query;
+	const { postUID } = req.query;
 	const lang = getLocaleCookie(req);
 
-	if (!uid || typeof uid !== 'string') {
+	if (!postUID || typeof postUID !== 'string') {
 		return res.status(400).json({
 			data: null,
 			error: { message: 'Missing or invalid post uid' },
 		});
 	}
 
-	const { main, relatedPosts } = await PostService.getRelatedPosts(uid, lang);
+	const { main, relatedPosts } = await PostService.getRelatedPosts(
+		postUID,
+		lang
+	);
 
 	if (!main) {
 		return res

@@ -2,18 +2,15 @@ import PostComponents from '@components/Post/Post';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
-import MainLayout from '@layouts/MainLayout';
 import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
 import { Post } from '@model';
 import dayjs from 'dayjs';
 import React from 'react';
 
-type Props = { post: Post; relatedPosts: Post[]; isPreviewMode?: boolean };
+type Props = { className?: string; post: Post; relatedPosts: Post[] };
 
-const EventPost = ({ post, relatedPosts, isPreviewMode }: Props) => {
-	// FIXME
-	// const { data, error } = usePost(serverData?.post.slug, serverData);
-
+// TODO add author at the bottom
+const EventPost = ({ post, relatedPosts, className }: Props) => {
 	const publishedAt = post.first_publication_date
 		? new Date(post.first_publication_date)
 		: new Date();
@@ -21,12 +18,8 @@ const EventPost = ({ post, relatedPosts, isPreviewMode }: Props) => {
 	const toDate = dayjs(post.data.to_date ?? new Date());
 
 	return (
-		<MainLayout
-			isPreviewMode={isPreviewMode}
-			title={post.data.title}
-			tw="pb-0! md:text-2xl"
-		>
-			<section tw="col-span-full ">
+		<div tw="col-spall-full" className={className}>
+			<section tw="">
 				<PostComponents.Wrapper as="header">
 					<PublishedDate date={publishedAt} />
 					<PostComponents.Title>{post.data.title}</PostComponents.Title>
@@ -73,7 +66,7 @@ const EventPost = ({ post, relatedPosts, isPreviewMode }: Props) => {
 			</section>
 
 			<RelatedPosts posts={relatedPosts} heading="Related events" />
-		</MainLayout>
+		</div>
 	);
 };
 

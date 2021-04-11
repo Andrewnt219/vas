@@ -3,26 +3,27 @@ import { getErrorMessage } from '@utils/convert-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { keyInterface } from 'swr';
 
 type ApiResponse = PostResult.GetIndex;
 type FetcherError = AxiosError<ApiResponse>;
 type UsePostsData = ApiResponse['data'];
 
-const fetcher = (endpoint: string, categorySlug: string) =>
+const fetcher = (endpoint: string, categoryUID: string) =>
 	axios
 		.get<ApiResponse>(endpoint, {
 			params: {
-				categorySlug,
+				categoryUID,
 			},
 		})
 		.then((res) => res.data.data);
-export const usePostsWithMeta = (
-	categorySlug: string,
+export const useCategoryPosts = (
+	categoryUID: string | undefined,
 	initialData?: UsePostsData | null
 ): Result<UsePostsData> => {
+	const swrKey: keyInterface = ['/api/posts', categoryUID];
 	const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(
-		['/api/posts', categorySlug],
+		swrKey,
 		fetcher,
 		{
 			initialData,

@@ -6,23 +6,29 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
-const fetcher = (endpoint: string, postSlug: string) =>
+const fetcher = (endpoint: string, postUID: string) =>
 	axios
 		.get<PostResult.GetRelatedPost>(endpoint, {
 			params: {
-				postSlug,
+				postUID,
 			},
 		})
 		.then((res) => res.data.data);
 
+type SWRdata = RelatedPostsResult | null;
+type SWRerror = AxiosError<PostResult.GetRelatedPost>;
 export const useRelatedPosts = (
-	postSlug: string | undefined,
-	initialData?: RelatedPostsResult
+	postUID: string | undefined,
+	initialData?: RelatedPostsResult | null
 ): Result<RelatedPostsResult> => {
-	const { data, error, revalidate } = useSWR<
-		RelatedPostsResult | null,
-		AxiosError<PostResult.GetRelatedPost>
-	>(['/api/posts/relatedPosts', postSlug], fetcher, { initialData });
+	const swrKey = ['/api/posts/relatedPosts', postUID];
+	const { data, error, revalidate } = useSWR<SWRdata, SWRerror>(
+		swrKey,
+		fetcher,
+		{
+			initialData,
+		}
+	);
 
 	const { locale } = useRouter();
 

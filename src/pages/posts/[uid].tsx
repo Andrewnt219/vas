@@ -1,7 +1,10 @@
 import { Result } from '@api-response';
+import { PreviewProvider } from '@contexts/PreviewContext';
+import MainLayout from '@layouts/MainLayout';
 import PostWithoutHero from '@layouts/PostWithoutHero';
 import { Post } from '@model';
 import { PostService } from '@services/post-service';
+import { useRelatedPosts } from '@src/hooks/useRelatedPosts';
 import {
 	errorStatcPropsHandler,
 	errorStaticPathsHandler,
@@ -12,43 +15,52 @@ import React from 'react';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function PostUid({ data, error, preview, meta }: Props) {
-	if (error) {
-		return <h1>{error.message}</h1>;
+function PostUid({ data: initialData, error: serverError, preview }: Props) {
+	const { data, error } = useRelatedPosts(initialData?.main.uid, initialData);
+
+	if (error || serverError) {
+		return <h1>{serverError?.message ?? error?.message}</h1>;
 	}
 
-	if (!data) {
+	if (!data || !data.main) {
 		return <h2>Loading</h2>;
 	}
 
-	const categoryUID = data.post.data.categories?.[0].category.uid;
+	const categoryUID = data.main.data.categories?.[0].category.uid;
+	let renderedPostPage = <h1>Fail to get post</h1>;
+
 	switch (categoryUID) {
 		case 'blog':
 		case 'news':
-			return (
-				<PostWithoutHero
-					post={data.post}
-					relatedPosts={data.relatedPosts}
-					isPreviewMode={preview}
-				/>
+			renderedPostPage = (
+				<PostWithoutHero post={data.main} relatedPosts={data.relatedPosts} />
 			);
+			break;
 
 		case 'events':
 		case 'orientation':
 		case 'tet':
-			return (
-				<PostWithoutHero
-					isPreviewMode={preview}
-					post={data.post}
-					relatedPosts={data.relatedPosts}
-				/>
+			renderedPostPage = (
+				<PostWithoutHero post={data.main} relatedPosts={data.relatedPosts} />
 			);
+			break;
 
 		default:
-			return <h1>Fail to get post</h1>;
+			break;
 	}
+
+	return (
+		<PreviewProvider initialValue={preview}>
+			<MainLayout
+				title={data.main.data.title}
+				tw="pb-0! leading-relaxed! md:text-xl"
+			>
+				{renderedPostPage}
+			</MainLayout>
+		</PreviewProvider>
+	);
 }
-type StaticProps = Result<{ post: Post; relatedPosts: Post[] }> & {
+type StaticProps = Result<{ main: Post; relatedPosts: Post[] }> & {
 	preview: boolean;
 };
 
@@ -98,7 +110,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		return {
 			props: {
 				data: {
-					post: main,
+					main: main,
 					relatedPosts,
 				},
 				error: null,

@@ -41,7 +41,7 @@ function RelatedPosts({ className, heading, posts }: Props) {
 		<section
 			aria-label="Related posts"
 			className={className}
-			tw="mt-24 col-span-full bg-gray-100 px-8 py-10 md:(px-12) xl:(px-44 py-24)"
+			tw="mt-24 bg-gray-100 px-8 py-10 md:(px-12) xl:(px-44 py-24)"
 		>
 			<h1 tw="font-bold text-larger mx-auto max-w-max uppercase relative after:(content block w-sm h-px bg-black bg-opacity-50 mx-auto my-2 md:my-5)">
 				{heading}

@@ -1,7 +1,6 @@
 import PostComponents from '@components/Post/Post';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
-import MainLayout from '@layouts/MainLayout';
 import SliceZone from '@lib/prismic/components/slices/SliceZone/SliceZone';
 import { Post } from '@model';
 import { getHashtagLink } from '@utils/route-utils';
@@ -9,26 +8,17 @@ import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
 
-type Props = { post: Post; relatedPosts: Post[]; isPreviewMode?: boolean };
+type Props = { className?: string; post: Post; relatedPosts: Post[] };
 
-const PostWithoutHero = ({
-	post,
-	relatedPosts,
-	isPreviewMode = false,
-}: Props) => {
-	// FIXME
-	// const { data, error } = usePost(serverData?.post.slug, serverData);
+// TODO add author at the bottom
 
+const PostWithoutHero = ({ className, post, relatedPosts }: Props) => {
 	const displayedHashtag = post.data.hashtags[0]?.hashtag;
 	const publishDate = dayjs(post.first_publication_date ?? Date.now());
 
 	return (
-		<MainLayout
-			title={post.data.title}
-			tw="pb-0!"
-			isPreviewMode={isPreviewMode}
-		>
-			<section tw="col-span-full md:text-2xl">
+		<div tw="col-span-full" className={className}>
+			<section>
 				<PostComponents.Wrapper as="header">
 					{displayedHashtag && (
 						<NextLink href={getHashtagLink(displayedHashtag.data.uid)} passHref>
@@ -58,7 +48,7 @@ const PostWithoutHero = ({
 			</section>
 
 			<RelatedPosts posts={relatedPosts} heading="read more" />
-		</MainLayout>
+		</div>
 	);
 };
 
