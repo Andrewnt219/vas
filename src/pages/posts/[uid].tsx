@@ -15,7 +15,11 @@ import React from 'react';
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function PostUid({ data: initialData, error: serverError, preview }: Props) {
-	const { data, error } = useRelatedPosts(initialData?.main.uid, initialData);
+	const { data, error } = useRelatedPosts(
+		initialData?.main.uid,
+		initialData,
+		preview
+	);
 
 	if (error || serverError) {
 		return <h1>{serverError?.message ?? error?.message}</h1>;
@@ -36,7 +40,7 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 			);
 			break;
 
-		case 'events':
+		case 'event':
 		case 'orientation':
 		case 'tet':
 			renderedPostPage = (

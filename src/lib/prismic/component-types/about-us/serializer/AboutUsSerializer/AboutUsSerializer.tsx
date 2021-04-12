@@ -28,6 +28,13 @@ export const AboutUsSerializer: HTMLSerializer<React.ReactNode> = (
 				</AboutUsList>
 			);
 
+		case Elements.paragraph:
+			return (
+				<p tw="mb-8 xl:text-center" key={getUniqueKey()}>
+					{children}
+				</p>
+			);
+
 		case Elements.image:
 			return <AboutUsImage data={element} key={getUniqueKey()} />;
 

@@ -31,6 +31,7 @@ export class PostService {
 			options
 		);
 
+		console.log(previewRef);
 		return this.mapPostDocumentToPost(postDoc);
 	}
 
@@ -118,7 +119,7 @@ export class PostService {
 		lang: Language,
 		previewRef = ''
 	): Promise<RelatedPostsResult> {
-		const post = await this.getPostByUID(postUID, lang);
+		const post = await this.getPostByUID(postUID, lang, previewRef);
 
 		if (!post) {
 			return {

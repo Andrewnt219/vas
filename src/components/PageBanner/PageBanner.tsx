@@ -11,6 +11,7 @@ type Props = {
 	};
 };
 
+// TODO useSizes()
 function PageBanner({ className, data }: Props) {
 	const { title, description, thumbnail } = data;
 

@@ -150,7 +150,11 @@ function CategoryUID({
 	return (
 		<PreviewProvider initialValue={preview}>
 			<CategoryUIDlayout categoryDoc={meta.categoryDoc}>
-				{renderedCategoryPage}
+				{data.length == 0 ? (
+					<h1 tw="grid-p-sm">Come back later for interesting articles</h1>
+				) : (
+					renderedCategoryPage
+				)}
 			</CategoryUIDlayout>
 		</PreviewProvider>
 	);

@@ -7,11 +7,12 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
-const fetcher = (endpoint: string, postUID: string) =>
+const fetcher = (endpoint: string, postUID: string, previewRef: string) =>
 	axios
 		.get<PostsGetRelatedPosts>(endpoint, {
 			params: {
 				postUID,
+				previewRef,
 			},
 		})
 		.then((res) => res.data.data);
@@ -20,7 +21,8 @@ type SWRdata = RelatedPostsResult | null;
 type SWRerror = AxiosError<PostsGetRelatedPosts>;
 export const useRelatedPosts = (
 	postUID: string | undefined,
-	initialData?: RelatedPostsResult | null
+	initialData?: RelatedPostsResult | null,
+	isPreviewMode = false
 ): Result<RelatedPostsResult> => {
 	const swrKey = ['/api/posts/relatedPosts', postUID];
 	const { data, error, revalidate } = useSWR<SWRdata, SWRerror>(
@@ -36,6 +38,13 @@ export const useRelatedPosts = (
 	useEffect(() => {
 		revalidate();
 	}, [revalidate, locale]);
+
+	if (isPreviewMode) {
+		return {
+			data: initialData ?? null,
+			error: null,
+		};
+	}
 
 	if (error) {
 		return {
