@@ -16,6 +16,7 @@ function EventCard({ className, data: postDoc }: Props) {
 	const fromDate = dayjs(postDoc.data.from_date ?? Date.now());
 	const toDate = dayjs(postDoc.data.from_date ?? Date.now());
 	const postLink = getPostLink(postDoc.uid ?? '');
+	const imgSrc = postDoc.data.thumbnail.url + '&fm=webp';
 
 	return (
 		<article className={className} tw="space-y-4 xl:space-y-14">
@@ -33,7 +34,7 @@ function EventCard({ className, data: postDoc }: Props) {
 						<a>
 							<Image
 								tw="img-absolute absolute!"
-								imgSrc={postDoc.data.thumbnail.url}
+								imgSrc={imgSrc}
 								alt={postDoc.data.thumbnail.alt ?? ''}
 							/>
 						</a>
