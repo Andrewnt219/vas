@@ -5,7 +5,7 @@ export type MemberModel = {
 	uid: string;
 	is_active: boolean;
 	title: string;
-	description: RichTextBlock[] | null;
+	description: RichTextBlock[];
 	positions: [{ position: string }];
 	thumbnail: Asset;
 	linked_in: string | null;

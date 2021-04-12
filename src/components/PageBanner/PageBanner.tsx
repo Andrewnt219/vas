@@ -1,11 +1,14 @@
 import Image from '@components/Image/Image';
-import { CategoryModel } from '@lib/prismic/component-types/category/CategoryModel';
-import { RichText } from 'prismic-reactjs';
+import { Asset } from '@prismic-types';
+import { RichText, RichTextBlock } from 'prismic-reactjs';
 import React from 'react';
-
 type Props = {
 	className?: string;
-	data: CategoryModel;
+	data: {
+		title: string;
+		description: RichTextBlock[];
+		thumbnail: Asset;
+	};
 };
 
 function PageBanner({ className, data }: Props) {

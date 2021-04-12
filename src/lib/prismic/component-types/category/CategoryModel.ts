@@ -4,7 +4,7 @@ import { RichTextBlock } from 'prismic-reactjs';
 export type CategoryModel = {
 	uid: string;
 	title: string;
-	description: RichTextBlock[] | null;
+	description: RichTextBlock[];
 	thumbnail: Asset;
 };
 

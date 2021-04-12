@@ -1,4 +1,4 @@
-import { StaticPathError, StaticPropsError } from '@common';
+import { StaticPathError, StaticPropsError, StaticPropsSuccess } from '@common';
 
 export function errorStatcPropsHandler(
 	error: unknown,
@@ -6,15 +6,9 @@ export function errorStatcPropsHandler(
 ): StaticPropsError {
 	console.error(error);
 
-	return {
-		props: {
-			data: null,
-			preview,
-			error: { message: 'Something went wrong' },
-		},
-		revalidate: 60,
-	};
+	return createStaticError('Something went wrong', preview);
 }
+/* -------------------------------------------------------------------------- */
 
 export function errorStaticPathsHandler(error: unknown): StaticPathError {
 	console.error(error);
@@ -22,5 +16,38 @@ export function errorStaticPathsHandler(error: unknown): StaticPathError {
 	return {
 		fallback: true,
 		paths: [],
+	};
+}
+/* -------------------------------------------------------------------------- */
+
+export function createStaticError(
+	message: string,
+	preview = false
+): StaticPropsError {
+	return {
+		props: {
+			data: null,
+			error: { message },
+			preview,
+		},
+		revalidate: 60,
+	};
+}
+
+/* -------------------------------------------------------------------------- */
+
+export function createStaticProps<Data, Meta = any>(
+	data: Data,
+	preview = false,
+	meta?: Meta
+): StaticPropsSuccess<Data, Meta> {
+	return {
+		props: {
+			data,
+			error: null,
+			preview,
+			meta: meta ?? null,
+		},
+		revalidate: 60,
 	};
 }

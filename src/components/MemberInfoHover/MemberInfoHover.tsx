@@ -29,7 +29,7 @@ function MemberInfoHover({ className, data }: Props) {
 				`}
 			>
 				<p tw="font-bold">{data.title}</p>
-				<p>{data.positions.join(', ')}</p>
+				<p>{data.positions.map((item) => item.position).join(', ')}</p>
 			</div>
 		</article>
 	);

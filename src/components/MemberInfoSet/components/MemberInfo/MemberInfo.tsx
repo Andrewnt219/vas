@@ -20,7 +20,7 @@ function MemberInfo({ className, data: { data } }: Props) {
 
 			<div tw="col-span-2">
 				<p tw="font-bold">{data.title}</p>
-				<p>{data.positions.join(', ')}</p>
+				<p>{data.positions.map((item) => item.position).join(', ')}</p>
 				{data.linked_in && (
 					<a
 						tw="block underline"

@@ -4,7 +4,7 @@ import { RichTextBlock } from 'prismic-reactjs';
 export type HashtagModel = {
 	uid: string;
 	title: string;
-	description: RichTextBlock[] | null;
+	description: RichTextBlock[];
 	thumbnail: Asset;
 };
 

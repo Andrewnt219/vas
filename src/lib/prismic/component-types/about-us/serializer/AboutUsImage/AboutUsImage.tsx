@@ -5,14 +5,14 @@ import 'twin.macro';
 
 type Props = { className?: string; data: Asset };
 
-function PostImage({ className, data }: Props) {
+function AboutUsImage({ className, data }: Props) {
 	const imgSrc = `${data.url}&fm=webp`;
 
 	return (
 		<Image
+			sizes="(min-width: 1280px) 50vw, 80vw"
 			imgSrc={imgSrc}
-			sizes="(min-width: 65ch) 65ch, 100vw"
-			tw="w-full my-9 rounded-sm overflow-hidden md:my-12"
+			tw="my-7 md:my-14 rounded-sm overflow-hidden "
 			className={className}
 			alt={data.alt ?? 'Missing alternative text'}
 			width={data.dimensions.width}
@@ -21,4 +21,4 @@ function PostImage({ className, data }: Props) {
 	);
 }
 
-export default PostImage;
+export default AboutUsImage;

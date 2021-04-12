@@ -1,6 +1,7 @@
 import { Result } from '@common';
 import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
 import PageH1 from '@components/PageH1/PageH1';
+import { SizesProvider } from '@contexts/SizesContext';
 import MainLayout from '@layouts/MainLayout';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { AuthorDataService } from '@services/author-data-service';
@@ -49,23 +50,26 @@ function Members({ data, error }: Props) {
 		return <h1>Fetching members...</h1>;
 	}
 
+	// TODO change sizes
 	return (
 		<MainLayout title={t('members:title')} tw="mb-10 md:mb-20">
 			<header tw="grid-p-sm ">
 				<PageH1>{t('members:title')}</PageH1>
 			</header>
 
-			<MemberInfoSet
-				heading={t('members:current')}
-				members={data.filter((doc) => doc.data.is_active)}
-				tw="grid-p-sm "
-			/>
+			<SizesProvider initialContext="100vw">
+				<MemberInfoSet
+					heading={t('members:current')}
+					members={data.filter((doc) => doc.data.is_active)}
+					tw="grid-p-sm "
+				/>
 
-			<MemberInfoSet
-				heading={t('members:former')}
-				members={data.filter((doc) => !doc.data.is_active)}
-				tw="grid-p-sm mt-8 md:mt-14 xl:mt-20"
-			/>
+				<MemberInfoSet
+					heading={t('members:former')}
+					members={data.filter((doc) => !doc.data.is_active)}
+					tw="grid-p-sm mt-8 md:mt-14 xl:mt-20"
+				/>
+			</SizesProvider>
 		</MainLayout>
 	);
 }
