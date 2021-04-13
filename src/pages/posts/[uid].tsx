@@ -3,6 +3,7 @@ import { PreviewProvider } from '@contexts/PreviewContext';
 import MainLayout from '@layouts/MainLayout';
 import PostWithoutHero from '@layouts/PostWithoutHero';
 import { Post, PostService } from '@services/post-service';
+import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { usePost } from '@src/hooks/usePost';
 import { useRelatedPost } from '@src/hooks/useRelatedPosts';
 import {
@@ -13,11 +14,15 @@ import {
 } from '@src/server/utils/page-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+import { RichText } from 'prismic-reactjs';
 import React from 'react';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function PostUid({ data: initialData, error: serverError, preview }: Props) {
+	const location = useCurrentLocation();
+
 	const { data: post, error: postError } = usePost({
 		post: initialData?.main,
 		isPreviewMode: preview,
@@ -69,12 +74,50 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 			break;
 	}
 
+	const ogImgUrl = `${post.data.thumbnail.url}&fm=jpg&w=1500`;
+
 	return (
 		<PreviewProvider initialValue={preview}>
 			<MainLayout
 				title={post.data.title}
 				tw="pb-0! leading-relaxed! md:text-xl"
 			>
+				<Head>
+					<meta property="og:url" content={location} />
+					<meta property="og:type" content="article" />
+					<meta property="og:title" content={post.data.title} />
+					<meta
+						property="og:description"
+						content={RichText.asText(post.data.snippet)}
+					/>
+					<meta property="og:image" content={ogImgUrl} />
+					<meta
+						property="og:image:width"
+						content={post.data.thumbnail.dimensions.width.toString()}
+					/>
+					<meta
+						property="og:image:height"
+						content={post.data.thumbnail.dimensions.height.toString()}
+					/>
+
+					<meta name="twitter:card" content="summary_large_image" />
+					<meta name="twitter:title" content={post.data.title} />
+					<meta
+						name="twitter:description"
+						content={RichText.asText(post.data.snippet)}
+					/>
+					<meta name="twitter:image" content={ogImgUrl} />
+
+					<meta
+						property="article:published_time"
+						content={
+							post.first_publication_date
+								? new Date(post.first_publication_date).toISOString()
+								: new Date().toISOString()
+						}
+					/>
+				</Head>
+
 				{renderedPostPage}
 			</MainLayout>
 		</PreviewProvider>

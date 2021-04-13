@@ -1,3 +1,4 @@
+import { Result } from '@common';
 import { Post } from '@services/post-service';
 import { PostsUIDget } from '@src/pages/api/posts/[uid]';
 import { getErrorMessage } from '@utils/convert-utils';
@@ -33,7 +34,7 @@ export const usePost = ({
 	post,
 	config,
 	isPreviewMode = false,
-}: Parameters) => {
+}: Parameters): Result<SWRdata> => {
 	const postID = post?.id;
 	const postUID = post?.uid;
 

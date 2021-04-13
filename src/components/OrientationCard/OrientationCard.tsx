@@ -5,6 +5,7 @@ import { Post } from '@services/post-service';
 import { getPostLink } from '@utils/route-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
+import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -59,7 +60,9 @@ function OrientationCard({ className, data: post, isMain }: Props) {
 						</div>
 
 						<div tw="text-base mt-4 text-gray-200 md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
-							<p tw="mb-2 xl:mb-4">{post.data.snippet}</p>
+							<div tw="mb-2 xl:mb-4">
+								<RichText render={post.data.snippet} />
+							</div>
 
 							<NextLink href={postLink} passHref>
 								<Button variant="link" as="a" tw="mt-9 italic">

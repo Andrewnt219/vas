@@ -43,9 +43,9 @@ function NewsCard({ className, post }: Props) {
 								<a>{post.data.title}</a>
 							</NextLink>
 						</h2>
-						<p tw="mt-4 text-gray-200 md:text-newsBody xl:mt-8">
+						<div tw="mt-4 text-gray-200 md:text-newsBody xl:mt-8">
 							<RichText render={post.data.snippet} />
-						</p>
+						</div>
 					</header>
 
 					<p tw="mt-8 text-right text-gray-200 md:text-xl xl:(mt-0 text-left)">
