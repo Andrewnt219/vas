@@ -1,6 +1,6 @@
 import { Language } from '@data/localization-data';
 import firestore, { fsOperands } from '@lib/firestore/firestore';
-import { FsPost } from '@lib/firestore/models/FsPost';
+import { PostMeta } from '@lib/firestore/models/FsPostDoc';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import {
 	PostDocument,
@@ -8,6 +8,7 @@ import {
 } from '@lib/prismic/component-types/post/PostModel';
 import {
 	defaultQueryOptionsFactory,
+	LanguageOption,
 	Predicates,
 } from '@lib/prismic/prismic-helpers';
 import { PMclient } from '@root/prismic-configuration';
@@ -35,7 +36,7 @@ export class PostService {
 		return this.mapPostDocumentToPost(postDoc);
 	}
 
-	static async getPosts(lang: Language): Promise<Post[]> {
+	static async getPosts(lang: LanguageOption): Promise<Post[]> {
 		const query = POST_TYPE_PREDICATE;
 		const options = getQueryOptions(lang);
 
@@ -115,66 +116,63 @@ export class PostService {
 	}
 
 	public static async getRelatedPosts(
-		postUID: string,
+		postID: string,
 		lang: Language,
 		previewRef = ''
-	): Promise<RelatedPostsResult> {
-		const post = await this.getPostByUID(postUID, lang, previewRef);
-
-		if (!post) {
-			return {
-				main: null,
-				relatedPosts: [],
-			};
-		}
-
+	): Promise<Post[]> {
 		const options = getQueryOptions(lang, { ref: previewRef });
 		const query = [
-			Predicates.similar(post.id, 5),
+			Predicates.similar(postID, 5),
 			Predicates.at('document.type', 'post'),
 		];
 
 		const relatedPostDocs: PostDocument[] = await (
 			await this.cms.query(query, options)
 		).results;
-		const relatedPosts = await this.mapPostDocumentsToPosts(relatedPostDocs);
 
-		return { main: post, relatedPosts };
+		return this.mapPostDocumentsToPosts(relatedPostDocs);
 	}
 
 	//#region Firestore
-	public static async increaseViews(postId: string): Promise<FsPost> {
-		const postMetaRef = this.collection.doc(postId);
+
+	public static async increaseViews(postID: string): Promise<PostMeta> {
+		const postMetaRef = this.collection.doc(postID);
+
+		const postMetaDoc = await postMetaRef.get();
+
+		if (!postMetaDoc.exists) {
+			return this.InsertPostMeta(postID);
+		}
 
 		await postMetaRef.update({
 			views: fsOperands.FieldValue.increment(1),
 		});
 
-		const postMetaDoc = await postMetaRef.get();
+		const updatedPostMetaRef = await postMetaRef.get();
 
-		if (!postMetaDoc.exists) {
-			return this.InsertPostMeta(postId);
+		if (!updatedPostMetaRef.exists) {
+			throw new Error('Fail to update post in Firestore');
 		}
 
-		return postMetaDoc.data() as FsPost;
+		return updatedPostMetaRef.data() as PostMeta;
 	}
 
-	public static async InsertPostMeta(postId: string): Promise<FsPost> {
-		const newData: FsPost = {
+	public static async InsertPostMeta(postId: string): Promise<PostMeta> {
+		const postMetaRef = this.collection.doc(postId);
+
+		const initMeta: PostMeta = {
 			comments: [],
 			views: 0,
 			id: postId,
 		};
+		postMetaRef.set(initMeta);
 
-		const postMetaRef = await this.collection.add(newData);
-		const postMeta = postMetaRef.get();
-
-		return (await postMeta).data() as FsPost;
+		return (await postMetaRef.get()).data() as PostMeta;
 	}
 
-	public static async getFsPostsByPostIDs(
+	public static async getPostMetaByPostIDs(
 		postIds: (string | undefined)[]
-	): Promise<FsPost[]> {
+	): Promise<PostMeta[]> {
 		const filteredPostIDs = postIds.filter(isString);
 
 		if (filteredPostIDs.length == 0) {
@@ -186,13 +184,13 @@ export class PostService {
 			.where(fsOperands.FieldPath.documentId(), 'in', filteredPostIDs)
 			.get();
 
-		return metaList.docs.map((doc) => doc.data() as FsPost);
+		return metaList.docs.map((doc) => doc.data() as PostMeta);
 	}
 
-	public static async getFsPostByPostID(
-		postId: string | undefined
-	): Promise<FsPost | undefined> {
-		return (await this.getFsPostsByPostIDs([postId]))[0];
+	public static async getPostMetaByPostID(
+		postId: string
+	): Promise<PostMeta | undefined> {
+		return (await this.getPostMetaByPostIDs([postId]))[0];
 	}
 	//#endregion
 
@@ -201,7 +199,7 @@ export class PostService {
 		postDocs: PostDocument[]
 	): Promise<Post[]> {
 		const ids = postDocs.map((doc) => doc.id);
-		const postMetaList = await this.getFsPostsByPostIDs(ids);
+		const postMetaList = await this.getPostMetaByPostIDs(ids);
 
 		return postDocs.map((doc) => {
 			const meta = postMetaList.find((meta) => meta.id === doc.id);
@@ -224,12 +222,7 @@ export class PostService {
 	//#endregion
 }
 
-export type RelatedPostsResult = {
-	main: Post | null;
-	relatedPosts: Post[];
-};
-
-export type Post = PostDocument & { meta: FsPost | null };
+export type Post = PostDocument & { meta: PostMeta | null };
 
 const getQueryOptions = defaultQueryOptionsFactory(postQuery);
 

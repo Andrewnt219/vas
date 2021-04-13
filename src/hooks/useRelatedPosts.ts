@@ -1,37 +1,31 @@
 import { Result } from '@common';
-import { RelatedPostsResult } from '@services/post-service';
 import { PostsGetRelatedPosts } from '@src/pages/api/posts/relatedPosts';
 import { getErrorMessage } from '@utils/convert-utils';
+import { createResultError, createResultPending } from '@utils/create-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { ConfigInterface } from 'swr';
 
-const fetcher = (endpoint: string, postUID: string, previewRef: string) =>
+const fetcher = (endpoint: string, postID: string) =>
 	axios
 		.get<PostsGetRelatedPosts>(endpoint, {
 			params: {
-				postUID,
-				previewRef,
+				postID,
 			},
 		})
 		.then((res) => res.data.data);
 
-type SWRdata = RelatedPostsResult | null;
+/* -------------------------------------------------------------------------- */
+type SWRdata = PostsGetRelatedPosts['data'];
 type SWRerror = AxiosError<PostsGetRelatedPosts>;
-export const useRelatedPosts = (
-	postUID: string | undefined,
-	initialData?: RelatedPostsResult | null,
+export const useRelatedPost = (
+	postID: string | undefined,
+	config?: ConfigInterface<SWRdata, SWRerror>,
 	isPreviewMode = false
-): Result<RelatedPostsResult> => {
-	const swrKey = ['/api/posts/relatedPosts', postUID];
-	const { data, error, revalidate } = useSWR<SWRdata, SWRerror>(
-		swrKey,
-		fetcher,
-		{
-			initialData,
-		}
-	);
+): Result<SWRdata> => {
+	const swrKey = ['/api/posts/relatedPosts', postID];
+	const { data, error, revalidate } = useSWR(swrKey, fetcher, config);
 
 	const { locale } = useRouter();
 
@@ -39,25 +33,12 @@ export const useRelatedPosts = (
 		revalidate();
 	}, [revalidate, locale]);
 
-	if (isPreviewMode) {
-		return {
-			data: initialData ?? null,
-			error: null,
-		};
-	}
-
 	if (error) {
-		return {
-			data: null,
-			error: { message: getErrorMessage(error) },
-		};
+		return createResultError(getErrorMessage(error), config?.initialData);
 	}
 
-	if (!data) {
-		return {
-			data: null,
-			error: null,
-		};
+	if (isPreviewMode || !data) {
+		return createResultPending(config?.initialData);
 	}
 
 	return { data, error: null };

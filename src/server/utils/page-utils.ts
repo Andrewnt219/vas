@@ -36,17 +36,15 @@ export function createStaticError(
 
 /* -------------------------------------------------------------------------- */
 
-export function createStaticProps<Data, Meta = any>(
+export function createStaticProps<Data>(
 	data: Data,
-	preview = false,
-	meta?: Meta
-): StaticPropsSuccess<Data, Meta> {
+	preview = false
+): StaticPropsSuccess<Data> {
 	return {
 		props: {
 			data,
 			error: null,
 			preview,
-			meta: meta ?? null,
 		},
 		revalidate: 60,
 	};

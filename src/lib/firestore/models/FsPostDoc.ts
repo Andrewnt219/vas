@@ -1,9 +1,9 @@
-export type FsPost = {
-	id: string;
+export type PostMeta = {
 	views: number;
+	id: string;
 	comments: {
 		name: string;
 		email: string;
-		createdAt: string;
+		createdAt: Date;
 	}[];
 };

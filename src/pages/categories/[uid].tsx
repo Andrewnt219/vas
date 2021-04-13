@@ -10,6 +10,8 @@ import { CategoryService } from '@services/category-data-service';
 import { Post, PostService } from '@services/post-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
 import {
+	createStaticError,
+	createStaticProps,
 	errorStatcPropsHandler,
 	errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
@@ -20,10 +22,12 @@ import React from 'react';
 import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
-type StaticProps = Result<
-	Post[],
-	{ categoryUID: string; categoryDoc: CategoryDocument }
-> & { preview: boolean };
+type Data = {
+	posts: Post[];
+	categoryUID: string;
+	categoryDoc: CategoryDocument;
+};
+type StaticProps = Result<Data> & { preview: boolean };
 type Params = {
 	uid: string;
 };
@@ -40,14 +44,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		const lang = tryParseLocale(locale);
 
 		if (!categoryUID) {
-			return {
-				props: {
-					data: null,
-					error: { message: "Missing category's UID" },
-					preview,
-				},
-				revalidate: 60,
-			};
+			return createStaticError("Missing category's UID", preview);
 		}
 
 		const categoryDoc = await CategoryService.getCategoryByUID(
@@ -57,26 +54,13 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		);
 
 		if (!categoryDoc) {
-			return {
-				props: {
-					data: null,
-					error: { message: 'Category not found' },
-					preview,
-				},
-			};
+			return createStaticError('Category not found', preview);
 		}
 
 		const posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
 
-		return {
-			props: {
-				data: posts,
-				error: null,
-				meta: { categoryDoc, categoryUID },
-				preview,
-			},
-			revalidate: 60,
-		};
+		const data = { posts, categoryDoc, categoryUID };
+		return createStaticProps(data, preview);
 	} catch (error) {
 		return errorStatcPropsHandler(error);
 	}
@@ -107,16 +91,20 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 function CategoryUID({
 	data: initialData,
 	error: serverError,
-	meta,
 	preview,
 }: Props) {
-	const { data, error } = useCategoryPosts(meta?.categoryUID, initialData);
+	const categoryDoc = initialData?.categoryDoc;
+	const { data, error } = useCategoryPosts(
+		categoryDoc?.uid,
+		initialData?.posts
+	);
 
-	if (error || serverError) {
+	// server error is prioritized, so place first
+	if (serverError || error) {
 		return <h1>{error?.message ?? serverError?.message}</h1>;
 	}
 
-	if (!data || !meta) {
+	if (!data || !categoryDoc) {
 		return <h1>Fetching posts...</h1>;
 	}
 
@@ -124,7 +112,7 @@ function CategoryUID({
 		typeof CategoryUIDlayout
 	>['children'];
 
-	switch (meta.categoryUID) {
+	switch (categoryDoc.uid) {
 		case 'blog':
 			renderedCategoryPage = <BlogPage posts={data} />;
 			break;
@@ -149,7 +137,7 @@ function CategoryUID({
 
 	return (
 		<PreviewProvider initialValue={preview}>
-			<CategoryUIDlayout categoryDoc={meta.categoryDoc}>
+			<CategoryUIDlayout categoryDoc={categoryDoc}>
 				{data.length == 0 ? (
 					<h1 tw="grid-p-sm">Come back later for interesting articles</h1>
 				) : (

@@ -1,10 +1,10 @@
 import { Result } from '@common';
-import { FsPost } from '@lib/firestore/models/FsPost';
+import { PostMeta } from '@lib/firestore/models/FsPostDoc';
 import { PostService } from '@services/post-service';
 import { apiHanler } from '@src/server/utils/api-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export type PostsPatchIncreaseView = Result<FsPost>;
+export type PostsPatchIncreaseView = Result<PostMeta>;
 
 async function patchHandler(
 	req: NextApiRequest,

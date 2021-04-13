@@ -58,7 +58,7 @@ type ContainerProps = {
 const Container = styled.button<ContainerProps>`
 	${tw`flex flex-col w-8 space-y-1 md:(w-12 space-y-2)`}
 	${tw`hocus:outline-none z-10`}
-  ${tw`xl:hidden`}
+  ${tw`lg:hidden`}
 
 	:hover, :focus {
 		${Line} {

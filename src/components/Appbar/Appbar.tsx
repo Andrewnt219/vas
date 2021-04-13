@@ -46,7 +46,7 @@ const Appbar: VFC<Props> = ({}) => {
 				<AnimatePresence>{isActive && <Slider />}</AnimatePresence>
 
 				<MenuItemSet
-					tw="hidden xl:(flex col-start-4 col-end-12 justify-end)"
+					tw="hidden lg:(flex col-start-4 col-end-12 justify-end)"
 					data={routes}
 				/>
 			</nav>

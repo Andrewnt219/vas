@@ -3,8 +3,11 @@ import { PreviewProvider } from '@contexts/PreviewContext';
 import MainLayout from '@layouts/MainLayout';
 import PostWithoutHero from '@layouts/PostWithoutHero';
 import { Post, PostService } from '@services/post-service';
-import { useRelatedPosts } from '@src/hooks/useRelatedPosts';
+import { usePost } from '@src/hooks/usePost';
+import { useRelatedPost } from '@src/hooks/useRelatedPosts';
 import {
+	createStaticError,
+	createStaticProps,
 	errorStatcPropsHandler,
 	errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
@@ -15,28 +18,42 @@ import React from 'react';
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function PostUid({ data: initialData, error: serverError, preview }: Props) {
-	const { data, error } = useRelatedPosts(
-		initialData?.main.uid,
-		initialData,
+	const { data: post, error: postError } = usePost({
+		post: initialData?.main,
+		isPreviewMode: preview,
+	});
+
+	const { data: relatedPosts, error: relatedPostsError } = useRelatedPost(
+		initialData?.main.id,
+		{
+			initialData: initialData?.relatedPosts,
+		},
 		preview
 	);
 
-	if (error || serverError) {
-		return <h1>{serverError?.message ?? error?.message}</h1>;
+	// server error is prioritized, so place first
+	if (serverError || postError || relatedPostsError) {
+		return (
+			<h1>
+				{serverError?.message ??
+					postError?.message ??
+					relatedPostsError?.message}
+			</h1>
+		);
 	}
 
-	if (!data || !data.main) {
+	if (!post || !relatedPosts) {
 		return <h2>Loading</h2>;
 	}
 
-	const categoryUID = data.main.data.categories?.[0].category.uid;
+	const categoryUID = post.data.categories?.[0].category.uid;
 	let renderedPostPage = <h1>Fail to get post</h1>;
 
 	switch (categoryUID) {
 		case 'blog':
 		case 'news':
 			renderedPostPage = (
-				<PostWithoutHero post={data.main} relatedPosts={data.relatedPosts} />
+				<PostWithoutHero post={post} relatedPosts={relatedPosts} />
 			);
 			break;
 
@@ -44,7 +61,7 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 		case 'orientation':
 		case 'tet':
 			renderedPostPage = (
-				<PostWithoutHero post={data.main} relatedPosts={data.relatedPosts} />
+				<PostWithoutHero post={post} relatedPosts={relatedPosts} />
 			);
 			break;
 
@@ -55,7 +72,7 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 	return (
 		<PreviewProvider initialValue={preview}>
 			<MainLayout
-				title={data.main.data.title}
+				title={post.data.title}
 				tw="pb-0! leading-relaxed! md:text-xl"
 			>
 				{renderedPostPage}
@@ -79,48 +96,27 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 }) => {
 	try {
 		const { ref } = previewData;
-
+		const lang = tryParseLocale(locale);
 		const uid = params?.uid;
 
 		if (!uid) {
-			return {
-				props: {
-					data: null,
-					error: {
-						message: 'Missing uid',
-					},
-					preview,
-				},
-			};
+			return createStaticError('Missing uid', preview);
 		}
 
-		const { main, relatedPosts } = await PostService.getRelatedPosts(
-			uid,
-			tryParseLocale(locale),
-			ref
-		);
+		const post = await PostService.getPostByUID(uid, lang, ref);
 
-		if (!main) {
-			return {
-				props: {
-					data: null,
-					error: { message: 'Post not found' },
-					preview: preview,
-				},
-			};
+		if (!post) {
+			return createStaticError('Post not found', preview);
 		}
 
-		return {
-			props: {
-				data: {
-					main: main,
-					relatedPosts,
-				},
-				error: null,
-				preview,
-			},
-			revalidate: 60,
+		const relatedPosts = await PostService.getRelatedPosts(post.id, lang, ref);
+
+		const data = {
+			main: post,
+			relatedPosts,
 		};
+
+		return createStaticProps(data, preview);
 	} catch (error) {
 		return errorStatcPropsHandler(error);
 	}

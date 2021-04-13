@@ -6,6 +6,7 @@ import {
 } from '@lib/prismic/component-types/category/CategoryModel';
 import {
 	defaultQueryOptionsFactory,
+	LanguageOption,
 	Predicates,
 } from '@lib/prismic/prismic-helpers';
 import { PMclient } from '@root/prismic-configuration';
@@ -17,7 +18,7 @@ export class CategoryService {
 	/* -------------------------------------------------------------------------- */
 
 	public static async getCategories(
-		lang: Language
+		lang: LanguageOption
 	): Promise<CategoryDocument[]> {
 		const options = getQueryOptions(lang);
 		const query = Predicates.at('document.type', 'category');

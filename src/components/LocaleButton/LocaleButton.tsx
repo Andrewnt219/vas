@@ -26,7 +26,6 @@ function LocaleButton({ className }: Props) {
 			text: t('common:locales.vi'),
 			iconSrc: '/svg/vietnam-flag.svg',
 		},
-		'*': null,
 	};
 
 	const currentLocale = isValidLocale(locale)

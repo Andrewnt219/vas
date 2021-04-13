@@ -3,11 +3,11 @@ import { Post, PostService } from '@services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export type PostsGetUID = Result<Post>;
+export type PostsUIDget = Result<Post>;
 
 async function getHandler(
 	req: NextApiRequest,
-	res: NextApiResponse<PostsGetUID>
+	res: NextApiResponse<PostsUIDget>
 ) {
 	// TODO check documentations for getting params
 	const { uid } = req.query;

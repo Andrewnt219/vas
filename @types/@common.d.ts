@@ -14,15 +14,14 @@ declare module '@common' {
 		ResultError & { preview: boolean }
 	>;
 
-	type StaticPropsSuccess<Data, Meta = any> = GetStaticPropsResult<
-		Result<Data, Meta> & { preview: boolean }
+	type StaticPropsSuccess<Data> = GetStaticPropsResult<
+		Result<Data> & { preview: boolean }
 	>;
 	type StaticPathError = GetStaticPathsResult<any>;
 
 	type Meta = Record<string, any> | null;
-	type Result<Data, Meta = any> = {
+	type Result<Data> = {
 		error: Error | null;
 		data: Data | null;
-		meta?: Meta | null;
 	};
 }
