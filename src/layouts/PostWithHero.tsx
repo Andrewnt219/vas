@@ -1,3 +1,5 @@
+import AuthordCard from '@components/AuthorCard/AuthordCard';
+import Image from '@components/Image/Image';
 import PostComponents from '@components/Post/Post';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
@@ -10,15 +12,15 @@ import React from 'react';
 type Props = { className?: string; post: Post; relatedPosts: Post[] };
 
 // TODO add author at the bottom
-const EventPost = ({ post, relatedPosts, className }: Props) => {
+const PostWithHero = ({ post, relatedPosts, className }: Props) => {
 	const publishedAt = post.first_publication_date
 		? new Date(post.first_publication_date)
 		: new Date();
 	const fromDate = dayjs(post.data.from_date ?? new Date());
 	const toDate = dayjs(post.data.to_date ?? new Date());
-
+	const imgSrc = `${post.data.thumbnail.url}&fm=webp`;
 	return (
-		<div tw="col-spall-full" className={className}>
+		<div tw="col-span-full" className={className}>
 			<section tw="">
 				<PostComponents.Wrapper as="header">
 					<PublishedDate date={publishedAt} />
@@ -26,10 +28,9 @@ const EventPost = ({ post, relatedPosts, className }: Props) => {
 				</PostComponents.Wrapper>
 
 				<PostComponents.Wrapper tw="relative pb-2xs my-10 md:my-16 xl:(my-20 transform scale-x-125)">
-					{/* FIXME missing responsive and swap */}
-					<img
+					<Image
 						tw="img-absolute absolute!"
-						src={post.data.thumbnail.url}
+						imgSrc={imgSrc}
 						alt={
 							post.data.thumbnail.alt ?? 'Alt text is unfortunately missing.'
 						}
@@ -42,8 +43,8 @@ const EventPost = ({ post, relatedPosts, className }: Props) => {
 					))}
 				</PostComponents.Wrapper>
 
-				<PostComponents.Wrapper as="footer">
-					<div tw="relative font-medium pl-4 py-px mt-10 before:(content absolute top-0 left-0 block h-full w-1 bg-primary) md:(pl-16 py-2 text-4xl mt-20 space-y-4 before:w-2)">
+				<PostComponents.Wrapper>
+					<div tw="relative font-medium pl-4 py-px mt-10 before:(content absolute top-0 left-0 block h-full w-1 bg-primary) md:(pl-8 py-2 text-2xl mt-20 before:w-2)">
 						<p>
 							Time:{' '}
 							<time dateTime={fromDate.format(Format.DATE)}>
@@ -63,6 +64,10 @@ const EventPost = ({ post, relatedPosts, className }: Props) => {
 						<p>Location: {post.data.location ?? 'TBD'}</p>
 					</div>
 				</PostComponents.Wrapper>
+
+				<PostComponents.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
+					<AuthordCard data={post.data.author.data} />
+				</PostComponents.Wrapper>
 			</section>
 
 			<RelatedPosts posts={relatedPosts} heading="Related events" />
@@ -70,4 +75,4 @@ const EventPost = ({ post, relatedPosts, className }: Props) => {
 	);
 };
 
-export default EventPost;
+export default PostWithHero;

@@ -1,3 +1,4 @@
+import AuthordCard from '@components/AuthorCard/AuthordCard';
 import PostComponents from '@components/Post/Post';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
@@ -44,6 +45,10 @@ const PostWithoutHero = ({ className, post, relatedPosts }: Props) => {
 					{post.data.body.map((slice, index) => (
 						<PostSliceZone slice={slice} key={`slice-${index}`} />
 					))}
+				</PostComponents.Wrapper>
+
+				<PostComponents.Wrapper tw="mt-10 md:mt-14 xl:mt-20">
+					<AuthordCard data={post.data.author.data} />
 				</PostComponents.Wrapper>
 			</section>
 

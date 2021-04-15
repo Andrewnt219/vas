@@ -1,6 +1,7 @@
 import { Result } from '@common';
 import { PreviewProvider } from '@contexts/PreviewContext';
 import MainLayout from '@layouts/MainLayout';
+import PostWithHero from '@layouts/PostWithHero';
 import PostWithoutHero from '@layouts/PostWithoutHero';
 import { Post, PostService } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
@@ -66,7 +67,7 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 		case 'orientation':
 		case 'tet':
 			renderedPostPage = (
-				<PostWithoutHero post={post} relatedPosts={relatedPosts} />
+				<PostWithHero post={post} relatedPosts={relatedPosts} />
 			);
 			break;
 
