@@ -74,7 +74,6 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 						{t('home:hero.subtitle')}
 					</p>
 				</header>
-
 				<div tw="col-span-full mt-10 xl:(mt-0 col-start-6 col-end-13 relative top-24)">
 					<EnhancedImage
 						src={require('images/friends-with-books.png')}

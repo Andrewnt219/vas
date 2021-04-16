@@ -1,7 +1,11 @@
 import { Result } from '@common';
 import { PostsGetRelatedPosts } from '@src/pages/api/posts/relatedPosts';
 import { getErrorMessage } from '@utils/convert-utils';
-import { createResultError, createResultPending } from '@utils/create-utils';
+import {
+	createResult,
+	createResultError,
+	createResultPending,
+} from '@utils/create-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -23,10 +27,10 @@ export const useRelatedPost = (
 	postID: string | undefined,
 	config?: ConfigInterface<SWRdata, SWRerror>
 ): Result<SWRdata> => {
-	const swrKey = ['/api/posts/relatedPosts', postID];
-	const { data, error, revalidate } = useSWR(swrKey, fetcher, config);
-
 	const { locale, isPreview } = useRouter();
+
+	const swrKey = isPreview ? null : ['/api/posts/relatedPosts', postID];
+	const { data, error, revalidate } = useSWR(swrKey, fetcher, config);
 
 	useEffect(() => {
 		revalidate();
@@ -40,5 +44,5 @@ export const useRelatedPost = (
 		return createResultPending(config?.initialData);
 	}
 
-	return { data, error: null };
+	return createResult(data);
 };

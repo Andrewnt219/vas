@@ -33,13 +33,13 @@ export const usePost = ({ post, config }: Parameters): Result<SWRdata> => {
 	const postID = post?.id;
 	const postUID = post?.uid;
 
-	const swrKey = `/api/posts/${postUID}`;
+	const { locale, isPreview } = useRouter();
+
+	const swrKey = isPreview ? null : `/api/posts/${postUID}`;
 	const { data, error, revalidate } = useSWR(swrKey, fetcher, {
 		initialData: post,
 		...config,
 	});
-
-	const { locale, isPreview } = useRouter();
 
 	useEffect(() => {
 		revalidate();
@@ -51,7 +51,7 @@ export const usePost = ({ post, config }: Parameters): Result<SWRdata> => {
 		return createResultError(getErrorMessage(error));
 	}
 
-	if (isPreview || !data) {
+	if (!data) {
 		return createResultPending(post);
 	}
 
