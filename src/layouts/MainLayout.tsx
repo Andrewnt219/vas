@@ -1,4 +1,3 @@
-import { usePreview } from '@contexts/PreviewContext';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,8 +18,7 @@ export default function MainLayout({
 	title,
 	className,
 }: Props) {
-	const { asPath, query, locale, pathname } = useRouter();
-	const isPreviewMode = usePreview();
+	const { asPath, query, locale, pathname, isPreview } = useRouter();
 
 	// TODO replace banner.png with vas
 	const meta = {
@@ -42,7 +40,7 @@ export default function MainLayout({
 				tw="col-span-full grid grid-cols-12 mt-6 pb-6 xl:(mt-20 pb-14)"
 				id="skip"
 			>
-				{isPreviewMode && (
+				{isPreview && (
 					<div tw="flex flex-col space-y-3 text-center  md:text-2xl  fixed bg-black bg-opacity-50 text-white top-0 left-0 px-20 py-4 z-50 transition-opacity hover:bg-opacity-100">
 						<NextLink
 							href={{ pathname, query }}

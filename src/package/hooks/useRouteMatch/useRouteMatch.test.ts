@@ -20,6 +20,8 @@ mockedUseRouter.mockImplementation(() => ({
 	isFallback: false,
 	isReady: true,
 	events: { emit: jest.fn(), off: jest.fn(), on: jest.fn() },
+	isLocaleDomain: true,
+	isPreview: false,
 }));
 
 describe('not exact', () => {

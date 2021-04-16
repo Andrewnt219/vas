@@ -20,8 +20,7 @@ const fetcher = (endpoint: string, categoryUID: string) =>
 		.then((res) => res.data.data);
 export const useCategoryPosts = (
 	categoryUID: string | undefined,
-	initialData?: UsePostsData | null,
-	isPreviewMode = false
+	initialData?: UsePostsData | null
 ): Result<UsePostsData> => {
 	const swrKey: keyInterface = ['/api/posts', categoryUID];
 	const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(
@@ -32,7 +31,7 @@ export const useCategoryPosts = (
 		}
 	);
 
-	const { locale } = useRouter();
+	const { locale, isPreview } = useRouter();
 
 	useEffect(() => {
 		revalidate();
@@ -45,7 +44,7 @@ export const useCategoryPosts = (
 		};
 	}
 
-	if (isPreviewMode) {
+	if (isPreview) {
 		return {
 			data: initialData ?? null,
 			error: null,

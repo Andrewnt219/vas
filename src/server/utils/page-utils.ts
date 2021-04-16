@@ -6,7 +6,7 @@ export function errorStatcPropsHandler(
 ): StaticPropsError {
 	console.error(error);
 
-	return createStaticError('Something went wrong', preview);
+	return createStaticError('Something went wrong');
 }
 /* -------------------------------------------------------------------------- */
 
@@ -20,15 +20,11 @@ export function errorStaticPathsHandler(error: unknown): StaticPathError {
 }
 /* -------------------------------------------------------------------------- */
 
-export function createStaticError(
-	message: string,
-	preview = false
-): StaticPropsError {
+export function createStaticError(message: string): StaticPropsError {
 	return {
 		props: {
 			data: null,
 			error: { message },
-			preview,
 		},
 		revalidate: 60,
 	};
@@ -36,15 +32,11 @@ export function createStaticError(
 
 /* -------------------------------------------------------------------------- */
 
-export function createStaticProps<Data>(
-	data: Data,
-	preview = false
-): StaticPropsSuccess<Data> {
+export function createStaticProps<Data>(data: Data): StaticPropsSuccess<Data> {
 	return {
 		props: {
 			data,
 			error: null,
-			preview,
 		},
 		revalidate: 60,
 	};

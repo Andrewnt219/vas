@@ -21,13 +21,12 @@ type SWRdata = PostsGetRelatedPosts['data'];
 type SWRerror = AxiosError<PostsGetRelatedPosts>;
 export const useRelatedPost = (
 	postID: string | undefined,
-	config?: ConfigInterface<SWRdata, SWRerror>,
-	isPreviewMode = false
+	config?: ConfigInterface<SWRdata, SWRerror>
 ): Result<SWRdata> => {
 	const swrKey = ['/api/posts/relatedPosts', postID];
 	const { data, error, revalidate } = useSWR(swrKey, fetcher, config);
 
-	const { locale } = useRouter();
+	const { locale, isPreview } = useRouter();
 
 	useEffect(() => {
 		revalidate();
@@ -37,7 +36,7 @@ export const useRelatedPost = (
 		return createResultError(getErrorMessage(error), config?.initialData);
 	}
 
-	if (isPreviewMode || !data) {
+	if (isPreview || !data) {
 		return createResultPending(config?.initialData);
 	}
 

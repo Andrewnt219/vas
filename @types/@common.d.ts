@@ -10,13 +10,9 @@ declare module '@common' {
 		data: null;
 	};
 
-	type StaticPropsError = GetStaticPropsResult<
-		ResultError & { preview: boolean }
-	>;
+	type StaticPropsError = GetStaticPropsResult<ResultError>;
 
-	type StaticPropsSuccess<Data> = GetStaticPropsResult<
-		Result<Data> & { preview: boolean }
-	>;
+	type StaticPropsSuccess<Data> = GetStaticPropsResult<Result<Data>>;
 	type StaticPathError = GetStaticPathsResult<any>;
 
 	type Meta = Record<string, any> | null;

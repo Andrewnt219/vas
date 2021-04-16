@@ -1,5 +1,4 @@
 import { Result } from '@common';
-import { PreviewProvider } from '@contexts/PreviewContext';
 import MainLayout from '@layouts/MainLayout';
 import PostWithHero from '@layouts/PostWithHero';
 import PostWithoutHero from '@layouts/PostWithoutHero';
@@ -21,20 +20,18 @@ import React from 'react';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function PostUid({ data: initialData, error: serverError, preview }: Props) {
+function PostUid({ data: initialData, error: serverError }: Props) {
 	const location = useCurrentLocation();
 
 	const { data: post, error: postError } = usePost({
 		post: initialData?.main,
-		isPreviewMode: preview,
 	});
 
 	const { data: relatedPosts, error: relatedPostsError } = useRelatedPost(
 		initialData?.main.id,
 		{
 			initialData: initialData?.relatedPosts,
-		},
-		preview
+		}
 	);
 
 	// server error is prioritized, so place first
@@ -78,55 +75,48 @@ function PostUid({ data: initialData, error: serverError, preview }: Props) {
 	const ogImgUrl = `${post.data.thumbnail.url}&fm=jpg&w=1500`;
 
 	return (
-		<PreviewProvider initialValue={preview}>
-			<MainLayout
-				title={post.data.title}
-				tw="pb-0! leading-relaxed! md:text-xl"
-			>
-				<Head>
-					<meta property="og:url" content={location} />
-					<meta property="og:type" content="article" />
-					<meta property="og:title" content={post.data.title} />
-					<meta
-						property="og:description"
-						content={RichText.asText(post.data.snippet)}
-					/>
-					<meta property="og:image" content={ogImgUrl} />
-					<meta
-						property="og:image:width"
-						content={post.data.thumbnail.dimensions.width.toString()}
-					/>
-					<meta
-						property="og:image:height"
-						content={post.data.thumbnail.dimensions.height.toString()}
-					/>
+		<MainLayout title={post.data.title} tw="pb-0! leading-relaxed! md:text-xl">
+			<Head>
+				<meta property="og:url" content={location} />
+				<meta property="og:type" content="article" />
+				<meta property="og:title" content={post.data.title} />
+				<meta
+					property="og:description"
+					content={RichText.asText(post.data.snippet)}
+				/>
+				<meta property="og:image" content={ogImgUrl} />
+				<meta
+					property="og:image:width"
+					content={post.data.thumbnail.dimensions.width.toString()}
+				/>
+				<meta
+					property="og:image:height"
+					content={post.data.thumbnail.dimensions.height.toString()}
+				/>
 
-					<meta name="twitter:card" content="summary_large_image" />
-					<meta name="twitter:title" content={post.data.title} />
-					<meta
-						name="twitter:description"
-						content={RichText.asText(post.data.snippet)}
-					/>
-					<meta name="twitter:image" content={ogImgUrl} />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={post.data.title} />
+				<meta
+					name="twitter:description"
+					content={RichText.asText(post.data.snippet)}
+				/>
+				<meta name="twitter:image" content={ogImgUrl} />
 
-					<meta
-						property="article:published_time"
-						content={
-							post.first_publication_date
-								? new Date(post.first_publication_date).toISOString()
-								: new Date().toISOString()
-						}
-					/>
-				</Head>
+				<meta
+					property="article:published_time"
+					content={
+						post.first_publication_date
+							? new Date(post.first_publication_date).toISOString()
+							: new Date().toISOString()
+					}
+				/>
+			</Head>
 
-				{renderedPostPage}
-			</MainLayout>
-		</PreviewProvider>
+			{renderedPostPage}
+		</MainLayout>
 	);
 }
-type StaticProps = Result<{ main: Post; relatedPosts: Post[] }> & {
-	preview: boolean;
-};
+type StaticProps = Result<{ main: Post; relatedPosts: Post[] }>;
 
 type Params = {
 	uid: string;
@@ -135,7 +125,7 @@ type Params = {
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 	params,
 	locale,
-	preview = false,
+
 	previewData = {},
 }) => {
 	try {
@@ -144,13 +134,13 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		const uid = params?.uid;
 
 		if (!uid) {
-			return createStaticError('Missing uid', preview);
+			return createStaticError('Missing uid');
 		}
 
 		const post = await PostService.getPostByUID(uid, lang, ref);
 
 		if (!post) {
-			return createStaticError('Post not found', preview);
+			return createStaticError('Post not found');
 		}
 
 		const relatedPosts = await PostService.getRelatedPosts(post.id, lang, ref);
@@ -160,7 +150,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 			relatedPosts,
 		};
 
-		return createStaticProps(data, preview);
+		return createStaticProps(data);
 	} catch (error) {
 		return errorStatcPropsHandler(error);
 	}

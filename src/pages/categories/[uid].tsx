@@ -1,5 +1,4 @@
 import { Result } from '@common';
-import { PreviewProvider } from '@contexts/PreviewContext';
 import BlogPage from '@layouts/categoryPages/BlogPage';
 import CategoryUIDlayout from '@layouts/categoryPages/CategoryUIDlayout';
 import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
@@ -27,7 +26,7 @@ type Data = {
 	categoryUID: string;
 	categoryDoc: CategoryDocument;
 };
-type StaticProps = Result<Data> & { preview: boolean };
+type StaticProps = Result<Data>;
 type Params = {
 	uid: string;
 };
@@ -35,7 +34,6 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 	locale,
 	params,
 	previewData = {},
-	preview = false,
 }) => {
 	try {
 		const { ref } = previewData;
@@ -44,7 +42,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		const lang = tryParseLocale(locale);
 
 		if (!categoryUID) {
-			return createStaticError("Missing category's UID", preview);
+			return createStaticError("Missing category's UID");
 		}
 
 		const categoryDoc = await CategoryService.getCategoryByUID(
@@ -54,13 +52,13 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 		);
 
 		if (!categoryDoc) {
-			return createStaticError('Category not found', preview);
+			return createStaticError('Category not found');
 		}
 
 		const posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
 
 		const data = { posts, categoryDoc, categoryUID };
-		return createStaticProps(data, preview);
+		return createStaticProps(data);
 	} catch (error) {
 		return errorStatcPropsHandler(error);
 	}
@@ -88,11 +86,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-function CategoryUID({
-	data: initialData,
-	error: serverError,
-	preview,
-}: Props) {
+function CategoryUID({ data: initialData, error: serverError }: Props) {
 	const categoryDoc = initialData?.categoryDoc;
 	const { data, error } = useCategoryPosts(
 		categoryDoc?.uid,
@@ -136,15 +130,13 @@ function CategoryUID({
 	}
 
 	return (
-		<PreviewProvider initialValue={preview}>
-			<CategoryUIDlayout categoryDoc={categoryDoc}>
-				{data.length == 0 ? (
-					<h1 tw="grid-p-sm">Come back later for interesting articles</h1>
-				) : (
-					renderedCategoryPage
-				)}
-			</CategoryUIDlayout>
-		</PreviewProvider>
+		<CategoryUIDlayout categoryDoc={categoryDoc}>
+			{data.length == 0 ? (
+				<h1 tw="grid-p-sm">Come back later for interesting articles</h1>
+			) : (
+				renderedCategoryPage
+			)}
+		</CategoryUIDlayout>
 	);
 }
 export default CategoryUID;

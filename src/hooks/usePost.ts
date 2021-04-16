@@ -28,13 +28,8 @@ type SWRerror = AxiosError<PostsUIDget>;
 type Parameters = {
 	post: Post | undefined;
 	config?: ConfigInterface<SWRdata, SWRerror>;
-	isPreviewMode: boolean;
 };
-export const usePost = ({
-	post,
-	config,
-	isPreviewMode = false,
-}: Parameters): Result<SWRdata> => {
+export const usePost = ({ post, config }: Parameters): Result<SWRdata> => {
 	const postID = post?.id;
 	const postUID = post?.uid;
 
@@ -44,7 +39,7 @@ export const usePost = ({
 		...config,
 	});
 
-	const { locale } = useRouter();
+	const { locale, isPreview } = useRouter();
 
 	useEffect(() => {
 		revalidate();
@@ -56,7 +51,7 @@ export const usePost = ({
 		return createResultError(getErrorMessage(error));
 	}
 
-	if (isPreviewMode || !data) {
+	if (isPreview || !data) {
 		return createResultPending(post);
 	}
 
