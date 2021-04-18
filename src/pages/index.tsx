@@ -1,5 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import FactTile from '@components/FactTile/FactTile';
+import FontPrefetch from '@components/head/FontPrefetch';
 import SectionH1 from '@components/SectionH1/SectionH1';
 import { AuthorDataService } from '@services/author-data-service';
 import { StatsDataService } from '@services/stats-data-service';
@@ -9,6 +10,7 @@ import { padZero } from '@utils/number-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import Head from 'next/head';
 import React, { VFC } from 'react';
 
 // TODO use loadLocaleFrom in i18n.json to load translation files
@@ -59,6 +61,12 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 
 	return (
 		<MainLayout title={t('home:hero.title')} tw="pb-0!">
+			<Head>
+				<FontPrefetch
+					fonts={['300', '300italic', '700', '900', 'italic', 'regular']}
+				/>
+			</Head>
+
 			<section
 				tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
 				aria-labelledby="hero-title"
