@@ -1,7 +1,6 @@
 import { Result } from '@common';
+import DefaultPost from '@components/posts/DefaultPost/DefaultPost';
 import MainLayout from '@layouts/MainLayout';
-import PostWithHero from '@layouts/PostWithHero';
-import PostWithoutHero from '@layouts/PostWithoutHero';
 import { Post, PostService } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { usePost } from '@src/hooks/usePost';
@@ -56,7 +55,7 @@ function PostUid({ data: initialData, error: serverError }: Props) {
 		case 'blog':
 		case 'news':
 			renderedPostPage = (
-				<PostWithoutHero post={post} relatedPosts={relatedPosts} />
+				<DefaultPost post={post} relatedPosts={relatedPosts} />
 			);
 			break;
 
@@ -64,7 +63,7 @@ function PostUid({ data: initialData, error: serverError }: Props) {
 		case 'orientation':
 		case 'tet':
 			renderedPostPage = (
-				<PostWithHero post={post} relatedPosts={relatedPosts} />
+				<DefaultPost post={post} relatedPosts={relatedPosts} />
 			);
 			break;
 

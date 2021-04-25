@@ -17,6 +17,7 @@ type SliceProps = {
 type Props = SliceComponentProps<SliceProps>;
 
 // TODO maybe add config (label) in prismic for full-width or not, so we can set the sizes accordingly
+// TODO preview image on click
 function PostImageWithCaptionSlice({ className, slice }: Props) {
 	const data = slice.primary;
 	const imgRef = useImageSwap();
@@ -24,7 +25,7 @@ function PostImageWithCaptionSlice({ className, slice }: Props) {
 	return (
 		<figure
 			className={className}
-			tw="my-9 flex flex-col items-center justify-center rounded overflow-hidden md:my-12"
+			tw="mb-4 flex flex-col items-center justify-center rounded overflow-hidden"
 		>
 			<img
 				data-srcset={getSrcSet(data.image.url)}
@@ -37,7 +38,7 @@ function PostImageWithCaptionSlice({ className, slice }: Props) {
 				alt={data.image.alt ?? 'Missing alt'}
 				sizes="(min-width: 65ch) 65ch, 100vw"
 			/>
-			<figcaption tw="mx-auto text-smaller mt-2 text-gray-200 text-center">
+			<figcaption tw="mx-auto text-smaller mt-2 text-skin-muted text-center">
 				{data.caption}
 			</figcaption>
 		</figure>

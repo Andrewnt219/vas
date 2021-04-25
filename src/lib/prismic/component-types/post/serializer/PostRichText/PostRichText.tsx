@@ -11,10 +11,7 @@ function PostRichText({ className, data, children }: Props) {
 	switch (data.type) {
 		case 'heading2':
 			return (
-				<h2
-					className={className}
-					tw="font-bold text-2xl mt-10 mb-2 md:(text-4xl mb-8 mt-16)"
-				>
+				<h2 className={className} tw="font-black text-2xl mb-4 mt-7">
 					{children}
 				</h2>
 			);
@@ -31,14 +28,14 @@ function PostRichText({ className, data, children }: Props) {
 
 		case 'heading4':
 			return (
-				<h4 className={className} tw="font-bold mt-7 mb-2 md:(mt-14 mb-3 )">
+				<h4 className={className} tw="font-bold mt-7 mb-2 md:(mt-14 mb-3)">
 					{children}
 				</h4>
 			);
 
 		case 'paragraph':
 			return (
-				<p className={className} tw="mb-7 md:mb-10">
+				<p className={className} tw="mb-4">
 					{children}
 				</p>
 			);

@@ -72,6 +72,9 @@ export const bodyFontFace = css`
 `;
 
 export const typographyStyles = css`
-	${tw`font-sans`}
+	:root {
+		${tw`font-sans`}
+	}
+
 	${bodyFontFace}
 `;

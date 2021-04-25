@@ -1,6 +1,10 @@
 import { Language } from '@data/localization-data';
 import firestore, { fsOperands } from '@lib/firestore/firestore';
-import { PostMeta } from '@lib/firestore/models/FsPostDoc';
+import {
+	PostComment,
+	PostMeta,
+	PostReply,
+} from '@lib/firestore/models/FsPostDoc';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import {
 	PostDocument,
@@ -16,7 +20,8 @@ import { isString } from '@utils/validate-utils';
 import { CategoryService } from './category-data-service';
 
 export class PostService {
-	private static readonly collection = firestore.collection('posts');
+	private static readonly posts = firestore.collection('posts');
+	private static readonly comments = firestore.collection('comments');
 	private static readonly cms = PMclient;
 
 	static async getPostByUID(
@@ -134,37 +139,54 @@ export class PostService {
 	}
 
 	//#region Firestore
-
-	public static async increaseViews(postID: string): Promise<PostMeta> {
-		const postMetaRef = this.collection.doc(postID);
-
-		const postMetaDoc = await postMetaRef.get();
-
-		if (!postMetaDoc.exists) {
-			return this.InsertPostMeta(postID);
-		}
-
-		await postMetaRef.update({
-			views: fsOperands.FieldValue.increment(1),
-		});
-
-		const updatedPostMetaRef = await postMetaRef.get();
-
-		if (!updatedPostMetaRef.exists) {
-			throw new Error('Fail to update post in Firestore');
-		}
-
-		return updatedPostMetaRef.data() as PostMeta;
+	public static async insertComment(
+		comment: PostComment
+	): Promise<PostComment | undefined> {
+		const ref = await this.comments.add(comment);
+		const snapshot = await ref.get();
+		return { ...snapshot.data(), id: snapshot.id } as PostComment;
 	}
 
-	public static async InsertPostMeta(postId: string): Promise<PostMeta> {
-		const postMetaRef = this.collection.doc(postId);
+	public static async insertReply(
+		commentId: string,
+		reply: PostReply
+	): Promise<PostComment | null> {
+		return this.updatePostCommentByCommentId(commentId, {
+			replies: (fsOperands.FieldValue.arrayUnion(
+				reply
+			) as unknown) as PostReply[],
+		});
+	}
 
-		const initMeta: PostMeta = {
-			comments: [],
-			views: 0,
-			id: postId,
-		};
+	public static async getCommentsByPostUids(
+		postUids: string[]
+	): Promise<PostComment[]> {
+		const snapshot = this.comments.where('postUid', 'in', postUids);
+		return (await snapshot.get()).docs.map((doc) => {
+			return { ...doc.data(), id: doc.id } as PostComment;
+		});
+	}
+	public static async getCommentsByPostUid(
+		postUid: string
+	): Promise<PostComment[]> {
+		return this.getCommentsByPostUids([postUid]);
+	}
+
+	public static async increaseViews(
+		postID: string
+	): Promise<PostMeta | undefined> {
+		return this.updatePostMetaByPostID(postID, {
+			views: (fsOperands.FieldValue.increment(1) as unknown) as number,
+		});
+	}
+
+	public static async insertPostMeta(
+		postId: string,
+		overwrite?: Partial<PostMeta>
+	): Promise<PostMeta> {
+		const postMetaRef = this.posts.doc(postId);
+
+		const initMeta = this.createPostMeta(postId, overwrite);
 		postMetaRef.set(initMeta);
 
 		return (await postMetaRef.get()).data() as PostMeta;
@@ -180,7 +202,7 @@ export class PostService {
 		}
 
 		// NOTE firebase `in` requires non-empty array
-		const metaList = await this.collection
+		const metaList = await this.posts
 			.where(fsOperands.FieldPath.documentId(), 'in', filteredPostIDs)
 			.get();
 
@@ -192,19 +214,67 @@ export class PostService {
 	): Promise<PostMeta | undefined> {
 		return (await this.getPostMetaByPostIDs([postId]))[0];
 	}
+
+	public static async updatePostMetaByPostID(
+		postId: string,
+		data: Partial<PostMeta>
+	): Promise<PostMeta> {
+		const postMetaRef = this.posts.doc(postId);
+		const postMetaSnapshot = await postMetaRef.get();
+
+		if (!postMetaSnapshot.exists) {
+			return this.insertPostMeta(postId);
+		}
+
+		await postMetaRef.update(data);
+
+		return (await postMetaRef.get()).data() as PostMeta;
+	}
+
+	public static async updatePostCommentByCommentId(
+		commentId: string,
+		data: Partial<PostComment>
+	): Promise<PostComment | null> {
+		const ref = this.comments.doc(commentId);
+		let snapshot = await ref.get();
+
+		if (!snapshot.exists) {
+			return null;
+		}
+
+		await ref.update(data);
+		snapshot = await ref.get();
+
+		return snapshot.data() as PostComment;
+	}
 	//#endregion
 
 	//#region Helpers
+	private static createPostMeta(
+		postId: string,
+		overwrite?: Partial<PostMeta>
+	): PostMeta {
+		return {
+			views: 0,
+			postId: postId,
+			...overwrite,
+		};
+	}
+
 	private static async mapPostDocumentsToPosts(
 		postDocs: PostDocument[]
 	): Promise<Post[]> {
 		const ids = postDocs.map((doc) => doc.id);
+		const uids = postDocs.map((doc) => doc.uid).filter(isString);
 		const postMetaList = await this.getPostMetaByPostIDs(ids);
+		const postCommentsList = await this.getCommentsByPostUids(uids);
 
 		return postDocs.map((doc) => {
-			const meta = postMetaList.find((meta) => meta.id === doc.id);
-
-			return { ...doc, meta: meta ?? null };
+			const meta = postMetaList.find((meta) => meta.postId === doc.id);
+			const comments = postCommentsList.filter(
+				(comment) => comment.postUid === doc.uid
+			);
+			return { ...doc, comments, meta: meta ?? null };
 		});
 	}
 
@@ -222,7 +292,10 @@ export class PostService {
 	//#endregion
 }
 
-export type Post = PostDocument & { meta: PostMeta | null };
+export type Post = PostDocument & {
+	meta: PostMeta | null;
+	comments: PostComment[];
+};
 
 const getQueryOptions = defaultQueryOptionsFactory(postQuery);
 

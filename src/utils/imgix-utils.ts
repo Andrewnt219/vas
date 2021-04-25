@@ -1,5 +1,7 @@
 export const getSrcSet = (imgSrc: string): string => {
-	return `				
+	return imgSrc.includes('&w=')
+		? imgSrc
+		: `				
     ${imgSrc}&w=3840 3840w,
     ${imgSrc}&w=2048 2048w,
     ${imgSrc}&w=1920 1920w,

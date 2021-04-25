@@ -2,6 +2,7 @@
 
 const { fontFamily, transitionProperty } = require('tailwindcss/defaultTheme');
 const _ = require('lodash');
+const { spacing } = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	purge: {
@@ -17,15 +18,10 @@ module.exports = {
 			primary: '#D73732',
 
 			gray: {
-				DEFAULT: '#F3F0EA',
-				100: '#F6F6F6',
-				200: '#6B7280',
 				300: '#7A7A7A',
 				400: '#EEE',
 			},
-			black: {
-				DEFAULT: '#000',
-			},
+			black: '#000',
 			white: '#fff',
 			transparent: 'transparent',
 			current: 'currentColor',
@@ -34,10 +30,30 @@ module.exports = {
 			borderRadius: {
 				'4xl': '3.125rem',
 			},
+			textColor: {
+				skin: {
+					base: '#424851',
+					muted: '#6B7280',
+				},
+			},
+			backgroundColor: {
+				skin: {
+					light: '#F2F3F3',
+					dark: '#424851',
+				},
+			},
+			borderColor: {
+				skin: {
+					light: '#424851',
+				},
+			},
 			transitionProperty: {
 				colors: transitionProperty.colors + ', text-decoration-color',
 			},
-			spacing: {
+			margin: {
+				sm: spacing[4],
+			},
+			padding: {
 				'2xs': '42.5%',
 				xs: '56.25%',
 				sm: '75%',
@@ -46,6 +62,9 @@ module.exports = {
 				'2xl': '150%',
 				'3xl': '175%',
 				'4xl': '200%',
+			},
+			width: {
+				larger: '150%',
 			},
 			fontSize: {
 				body: ['0.875rem', { lineHeight: '1.43' }],
@@ -76,8 +95,6 @@ module.exports = {
 	},
 	plugins: [centers, grid, sizing, commons, decorator, fonts],
 };
-
-// TODO move to tailwindcss/typography
 
 function commons({ addUtilities }) {
 	addUtilities({

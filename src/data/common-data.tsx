@@ -13,6 +13,6 @@ export enum Format {
 	SHORT_DATE = 'MM-DD',
 	SHORT_TEXT_DATE = 'MMM DD',
 	DATE = 'YYYY-MM-DD',
-	DATE_TIME = 'YYYY-MM-DD HH:mm',
+	DATE_TIME = 'YYYY-MM-DD h:mm a',
 	DATE_TEXT = 'MMMM DD, YYYY',
 }

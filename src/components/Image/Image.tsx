@@ -10,14 +10,15 @@ type HtmlImageProps = Omit<
 	'data-srcset'?: never;
 	'data-src'?: never;
 };
-type Props = HtmlImageProps & {
+type Props = Omit<HtmlImageProps, 'src' | 'alt'> & {
 	className?: string;
 	imgSrc: string;
-	alt: string;
+	alt: string | undefined | null;
 };
 
 function Image({ className, imgSrc, alt, ...imgProps }: Props) {
 	const imgRef = useImageSwap();
+	imgSrc += '&fm=webp';
 
 	return (
 		<img
@@ -26,9 +27,10 @@ function Image({ className, imgSrc, alt, ...imgProps }: Props) {
 			src={getLqip(imgSrc)}
 			data-srcset={getSrcSet(imgSrc)}
 			data-src={imgSrc}
-			tw="w-full rounded"
 			className={className}
-			alt={alt}
+			tw="w-full rounded"
+			alt={alt ?? 'Missing alt text'}
+			loading="lazy"
 			{...imgProps}
 		/>
 	);

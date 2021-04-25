@@ -19,7 +19,7 @@ function PostListItem({ data, className, children }: Props) {
 }
 
 const sharedCss = css`
-	${tw`pl-2 md:pl-3`}
+	${tw``}
 `;
 
 type BulletProps = {};
@@ -28,7 +28,7 @@ const Bullet = styled.li<BulletProps>`
 	list-style: disc;
 
 	::marker {
-		${tw`text-gray-200`}
+		${tw`text-skin-muted`}
 	}
 `;
 

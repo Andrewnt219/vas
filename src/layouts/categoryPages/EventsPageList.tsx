@@ -10,7 +10,7 @@ function EventsPageList({ className, posts }: Props) {
 	return (
 		<section className={className} tw="grid-p-sm xl:(col-start-3 col-end-12 )">
 			<ul
-				tw=" flex flex-col space-y-16 xl:(all-child:(w-sm even:self-end))"
+				tw=" flex flex-col space-y-16 xl:(all-child:(w-3/4 even:self-end))"
 				aria-label="articles about VAS' events"
 			>
 				{posts.length > 0 &&

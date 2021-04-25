@@ -2,7 +2,7 @@ import Button from '@components/Button/Button';
 import Image from '@components/Image/Image';
 import { Format } from '@data/common-data';
 import { Post } from '@services/post-service';
-import { getPostLink } from '@utils/route-utils';
+import { getPostLink } from '@utils/convert-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
@@ -59,7 +59,7 @@ function OrientationCard({ className, data: post, isMain }: Props) {
 							<p>Location: {post.data.location}</p>
 						</div>
 
-						<div tw="text-base mt-4 text-gray-200 md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
+						<div tw="text-base mt-4 text-skin-muted md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
 							<div tw="mb-2 xl:mb-4">
 								<RichText render={post.data.snippet} />
 							</div>

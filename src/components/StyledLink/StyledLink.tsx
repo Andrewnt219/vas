@@ -2,13 +2,13 @@ import tw, { css, styled, theme } from 'twin.macro';
 
 const visitedCss = css`
 	svg {
-		color: ${theme`colors.gray.200`};
+		color: ${theme`textColor.skin.muted`};
 	}
 
 	//NOTE Must be placed at the bottom because weird TS bug
 	&:visited {
-		// NOTE somehow text-gray-200 isn't working
-		color: ${theme`colors.gray.200`};
+		// NOTE somehow text-skin-muted isn't working
+		color: ${theme`textColor.skin.muted`};
 		${tw`decorator-current`};
 	}
 `;

@@ -3,7 +3,7 @@ import Image from '@components/Image/Image';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import { Format } from '@data/common-data';
 import { Post } from '@services/post-service';
-import { getPostLink } from '@utils/route-utils';
+import { getPostLink } from '@utils/convert-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
@@ -16,7 +16,7 @@ function EventCard({ className, data: postDoc }: Props) {
 	const fromDate = dayjs(postDoc.data.from_date ?? Date.now());
 	const toDate = dayjs(postDoc.data.from_date ?? Date.now());
 	const postLink = getPostLink(postDoc.uid ?? '');
-	const imgSrc = postDoc.data.thumbnail.url + '&fm=webp';
+	const imgSrc = postDoc.data.thumbnail.url;
 
 	return (
 		<article className={className} tw="space-y-4 xl:space-y-14">
@@ -59,7 +59,7 @@ function EventCard({ className, data: postDoc }: Props) {
 				<p tw="md:text-right">Location: {postDoc.data.location}</p>
 			</div>
 
-			<div tw="text-base text-gray-200 md:text-newsBody">
+			<div tw="text-base text-skin-muted md:text-newsBody">
 				<div tw="mb-4 md:mb-6">
 					<RichText render={postDoc.data.snippet} />
 				</div>

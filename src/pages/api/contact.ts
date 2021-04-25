@@ -2,6 +2,7 @@ import { Result } from '@common';
 import sgMail from '@lib/sendgrid';
 import { MailDataRequired } from '@sendgrid/mail';
 import { apiHanler } from '@src/server/utils/api-utils';
+import { createResult, createResultError } from '@utils/create-utils';
 import { NextApiHandler } from 'next';
 
 // TODO sendgrid
@@ -9,10 +10,7 @@ const post: NextApiHandler<Result<string>> = async (req, res) => {
 	const { email, subject, message } = req.body;
 
 	if (!email || !subject || !message) {
-		return res.status(400).json({
-			data: null,
-			error: { message: 'Missing data' },
-		});
+		return res.status(400).json(createResultError('Missing data'));
 	}
 
 	const msg: MailDataRequired = {
@@ -24,12 +22,10 @@ const post: NextApiHandler<Result<string>> = async (req, res) => {
 
 	try {
 		await sgMail.send(msg);
-		return res.status(200).json({ data: 'Sent', error: null });
+		return res.status(200).json(createResult('Sent'));
 	} catch (error) {
 		console.log(error);
-		return res
-			.status(500)
-			.json({ data: null, error: { message: 'Fail to send email' } });
+		return res.status(500).json(createResultError('Fail to send mail'));
 	}
 };
 

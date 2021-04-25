@@ -1,5 +1,6 @@
 import { Result } from '@common';
 import { Client, linkResolver } from '@root/prismic-configuration';
+import { createResultError } from '@utils/create-utils';
 import { isNullOrUndefined } from '@utils/validate-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -12,7 +13,7 @@ const preview = async (
 	if (!isValidQuery(query)) {
 		return res
 			.status(400)
-			.json({ data: null, error: { message: 'Invalid token or documentId' } });
+			.json(createResultError('Invalid token or documentId'));
 	}
 
 	const { token: ref, documentId } = query;
@@ -22,9 +23,7 @@ const preview = async (
 		.resolve(linkResolver, '/');
 
 	if (!redirectUrl) {
-		return res
-			.status(401)
-			.json({ data: null, error: { message: 'Invalid token' } });
+		return res.status(401).json(createResultError('Invalid token'));
 	}
 
 	res.setPreviewData({ ref });

@@ -4,7 +4,7 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import { Format } from '@data/common-data';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
-import { getHashtagLink } from '@utils/route-utils';
+import { getHashtagLink } from '@utils/convert-utils';
 import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
@@ -34,7 +34,7 @@ const PostWithoutHero = ({ className, post, relatedPosts }: Props) => {
 					</PostComponents.Title>
 
 					<time
-						tw="text-gray-200 text-smaller italic"
+						tw="text-skin-muted text-smaller italic"
 						dateTime={publishDate.format(Format.DATE)}
 					>
 						{publishDate.format(Format.DATE_TEXT)}

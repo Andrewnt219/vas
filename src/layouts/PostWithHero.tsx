@@ -18,7 +18,7 @@ const PostWithHero = ({ post, relatedPosts, className }: Props) => {
 		: new Date();
 	const fromDate = dayjs(post.data.from_date ?? new Date());
 	const toDate = dayjs(post.data.to_date ?? new Date());
-	const imgSrc = `${post.data.thumbnail.url}&fm=webp`;
+	const imgSrc = `${post.data.thumbnail.url}`;
 	return (
 		<div tw="col-span-full" className={className}>
 			<section tw="">

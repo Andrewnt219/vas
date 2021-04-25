@@ -1,7 +1,7 @@
 import Image from '@components/Image/Image';
 import { Post } from '@services/post-service';
 import { scaleImageCss } from '@styles/apply';
-import { getPostLink } from '@utils/route-utils';
+import { getPostLink } from '@utils/convert-utils';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
@@ -43,14 +43,14 @@ function NewsCard({ className, post }: Props) {
 								<a>{post.data.title}</a>
 							</NextLink>
 						</h2>
-						<div tw="mt-4 text-gray-200 md:text-newsBody xl:mt-8">
+						<div tw="mt-4 text-skin-muted md:text-newsBody xl:mt-8">
 							<RichText render={post.data.snippet} />
 						</div>
 					</header>
 
-					<p tw="mt-8 text-right text-gray-200 md:text-xl xl:(mt-0 text-left)">
-						{post.meta?.views ?? 0} views &#47;{' '}
-						{post.meta?.comments.length ?? 0} comments
+					<p tw="mt-8 text-right text-skin-muted md:text-xl xl:(mt-0 text-left)">
+						{post.meta?.views ?? 0} views &#47; {post.comments.length ?? 0}{' '}
+						comments
 					</p>
 				</div>
 			</div>

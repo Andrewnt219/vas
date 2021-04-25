@@ -10,7 +10,7 @@ type Props = {
 };
 
 function MemberAvatar({ className, imageData }: Props) {
-	const imgSrc = imageData.url + '&fm=webp';
+	const imgSrc = imageData.url;
 	const sizes = useSizes();
 
 	return (

@@ -71,7 +71,7 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 				tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
 				aria-labelledby="hero-title"
 			>
-				<header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 w-xl text-left)">
+				<header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 w-larger text-left)">
 					<h1
 						id="hero-title"
 						tw="text-2xl text-primary font-bold md:text-4xl lg:text-5xl"
@@ -96,7 +96,7 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 			</section>
 
 			<section
-				tw="col-span-full bg-gray-100 pt-10 md:pt-20 xl:pt-40"
+				tw="col-span-full bg-skin-light pt-10 md:pt-20 xl:pt-40"
 				aria-labelledby="fact-title"
 			>
 				<header>

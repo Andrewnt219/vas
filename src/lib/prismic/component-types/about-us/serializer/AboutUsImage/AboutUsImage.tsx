@@ -6,7 +6,7 @@ import 'twin.macro';
 type Props = { className?: string; data: Asset };
 
 function AboutUsImage({ className, data }: Props) {
-	const imgSrc = `${data.url}&fm=webp`;
+	const imgSrc = `${data.url}`;
 
 	return (
 		<Image

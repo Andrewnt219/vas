@@ -1,6 +1,11 @@
 import { Result } from '@common';
 import { PostsGetIndex } from '@src/pages/api/posts';
 import { getErrorMessage } from '@utils/convert-utils';
+import {
+	createResult,
+	createResultError,
+	createResultPending,
+} from '@utils/create-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -38,28 +43,16 @@ export const useCategoryPosts = (
 	}, [revalidate, locale]);
 
 	if (error) {
-		return {
-			data: null,
-			error: { message: getErrorMessage(error) },
-		};
+		return createResultError(getErrorMessage(error));
 	}
 
 	if (isPreview) {
-		return {
-			data: initialData ?? null,
-			error: null,
-		};
+		return createResultPending(initialData);
 	}
 
 	if (!data) {
-		return {
-			data: null,
-			error: null,
-		};
+		return createResultPending();
 	}
 
-	return {
-		data,
-		error: null,
-	};
+	return createResult(data);
 };

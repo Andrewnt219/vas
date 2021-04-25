@@ -24,7 +24,7 @@ const Container = styled.hr<ContainerProps>`
 
 	::before {
 		content: '\\00b7 \\00b7 \\00b7';
-		${tw`font-bold text-gray-200 text-2xl`}
+		${tw`font-bold text-skin-muted text-2xl`}
 		letter-spacing: 21px;
 		margin-left: -21px; // account for the letter spacing
 	}

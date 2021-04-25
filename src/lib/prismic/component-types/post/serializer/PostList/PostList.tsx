@@ -17,7 +17,7 @@ function PostList({ data, children }: Props) {
 
 type StyledListProps = {};
 const StyledList = styled.ul<StyledListProps>`
-	${tw`ml-8 my-6 space-y-3 md:(ml-11 my-10 space-y-6)`}
+	${tw`mb-4 pl-6 space-y-1`}
 `;
 
 export default PostList;

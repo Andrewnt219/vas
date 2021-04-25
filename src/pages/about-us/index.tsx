@@ -90,7 +90,7 @@ const AboutUs: VFC<Props> = ({ data, error }) => {
 
 const mainLayoutCss = css`
 	& > section:nth-child(even) {
-		${tw`bg-gray-100`}
+		${tw`bg-skin-light`}
 	}
 `;
 
