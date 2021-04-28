@@ -52,6 +52,7 @@ const sharedButton = css`
 
 type Props = { className?: string; post: Post; relatedPosts: Post[] };
 
+// TODO componentize
 function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
 
@@ -134,6 +135,8 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
           <PostSliceZone slice={slice} key={`slice-${index}`} />
         ))}
       </div>
+
+      {/* TODO add card for event date time */}
 
       {/* Footer */}
       <div tw="mt-9" css={wrapper}>
