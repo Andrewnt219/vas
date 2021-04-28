@@ -15,10 +15,10 @@ function Time({ className, time, children }: Props) {
 
   return (
     <time
-      className={className}
       dateTime={dayjsTime.format()}
       title={dayjsTime.format()}
       tw=""
+      className={className}
     >
       {children ?? dayjsTime.fromNow()}
     </time>
