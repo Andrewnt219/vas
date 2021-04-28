@@ -39,14 +39,14 @@ const Appbar: VFC<Props> = ({}) => {
           Skip to content
         </a>
 
-        <Logo tw="col-start-1 col-end-4  md:col-end-3 xl:(col-start-2 col-end-3)" />
+        <Logo tw="col-start-1 col-span-2 xl:(w-3/4 col-start-2 col-end-3)" />
 
         <Burger tw="col-start-11 col-end-13 justify-self-center self-center" />
 
         <AnimatePresence>{isActive && <Slider />}</AnimatePresence>
 
         <MenuItemSet
-          tw="hidden lg:(flex col-start-4 col-end-12 justify-end)"
+          tw="hidden xl:(flex col-start-4 col-end-12 justify-end)"
           data={routes}
         />
       </nav>

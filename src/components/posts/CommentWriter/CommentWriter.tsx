@@ -1,27 +1,12 @@
+import Button from '@components/Button/Button';
 import InputGroup from '@components/InputGroup/InputGroup';
 import { InputLabel } from '@components/InputLabel/InputLabel';
 import TextField from '@components/TextField/TextField';
-import { percentageToHex } from '@utils/css-utils';
 import { isEmail } from '@utils/validate-utils';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import tw, { css, theme } from 'twin.macro';
 import { uid } from 'uid';
-
-const button = css`
-  ${tw`px-6 py-2 text-white bg-primary font-black border border-transparent transition-colors`}
-  box-shadow: 0 10px 15px 0 ${theme`colors.primary` + percentageToHex(20)};
-
-  :hover,
-  :focus {
-    ${tw`bg-white  border-primary text-primary`}
-  }
-
-  :active {
-    box-shadow: none;
-  }
-`;
 
 /* -------------------------------------------------------------------------- */
 
@@ -104,9 +89,9 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
         />
       </InputGroup>
 
-      <button tw="mt-4" css={button} disabled={isSubmitting}>
+      <Button tw="mt-4" disabled={isSubmitting}>
         {isSubmitting ? 'Sending' : 'Submit Comment'}
-      </button>
+      </Button>
     </form>
   );
 }
