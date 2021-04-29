@@ -134,7 +134,7 @@ function fonts({ addUtilities, theme }) {
       },
 
       '@screen xl': {
-        fontSize: theme('fontSize.4xl'),
+        fontSize: theme('fontSize.5xl'),
       },
     },
     '.text-h3-variants': {

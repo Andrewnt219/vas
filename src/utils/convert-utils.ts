@@ -1,4 +1,5 @@
 import { Result } from '@common';
+import { PostDocument } from '@lib/prismic/component-types/post/PostModel';
 import { Post } from '@services/post-service';
 import { AxiosError } from 'axios';
 import { RichText } from 'prismic-reactjs';
@@ -16,21 +17,22 @@ export const getHashtagLink = (hashtagUID: string | undefined) =>
   `/hashtags/${hashtagUID}`;
 export const getPostLink = (postUID: string | undefined) => `/posts/${postUID}`;
 export const getCategoryLink = (categoryUID: string | undefined) =>
-  `/${categoryUID}`;
+  `/categories/${categoryUID}`;
 export const getAuthorLink = (authorUID: string | undefined) =>
   `/authors/${authorUID}`;
 
 /* -------------------------------------------------------------------------- */
 
-export const getMainCategory = (post: Post) =>
+export const getMainCategory = (post: Post | PostDocument) =>
   post.data.categories[0]?.category;
 
-export const getPublishedDate = (post: Post): Date =>
+export const getPublishedDate = (post: Post | PostDocument): Date =>
   post.first_publication_date
     ? new Date(post.first_publication_date)
     : new Date();
 
-export const getFirstHashtag = (post: Post) => post.data.hashtags[0]?.hashtag;
+export const getFirstHashtag = (post: Post | PostDocument) =>
+  post.data.hashtags[0]?.hashtag;
 
 /* -------------------------------------------------------------------------- */
 
@@ -40,7 +42,7 @@ export function getCommentsCount(post: Post) {
     post.comments.length
   );
 }
-export function getPostReadingMinutes(post: Post) {
+export function getPostReadingMinutes(post: Post | PostDocument) {
   const readingTime = post.data.body.reduce((accumulator, slice) => {
     switch (slice.slice_type) {
       case 'image_with_caption':

@@ -16,7 +16,10 @@ import {
   Predicates,
 } from '@lib/prismic/prismic-helpers';
 import { PMclient } from '@root/prismic-configuration';
+import { getMainCategory } from '@utils/convert-utils';
 import { isString } from '@utils/validate-utils';
+import { Dictionary } from 'lodash';
+import groupBy from 'lodash/groupBy';
 import { CategoryService } from './category-data-service';
 
 export class PostService {
@@ -80,23 +83,41 @@ export class PostService {
     return this.mapPostDocumentsToPosts(postDocs);
   }
 
-  public static async getPostsByCategoryUIDs(
-    categoryUIDs: string[],
+  public static getPostDocsByCategoryDocs(
+    categoryDocs: CategoryDocument[],
     lang: Language
-  ): Promise<Post[]> {
-    const categoryDocs: CategoryDocument[] = await CategoryService.getCategoriesByUIDs(
-      categoryUIDs,
-      lang
-    );
-
+  ): Promise<PostDocument[][]> {
     const getPostsByCategoryDoc = (categoryDoc: CategoryDocument) =>
       this.getPostDocsByCategoryID(categoryDoc.id, lang);
 
     const getPostsByCategoryDocs = categoryDocs.map(getPostsByCategoryDoc);
 
-    const postDocs: PostDocument[][] = await Promise.all(
-      getPostsByCategoryDocs
+    return Promise.all(getPostsByCategoryDocs);
+  }
+
+  public static async getPostsByCategories(
+    lang: Language
+  ): Promise<Dictionary<Post[]>> {
+    const categoryDocs = await CategoryService.getCategories(lang);
+    const postDocs = await this.getPostDocsByCategoryDocs(categoryDocs, lang);
+    const posts = await this.mapPostDocumentsToPosts(postDocs.flat());
+
+    const byCategoryUid = (postDoc: PostDocument): string | undefined =>
+      getMainCategory(postDoc).uid;
+
+    return groupBy(posts, byCategoryUid);
+  }
+
+  public static async getPostsByCategoryUIDs(
+    categoryUIDs: string[],
+    lang: Language
+  ): Promise<Post[]> {
+    const categoryDocs = await CategoryService.getCategoriesByUIDs(
+      categoryUIDs,
+      lang
     );
+
+    const postDocs = await this.getPostDocsByCategoryDocs(categoryDocs, lang);
 
     return this.mapPostDocumentsToPosts(postDocs.flat());
   }
@@ -161,6 +182,10 @@ export class PostService {
   public static async getCommentsByPostUids(
     postUids: string[]
   ): Promise<PostComment[]> {
+    if (postUids.length === 0) {
+      return [];
+    }
+
     const snapshot = this.comments.where('postUid', 'in', postUids);
     return (await snapshot.get()).docs.map((doc) => {
       return { ...doc.data(), id: doc.id } as PostComment;

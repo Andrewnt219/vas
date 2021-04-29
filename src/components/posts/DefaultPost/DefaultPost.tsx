@@ -4,7 +4,7 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
-import { font, label } from '@styles/shared-css';
+import { container, font, label } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCommentsCount,
@@ -68,8 +68,8 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
     <section className={className} tw="col-span-full text-skin-base">
       {/* Hero */}
       <header
-        tw="mb-5 mx-auto max-w-6xl! md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg"
-        css={wrapper}
+        tw="mb-5  md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg"
+        css={container}
       >
         {/* TODO don't use fit cover */}
         <div tw="pb-full relative mb-sm after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">

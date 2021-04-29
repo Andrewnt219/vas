@@ -1,13 +1,15 @@
 import Button from '@components/Button/Button';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import FactTile from '@components/FactTile/FactTile';
 import FontPrefetch from '@components/head/FontPrefetch';
-import SectionH1 from '@components/SectionH1/SectionH1';
-import { AuthorDataService } from '@services/author-data-service';
-import { StatsDataService } from '@services/stats-data-service';
+import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
+import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
+import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
+import {
+  CategoryService,
+  CategoryWithPosts,
+} from '@services/category-data-service';
 import MainLayout from '@src/layouts/MainLayout';
-import { ComponentProps } from '@utils';
-import { padZero } from '@utils/number-utils';
+import { container } from '@styles/shared-css';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,22 +22,24 @@ import React, { VFC } from 'react';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
-type StaticProps = { membersCount: number; projectsCount: number };
+type StaticProps = {
+  categoriesWithPosts: CategoryWithPosts[];
+};
 
 type Params = {};
 
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
   locale,
 }) => {
-  const projectsCount = await StatsDataService.countProjects();
-  const membersCount = await AuthorDataService.countAuthors(
-    tryParseLocale(locale)
+  const lang = tryParseLocale(locale);
+
+  const categoriesWithPosts = await CategoryService.getCategoriesWithPosts(
+    lang
   );
 
   return {
     props: {
-      projectsCount,
-      membersCount,
+      categoriesWithPosts,
     },
 
     revalidate: 60,
@@ -47,22 +51,11 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 /* -------------------------------------------------------------------------- */
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
+const Index: VFC<Props> = ({ categoriesWithPosts }) => {
   const { t } = useTranslation();
 
-  const FACTS: ComponentProps<typeof FactTile>['data'][] = [
-    {
-      key: t`home:our-facts.members.key`,
-      value: padZero(membersCount),
-    },
-    {
-      key: t`home:our-facts.projects.key`,
-      value: padZero(projectsCount) + '+',
-    },
-  ];
-
   return (
-    <MainLayout title={t('home:hero.title')} tw="pb-0!">
+    <MainLayout title={t('home:hero.title')} tw="pb-0! mb-12">
       <Head>
         <FontPrefetch
           fonts={['300', '300italic', '700', '900', 'italic', 'regular']}
@@ -83,6 +76,9 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
 
           <p tw="mt-sm md:text-base xl:(w-2/3)">{t('home:hero.subtitle')}</p>
 
+          {/* TODO translate */}
+          {/* TODO add primary button for read more (scroll down) */}
+          {/* TODO switch find out more to secondary */}
           <NextLink href="/about-us" passHref>
             <Button as="a" variant="contain" size="lg" tw="mt-lg inline-block">
               Find out more
@@ -104,63 +100,18 @@ const Index: VFC<Props> = ({ membersCount, projectsCount }) => {
       </section>
 
       <section
-        tw="col-span-full bg-skin-light pt-10 md:pt-20 xl:pt-40"
-        aria-labelledby="fact-title"
+        css={container}
+        tw="mt-96 col-span-full grid xl:(grid-cols-3 gap-x-12)"
       >
-        <header>
-          <SectionH1 id="fact-title" tw="mb-0 xl:mb-24">
-            {t`home:our-facts.title`}
-          </SectionH1>
-        </header>
+        <div tw="col-span-2">Posts</div>
 
-        <div tw="grid grid-cols-12 space-y-10 md:space-y-24 xl:(space-y-0)">
-          <EnhancedImage
-            tw="hidden xl:(block col-start-1 col-end-3 relative -top-1/3)"
-            src={require('images/woman-with-pencil.png')}
-            lqip={require('images/woman-with-pencil.png?lqip')}
-            alt="A woman holds a human-size pencil"
-            width={928}
-            height={2157}
-            layout="responsive"
-            sizes="15vw"
-          />
-
-          <ul
-            tw="grid grid-cols-2 gap-10 grid-p-sm xl:(grid-p-md gap-32)"
-            aria-label="Facts about VAS"
-          >
-            {FACTS.map((fact) => (
-              <li key={fact.key}>
-                <FactTile data={fact} />
-              </li>
-            ))}
-          </ul>
-
-          <EnhancedImage
-            tw="hidden xl:(block col-start-10 col-end-13 w-full h-full) "
-            src={require('images/man-with-champion-cup.png')}
-            lqip={require('images/man-with-champion-cup.png?lqip')}
-            alt="A man holds a champion cup"
-            width={1297}
-            height={2686}
-            layout="responsive"
-            sizes="25vw"
-          />
-
-          <EnhancedImage
-            tw="grid-p-sm relative z-10 top-3 md:top-6 lg:top-7 xl:(grid-p-md -mt-96!) 2xl:top-9"
-            src={require('images/friends-with-hobbies.png')}
-            lqip={require('images/friends-with-hobbies.png?lqip')}
-            alt="A group of friends with different hobbies"
-            width={3233}
-            height={2210}
-            layout="responsive"
-            sizes="50vw"
-          />
-        </div>
+        <aside tw="mt-7 col-span-1 grid gap-y-4 md:(gap-7 grid-cols-2) xl:(mt-0 grid-cols-1 gap-12)">
+          <NewsletterBox />
+          <CategoriesBox categories={categoriesWithPosts} />
+          <SocialMediaBox tw="col-span-full" />
+        </aside>
       </section>
     </MainLayout>
   );
 };
-
 export default Index;
