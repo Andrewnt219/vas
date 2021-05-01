@@ -137,6 +137,18 @@ function fonts({ addUtilities, theme }) {
         fontSize: theme('fontSize.5xl'),
       },
     },
+    '.article-card-title-variants': {
+      fontSize: theme('fontSize.2xl'),
+      lineHeight: 1.2,
+
+      '@screen md': {
+        fontSize: theme('fontSize.3xl'),
+      },
+
+      '@screen lg': {
+        fontSize: theme('fontSize.4xl'),
+      },
+    },
     '.text-h3-variants': {
       fontSize: theme('fontSize.lg'),
       lineHeight: 1.3,

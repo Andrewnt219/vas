@@ -8,10 +8,8 @@ import { container, font, label } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCommentsCount,
-  getFirstHashtag,
+  getDataFromPost,
   getHashtagLink,
-  getPostReadingMinutes,
-  getPublishedDate,
 } from '@utils/convert-utils';
 import { getSizes } from '@utils/css-utils';
 import NextLink from 'next/link';
@@ -55,14 +53,17 @@ type Props = { className?: string; post: Post; relatedPosts: Post[] };
 // TODO componentize
 function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
-
   const location = useCurrentLocation();
 
-  const { author, thumbnail } = post.data;
+  const {
+    author,
+    firstHashtag,
+    thumbnail,
+    publishedDate,
+    readingMinutes,
+  } = getDataFromPost(post);
+
   const authorAvatar = `${author.data.thumbnail.url}&w=48&h=48&fit=crop`;
-  const displayedHashtag = getFirstHashtag(post);
-  const publishedDate = getPublishedDate(post);
-  const readingMinutes = getPostReadingMinutes(post);
 
   return (
     <section className={className} tw="col-span-full text-skin-base">
@@ -86,7 +87,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         <div>
           <div tw="space-y-1 xl:space-y-4">
             <span css={label} tw="inline-block">
-              {displayedHashtag.data.title}
+              {firstHashtag.data.title}
             </span>
 
             <h1 css={font.h1}>{post.data.title}</h1>

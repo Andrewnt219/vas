@@ -34,6 +34,17 @@ export const getPublishedDate = (post: Post | PostDocument): Date =>
 export const getFirstHashtag = (post: Post | PostDocument) =>
   post.data.hashtags[0]?.hashtag;
 
+export const getDataFromPost = (post: Post | PostDocument) => ({
+  snippet: post.data.snippet,
+  body: post.data.body,
+  title: post.data.title,
+  author: post.data.author,
+  thumbnail: post.data.thumbnail,
+  mainCategory: getMainCategory(post),
+  firstHashtag: getFirstHashtag(post),
+  publishedDate: getPublishedDate(post),
+  readingMinutes: getPostReadingMinutes(post),
+});
 /* -------------------------------------------------------------------------- */
 
 export function getCommentsCount(post: Post) {

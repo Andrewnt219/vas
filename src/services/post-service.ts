@@ -14,6 +14,7 @@ import {
   defaultQueryOptionsFactory,
   LanguageOption,
   Predicates,
+  PrismicQueryOptions,
 } from '@lib/prismic/prismic-helpers';
 import { PMclient } from '@root/prismic-configuration';
 import { getMainCategory } from '@utils/convert-utils';
@@ -44,11 +45,14 @@ export class PostService {
     return this.mapPostDocumentToPost(postDoc);
   }
 
-  static async getPosts(lang: LanguageOption): Promise<Post[]> {
+  static async getPosts(
+    lang: LanguageOption,
+    options?: PrismicQueryOptions
+  ): Promise<Post[]> {
     const query = POST_TYPE_PREDICATE;
-    const options = getQueryOptions(lang);
+    const queryOptions = getQueryOptions(lang, options);
 
-    const postDocs: PostDocument[] = (await this.cms.query(query, options))
+    const postDocs: PostDocument[] = (await this.cms.query(query, queryOptions))
       .results;
 
     return this.mapPostDocumentsToPosts(postDocs);
