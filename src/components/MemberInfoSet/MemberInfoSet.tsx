@@ -1,4 +1,5 @@
 import MemberInfo from '@components/MemberInfoSet/components/MemberInfo/MemberInfo';
+import { sectionH1 } from '@styles/shared-css';
 import { ComponentProps } from '@utils';
 import React from 'react';
 
@@ -16,7 +17,7 @@ function MemberInfoSet({ className, heading, members }: Props) {
       tw="md:text-lg xl:text-2xl"
     >
       <header tw="mb-6 md:mb-lg xl:mb-20">
-        <h2 tw="text-xl max-w-max relative pb-1 after:( content3/4 h-px absolute left-0 bottom-0 bg-primary) md:(text-4xl pb-3 after:h-1) xl:(text-5xl  )">
+        <h2 css={sectionH1} tw="mx-0 after:(mx-0)">
           {heading}
         </h2>
       </header>

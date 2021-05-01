@@ -12,7 +12,7 @@ function PostImage({ className, data }: Props) {
   return (
     <Image
       imgSrc={imgSrc}
-      sizes="(min-width: 65ch) 65ch, 100vw"
+      sizes="(min-width: 65ch) 130ch, 100vw"
       tw="w-full mb-4 rounded-sm overflow-hidden"
       className={className}
       alt={data.alt ?? 'Missing alternative text'}

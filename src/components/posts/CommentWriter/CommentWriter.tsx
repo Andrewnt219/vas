@@ -89,7 +89,7 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
         />
       </InputGroup>
 
-      <Button tw="mt-4" disabled={isSubmitting}>
+      <Button tw="mt-4" variant="contain" disabled={isSubmitting}>
         {isSubmitting ? 'Sending' : 'Submit Comment'}
       </Button>
     </form>

@@ -75,7 +75,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         {/* TODO don't use fit cover */}
         <div tw="pb-full relative mb-sm after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">
           <Image
-            sizes={getSizes(['90vw', '40vw', '30vw'])}
+            sizes={getSizes(['90vw', '40vw', '1280px'])}
             alt={thumbnail.alt}
             imgSrc={thumbnail.url}
             height={thumbnail.dimensions.height}

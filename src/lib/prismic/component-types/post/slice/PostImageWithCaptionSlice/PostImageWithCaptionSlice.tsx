@@ -36,7 +36,7 @@ function PostImageWithCaptionSlice({ className, slice }: Props) {
         width={data.image.dimensions.width}
         height={data.image.dimensions.height}
         alt={data.image.alt ?? 'Missing alt'}
-        sizes="(min-width: 65ch) 65ch, 100vw"
+        sizes="(min-width: 65ch) 130ch, 100vw"
       />
       <figcaption tw="mx-auto text-smaller mt-2 text-skin-muted text-center">
         {data.caption}
