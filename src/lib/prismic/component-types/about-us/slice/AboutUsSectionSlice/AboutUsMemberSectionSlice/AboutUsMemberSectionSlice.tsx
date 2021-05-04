@@ -1,7 +1,7 @@
 import MemberInfoHover from '@components/MemberInfoHover/MemberInfoHover';
+import { SectionH1 } from '@components/SectionH1/SectionH1';
 import { useMembers } from '@contexts/MembersContext';
 import { SizesProvider } from '@contexts/SizesContext';
-import { sectionH1 } from '@styles/shared-css';
 import { getSizes } from '@utils/css-utils';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
@@ -19,7 +19,7 @@ function AboutUsMemberSectionSlice({ className, slice }: Props) {
       tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-400 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) "
     >
       <header>
-        <h1 css={sectionH1}>{RichText.asText(slice.primary.title)}</h1>
+        <SectionH1>{RichText.asText(slice.primary.title)}</SectionH1>
       </header>
 
       <SizesProvider

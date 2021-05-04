@@ -1,7 +1,7 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import PageH1 from '@components/PageH1/PageH1';
+import { SectionH1 } from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
-import { sectionH1 } from '@styles/shared-css';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
@@ -119,7 +119,7 @@ const Partners: VFC<Props> = ({}) => {
       </StyledSection>
 
       <StyledSection tw="mt-24 md:mt-36">
-        <h1 css={sectionH1}>{t`partnerships:our-partners.title`}</h1>
+        <SectionH1>{t`partnerships:our-partners.title`}</SectionH1>
         <ul
           aria-label="List of VAS' partners"
           tw="grid  md:grid-cols-2 xl:grid-cols-4"

@@ -1,7 +1,6 @@
 import { Label } from '@components/Label/Label';
 import Time from '@components/posts/Time/Time';
 import { Post } from '@services/post-service';
-import { font } from '@styles/shared-css';
 import { getFirstHashtag, getHashtagLink } from '@utils/convert-utils';
 import NextLink from 'next/link';
 import React from 'react';
@@ -41,8 +40,7 @@ function PostItem({ data }: PostItemProps) {
         </h1>
 
         <Time
-          tw="mt-1 block text-white text-opacity-80" // important to have block, or weird gap with title
-          css={font.subtitle}
+          tw="mt-1 block text-white text-opacity-80 text-subtitle" // important to have block, or weird gap with title
           time={data.first_publication_date}
         />
       </header>

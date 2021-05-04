@@ -5,7 +5,6 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
-import { container, font } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCommentsCount,
@@ -69,10 +68,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
   return (
     <section className={className} tw="col-span-full text-skin-base">
       {/* Hero */}
-      <header
-        tw="mb-5  md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg"
-        css={container}
-      >
+      <header tw="mb-5 wrapper md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg">
         {/* TODO don't use fit cover */}
         <div tw="pb-full relative mb-sm after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">
           <Image
@@ -91,9 +87,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
               <Label tw="inline-block">{firstHashtag.data.title}</Label>
             </NextLink>
 
-            <h1 css={font.h1}>{post.data.title}</h1>
+            <h1 tw="text-h1-variants">{post.data.title}</h1>
 
-            <div css={font.tag} tw="flex items-center  space-x-1">
+            <div tw=" text-tag flex items-center  space-x-1">
               <span tw="text-primary font-black">
                 {post.meta?.views ?? 0} views
               </span>
@@ -143,7 +139,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       {/* Footer */}
       <div tw="mt-9" css={wrapper}>
         <div tw="flex flex-col">
-          <span css={font.tag}>Tagged as</span>
+          <span tw="text-tag">Tagged as</span>
 
           <ul tw="flex flex-wrap">
             {post.data.hashtags.map(({ hashtag }) => (
@@ -159,7 +155,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         </div>
 
         <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-sm">
-          <span css={font.tag}>Share</span>
+          <span tw="text-tag">Share</span>
           <ul tw="grid grid-cols-2 gap-1 md:grid-cols-4">
             <li>
               <FacebookShareButton

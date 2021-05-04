@@ -1,6 +1,5 @@
 import Image from '@components/Image/Image';
 import { MemberModel } from '@lib/prismic/component-types/member/MemberModel';
-import { font } from '@styles/shared-css';
 import { getAuthorLink } from '@utils/convert-utils';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
@@ -32,7 +31,7 @@ function AuthordCard({ className, data }: Props) {
       {/* NOTE interesting, without flex-1, the image is squished */}
       <div tw="space-y-5 flex-1 mt-2 text-center xl:text-left flex flex-col items-center xl:(items-start mt-0)">
         <header tw="leading-snug">
-          <p css={font.tag}>Written By</p>
+          <p tw="text-tag">Written By</p>
           {/* TODO link to author page */}
           <NextLink href={getAuthorLink(data.uid)} passHref>
             <a tw="font-black transition-colors hocus:text-primary md:text-3xl">

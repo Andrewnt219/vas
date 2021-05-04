@@ -7,6 +7,7 @@ import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
 import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
 import Image from '@components/Image/Image';
 import { Label } from '@components/Label/Label';
+import { SectionH1 } from '@components/SectionH1/SectionH1';
 import {
   CategoryService,
   CategoryWithPosts,
@@ -17,14 +18,13 @@ import {
   createStaticProps,
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
-import { container, darkenImage, sectionH1 } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCategoryLink,
   getDataFromPost,
   getPostLink,
 } from '@utils/convert-utils';
-import { getSizes } from '@utils/css-utils';
+import { darkenImage, getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -131,13 +131,10 @@ const Index: VFC<Props> = ({ data, error }) => {
         </div>
       </section>
 
-      <section
-        css={container}
-        tw=" col-span-full grid grid-cols-1 xl:(grid-cols-3 gap-x-12 items-start)"
-      >
+      <section tw="wrapper col-span-full grid grid-cols-1 xl:(grid-cols-3 gap-x-12 items-start)">
         <header tw="col-span-full">
           {/* TODO translation */}
-          <h2 css={sectionH1}>Latest articles</h2>
+          <SectionH1>Latest articles</SectionH1>
         </header>
 
         <ul

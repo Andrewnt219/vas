@@ -117,12 +117,21 @@ function fonts({ addUtilities, theme }) {
     '.text-larger': {
       fontSize: 'larger',
     },
+    '.text-tag': {
+      fontSize: 'smaller',
+      color: theme('textColor.skin.muted'),
+    },
+    '.text-subtitle': {
+      fontSize: theme('fontSize.sm'),
+      fontWeight: theme('fontWeight.normal'),
+    },
     '.text-h1-variants': {
       fontSize: theme('fontSize.3xl'),
-      lineHeight: 1.3,
+      lineHeight: theme('lineHeight.tight'),
+      fontWeight: theme('fontWeight.black'),
 
-      '@screen md': {
-        fontSize: '4rem',
+      '@screen xl': {
+        fontSize: theme('fontSize.5xl'),
       },
     },
     '.text-h2-variants': {
@@ -190,8 +199,21 @@ function grid({ addUtilities }) {
   });
 }
 
-function sizing({ addUtilities }) {
+function sizing({ addUtilities, theme }) {
   addUtilities({
+    '.wrapper': {
+      maxWidth: theme('maxWidth.6xl'),
+      margin: '0 auto',
+      padding: `0 ${theme('padding.4')}`,
+
+      '@screen md': {
+        padding: `0 ${theme('padding.8')}`,
+      },
+
+      '@screen xl': {
+        padding: `0 ${theme('padding.0')}`,
+      },
+    },
     '.absolute-cover': {
       position: 'absolute',
       top: 0,

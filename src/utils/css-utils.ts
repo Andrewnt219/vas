@@ -1,4 +1,4 @@
-import { css } from 'twin.macro';
+import tw, { css } from 'twin.macro';
 
 export const lqipBackground = (lqip: string) => css`
   background-image: url(${lqip});
@@ -26,3 +26,18 @@ export function getSizes([base, md, xl, _2xl]: [
 
   return `(min-width: 1536px) ${_2xl}, (min-width: 1280px) ${xl}, (min-width: 768px) ${md}, ${base}`;
 }
+
+/* -------------------------------------------------------------------------- */
+
+export const darkenImage = css`
+  ${tw`relative`}
+
+  ::after {
+    ${tw`content absolute top-0 left-0 w-full h-full block bg-black opacity-0 transition-opacity`}
+  }
+
+  :hover ::after,
+  :focus ::after {
+    ${tw`opacity-10`}
+  }
+`;
