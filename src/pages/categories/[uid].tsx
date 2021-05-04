@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
   previewData = {},
 }) => {
   try {
-    const { ref } = previewData;
+    //NOTE As of 10.2, the typing has changed so an explicit cast is needed
+    const { ref } = previewData as { ref: string | undefined };
 
     const categoryUID = params?.uid;
     const lang = tryParseLocale(locale);
