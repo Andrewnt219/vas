@@ -31,7 +31,12 @@ export type PrismicQueryOptions = Partial<{
   ref: string;
 }>;
 
-export const defaultQueryOptionsFactory = (modelQuery: string) => (
-  lang: LanguageOption,
-  otherOptions?: Omit<PrismicQueryOptions, 'lang'>
-) => ({ graphQuery: modelQuery, lang, ...otherOptions });
+export const defaultQueryOptionsFactory = (
+  modelQuery: string,
+  defaultOptions?: PrismicQueryOptions
+) => (lang: LanguageOption, options?: Omit<PrismicQueryOptions, 'lang'>) => ({
+  ...defaultOptions,
+  graphQuery: modelQuery,
+  lang,
+  ...options,
+});

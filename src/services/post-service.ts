@@ -23,6 +23,9 @@ import { Dictionary } from 'lodash';
 import groupBy from 'lodash/groupBy';
 import { CategoryService } from './category-data-service';
 
+// Due to Firestore limitation of `in` query
+const MAX_PAGE_SIZE = 10;
+
 export class PostService {
   private static readonly posts = firestore.collection('posts');
   private static readonly comments = firestore.collection('comments');
@@ -33,7 +36,7 @@ export class PostService {
     lang: Language,
     previewRef = ''
   ): Promise<Post | null> {
-    const options = getQueryOptions(lang, { ref: previewRef });
+    const options = getQueryOption(lang, { ref: previewRef });
 
     const postDoc: PostDocument = await this.cms.getByUID(
       'post',
@@ -50,7 +53,7 @@ export class PostService {
     options?: PrismicQueryOptions
   ): Promise<Post[]> {
     const query = POST_TYPE_PREDICATE;
-    const queryOptions = getQueryOptions(lang, options);
+    const queryOptions = getQueryOption(lang, options);
 
     const postDocs: PostDocument[] = (await this.cms.query(query, queryOptions))
       .results;
@@ -62,7 +65,7 @@ export class PostService {
     postUIDs: string[],
     lang: Language
   ): Promise<Post[]> {
-    const options = getQueryOptions(lang);
+    const options = getQueryOption(lang);
     const query = Predicates.in('document.uid', postUIDs);
 
     const postDocs: PostDocument[] = (await this.cms.query(query, options))
@@ -79,7 +82,7 @@ export class PostService {
       Predicates.at('document.type', 'post'),
       Predicates.at('my.post.categories.category', categoryID),
     ];
-    const options = getQueryOptions(lang);
+    const options = getQueryOption(lang);
 
     const postDocs = (await this.cms.query(query, options))
       .results as PostDocument[];
@@ -134,7 +137,7 @@ export class PostService {
       Predicates.at('document.type', 'post'),
       Predicates.at('my.post.categories.category', categoryID),
     ];
-    const options = getQueryOptions(lang);
+    const options = getQueryOption(lang);
     return (await this.cms.query(query, options)).results as PostDocument[];
   }
 
@@ -150,7 +153,9 @@ export class PostService {
     lang: Language,
     previewRef = ''
   ): Promise<Post[]> {
-    const options = getQueryOptions(lang, { ref: previewRef });
+    const options = getQueryOption(lang, {
+      ref: previewRef,
+    });
     const query = [
       Predicates.similar(postID, 5),
       Predicates.at('document.type', 'post'),
@@ -327,6 +332,10 @@ export type Post = PostDocument & {
   comments: PostComment[];
 };
 
-const getQueryOptions = defaultQueryOptionsFactory(postQuery);
+const defaultOption: PrismicQueryOptions = {
+  pageSize: MAX_PAGE_SIZE,
+  orderings: '[document.first_publication_date desc]',
+};
+const getQueryOption = defaultQueryOptionsFactory(postQuery, defaultOption);
 
 const POST_TYPE_PREDICATE = Predicates.at('document.type', 'post');
