@@ -6,6 +6,7 @@ import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
 import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
 import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
 import Image from '@components/Image/Image';
+import { Label } from '@components/Label/Label';
 import {
   CategoryService,
   CategoryWithPosts,
@@ -16,7 +17,7 @@ import {
   createStaticProps,
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
-import { container, darkenImage, label, sectionH1 } from '@styles/shared-css';
+import { container, darkenImage, sectionH1 } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCategoryLink,
@@ -189,9 +190,9 @@ function LatestArticle({ post, className }: LatestArticleProps) {
 
       <header tw="mt-3 space-y-2 md:(mt-6 w-3/4 mx-auto) xl:mt-9">
         <NextLink href={getCategoryLink(mainCategory.uid)} passHref>
-          <a css={label} className={className} tw="">
+          <Label className={className} tw="">
             {mainCategory.data.title}
-          </a>
+          </Label>
         </NextLink>
 
         <NextLink href={postLink} passHref>

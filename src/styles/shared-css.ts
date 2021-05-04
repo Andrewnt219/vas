@@ -13,9 +13,6 @@ export const font = {
     ${tw`text-sm font-normal`}
   `,
 };
-export const label = css`
-  ${tw`px-3 py-1 bg-primary text-white text-xs font-black hocus:(underline) md:text-sm`}
-`;
 
 export const container = css`
   ${tw`max-w-6xl mx-auto px-4 md:px-8 xl:px-0`}

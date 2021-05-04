@@ -1,10 +1,11 @@
 import AuthordCard from '@components/AuthorCard/AuthordCard';
 import Image from '@components/Image/Image';
+import { Label } from '@components/Label/Label';
 import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
-import { container, font, label } from '@styles/shared-css';
+import { container, font } from '@styles/shared-css';
 import {
   getAuthorLink,
   getCommentsCount,
@@ -86,9 +87,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
         <div>
           <div tw="space-y-1 xl:space-y-4">
-            <span css={label} tw="inline-block">
-              {firstHashtag.data.title}
-            </span>
+            <NextLink href={getHashtagLink(firstHashtag.uid)} passHref>
+              <Label tw="inline-block">{firstHashtag.data.title}</Label>
+            </NextLink>
 
             <h1 css={font.h1}>{post.data.title}</h1>
 
