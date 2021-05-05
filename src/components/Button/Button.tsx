@@ -2,10 +2,10 @@ import { percentageToHex } from '@utils/css-utils';
 import tw, { css, styled, theme } from 'twin.macro';
 
 const base = css`
-  ${tw`px-6 py-2 font-black border border-transparent transition-colors`}
+  ${tw` font-black transition-colors`}
 
   :disabled {
-    ${tw`bg-skin-dark`}
+    ${tw`bg-skin-dark text-white`}
   }
   /* ${tw`border border-transparent  max-w-max transition-colors `}
   ${tw`xl:text-2xl`}
@@ -13,7 +13,7 @@ const base = css`
 `;
 
 const contain = css`
-  ${tw`bg-primary text-white`}
+  ${tw`bg-primary  text-white px-6 py-2 border border-transparent `}
   box-shadow: 0 10px 15px 0 ${theme`colors.primary` + percentageToHex(20)};
 
   :hover,
@@ -39,8 +39,8 @@ const outline = css`
 `;
 
 const link = css`
-  /* ${tw`underline decorator-transparent transition-colors `}
-	${tw`hocus:(outline-none decorator-primary text-primary)`} */
+  ${tw`underline decorator-transparent transition-colors `}
+  ${tw`hocus:(outline-none decorator-primary text-primary)`}
 `;
 
 const lg = css`
