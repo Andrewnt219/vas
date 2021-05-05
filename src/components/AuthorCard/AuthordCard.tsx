@@ -20,6 +20,7 @@ function AuthordCard({ className, data }: Props) {
     >
       <div tw="xl:(-ml-24 mr-8)">
         <Image
+          sizes="96px"
           imgSrc={imgSrc}
           alt={data.thumbnail.alt ?? 'An avatar of the author'}
           height={96}

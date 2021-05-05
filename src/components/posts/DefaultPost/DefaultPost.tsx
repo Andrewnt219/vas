@@ -109,6 +109,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
           {/* Author info */}
           <div tw="flex items-end space-x-5 mt-5">
             <Image
+              sizes="48px"
               alt={author.data.thumbnail.alt}
               imgSrc={authorAvatar}
               height={48}
