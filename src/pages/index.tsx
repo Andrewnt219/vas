@@ -193,11 +193,12 @@ function LatestArticle({ post, className }: LatestArticleProps) {
         </NextLink>
 
         <NextLink href={postLink} passHref>
-          <a tw="block article-card-title-variants font-black leading-tight underline decorator-transparent transition-colors hocus:(text-primary decorator-current)">
+          <a tw="block article-card-title-variants font-black underline decorator-transparent transition-colors hocus:(text-primary decorator-current)">
             <h3>{title}</h3>
           </a>
         </NextLink>
 
+        {/* TODO add published date */}
         <span tw="block text-smaller">
           By{' '}
           <NextLink href={getAuthorLink(author.uid)} passHref>
