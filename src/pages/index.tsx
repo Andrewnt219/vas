@@ -176,8 +176,8 @@ function LatestArticle({ post, className }: LatestArticleProps) {
       <NextLink href={postLink} passHref>
         <a tw="block relative pb-sm md:pb-xs" css={darkenImage}>
           <Image
-            // Capped 1280px because of the max-width, and kinda magic to make image clear
-            sizes={getSizes(['100vw', undefined, '1280px'])}
+            // Capped 1400px because of the max-width (take width of img at xl * 2)
+            sizes={getSizes(['90vw', undefined, '1400px'])}
             tw="img-absolute absolute!"
             imgSrc={thumbnail.url}
             alt={thumbnail.alt}

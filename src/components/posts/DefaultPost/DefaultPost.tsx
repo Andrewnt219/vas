@@ -51,6 +51,7 @@ const sharedButton = css`
 type Props = { className?: string; post: Post; relatedPosts: Post[] };
 
 // TODO componentize
+// TODO add event datetime
 function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
   const location = useCurrentLocation();

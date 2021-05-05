@@ -14,8 +14,8 @@ import {
   defaultQueryOptionsFactory,
   LanguageOption,
   Predicates,
-  PrismicQueryOptions,
 } from '@lib/prismic/prismic-helpers';
+import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 import { PMclient } from '@root/prismic-configuration';
 import { getMainCategory } from '@utils/convert-utils';
 import { isString } from '@utils/validate-utils';
@@ -50,7 +50,7 @@ export class PostService {
 
   static async getPosts(
     lang: LanguageOption,
-    options?: PrismicQueryOptions
+    options?: QueryOptions
   ): Promise<Post[]> {
     const query = POST_TYPE_PREDICATE;
     const queryOptions = getQueryOption(lang, options);
@@ -332,7 +332,7 @@ export type Post = PostDocument & {
   comments: PostComment[];
 };
 
-const defaultOption: PrismicQueryOptions = {
+const defaultOption: QueryOptions = {
   pageSize: MAX_PAGE_SIZE,
   orderings: '[document.first_publication_date desc]',
 };

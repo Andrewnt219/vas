@@ -1,5 +1,6 @@
 import { languages } from '@data/localization-data';
 import Prismic from '@prismicio/client';
+import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 
 export const Predicates = Prismic.Predicates;
 
@@ -17,24 +18,10 @@ export const tryParseLanguageOption = (lang: any): LanguageOption => {
 
 /* -------------------------------------------------------------------------- */
 
-/**
- * @example See https://prismic.io/docs/technologies/query-options-reference-javascript
- */
-export type PrismicQueryOptions = Partial<{
-  after: string;
-  fetch: string;
-  fetchLinks: string;
-  lang: string;
-  orderings: string;
-  page: number;
-  pageSize: number;
-  ref: string;
-}>;
-
 export const defaultQueryOptionsFactory = (
   modelQuery: string,
-  defaultOptions?: PrismicQueryOptions
-) => (lang: LanguageOption, options?: Omit<PrismicQueryOptions, 'lang'>) => ({
+  defaultOptions?: QueryOptions
+) => (lang: LanguageOption, options?: QueryOptions) => ({
   ...defaultOptions,
   graphQuery: modelQuery,
   lang,
