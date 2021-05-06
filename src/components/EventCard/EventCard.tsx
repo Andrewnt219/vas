@@ -3,6 +3,7 @@ import Image from '@components/Image/Image';
 import PublishedDate from '@components/PublishedDate/PublishedDate';
 import { Format } from '@data/common-data';
 import { Post } from '@services/post-service';
+import { articleTitle } from '@styles/_typographyStyles';
 import { getPostLink } from '@utils/convert-utils';
 import { getSizes } from '@utils/css-utils';
 import dayjs from 'dayjs';
@@ -25,7 +26,7 @@ function EventCard({ className, data: postDoc }: Props) {
     <article className={className} tw="space-y-4 xl:space-y-14">
       <PublishedDate date={new Date(publishedAt)} />
 
-      <h2 tw=" font-black article-card-title-variants">
+      <h2 css={articleTitle}>
         <NextLink href={postLink}>
           <a>{postDoc.data.title}</a>
         </NextLink>

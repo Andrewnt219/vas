@@ -98,16 +98,16 @@ module.exports = {
   plugins: [centers, grid, sizing, commons, decorator, fonts],
 };
 
-function commons({ addUtilities }) {
-  addUtilities({
+function commons({ addComponents }) {
+  addComponents({
     '.content': {
       content: '""',
     },
   });
 }
 
-function fonts({ addUtilities, theme }) {
-  addUtilities({
+function fonts({ addComponents, theme }) {
+  addComponents({
     '.font-inherit': {
       font: 'inherit',
     },
@@ -117,60 +117,11 @@ function fonts({ addUtilities, theme }) {
     '.text-larger': {
       fontSize: 'larger',
     },
-    '.text-tag': {
-      fontSize: 'smaller',
-      color: theme('textColor.skin.muted'),
-    },
-    '.text-subtitle': {
-      fontSize: theme('fontSize.sm'),
-      fontWeight: theme('fontWeight.normal'),
-    },
-    '.text-h1-variants': {
-      fontSize: theme('fontSize.3xl'),
-      lineHeight: theme('lineHeight.tight'),
-      fontWeight: theme('fontWeight.black'),
-
-      '@screen xl': {
-        fontSize: theme('fontSize.5xl'),
-      },
-    },
-    '.text-h2-variants': {
-      fontSize: theme('fontSize.2xl'),
-      fontWeight: 900,
-
-      '@screen md': {
-        fontSize: theme('fontSize.3xl'),
-      },
-
-      '@screen xl': {
-        fontSize: theme('fontSize.5xl'),
-      },
-    },
-    '.article-card-title-variants': {
-      fontSize: theme('fontSize.2xl'),
-      lineHeight: 1.2,
-
-      '@screen md': {
-        fontSize: theme('fontSize.3xl'),
-      },
-
-      '@screen lg': {
-        fontSize: theme('fontSize.4xl'),
-      },
-    },
-    '.text-h3-variants': {
-      fontSize: theme('fontSize.lg'),
-      lineHeight: 1.3,
-
-      '@screen md': {
-        fontSize: theme('fontSize.5xl'),
-      },
-    },
   });
 }
 
-function centers({ addUtilities }) {
-  addUtilities({
+function centers({ addComponents }) {
+  addComponents({
     '.position-center': {
       position: 'absolute',
       top: '50%',
@@ -185,8 +136,8 @@ function centers({ addUtilities }) {
   });
 }
 
-function grid({ addUtilities }) {
-  addUtilities({
+function grid({ addComponents }) {
+  addComponents({
     '.grid-p-sm': {
       'grid-column': '2/12',
     },
@@ -199,21 +150,8 @@ function grid({ addUtilities }) {
   });
 }
 
-function sizing({ addUtilities, theme }) {
-  addUtilities({
-    '.wrapper': {
-      maxWidth: theme('maxWidth.6xl'),
-      margin: '0 auto',
-      padding: `0 ${theme('padding.4')}`,
-
-      '@screen md': {
-        padding: `0 ${theme('padding.8')}`,
-      },
-
-      '@screen xl': {
-        padding: `0 ${theme('padding.0')}`,
-      },
-    },
+function sizing({ addComponents, theme }) {
+  addComponents({
     '.absolute-cover': {
       position: 'absolute',
       top: 0,

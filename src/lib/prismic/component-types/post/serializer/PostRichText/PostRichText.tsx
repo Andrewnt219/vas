@@ -1,3 +1,4 @@
+import { h2 } from '@styles/_typographyStyles';
 import { RichTextBlock } from 'prismic-reactjs';
 import { ReactNode } from 'react';
 
@@ -11,10 +12,7 @@ function PostRichText({ className, data, children }: Props) {
   switch (data.type) {
     case 'heading2':
       return (
-        <h2
-          className={className}
-          tw="text-h2-variants mb-4 mt-7 xl:( mt-14 mb-8)"
-        >
+        <h2 className={className} css={h2} tw=" mb-4 mt-7 xl:( mt-14 mb-8)">
           {children}
         </h2>
       );

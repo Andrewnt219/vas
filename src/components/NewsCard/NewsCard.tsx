@@ -2,6 +2,7 @@ import Image from '@components/Image/Image';
 import { Label } from '@components/Label/Label';
 import { Post } from '@services/post-service';
 import { scaleImageCss } from '@styles/apply';
+import { articleTitle } from '@styles/_typographyStyles';
 import { getHashtagLink, getPostLink } from '@utils/convert-utils';
 import { getSizes } from '@utils/css-utils';
 import NextLink from 'next/link';
@@ -44,7 +45,10 @@ function NewsCard({ className, post }: Props) {
               <Label>{hashtag.data.title ?? '--'}</Label>
             </NextLink>
 
-            <h2 tw="mt-2 font-black article-card-title-variants hocus:(underline text-primary) xl:(mt-5)">
+            <h2
+              css={articleTitle}
+              tw="mt-2 hocus:(underline text-primary) xl:(mt-5)"
+            >
               <NextLink href={postLink}>
                 <a>{post.data.title}</a>
               </NextLink>

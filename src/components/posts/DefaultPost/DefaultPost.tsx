@@ -5,6 +5,8 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
+import { h2Margin, wrapper } from '@styles/spacing';
+import { h1, h2, tag } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
   getCommentsCount,
@@ -33,7 +35,7 @@ import CommentWriter from '../CommentWriter/CommentWriter';
 import Time from '../Time/Time';
 import { usePostComments } from './usePostComments';
 
-const wrapper = css`
+const bodyWrapper = css`
   ${tw`max-w-prose mx-auto px-4 md:px-8`}
 `;
 
@@ -69,7 +71,10 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
   return (
     <section className={className} tw="col-span-full text-skin-base">
       {/* Hero */}
-      <header tw="mb-5 wrapper md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg">
+      <header
+        css={wrapper}
+        tw="mb-5 md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg"
+      >
         {/* TODO don't use fit cover */}
         <div tw="pb-full relative mb-sm after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">
           <Image
@@ -88,9 +93,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
               <Label tw="inline-block">{firstHashtag.data.title}</Label>
             </NextLink>
 
-            <h1 tw="text-h1-variants">{post.data.title}</h1>
+            <h1 css={h1}>{post.data.title}</h1>
 
-            <div tw=" text-tag flex items-center  space-x-1">
+            <div css={tag} tw=" flex items-center  space-x-1">
               <span tw="text-primary font-black">
                 {post.meta?.views ?? 0} views
               </span>
@@ -130,7 +135,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       </header>
 
       {/* Body */}
-      <div css={wrapper}>
+      <div css={bodyWrapper}>
         {post.data.body.map((slice, index) => (
           <PostSliceZone slice={slice} key={`slice-${index}`} />
         ))}
@@ -139,9 +144,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       {/* TODO add card for event date time */}
 
       {/* Footer */}
-      <div tw="mt-9" css={wrapper}>
+      <div tw="mt-9" css={bodyWrapper}>
         <div tw="flex flex-col">
-          <span tw="text-tag">Tagged as</span>
+          <span css={tag}>Tagged as</span>
 
           <ul tw="flex flex-wrap">
             {post.data.hashtags.map(({ hashtag }) => (
@@ -157,7 +162,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         </div>
 
         <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-sm">
-          <span tw="text-tag">Share</span>
+          <span css={tag}>Share</span>
           <ul tw="grid grid-cols-2 gap-1 md:grid-cols-4">
             <li>
               <FacebookShareButton
@@ -215,18 +220,16 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       </div>
 
       {/* Author card */}
-      <section tw="mt-12" css={wrapper}>
+      <section tw="mt-12" css={bodyWrapper}>
         <AuthordCard data={post.data.author.data} />
       </section>
 
       {/* Comments */}
-      <section tw="mt-7 xl:mt-12" css={wrapper}>
-        <h2 tw="text-2xl mb-6 text-h2-variants">Join the dicussion</h2>
+      <section tw="mt-7 xl:mt-12" css={bodyWrapper}>
+        <h2 css={[h2, h2Margin]}>Join the dicussion</h2>
         <CommentWriter tw=" text-smaller" onFormSubmitted={onCommentSubmit} />
 
-        <h2 tw="mt-7 mb-sm text-h2-variants xl:mt-12">
-          {getCommentsCount(post)} comments
-        </h2>
+        <h2 css={[h2, h2Margin]}>{getCommentsCount(post)} comments</h2>
         {comments.length === 0 && <span>Be the first to comment</span>}
         <ActiveCommentProvider>
           <CommentSet tw="space-y-12" comments={comments} />

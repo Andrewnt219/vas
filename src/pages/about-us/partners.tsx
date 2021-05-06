@@ -2,6 +2,7 @@ import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import PageH1 from '@components/PageH1/PageH1';
 import { SectionH1 } from '@components/SectionH1/SectionH1';
 import MainLayout from '@layouts/MainLayout';
+import { h2 } from '@styles/_typographyStyles';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
@@ -23,7 +24,7 @@ const Partners: VFC<Props> = ({}) => {
           <Trans
             i18nKey="partnerships:why.title"
             components={[
-              <h1 key="h1" tw="text-h3-variants font-medium" />,
+              <h1 key="h1" css={h2} tw="font-medium" />,
               <span key="span" tw="text-primary" />,
             ]}
           />

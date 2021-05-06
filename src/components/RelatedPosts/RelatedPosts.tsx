@@ -1,6 +1,7 @@
 import { Label } from '@components/Label/Label';
 import Time from '@components/posts/Time/Time';
 import { Post } from '@services/post-service';
+import { h2, subtitle } from '@styles/_typographyStyles';
 import { getFirstHashtag, getHashtagLink } from '@utils/convert-utils';
 import NextLink from 'next/link';
 import React from 'react';
@@ -40,7 +41,8 @@ function PostItem({ data }: PostItemProps) {
         </h1>
 
         <Time
-          tw="mt-1 block text-white text-opacity-80 text-subtitle" // important to have block, or weird gap with title
+          css={subtitle}
+          tw="mt-1 block text-white text-opacity-80" // important to have block, or weird gap with title
           time={data.first_publication_date}
         />
       </header>
@@ -56,7 +58,10 @@ function RelatedPosts({ className, heading = 'Futher reading', posts }: Props) {
       className={className}
       tw=" bg-skin-dark pt-6 pb-1 text-white font-black md:(pt-9)"
     >
-      <h1 tw="mb-5 text-h2-variants text-center after:(content block mx-auto mt-3 w-5 h-0.5 bg-primary md:w-8 xl:w-12 ) md:(mb-6) xl:(mb-10)">
+      <h1
+        css={h2}
+        tw="mb-5 text-center after:(content block mx-auto mt-3 w-5 h-0.5 bg-primary md:w-8 xl:w-12 ) md:(mb-6) xl:(mb-10)"
+      >
         {heading}
       </h1>
 

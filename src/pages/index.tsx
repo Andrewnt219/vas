@@ -18,6 +18,8 @@ import {
   createStaticProps,
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
+import { wrapper } from '@styles/spacing';
+import { articleTitle } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
   getCategoryLink,
@@ -131,7 +133,10 @@ const Index: VFC<Props> = ({ data, error }) => {
         </div>
       </section>
 
-      <section tw="wrapper col-span-full grid grid-cols-1 xl:(grid-cols-3 gap-x-12 items-start)">
+      <section
+        css={wrapper}
+        tw=" col-span-full grid grid-cols-1 xl:(grid-cols-3 gap-x-12 items-start)"
+      >
         <header tw="col-span-full">
           {/* TODO translation */}
           <SectionH1>Latest articles</SectionH1>
@@ -193,7 +198,10 @@ function LatestArticle({ post, className }: LatestArticleProps) {
         </NextLink>
 
         <NextLink href={postLink} passHref>
-          <a tw="block article-card-title-variants font-black underline decorator-transparent transition-colors hocus:(text-primary decorator-current)">
+          <a
+            css={articleTitle}
+            tw="block font-black underline decorator-transparent transition-colors hocus:(text-primary decorator-current)"
+          >
             <h3>{title}</h3>
           </a>
         </NextLink>
