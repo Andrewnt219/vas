@@ -1,5 +1,6 @@
 import Image from '@components/Image/Image';
 import { Asset } from '@prismic-types';
+import { postGutterBottom } from '@styles/spacing';
 import React from 'react';
 import 'twin.macro';
 
@@ -12,8 +13,9 @@ function PostImage({ className, data }: Props) {
   return (
     <Image
       imgSrc={imgSrc}
+      css={postGutterBottom}
       sizes="(min-width: 65ch) 130ch, 100vw"
-      tw="w-full mb-4 rounded-sm overflow-hidden"
+      tw="w-full rounded-sm overflow-hidden"
       className={className}
       alt={data.alt ?? 'Missing alternative text'}
       width={data.dimensions.width}

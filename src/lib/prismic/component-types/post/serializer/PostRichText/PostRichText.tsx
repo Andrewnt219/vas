@@ -1,3 +1,4 @@
+import { postGutterBottom } from '@styles/spacing';
 import { h2 } from '@styles/_typographyStyles';
 import { RichTextBlock } from 'prismic-reactjs';
 import { ReactNode } from 'react';
@@ -36,7 +37,7 @@ function PostRichText({ className, data, children }: Props) {
 
     case 'paragraph':
       return (
-        <p className={className} tw="mb-4 md:mb-md">
+        <p className={className} css={postGutterBottom}>
           {children}
         </p>
       );

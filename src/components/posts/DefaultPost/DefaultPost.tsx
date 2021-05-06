@@ -135,7 +135,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       </header>
 
       {/* Body */}
-      <div css={bodyWrapper} tw="break-words">
+      <div css={bodyWrapper} tw="break-words mt-8  md:mt-16">
         {post.data.body.map((slice, index) => (
           <PostSliceZone slice={slice} key={`slice-${index}`} />
         ))}

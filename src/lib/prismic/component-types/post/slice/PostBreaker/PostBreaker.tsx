@@ -1,4 +1,5 @@
 import { SliceComponentProps } from '@prismic-slices';
+import { postGutterBottom } from '@styles/spacing';
 import React, { ReactElement } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -12,15 +13,14 @@ type Props = SliceComponentProps<SliceProps>;
 
 // TODO Breaker is not centered on mobile
 function PostBreaker(_: Props): ReactElement {
-  return <Container />;
+  return <Container css={postGutterBottom} />;
 }
 
 type ContainerProps = {};
 const Container = styled.hr<ContainerProps>`
   border: none;
-  ${tw`my-4 md:my-7`}
   ${tw`flex justify-center items-center`}
-	height: auto; // need for before
+  height: auto; // need for before
 
   ::before {
     content: '\\00b7 \\00b7 \\00b7';

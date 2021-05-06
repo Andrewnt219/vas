@@ -1,4 +1,5 @@
 import { List } from '@prismic-types';
+import { postGutterBottom } from '@styles/spacing';
 import React, { ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
 
@@ -9,7 +10,10 @@ type Props = {
 
 function PostList({ data, children }: Props) {
   return (
-    <StyledList as={data.type === 'group-o-list-item' ? 'ol' : 'ul'}>
+    <StyledList
+      css={postGutterBottom}
+      as={data.type === 'group-o-list-item' ? 'ol' : 'ul'}
+    >
       {children}
     </StyledList>
   );
@@ -17,7 +21,7 @@ function PostList({ data, children }: Props) {
 
 type StyledListProps = {};
 const StyledList = styled.ul<StyledListProps>`
-  ${tw`mb-4 pl-10 space-y-1`}
+  ${tw`pl-10 space-y-1`}
 `;
 
 export default PostList;

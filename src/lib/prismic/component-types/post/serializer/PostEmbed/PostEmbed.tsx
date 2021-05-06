@@ -1,4 +1,5 @@
 import { Embed } from '@prismic-types';
+import { postGutterBottom } from '@styles/spacing';
 import React from 'react';
 
 type Props = { className?: string; data: Embed };
@@ -7,7 +8,8 @@ function PostEmbed({ className, data }: Props) {
   return (
     <div
       className={className}
-      tw="w-full pb-sm relative all-child:(w-full h-full absolute) mb-sm md:mb-md"
+      css={postGutterBottom}
+      tw="w-full  pb-sm relative all-child:(w-full h-full absolute)"
       dangerouslySetInnerHTML={{ __html: data.oembed.html }}
     />
   );
