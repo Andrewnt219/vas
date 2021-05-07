@@ -1,6 +1,7 @@
 import { Result } from '@common';
 import { Post, PostService } from '@services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
+import { createResult } from '@utils/create-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export type PostsGetIndex = Result<Post[]>;
@@ -19,10 +20,7 @@ async function getHandler(
 		posts = await PostService.getPosts(lang);
 	}
 
-	return res.status(200).json({
-		data: posts,
-		error: null,
-	});
+	return res.status(200).json(createResult(posts));
 }
 
 export default apiHanler({ get: getHandler });

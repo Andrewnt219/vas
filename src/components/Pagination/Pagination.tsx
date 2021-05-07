@@ -39,7 +39,7 @@ function Pagination({
 			tw="flex-center flex-col max-w-max mx-auto mt-10 md:mt-20"
 		>
 			<ul
-				tw="w-2xl flex items-center justify-between"
+				tw="w-larger flex items-center justify-between"
 				aria-label="arrow buttons"
 			>
 				{PrevButton}

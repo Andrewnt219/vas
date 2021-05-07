@@ -1,113 +1,93 @@
 import tw, { css } from 'twin.macro';
 
 export const bodyFontFace = css`
-	/* dm-sans-regular - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: normal;
-		font-weight: 400;
-		src: local(''), url('/fonts/dm-sans-v6-latin-regular.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* dm-sans-italic - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: italic;
-		font-weight: 400;
-		src: local(''), url('/fonts/dm-sans-v6-latin-italic.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* dm-sans-500 - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: normal;
-		font-weight: 500;
-		src: local(''), url('/fonts/dm-sans-v6-latin-500.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* dm-sans-500italic - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: italic;
-		font-weight: 500;
-		src: local(''),
-			url('/fonts/dm-sans-v6-latin-500italic.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-500italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* dm-sans-700 - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: normal;
-		font-weight: 700;
-		src: local(''), url('/fonts/dm-sans-v6-latin-700.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* dm-sans-700italic - latin */
-	@font-face {
-		font-family: 'DM Sans';
-		font-display: 'swap';
-		font-style: italic;
-		font-weight: 700;
-		src: local(''),
-			url('/fonts/dm-sans-v6-latin-700italic.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/dm-sans-v6-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-`;
-
-const viFont = css`
-	/* inter-regular - vietnamese */
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 400;
-		src: local(''),
-			url('/fonts/inter-v3-vietnamese-regular.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/inter-v3-vietnamese-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* inter-500 - vietnamese */
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 500;
-		src: local(''), url('/fonts/inter-v3-vietnamese-500.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/inter-v3-vietnamese-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
-	/* inter-700 - vietnamese */
-	@font-face {
-		font-family: 'Inter';
-		font-style: normal;
-		font-weight: 700;
-		src: local(''), url('/fonts/inter-v3-vietnamese-700.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */
-				url('/fonts/inter-v3-vietnamese-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-	}
+  /* nunito-sans-300 - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 300;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-300.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* nunito-sans-regular - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-regular.woff2')
+        format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-regular.woff')
+        format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* nunito-sans-300italic - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-style: italic;
+    font-weight: 300;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-300italic.woff2')
+        format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-300italic.woff')
+        format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* nunito-sans-italic - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-italic.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* nunito-sans-700 - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-700.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* nunito-sans-900 - vietnamese_latin */
+  @font-face {
+    font-family: 'Nunito Sans';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+      url('/fonts/nunito-sans-v6-vietnamese_latin-900.woff2') format('woff2'),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/fonts/nunito-sans-v6-vietnamese_latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
 `;
 
 export const typographyStyles = css`
-	/* :root {
-		${tw`md:text-xl xl:text-2xl 2xl:text-3xl`}
-	} */
+  :root {
+    ${tw`font-sans text-skin-base`}
+  }
 
-	html:lang(vi) {
-		${tw`font-viSans`}
-		${viFont}
-	}
-
-	html:lang(en-us) {
-		${tw`font-sans`}
-		${bodyFontFace}
-	}
+  ${bodyFontFace}
 `;
+
+export const articleTitle = tw`text-2xl leading-tight font-black md:text-3xl xl:text-4xl`;
+
+export const tag = tw`text-sm text-skin-muted`;
+
+export const subtitle = tw`text-sm font-normal`;
+export const h1 = tw`text-3xl leading-tight font-black xl:text-5xl`;
+
+export const h2 = tw`
+  leading-tight text-2xl font-black md:text-3xl xl:text-5xl
+`;
+
+export const h3 = tw`text-lg font-black leading-tight md:text-4xl`;

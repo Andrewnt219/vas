@@ -1,63 +1,84 @@
 import { Language } from '@data/localization-data';
 import firestore from '@lib/firestore/firestore';
 import {
-	CategoryDocument,
-	categoryQuery,
+  CategoryDocument,
+  categoryQuery,
 } from '@lib/prismic/component-types/category/CategoryModel';
 import {
-	defaultQueryOptionsFactory,
-	LanguageOption,
-	Predicates,
+  defaultQueryOptionsFactory,
+  LanguageOption,
+  Predicates,
 } from '@lib/prismic/prismic-helpers';
 import { PMclient } from '@root/prismic-configuration';
+import { Post, PostService } from './post-service';
 
 export class CategoryService {
-	private static readonly collection = firestore.collection('categories');
-	private static readonly cms = PMclient;
+  private static readonly collection = firestore.collection('categories');
+  private static readonly cms = PMclient;
 
-	/* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
 
-	public static async getCategories(
-		lang: LanguageOption
-	): Promise<CategoryDocument[]> {
-		const options = getQueryOptions(lang);
-		const query = Predicates.at('document.type', 'category');
+  public static async getCategories(
+    lang: LanguageOption
+  ): Promise<CategoryDocument[]> {
+    const options = getQueryOptions(lang);
+    const query = Predicates.at('document.type', 'category');
 
-		return (await this.cms.query(query, options)).results as CategoryDocument[];
-	}
+    return (await this.cms.query(query, options)).results as CategoryDocument[];
+  }
 
-	public static async getCategoryByUID(
-		categoryUID: string,
-		lang: Language,
-		previewRef = ''
-	): Promise<CategoryDocument | null> {
-		const categoryDocs: CategoryDocument[] = await this.getCategoriesByUIDs(
-			[categoryUID],
-			lang,
-			previewRef
-		);
+  public static async getCategoryByUID(
+    categoryUID: string,
+    lang: Language,
+    previewRef = ''
+  ): Promise<CategoryDocument | null> {
+    const categoryDocs: CategoryDocument[] = await this.getCategoriesByUIDs(
+      [categoryUID],
+      lang,
+      previewRef
+    );
 
-		return categoryDocs[0] ?? null;
-	}
+    return categoryDocs[0] ?? null;
+  }
 
-	public static async getCategoriesByUIDs(
-		categoryUIDs: string[],
-		lang: Language,
-		previewRef = ''
-	): Promise<CategoryDocument[]> {
-		const options = getQueryOptions(lang, { ref: previewRef });
-		const query = Predicates.in('my.category.uid', categoryUIDs);
+  public static async getCategoriesByUIDs(
+    categoryUIDs: string[],
+    lang: Language,
+    previewRef = ''
+  ): Promise<CategoryDocument[]> {
+    const options = getQueryOptions(lang, { ref: previewRef });
+    const query = Predicates.in('my.category.uid', categoryUIDs);
 
-		const categoryDocs: CategoryDocument[] = (
-			await this.cms.query(query, options)
-		).results;
+    const categoryDocs: CategoryDocument[] = (
+      await this.cms.query(query, options)
+    ).results;
 
-		if (categoryDocs.length !== categoryUIDs.length) {
-			throw new Error("Mismatch results' size and search's size");
-		}
+    if (categoryDocs.length !== categoryUIDs.length) {
+      throw new Error("Mismatch results' size and search's size");
+    }
 
-		return categoryDocs;
-	}
+    return categoryDocs;
+  }
+
+  public static async getCategoriesWithPosts(
+    lang: Language
+  ): Promise<CategoryWithPosts[]> {
+    const categoryDocs = await this.getCategories(lang);
+
+    const getCategoryWithPosts = async (
+      categoryDoc: CategoryDocument
+    ): Promise<CategoryWithPosts> => {
+      const posts = await PostService.getPostsByCategoryID(
+        categoryDoc.id,
+        lang
+      );
+
+      return { ...categoryDoc, posts };
+    };
+
+    return Promise.all(categoryDocs.map(getCategoryWithPosts));
+  }
 }
 
+export type CategoryWithPosts = CategoryDocument & { posts: Post[] };
 const getQueryOptions = defaultQueryOptionsFactory(categoryQuery);

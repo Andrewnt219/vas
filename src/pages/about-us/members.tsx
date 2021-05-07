@@ -6,6 +6,7 @@ import MainLayout from '@layouts/MainLayout';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { AuthorDataService } from '@services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
+import { createResult } from '@utils/create-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -22,10 +23,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({
 		const authors = await AuthorDataService.getAuthors(tryParseLocale(locale));
 
 		return {
-			props: {
-				data: authors,
-				error: null,
-			},
+			props: createResult(authors),
 			revalidate: 60,
 		};
 	} catch (error) {

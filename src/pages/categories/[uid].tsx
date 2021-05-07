@@ -9,10 +9,10 @@ import { CategoryService } from '@services/category-data-service';
 import { Post, PostService } from '@services/post-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
 import {
-	createStaticError,
-	createStaticProps,
-	errorStatcPropsHandler,
-	errorStaticPathsHandler,
+  createStaticError,
+  createStaticProps,
+  errorStatcPropsHandler,
+  errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
 import { ComponentProps } from '@utils';
 import { tryParseLocale } from '@utils/validate-utils';
@@ -22,64 +22,65 @@ import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
 type Data = {
-	posts: Post[];
-	categoryUID: string;
-	categoryDoc: CategoryDocument;
+  posts: Post[];
+  categoryUID: string;
+  categoryDoc: CategoryDocument;
 };
 type StaticProps = Result<Data>;
 type Params = {
-	uid: string;
+  uid: string;
 };
 export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
-	locale,
-	params,
-	previewData = {},
+  locale,
+  params,
+  previewData = {},
 }) => {
-	try {
-		const { ref } = previewData;
+  try {
+    //NOTE As of 10.2, the typing has changed so an explicit cast is needed
+    const { ref } = previewData as { ref: string | undefined };
 
-		const categoryUID = params?.uid;
-		const lang = tryParseLocale(locale);
+    const categoryUID = params?.uid;
+    const lang = tryParseLocale(locale);
 
-		if (!categoryUID) {
-			return createStaticError("Missing category's UID");
-		}
+    if (!categoryUID) {
+      return createStaticError("Missing category's UID");
+    }
 
-		const categoryDoc = await CategoryService.getCategoryByUID(
-			categoryUID,
-			lang,
-			ref
-		);
+    const categoryDoc = await CategoryService.getCategoryByUID(
+      categoryUID,
+      lang,
+      ref
+    );
 
-		if (!categoryDoc) {
-			return createStaticError('Category not found');
-		}
+    if (!categoryDoc) {
+      return createStaticError('Category not found');
+    }
 
-		const posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
+    const posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
 
-		const data = { posts, categoryDoc, categoryUID };
-		return createStaticProps(data);
-	} catch (error) {
-		return errorStatcPropsHandler(error);
-	}
+    const data = { posts, categoryDoc, categoryUID };
+    return createStaticProps(data);
+  } catch (error) {
+    return errorStatcPropsHandler(error);
+  }
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-	try {
-		const categoryDoc = await CategoryService.getCategories('*');
+  try {
+    const categoryDoc = await CategoryService.getCategories('*');
 
-		const paths = categoryDoc.map((doc) => ({
-			params: { uid: doc.uid ?? '' },
-			locale: doc.lang,
-		}));
+    const paths = categoryDoc.map((doc) => ({
+      params: { uid: doc.uid ?? '' },
+      locale: doc.lang,
+    }));
 
-		return {
-			paths,
-			fallback: false,
-		};
-	} catch (error) {
-		return errorStaticPathsHandler(error);
-	}
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    return errorStaticPathsHandler(error);
+  }
 };
 
 /* --------------------------------- CLIENT --------------------------------- */
@@ -87,56 +88,56 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function CategoryUID({ data: initialData, error: serverError }: Props) {
-	const categoryDoc = initialData?.categoryDoc;
-	const { data, error } = useCategoryPosts(
-		categoryDoc?.uid,
-		initialData?.posts
-	);
+  const categoryDoc = initialData?.categoryDoc;
+  const { data, error } = useCategoryPosts(
+    categoryDoc?.uid,
+    initialData?.posts
+  );
 
-	// server error is prioritized, so place first
-	if (serverError || error) {
-		return <h1>{error?.message ?? serverError?.message}</h1>;
-	}
+  // server error is prioritized, so place first
+  if (serverError || error) {
+    return <h1>{error?.message ?? serverError?.message}</h1>;
+  }
 
-	if (!data || !categoryDoc) {
-		return <h1>Fetching posts...</h1>;
-	}
+  if (!data || !categoryDoc) {
+    return <h1>Fetching posts...</h1>;
+  }
 
-	let renderedCategoryPage: ComponentProps<
-		typeof CategoryUIDlayout
-	>['children'];
+  let renderedCategoryPage: ComponentProps<
+    typeof CategoryUIDlayout
+  >['children'];
 
-	switch (categoryDoc.uid) {
-		case 'blog':
-			renderedCategoryPage = <BlogPage posts={data} />;
-			break;
+  switch (categoryDoc.uid) {
+    case 'blog':
+      renderedCategoryPage = <BlogPage posts={data} />;
+      break;
 
-		case 'news':
-			renderedCategoryPage = <NewsPage posts={data} />;
-			break;
+    case 'news':
+      renderedCategoryPage = <NewsPage posts={data} />;
+      break;
 
-		case 'event':
-			renderedCategoryPage = <EventsPageList posts={data} />;
-			break;
+    case 'event':
+      renderedCategoryPage = <EventsPageList posts={data} />;
+      break;
 
-		case 'orientation':
-		case 'tet':
-			renderedCategoryPage = <EventsPageFeature posts={data} />;
-			break;
+    case 'orientation':
+    case 'tet':
+      renderedCategoryPage = <EventsPageFeature posts={data} />;
+      break;
 
-		default:
-			renderedCategoryPage = <h1>This category is not available yet</h1>;
-			break;
-	}
+    default:
+      renderedCategoryPage = <h1>This category is not available yet</h1>;
+      break;
+  }
 
-	return (
-		<CategoryUIDlayout categoryDoc={categoryDoc}>
-			{data.length == 0 ? (
-				<h1 tw="grid-p-sm">Come back later for interesting articles</h1>
-			) : (
-				renderedCategoryPage
-			)}
-		</CategoryUIDlayout>
-	);
+  return (
+    <CategoryUIDlayout categoryDoc={categoryDoc}>
+      {data.length == 0 ? (
+        <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
+      ) : (
+        renderedCategoryPage
+      )}
+    </CategoryUIDlayout>
+  );
 }
 export default CategoryUID;

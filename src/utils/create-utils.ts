@@ -1,10 +1,11 @@
-import { Result } from '@common';
+import { Result, ResultError, ResultSuccess } from '@common';
 
 export const createResultError = <T = any>(
 	message: string,
 	initialData?: T
-): Result<T> => {
+): ResultError<T> => {
 	return {
+		type: 'error',
 		data: initialData ?? null,
 		error: { message },
 	};
@@ -12,13 +13,15 @@ export const createResultError = <T = any>(
 
 export const createResultPending = <T = any>(initialData?: T): Result<T> => {
 	return {
+		type: 'pending',
 		data: initialData ?? null,
 		error: null,
 	};
 };
 
-export const createResult = <T = any>(data: T): Result<T> => {
+export const createResult = <T = any>(data: T): ResultSuccess<T> => {
 	return {
+		type: 'success',
 		data: data,
 		error: null,
 	};

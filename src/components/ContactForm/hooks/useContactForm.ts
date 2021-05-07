@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import type {
 	FieldError,
-	RefCallbackHandler,
+	UseFormRegisterReturn,
 	UseFormReturn,
 } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -17,7 +17,7 @@ type ContactFields = {
 type Value = {
 	labelText: string;
 	error?: FieldError;
-	register: RefCallbackHandler;
+	register: UseFormRegisterReturn;
 };
 
 type TextFields = Record<keyof ContactFields, Value>;

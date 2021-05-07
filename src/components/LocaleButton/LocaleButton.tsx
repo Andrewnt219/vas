@@ -12,65 +12,60 @@ import { css } from 'twin.macro';
 type Props = { className?: string };
 
 function LocaleButton({ className }: Props) {
-	const { locale, pathname, query, asPath } = useRouter();
-	const { t } = useTranslation();
-	const containerRef = useRef<HTMLDivElement | null>(null);
+  const { locale, pathname, query, asPath } = useRouter();
+  const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-	const isVisibleDropdown = useDropdown(containerRef);
-	const locales: Record<Language, { text: string; iconSrc: string } | null> = {
-		'en-us': {
-			text: t('common:locales.en-us'),
-			iconSrc: '/svg/american-flag.svg',
-		},
-		vi: {
-			text: t('common:locales.vi'),
-			iconSrc: '/svg/vietnam-flag.svg',
-		},
-	};
+  const isVisibleDropdown = useDropdown(containerRef);
+  const locales: Record<Language, { text: string; iconSrc: string }> = {
+    'en-us': {
+      text: t('common:locales.en-us'),
+      iconSrc: '/svg/american-flag.svg',
+    },
+    vi: {
+      text: t('common:locales.vi'),
+      iconSrc: '/svg/vietnam-flag.svg',
+    },
+  };
 
-	const currentLocale = isValidLocale(locale)
-		? locales[locale]
-		: locales['en-us'];
+  const currentLocale = isValidLocale(locale)
+    ? locales[locale]
+    : locales['en-us'];
 
-	return (
-		<div className={className} tw="relative mt-4" ref={containerRef}>
-			<button tw="flex space-x-2 font-bold shadow-card px-5 py-2 rounded-full bg-primary text-white focus:(outline-none underline)">
-				<span>{currentLocale?.text}</span>
-			</button>
+  return (
+    <div className={className} tw="relative mt-4" ref={containerRef}>
+      <button tw="flex space-x-2 font-bold shadow-card px-5 py-2 bg-primary text-white focus:(outline-none underline)">
+        <span>{currentLocale?.text}</span>
+      </button>
 
-			{isVisibleDropdown && (
-				<DropDownContainer tw="w-max">
-					{Object.entries(locales).map(
-						([key, value]) =>
-							value !== null && (
-								<>
-									<li key={key} tw="relative flex space-x-2 items-center">
-										<img
-											src={value.iconSrc}
-											alt={`Switch to ${value.text}`}
-											css={css`
-												width: 1.25em;
-												height: 1.25em;
-											`}
-										/>
-										<NextLink
-											href={{ pathname, query }}
-											as={asPath}
-											locale={key}
-											passHref
-										>
-											<StyledDropDownItem isActive={locale == key}>
-												{value.text}
-											</StyledDropDownItem>
-										</NextLink>
-									</li>
-								</>
-							)
-					)}
-				</DropDownContainer>
-			)}
-		</div>
-	);
+      {isVisibleDropdown && (
+        <DropDownContainer tw="w-max">
+          {Object.entries(locales).map(([key, value]) => (
+            <li key={key} tw="relative flex space-x-2 items-center">
+              <img
+                src={value.iconSrc}
+                alt={`Switch to ${value.text}`}
+                css={css`
+                  width: 1.25em;
+                  height: 1.25em;
+                `}
+              />
+              <NextLink
+                href={{ pathname, query }}
+                as={asPath}
+                locale={key}
+                passHref
+              >
+                <StyledDropDownItem isActive={locale == key}>
+                  {value.text}
+                </StyledDropDownItem>
+              </NextLink>
+            </li>
+          ))}
+        </DropDownContainer>
+      )}
+    </div>
+  );
 }
 
 export default LocaleButton;

@@ -3,26 +3,27 @@ import NextLink from 'next/link';
 import React, { VFC } from 'react';
 
 type Props = {
-	className?: string;
+  className?: string;
 };
 
+// TODO replace with SVG
 /**
  * @description renders the logo with link to homepage
  */
 const Logo: VFC<Props> = ({ className }) => {
-	return (
-		<NextLink href="/" passHref>
-			<a aria-label="Link to homepage" className={className}>
-				<Image
-					src={require('images/logo.png')}
-					width={747}
-					height={466}
-					layout="responsive"
-					alt="Logo with text VAS and Vietnamese Association at Seneca College"
-				/>
-			</a>
-		</NextLink>
-	);
+  return (
+    <NextLink href="/" passHref>
+      <a aria-label="Link to homepage" className={className}>
+        <Image
+          src={require('images/logo.png')}
+          width={747}
+          height={466}
+          layout="responsive"
+          alt="Logo with text VAS and Vietnamese Association at Seneca College"
+        />
+      </a>
+    </NextLink>
+  );
 };
 
 export default Logo;
