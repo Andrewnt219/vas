@@ -1,9 +1,12 @@
 import NewsCard from '@components/NewsCard/NewsCard';
 import Pagination from '@components/Pagination/Pagination';
+import { Post } from '@services/post-service';
 import { VFC } from 'react';
-import { CategoryUIDPageProps } from './CategoryUIDlayout';
 
-type Props = CategoryUIDPageProps;
+type Props = {
+  className?: string;
+  posts: Post[];
+};
 
 const BlogPage: VFC<Props> = ({ posts }) => {
   return (

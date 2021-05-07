@@ -2,9 +2,9 @@ import { Result } from '@common';
 import { PostsGetIndex } from '@src/pages/api/posts';
 import { getErrorMessage } from '@utils/convert-utils';
 import {
-	createResult,
-	createResultError,
-	createResultPending,
+  createResult,
+  createResultError,
+  createResultPending,
 } from '@utils/create-utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -15,44 +15,40 @@ type ApiResponse = PostsGetIndex;
 type FetcherError = AxiosError<ApiResponse>;
 type UsePostsData = ApiResponse['data'];
 
-const fetcher = (endpoint: string, categoryUID: string) =>
-	axios
-		.get<ApiResponse>(endpoint, {
-			params: {
-				categoryUID,
-			},
-		})
-		.then((res) => res.data.data);
+const fetcher = (endpoint: string) =>
+  axios.get<ApiResponse>(endpoint).then((res) => res.data.data);
 export const useCategoryPosts = (
-	categoryUID: string | undefined,
-	initialData?: UsePostsData | null
+  categoryUID: string | undefined,
+  page: number,
+  initialData?: UsePostsData | null
 ): Result<UsePostsData> => {
-	const swrKey: keyInterface = ['/api/posts', categoryUID];
-	const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(
-		swrKey,
-		fetcher,
-		{
-			initialData,
-		}
-	);
+  const swrKey: keyInterface = `/api/posts?categoryUID=${categoryUID}&page=${page}`;
 
-	const { locale, isPreview } = useRouter();
+  const { data, error, revalidate } = useSWR<UsePostsData, FetcherError>(
+    swrKey,
+    fetcher,
+    {
+      initialData,
+    }
+  );
 
-	useEffect(() => {
-		revalidate();
-	}, [revalidate, locale]);
+  const { locale, isPreview } = useRouter();
 
-	if (error) {
-		return createResultError(getErrorMessage(error));
-	}
+  useEffect(() => {
+    revalidate();
+  }, [revalidate, locale]);
 
-	if (isPreview) {
-		return createResultPending(initialData);
-	}
+  if (error) {
+    return createResultError(getErrorMessage(error));
+  }
 
-	if (!data) {
-		return createResultPending();
-	}
+  if (isPreview) {
+    return createResultPending(initialData);
+  }
 
-	return createResult(data);
+  if (!data) {
+    return createResultPending();
+  }
+
+  return createResult(data);
 };

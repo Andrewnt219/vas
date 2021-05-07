@@ -1,4 +1,5 @@
 import { Language } from '@data/localization-data';
+import { MAX_PAGE_SIZE } from '@data/range-data';
 import firestore, { fsOperands } from '@lib/firestore/firestore';
 import {
   PostComment,
@@ -24,7 +25,6 @@ import groupBy from 'lodash/groupBy';
 import { CategoryService } from './category-data-service';
 
 // Due to Firestore limitation of `in` query
-const MAX_PAGE_SIZE = 10;
 
 export class PostService {
   private static readonly posts = firestore.collection('posts');
@@ -117,11 +117,13 @@ export class PostService {
 
   public static async getPostsByCategoryUIDs(
     categoryUIDs: string[],
-    lang: Language
+    lang: Language,
+    options: QueryOptions
   ): Promise<Post[]> {
     const categoryDocs = await CategoryService.getCategoriesByUIDs(
       categoryUIDs,
-      lang
+      lang,
+      options
     );
 
     const postDocs = await this.getPostDocsByCategoryDocs(categoryDocs, lang);
@@ -143,9 +145,10 @@ export class PostService {
 
   public static getPostsByCategoryUID(
     categoryUID: string,
-    lang: Language
+    lang: Language,
+    options: QueryOptions
   ): Promise<Post[]> {
-    return this.getPostsByCategoryUIDs([categoryUID], lang);
+    return this.getPostsByCategoryUIDs([categoryUID], lang, options);
   }
 
   public static async getRelatedPosts(

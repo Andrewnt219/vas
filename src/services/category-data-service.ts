@@ -9,6 +9,7 @@ import {
   LanguageOption,
   Predicates,
 } from '@lib/prismic/prismic-helpers';
+import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 import { PMclient } from '@root/prismic-configuration';
 import { Post, PostService } from './post-service';
 
@@ -30,12 +31,12 @@ export class CategoryService {
   public static async getCategoryByUID(
     categoryUID: string,
     lang: Language,
-    previewRef = ''
+    options: QueryOptions = { ref: '' }
   ): Promise<CategoryDocument | null> {
     const categoryDocs: CategoryDocument[] = await this.getCategoriesByUIDs(
       [categoryUID],
       lang,
-      previewRef
+      options
     );
 
     return categoryDocs[0] ?? null;
@@ -44,13 +45,13 @@ export class CategoryService {
   public static async getCategoriesByUIDs(
     categoryUIDs: string[],
     lang: Language,
-    previewRef = ''
+    options: QueryOptions = { ref: '' }
   ): Promise<CategoryDocument[]> {
-    const options = getQueryOptions(lang, { ref: previewRef });
+    const queryOptions = getQueryOptions(lang, options);
     const query = Predicates.in('my.category.uid', categoryUIDs);
 
     const categoryDocs: CategoryDocument[] = (
-      await this.cms.query(query, options)
+      await this.cms.query(query, queryOptions)
     ).results;
 
     if (categoryDocs.length !== categoryUIDs.length) {
