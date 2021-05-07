@@ -9,6 +9,7 @@ import {
   LanguageOption,
   Predicates,
 } from '@lib/prismic/prismic-helpers';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 import { PMclient } from '@root/prismic-configuration';
 import { Post, PostService } from './post-service';
@@ -81,5 +82,7 @@ export class CategoryService {
   }
 }
 
-export type CategoryWithPosts = CategoryDocument & { posts: Post[] };
+export type CategoryWithPosts = CategoryDocument & {
+  posts: PrismicResult<Post>;
+};
 const getQueryOptions = defaultQueryOptionsFactory(categoryQuery);

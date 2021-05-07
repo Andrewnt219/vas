@@ -17,7 +17,7 @@ export const getHashtagLink = (hashtagUID: string | undefined) =>
   `/hashtags/${hashtagUID}`;
 export const getPostLink = (postUID: string | undefined) => `/posts/${postUID}`;
 export const getCategoryLink = (categoryUID: string | undefined) =>
-  `/${categoryUID}`;
+  `/categories/${categoryUID}`;
 export const getAuthorLink = (authorUID: string | undefined) =>
   `/authors/${authorUID}`;
 

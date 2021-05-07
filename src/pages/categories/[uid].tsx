@@ -7,6 +7,7 @@ import EventsPageList from '@layouts/categoryPages/EventsPageList';
 import NewsPage from '@layouts/categoryPages/NewsPage';
 import MainLayout from '@layouts/MainLayout';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import { CategoryService } from '@services/category-data-service';
 import { Post, PostService } from '@services/post-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
@@ -23,7 +24,7 @@ import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
 type Data = {
-  posts: Post[];
+  postsResult: PrismicResult<Post>;
   categoryUID: string;
   categoryDoc: CategoryDocument;
 };
@@ -59,11 +60,19 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
       return createStaticError('Category not found');
     }
 
-    const posts = await PostService.getPostsByCategoryUID(categoryUID, lang, {
-      ref,
-    });
+    const postsResult = await PostService.getPostsByCategoryUID(
+      categoryUID,
+      lang,
+      {
+        ref,
+      }
+    );
 
-    const data = { posts, categoryDoc, categoryUID };
+    if (!postsResult) {
+      return createStaticError('Cannot find matching posts');
+    }
+
+    const data = { postsResult, categoryDoc, categoryUID };
     return createStaticProps(data);
   } catch (error) {
     return errorStatcPropsHandler(error);
@@ -99,7 +108,7 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
   const { data, error } = useCategoryPosts(
     categoryDoc?.uid,
     page,
-    initialData?.posts
+    initialData?.postsResult
   );
 
   // server error is prioritized, so place first
@@ -115,20 +124,20 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
 
   switch (categoryDoc.uid) {
     case 'blog':
-      renderedCategoryPage = <BlogPage posts={data} />;
+      renderedCategoryPage = <BlogPage posts={data.results} />;
       break;
 
     case 'news':
-      renderedCategoryPage = <NewsPage posts={data} />;
+      renderedCategoryPage = <NewsPage posts={data.results} />;
       break;
 
     case 'event':
-      renderedCategoryPage = <EventsPageList posts={data} />;
+      renderedCategoryPage = <EventsPageList posts={data.results} />;
       break;
 
     case 'orientation':
     case 'tet':
-      renderedCategoryPage = <EventsPageFeature posts={data} />;
+      renderedCategoryPage = <EventsPageFeature posts={data.results} />;
       break;
 
     default:
@@ -140,14 +149,16 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
     <MainLayout title={categoryDoc.data.title} tw="">
       <PageBanner data={categoryDoc.data} />
 
-      {data.length == 0 ? (
+      {data.results.length == 0 ? (
         <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
       ) : (
         renderedCategoryPage
       )}
 
       <Pagination
-        total={data.length}
+        tw="col-span-full"
+        total={data.total_results_size}
+        perPage={data.results_per_page}
         onItemClicked={(_, page) => setPage(page)}
       />
     </MainLayout>

@@ -1,6 +1,7 @@
 import { Result } from '@common';
 import DefaultPost from '@components/posts/DefaultPost/DefaultPost';
 import MainLayout from '@layouts/MainLayout';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import { Post, PostService } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { usePost } from '@src/hooks/usePost';
@@ -55,7 +56,7 @@ function PostUid({ data: initialData, error: serverError }: Props) {
     case 'blog':
     case 'news':
       renderedPostPage = (
-        <DefaultPost post={post} relatedPosts={relatedPosts} />
+        <DefaultPost post={post} relatedPosts={relatedPosts.results} />
       );
       break;
 
@@ -63,7 +64,7 @@ function PostUid({ data: initialData, error: serverError }: Props) {
     case 'orientation':
     case 'tet':
       renderedPostPage = (
-        <DefaultPost post={post} relatedPosts={relatedPosts} />
+        <DefaultPost post={post} relatedPosts={relatedPosts.results} />
       );
       break;
 
@@ -115,7 +116,7 @@ function PostUid({ data: initialData, error: serverError }: Props) {
     </MainLayout>
   );
 }
-type StaticProps = Result<{ main: Post; relatedPosts: Post[] }>;
+type StaticProps = Result<{ main: Post; relatedPosts: PrismicResult<Post> }>;
 
 type Params = {
   uid: string;
@@ -160,7 +161,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   try {
     const posts = await PostService.getPosts('*');
 
-    const paths = posts.map((post) => ({
+    const paths = posts.results.map((post) => ({
       params: { uid: post.uid ?? '' },
       locale: post.lang,
     }));

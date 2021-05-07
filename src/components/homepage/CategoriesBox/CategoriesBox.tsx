@@ -11,7 +11,9 @@ type Props = {
 };
 
 function CategoriesBox({ className, categories }: Props) {
-  categories = categories.sort((a, b) => b.posts.length - a.posts.length);
+  categories = categories.sort(
+    (a, b) => b.posts.results.length - a.posts.results.length
+  );
 
   return (
     <WidgetBox
@@ -42,7 +44,7 @@ function CategoryLine({ data }: CategoryLineProps) {
         <a tw="pr-4 cursor-pointer hocus:text-primary">{category.data.title}</a>
       </NextLink>
       <span aria-hidden css={dots} tw="flex-1" />
-      <span tw="pl-4 font-black">{posts.length}</span>
+      <span tw="pl-4 font-black">{posts.results.length}</span>
     </p>
   );
 }

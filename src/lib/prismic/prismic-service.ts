@@ -1,4 +1,5 @@
 import { Language } from '@data/localization-data';
+import { Document } from '@prismicio/client/types/documents';
 import { PMclient } from '@root/prismic-configuration';
 import {
   AboutUsDocument,
@@ -17,3 +18,14 @@ export class PrismicService {
     return this.cms.getSingle('about_us', options);
   }
 }
+
+export type PrismicResult<Model extends Document> = {
+  page: number;
+  results_per_page: number;
+  results_size: number;
+  total_results_size: number;
+  total_pages: number;
+  next_page: string;
+  prev_page: string;
+  results: Model[];
+};

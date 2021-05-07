@@ -1,5 +1,4 @@
 import NewsCard from '@components/NewsCard/NewsCard';
-import Pagination from '@components/Pagination/Pagination';
 import { Post } from '@services/post-service';
 import { VFC } from 'react';
 
@@ -21,11 +20,6 @@ const BlogPage: VFC<Props> = ({ posts }) => {
           </li>
         ))}
       </ul>
-
-      <Pagination
-        total={posts.length}
-        onItemClicked={(ev, page) => console.log(page)}
-      />
     </section>
   );
 };
