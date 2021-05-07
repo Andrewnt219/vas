@@ -1,11 +1,11 @@
 import { Language } from '@data/localization-data';
+import { MAX_PAGE_SIZE } from '@data/range-data';
 import firestore, { fsOperands } from '@lib/firestore/firestore';
 import {
   PostComment,
   PostMeta,
   PostReply,
 } from '@lib/firestore/models/FsPostDoc';
-import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import {
   PostDocument,
   postQuery,
@@ -15,16 +15,13 @@ import {
   LanguageOption,
   Predicates,
 } from '@lib/prismic/prismic-helpers';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 import { PMclient } from '@root/prismic-configuration';
-import { getMainCategory } from '@utils/convert-utils';
 import { isString } from '@utils/validate-utils';
-import { Dictionary } from 'lodash';
-import groupBy from 'lodash/groupBy';
 import { CategoryService } from './category-data-service';
 
 // Due to Firestore limitation of `in` query
-const MAX_PAGE_SIZE = 10;
 
 export class PostService {
   private static readonly posts = firestore.collection('posts');
@@ -51,108 +48,83 @@ export class PostService {
   static async getPosts(
     lang: LanguageOption,
     options?: QueryOptions
-  ): Promise<Post[]> {
+  ): Promise<PrismicResult<Post>> {
     const query = POST_TYPE_PREDICATE;
     const queryOptions = getQueryOption(lang, options);
 
-    const postDocs: PostDocument[] = (await this.cms.query(query, queryOptions))
-      .results;
+    const postsResult = await this.cms.query(query, queryOptions);
 
-    return this.mapPostDocumentsToPosts(postDocs);
+    return this.replaceWithPosts(postsResult);
   }
 
   static async getPostsByUIDs(
     postUIDs: string[],
     lang: Language
-  ): Promise<Post[]> {
+  ): Promise<PrismicResult<Post>> {
     const options = getQueryOption(lang);
     const query = Predicates.in('document.uid', postUIDs);
 
-    const postDocs: PostDocument[] = (await this.cms.query(query, options))
-      .results;
+    const postsResult = await this.cms.query(query, options);
 
-    return this.mapPostDocumentsToPosts(postDocs);
+    return this.replaceWithPosts(postsResult);
   }
 
   public static async getPostsByCategoryID(
     categoryID: string,
-    lang: Language
-  ): Promise<Post[]> {
+    lang: Language,
+    options?: QueryOptions
+  ): Promise<PrismicResult<Post>> {
     const query = [
       Predicates.at('document.type', 'post'),
       Predicates.at('my.post.categories.category', categoryID),
     ];
-    const options = getQueryOption(lang);
+    const queryOptions = getQueryOption(lang, options);
 
-    const postDocs = (await this.cms.query(query, options))
-      .results as PostDocument[];
+    const postsResult = await this.cms.query(query, queryOptions);
 
-    return this.mapPostDocumentsToPosts(postDocs);
-  }
-
-  public static getPostDocsByCategoryDocs(
-    categoryDocs: CategoryDocument[],
-    lang: Language
-  ): Promise<PostDocument[][]> {
-    const getPostsByCategoryDoc = (categoryDoc: CategoryDocument) =>
-      this.getPostDocsByCategoryID(categoryDoc.id, lang);
-
-    const getPostsByCategoryDocs = categoryDocs.map(getPostsByCategoryDoc);
-
-    return Promise.all(getPostsByCategoryDocs);
-  }
-
-  public static async getPostsByCategories(
-    lang: Language
-  ): Promise<Dictionary<Post[]>> {
-    const categoryDocs = await CategoryService.getCategories(lang);
-    const postDocs = await this.getPostDocsByCategoryDocs(categoryDocs, lang);
-    const posts = await this.mapPostDocumentsToPosts(postDocs.flat());
-
-    const byCategoryUid = (postDoc: PostDocument): string | undefined =>
-      getMainCategory(postDoc).uid;
-
-    return groupBy(posts, byCategoryUid);
-  }
-
-  public static async getPostsByCategoryUIDs(
-    categoryUIDs: string[],
-    lang: Language
-  ): Promise<Post[]> {
-    const categoryDocs = await CategoryService.getCategoriesByUIDs(
-      categoryUIDs,
-      lang
-    );
-
-    const postDocs = await this.getPostDocsByCategoryDocs(categoryDocs, lang);
-
-    return this.mapPostDocumentsToPosts(postDocs.flat());
+    return this.replaceWithPosts(postsResult);
   }
 
   private static async getPostDocsByCategoryID(
     categoryID: string,
     lang: Language
-  ): Promise<PostDocument[]> {
+  ): Promise<PrismicResult<PostDocument>> {
     const query = [
       Predicates.at('document.type', 'post'),
       Predicates.at('my.post.categories.category', categoryID),
     ];
     const options = getQueryOption(lang);
-    return (await this.cms.query(query, options)).results as PostDocument[];
+    return this.cms.query(query, options);
   }
 
-  public static getPostsByCategoryUID(
+  public static async getPostsByCategoryUID(
     categoryUID: string,
-    lang: Language
-  ): Promise<Post[]> {
-    return this.getPostsByCategoryUIDs([categoryUID], lang);
+    lang: Language,
+    options: QueryOptions
+  ): Promise<PrismicResult<Post> | null> {
+    const categoryDoc = await CategoryService.getCategoryByUID(
+      categoryUID,
+      lang
+    );
+
+    if (!categoryDoc) {
+      return null;
+    }
+
+    const postsResult = await this.getPostsByCategoryID(
+      categoryDoc.id,
+      lang,
+      options
+    );
+
+    return this.replaceWithPosts(postsResult);
   }
 
   public static async getRelatedPosts(
     postID: string,
     lang: Language,
     previewRef = ''
-  ): Promise<Post[]> {
+  ): Promise<PrismicResult<Post>> {
     const options = getQueryOption(lang, {
       ref: previewRef,
     });
@@ -161,11 +133,9 @@ export class PostService {
       Predicates.at('document.type', 'post'),
     ];
 
-    const relatedPostDocs: PostDocument[] = await (
-      await this.cms.query(query, options)
-    ).results;
+    const relatedPostsResult = await await this.cms.query(query, options);
 
-    return this.mapPostDocumentsToPosts(relatedPostDocs);
+    return this.replaceWithPosts(relatedPostsResult);
   }
 
   //#region Firestore
@@ -323,6 +293,14 @@ export class PostService {
     }
 
     return post;
+  }
+
+  private static async replaceWithPosts(
+    result: PrismicResult<PostDocument>
+  ): Promise<PrismicResult<Post>> {
+    const posts = await this.mapPostDocumentsToPosts(result.results);
+
+    return { ...result, results: posts };
   }
   //#endregion
 }

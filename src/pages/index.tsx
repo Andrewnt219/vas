@@ -8,6 +8,7 @@ import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
 import Image from '@components/Image/Image';
 import { Label } from '@components/Label/Label';
 import { SectionH1 } from '@components/SectionH1/SectionH1';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import {
   CategoryService,
   CategoryWithPosts,
@@ -42,7 +43,7 @@ import React, { VFC } from 'react';
 /* -------------------------------------------------------------------------- */
 type StaticProps = Result<{
   categoriesWithPosts: CategoryWithPosts[];
-  latestPosts: Post[];
+  latestPosts: PrismicResult<Post>;
 }>;
 
 type Params = {};
@@ -146,7 +147,7 @@ const Index: VFC<Props> = ({ data, error }) => {
           aria-label="List of recent articles"
           tw="col-span-2 space-y-4 md:space-y-7 xl:space-y-12"
         >
-          {latestPosts.map((post) => (
+          {latestPosts.results.map((post) => (
             <li key={post.id}>
               <LatestArticle post={post} />
             </li>
