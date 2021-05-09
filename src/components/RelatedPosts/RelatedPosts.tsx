@@ -16,7 +16,7 @@ function PostItem({ data }: PostItemProps) {
 
   return (
     <article>
-      <div tw="relative pb-xs mb-3">
+      <div tw="relative aspect-w-16 aspect-h-9 mb-3">
         <NextLink href={postUrl} passHref>
           <a>
             <img

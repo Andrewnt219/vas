@@ -9,7 +9,7 @@ function PostEmbed({ className, data }: Props) {
     <div
       className={className}
       css={postGutterBottom}
-      tw="w-full  pb-sm relative all-child:(w-full h-full absolute)"
+      tw="w-full aspect-w-4 aspect-h-3 relative all-child:(w-full h-full absolute)"
       dangerouslySetInnerHTML={{ __html: data.oembed.html }}
     />
   );

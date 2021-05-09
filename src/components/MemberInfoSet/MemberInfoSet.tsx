@@ -16,7 +16,7 @@ function MemberInfoSet({ className, heading, members }: Props) {
       className={className}
       tw="md:text-lg xl:text-2xl"
     >
-      <header tw="mb-6 md:mb-lg xl:mb-20">
+      <header tw="mb-6 md:mb-2xl xl:mb-20">
         <SectionH1 as="h2" tw="mx-0 after:(mx-0)">
           {heading}
         </SectionH1>

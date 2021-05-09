@@ -32,8 +32,8 @@ function EventCard({ className, data: postDoc }: Props) {
         </NextLink>
       </h2>
 
-      <div tw="grid md:grid-cols-2  text-body font-medium md:text-lg">
-        <div tw="relative col-span-full pb-xs mb-4 md:(mb-6 pb-2xs)">
+      <div tw="grid md:grid-cols-2  text-sm font-medium md:text-lg">
+        <div tw="relative col-span-full aspect-w-16 aspect-h-9 mb-4 md:(aspect-w-16 aspect-h-7)">
           <NextLink href={postLink}>
             <a>
               <Image
@@ -64,7 +64,7 @@ function EventCard({ className, data: postDoc }: Props) {
         <p tw="md:text-right">Location: {postDoc.data.location}</p>
       </div>
 
-      <div tw="text-base text-skin-muted md:text-newsBody">
+      <div tw="text-base text-skin-muted md:text-2xl">
         <div tw="mb-4 md:mb-6">
           <RichText render={postDoc.data.snippet} />
         </div>

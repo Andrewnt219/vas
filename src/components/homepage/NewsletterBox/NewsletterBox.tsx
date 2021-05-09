@@ -27,7 +27,7 @@ function NewsletterBox({ className }: Props) {
         news.
       </p>
 
-      <form onSubmit={handleFormSubmit} tw="flex flex-col mt-sm">
+      <form onSubmit={handleFormSubmit} tw="flex flex-col mt-md">
         <label>
           Your email address
           <input

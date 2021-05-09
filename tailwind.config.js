@@ -50,35 +50,16 @@ module.exports = {
       transitionProperty: {
         colors: transitionProperty.colors + ', text-decoration-color',
       },
-      margin: {
-        sm: spacing[4],
-        md: spacing[7],
-        lg: spacing[12],
+      spacing: {
+        xs: '0.25rem',
+        sm: '0.5rem',
+        md: '1rem',
+        lg: '1.5rem',
+        xl: '2rem',
+        '2xl': '3rem',
       },
-      padding: {
-        '2xs': '42.5%',
-        xs: '56.25%',
-        sm: '75%',
-        full: '100%',
-        xl: '125%',
-        '2xl': '150%',
-        '3xl': '175%',
-        '4xl': '200%',
-      },
-      width: {
-        larger: '150%',
-      },
-      fontSize: {
-        body: ['0.875rem', { lineHeight: '1.43' }],
-        subtitle: ['0.875rem', { lineHeight: '1.46' }],
-        nav: ['1.25rem', { lineHeight: '1.3' }],
-        newsBody: ['1.4375rem', { lineHeight: '1.3' }],
-        title: ['2.25rem', { lineHeight: '1.3' }],
-      },
-
       fontFamily: {
         sans: ['Nunito Sans', ...fontFamily.sans],
-        viSans: ['Inter', ...fontFamily.sans],
       },
     },
   },
@@ -95,7 +76,15 @@ module.exports = {
     clear: false,
     order: false,
   },
-  plugins: [centers, grid, sizing, commons, decorator, fonts],
+  plugins: [
+    centers,
+    grid,
+    sizing,
+    commons,
+    decorator,
+    fonts,
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
 
 function commons({ addComponents }) {

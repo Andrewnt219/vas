@@ -29,7 +29,7 @@ function ContactForm({ className }: FormProps) {
       onSubmit={onSubmit}
       noValidate
       className={className}
-      tw="text-body pt-5 pb-10 px-5 rounded-xl bg-white shadow-card space-y-2 md:(text-2xl space-y-4 pt-10 pb-20 px-10) xl:(p-20 rounded-4xl grid grid-cols-2 gap-x-14)"
+      tw="text-sm pt-5 pb-10 px-5 rounded-xl bg-white shadow-card space-y-2 md:(text-2xl space-y-4 pt-10 pb-20 px-10) xl:(p-20 rounded-4xl grid grid-cols-2 gap-x-14)"
     >
       {formMethods.formState.isSubmitSuccessful ? (
         <div css={h2} tw=" col-span-full self-center">

@@ -61,7 +61,7 @@ function OrientationCard({ className, data: post, isMain }: Props) {
               <p>Location: {post.data.location}</p>
             </div>
 
-            <div tw="text-base mt-4 text-skin-muted md:(text-lg mt-6) xl:(mt-10 text-newsBody)">
+            <div tw="text-base mt-4 text-skin-muted md:(text-lg mt-6) xl:(mt-10 text-2xl)">
               <div tw="mb-2 xl:mb-4">
                 <RichText render={post.data.snippet} />
               </div>
@@ -81,8 +81,8 @@ function OrientationCard({ className, data: post, isMain }: Props) {
 
 type ImageContainerProps = Pick<Props, 'isMain'> & {};
 const ImageContainer = styled.div<ImageContainerProps>(({ isMain }) => [
-  tw`w-full pb-xs relative`,
-  !isMain && tw`md:pb-sm`,
+  tw`w-full aspect-w-16 aspect-h-9 relative`,
+  !isMain && tw`md:( aspect-w-4 aspect-h-3)`,
 ]);
 
 export default OrientationCard;

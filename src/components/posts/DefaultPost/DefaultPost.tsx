@@ -73,10 +73,10 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       {/* Hero */}
       <header
         css={wrapper}
-        tw="mb-5 md:(grid grid-cols-2 gap-x-16 items-center mb-md ) xl:mb-lg"
+        tw="mb-5 md:(grid grid-cols-2 gap-x-16 items-center mb-lg ) xl:mb-2xl"
       >
         {/* TODO don't use fit cover */}
-        <div tw="pb-full relative mb-sm after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">
+        <div tw="aspect-w-1 aspect-h-1 relative mb-md after:hidden md:after:(content block w-full h-full bg-skin-light absolute top-7 left-7)">
           <Image
             sizes={getSizes(['90vw', '40vw', '1280px'])}
             alt={thumbnail.alt}
@@ -161,7 +161,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
           </ul>
         </div>
 
-        <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-sm">
+        <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-md">
           <span css={tag}>Share</span>
           <ul tw="grid grid-cols-2 gap-1 md:grid-cols-4">
             <li>

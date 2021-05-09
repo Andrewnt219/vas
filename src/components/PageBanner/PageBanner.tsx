@@ -21,7 +21,7 @@ function PageBanner({ className, data }: Props) {
     <header
       key={data.title}
       className={className}
-      tw="relative col-span-full pb-2xs mb-10 md:mb-20 xl:grid-p-sm"
+      tw="relative col-span-full aspect-w-16 aspect-h-7 mb-10 md:mb-20 xl:grid-p-sm"
     >
       {/* TODO fix sizes */}
       <Image

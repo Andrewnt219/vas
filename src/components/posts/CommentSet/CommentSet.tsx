@@ -71,7 +71,7 @@ function Comment({ className, comment }: Props) {
       <div className={className} tw="flex">
         <FaUserCircle fontSize="60px" />
 
-        <div tw="ml-sm flex-1 flex flex-col space-y-3 text-smaller">
+        <div tw="ml-md flex-1 flex flex-col space-y-3 text-smaller">
           <div>
             <h3 tw="font-black text-xl">{comment.name}</h3>
 
@@ -99,7 +99,7 @@ function Comment({ className, comment }: Props) {
 
       {/* NOTE separate CommentSet to a different folder may need a workaround to avoid circular dependencies on overriding style */}
       <CommentSet
-        tw="pl-8 md:pl-20 mt-sm"
+        tw="pl-8 md:pl-20 mt-md"
         comments={comment.replies.map((reply) => ({ ...comment, ...reply }))}
       />
     </div>

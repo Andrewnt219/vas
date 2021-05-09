@@ -25,7 +25,7 @@ function NewsCard({ className, post }: Props) {
       <hr tw="border-black border-opacity-50" />
 
       <div tw="mt-6 grid md:(mt-12)  xl:(grid-cols-5 gap-x-8)">
-        <div tw="relative pb-xs border border-black border-opacity-50 xl:(col-span-2 pb-sm)">
+        <div tw="relative aspect-w-16 aspect-h-9 border border-black border-opacity-50 xl:(col-span-2 aspect-w-4 aspect-h-3)">
           <NextLink href={postLink}>
             <a>
               <Image
@@ -53,7 +53,7 @@ function NewsCard({ className, post }: Props) {
                 <a>{post.data.title}</a>
               </NextLink>
             </h2>
-            <div tw="mt-4 text-skin-muted md:text-newsBody xl:mt-8">
+            <div tw="mt-4 text-skin-muted md:text-2xl xl:mt-8">
               <RichText render={post.data.snippet} />
             </div>
           </header>

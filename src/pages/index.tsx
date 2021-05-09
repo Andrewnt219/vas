@@ -93,7 +93,7 @@ const Index: VFC<Props> = ({ data, error }) => {
         tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
         aria-labelledby="hero-title"
       >
-        <header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 w-larger text-left)">
+        <header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 width[150%] text-left)">
           <h1
             id="hero-title"
             tw="text-2xl text-primary font-black md:text-4xl lg:text-5xl"
@@ -101,13 +101,13 @@ const Index: VFC<Props> = ({ data, error }) => {
             {t('home:hero.title')}
           </h1>
 
-          <p tw="mt-sm md:text-base xl:(w-2/3)">{t('home:hero.subtitle')}</p>
+          <p tw="mt-md md:text-base xl:(w-2/3)">{t('home:hero.subtitle')}</p>
 
           {/* TODO translate */}
           {/* TODO add primary button for read more (scroll down) */}
           {/* TODO switch find out more to secondary */}
           <NextLink href="/about-us" passHref>
-            <Button as="a" variant="contain" size="lg" tw="mt-lg inline-block">
+            <Button as="a" variant="contain" size="lg" tw="mt-2xl inline-block">
               Find out more
             </Button>
           </NextLink>
@@ -171,7 +171,10 @@ function LatestArticle({ post, className }: LatestArticleProps) {
   return (
     <article>
       <NextLink href={postLink} passHref>
-        <a tw="block relative pb-sm md:pb-xs" css={darkenImage}>
+        <a
+          tw="block relative aspect-w-4 aspect-h-3 md:( aspect-w-16 aspect-h-9)"
+          css={darkenImage}
+        >
           <Image
             // Capped 1400px because of the max-width (take width of img at xl * 2)
             sizes={getSizes(['90vw', undefined, '1400px'])}
