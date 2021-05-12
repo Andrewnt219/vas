@@ -1,4 +1,4 @@
-import WidgetBox from '@components/widgets/WidgetBox';
+import Card from '@components/cards/Card';
 import { Link } from '@data/common-data';
 import React from 'react';
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
@@ -11,7 +11,7 @@ type Props = { className?: string };
 
 function SocialMediaBox({ className }: Props) {
   return (
-    <WidgetBox
+    <Card
       className={className}
       tw="bg-skin-dark text-white"
       title="Let's get social"
@@ -40,7 +40,7 @@ function SocialMediaBox({ className }: Props) {
           </a>
         </li>
       </ul>
-    </WidgetBox>
+    </Card>
   );
 }
 

@@ -1,11 +1,11 @@
+import Card from '@components/cards/Card';
 import Button from '@components/common/Button/Button';
-import WidgetBox from '@components/widgets/WidgetBox';
 import axios from 'axios';
 import React, { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 type Props = { className?: string };
 
-function NewsletterBox({ className }: Props) {
+function NewsletterCard({ className }: Props) {
   const [email, setEmail] = useState('');
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
@@ -21,7 +21,7 @@ function NewsletterBox({ className }: Props) {
   };
 
   return (
-    <WidgetBox className={className} title="Newsletter" tw="bg-skin-light">
+    <Card className={className} title="Newsletter" tw="bg-skin-light">
       <p>
         Make sure to subscribe to our newsletter and be the first to know the
         news.
@@ -42,8 +42,8 @@ function NewsletterBox({ className }: Props) {
 
         <Button variant="contain">Subscribe</Button>
       </form>
-    </WidgetBox>
+    </Card>
   );
 }
 
-export default NewsletterBox;
+export default NewsletterCard;

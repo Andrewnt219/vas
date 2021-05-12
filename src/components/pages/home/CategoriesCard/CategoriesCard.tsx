@@ -1,4 +1,4 @@
-import WidgetBox from '@components/widgets/WidgetBox';
+import Card from '@components/cards/Card';
 import { CategoryWithPosts } from '@src/server/services/category-data-service';
 import { getCategoryLink } from '@utils/convert-utils';
 import NextLink from 'next/link';
@@ -10,13 +10,13 @@ type Props = {
   categories: CategoryLineProps['data'][];
 };
 
-function CategoriesBox({ className, categories }: Props) {
+function CategoriesCard({ className, categories }: Props) {
   categories = categories.sort(
     (a, b) => b.posts.results.length - a.posts.results.length
   );
 
   return (
-    <WidgetBox
+    <Card
       title="Topics"
       className={className}
       tw="bg-skin-light overflow-hidden"
@@ -28,7 +28,7 @@ function CategoriesBox({ className, categories }: Props) {
           </li>
         ))}
       </ul>
-    </WidgetBox>
+    </Card>
   );
 }
 
@@ -61,4 +61,4 @@ const dots = css`
   }
 `;
 
-export default CategoriesBox;
+export default CategoriesCard;

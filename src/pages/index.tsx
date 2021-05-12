@@ -2,9 +2,9 @@ import { Result } from '@common';
 import PostCard from '@components/cards/PostCard/PostCard';
 import Button from '@components/common/Button/Button';
 import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
-import CategoriesBox from '@components/pages/home/CategoriesBox/CategoriesBox';
-import NewsletterBox from '@components/pages/home/NewsletterBox/NewsletterBox';
-import SocialMediaBox from '@components/pages/home/SocialMediaBox/SocialMediaBox';
+import CategoriesCard from '@components/pages/home/CategoriesCard/CategoriesCard';
+import NewsletterCard from '@components/pages/home/NewsletterCard/NewsletterCard';
+import SocialMediaBox from '@components/pages/home/SocialMediaCard/SocialMediaCard';
 import MainLayout from '@components/pages/MainLayout';
 import { SizesProvider } from '@contexts/SizesContext';
 import { PrismicResult } from '@lib/prismic/prismic-service';
@@ -168,8 +168,8 @@ function ArticlesSection({
       </ul>
 
       <aside tw="mt-7 col-span-1 grid gap-y-4 md:(gap-7 grid-cols-2) xl:(mt-0 grid-cols-1 gap-12)">
-        <NewsletterBox />
-        <CategoriesBox categories={categoriesWithPosts} />
+        <NewsletterCard />
+        <CategoriesCard categories={categoriesWithPosts} />
         <SocialMediaBox tw="col-span-full" />
       </aside>
     </section>
