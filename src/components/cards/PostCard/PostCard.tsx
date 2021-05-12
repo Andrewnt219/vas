@@ -1,14 +1,14 @@
 import Image from '@components/common/Image/Image';
 import { Label } from '@components/common/Label/Label';
 import Time from '@components/common/Time/Time';
+import WithSeparator from '@components/common/WithSeparator/WithSeparator';
 import { useSizes } from '@contexts/SizesContext';
 import { Post } from '@src/server/services/post-service';
-import { separator } from '@styles/apply';
 import { articleTitle } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
   getCategoryLink,
-  getDataFromPost
+  getDataFromPost,
 } from '@utils/convert-utils';
 import { darkenImage } from '@utils/css-utils';
 import NextLink from 'next/link';
@@ -67,7 +67,7 @@ function MetaSubtitle({ post }: Props) {
   const { author, publishedDate, readingMinutes } = getDataFromPost(post);
 
   return (
-    <div tw="text-smaller flex items-center  space-x-1">
+    <WithSeparator tw="text-smaller">
       {/* TODO add published date */}
       <span>
         By{' '}
@@ -78,15 +78,11 @@ function MetaSubtitle({ post }: Props) {
         </NextLink>
       </span>
 
-      <span css={separator} />
-
       <Time time={publishedDate} />
-
-      <span css={separator} />
 
       {/* TODO translate */}
       <span>{readingMinutes} min read</span>
-    </div>
+    </WithSeparator>
   );
 }
 
