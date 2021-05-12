@@ -1,7 +1,6 @@
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import PageH1 from '@components/PageH1/PageH1';
 import MainLayout from '@layouts/MainLayout';
-import { h2, sectionTitle } from '@styles/_typographyStyles';
+import { h2, pageTitle, sectionTitle } from '@styles/_typographyStyles';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
@@ -15,7 +14,9 @@ const Partners: VFC<Props> = ({}) => {
   return (
     <MainLayout title={t('partnerships:title')}>
       <header tw="col-span-full">
-        <PageH1 tw="text-center">{t('partnerships:title')}</PageH1>
+        <h1 css={pageTitle} tw="text-center">
+          {t('partnerships:title')}
+        </h1>
       </header>
 
       <StyledSection>
