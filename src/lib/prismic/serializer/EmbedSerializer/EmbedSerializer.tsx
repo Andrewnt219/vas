@@ -4,7 +4,7 @@ import React from 'react';
 
 type Props = { className?: string; data: Embed };
 
-function PostEmbed({ className, data }: Props) {
+function EmbedSerializer({ className, data }: Props) {
   return (
     <div
       className={className}
@@ -15,4 +15,4 @@ function PostEmbed({ className, data }: Props) {
   );
 }
 
-export default PostEmbed;
+export default EmbedSerializer;

@@ -16,6 +16,7 @@ function NewsletterCard({ className }: Props) {
     });
   };
 
+  // TODO clear input, show success modal
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
     setEmail(ev.target.value);
   };
@@ -30,6 +31,7 @@ function NewsletterCard({ className }: Props) {
       <form onSubmit={handleFormSubmit} tw="flex flex-col mt-md">
         <label>
           Your email address
+          {/* TODO autocomplete */}
           <input
             onChange={handleInputChange}
             value={email}

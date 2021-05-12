@@ -3,7 +3,7 @@ import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import 'twin.macro';
 import { AboutUsSectionSliceProps } from '..';
-import { AboutUsSerializer } from '../../../serializer/AboutUsSerializer/AboutUsSerializer';
+import { aboutUsSerializer } from '../../../about-us-serializer';
 
 type Props = AboutUsSectionSliceProps;
 
@@ -19,7 +19,7 @@ function AboutUsDefaultSection({ className, slice }: Props) {
 
           <RichText
             render={slice.primary.description}
-            htmlSerializer={AboutUsSerializer}
+            htmlSerializer={aboutUsSerializer}
           />
         </header>
       </div>

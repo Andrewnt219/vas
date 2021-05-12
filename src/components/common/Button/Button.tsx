@@ -12,6 +12,7 @@ const base = css`
 	${tw`hocus:(outline-none)`} */
 `;
 
+// TODO only reduce bg-opacity, don't invert on hocus
 const contain = css`
   ${tw`bg-primary  text-white px-6 py-2 border border-transparent `}
   box-shadow: 0 10px 15px 0 ${theme`colors.primary` + percentageToHex(20)};
