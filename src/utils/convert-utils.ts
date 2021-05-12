@@ -1,6 +1,6 @@
 import { Result } from '@common';
 import { PostDocument } from '@lib/prismic/component-types/post/PostModel';
-import { Post } from '@services/post-service';
+import { Post } from '@src/server/services/post-service';
 import { AxiosError } from 'axios';
 import { RichText } from 'prismic-reactjs';
 import { getReadingMinutes } from './number-utils';

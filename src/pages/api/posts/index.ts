@@ -1,7 +1,7 @@
 import { Result } from '@common';
 import { MAX_PAGE_SIZE } from '@data/range-data';
 import { PrismicResult } from '@lib/prismic/prismic-service';
-import { Post, PostService } from '@services/post-service';
+import { Post, PostService } from '@src/server/services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { createResult, createResultError } from '@utils/create-utils';
 import { NextApiRequest, NextApiResponse } from 'next';

@@ -1,8 +1,8 @@
 import { Result } from '@common';
-import Image from '@components/Image/Image';
-import PostCard from '@components/posts/PostCard/PostCard';
+import PostCard from '@components/cards/PostCard/PostCard';
+import Image from '@components/common/Image/Image';
+import MainLayout from '@components/pages/MainLayout';
 import { SizesProvider } from '@contexts/SizesContext';
-import MainLayout from '@layouts/MainLayout';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import { AuthorDataService } from '@services/author-data-service';

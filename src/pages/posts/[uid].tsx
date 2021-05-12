@@ -1,11 +1,11 @@
 import { Result } from '@common';
-import DefaultPost from '@components/posts/DefaultPost/DefaultPost';
-import MainLayout from '@layouts/MainLayout';
+import MainLayout from '@components/pages/MainLayout';
+import DefaultPost from '@components/pages/posts/DefaultPost/DefaultPost';
 import { PrismicResult } from '@lib/prismic/prismic-service';
-import { Post, PostService } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { usePost } from '@src/hooks/usePost';
 import { useRelatedPost } from '@src/hooks/useRelatedPosts';
+import { Post, PostService } from '@src/server/services/post-service';
 import {
   createStaticError,
   createStaticProps,

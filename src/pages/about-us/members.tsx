@@ -1,9 +1,9 @@
 import { Result } from '@common';
-import MemberInfoSet from '@components/MemberInfoSet/MemberInfoSet';
+import MainLayout from '@components/pages/MainLayout';
+import MemberInfoSet from '@components/pages/members/MemberInfoSet/MemberInfoSet';
 import { SizesProvider } from '@contexts/SizesContext';
-import MainLayout from '@layouts/MainLayout';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
-import { AuthorDataService } from '@services/author-data-service';
+import { AuthorDataService } from '@src/server/services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
 import { pageTitle } from '@styles/_typographyStyles';
 import { createResult } from '@utils/create-utils';

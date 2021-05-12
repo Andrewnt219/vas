@@ -1,18 +1,18 @@
 import { Result } from '@common';
-import Button from '@components/Button/Button';
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
-import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
-import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
-import PostCard from '@components/posts/PostCard/PostCard';
+import PostCard from '@components/cards/PostCard/PostCard';
+import Button from '@components/common/Button/Button';
+import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
+import CategoriesBox from '@components/pages/home/CategoriesBox/CategoriesBox';
+import NewsletterBox from '@components/pages/home/NewsletterBox/NewsletterBox';
+import SocialMediaBox from '@components/pages/home/SocialMediaBox/SocialMediaBox';
+import MainLayout from '@components/pages/MainLayout';
 import { SizesProvider } from '@contexts/SizesContext';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import {
   CategoryService,
   CategoryWithPosts,
-} from '@services/category-data-service';
-import { Post, PostService } from '@services/post-service';
-import MainLayout from '@src/layouts/MainLayout';
+} from '@src/server/services/category-data-service';
+import { Post, PostService } from '@src/server/services/post-service';
 import {
   createStaticProps,
   errorStatcPropsHandler,

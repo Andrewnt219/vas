@@ -1,4 +1,4 @@
-import Image from '@components/Image/Image';
+import Image from '@components/common/Image/Image';
 import { Asset } from '@prismic-types';
 import { getSizes } from '@utils/css-utils';
 import React from 'react';

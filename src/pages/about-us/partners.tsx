@@ -1,5 +1,5 @@
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import MainLayout from '@layouts/MainLayout';
+import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
+import MainLayout from '@components/pages/MainLayout';
 import { h2, pageTitle, sectionTitle } from '@styles/_typographyStyles';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';

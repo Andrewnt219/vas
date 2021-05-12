@@ -1,6 +1,6 @@
 import { Result } from '@common';
 import { PrismicResult } from '@lib/prismic/prismic-service';
-import { Post, PostService } from '@services/post-service';
+import { Post, PostService } from '@src/server/services/post-service';
 import { apiHanler, getLocaleCookie } from '@src/server/utils/api-utils';
 import { createResult, createResultError } from '@utils/create-utils';
 import { NextApiHandler } from 'next';

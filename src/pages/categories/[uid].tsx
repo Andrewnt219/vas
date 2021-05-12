@@ -1,16 +1,16 @@
 import { Result } from '@common';
-import PageBanner from '@components/PageBanner/PageBanner';
-import Pagination from '@components/Pagination/Pagination';
-import BlogPage from '@layouts/categoryPages/BlogPage';
-import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
-import EventsPageList from '@layouts/categoryPages/EventsPageList';
-import NewsPage from '@layouts/categoryPages/NewsPage';
-import MainLayout from '@layouts/MainLayout';
+import PageBanner from '@components/common/PageBanner/PageBanner';
+import Pagination from '@components/common/Pagination/Pagination';
+import BlogPage from '@components/pages/categories/BlogPage';
+import EventsPageFeature from '@components/pages/categories/EventsPageFeature';
+import EventsPageList from '@components/pages/categories/EventsPageList';
+import NewsPage from '@components/pages/categories/NewsPage';
+import MainLayout from '@components/pages/MainLayout';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import { PrismicResult } from '@lib/prismic/prismic-service';
-import { CategoryService } from '@services/category-data-service';
-import { Post, PostService } from '@services/post-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
+import { CategoryService } from '@src/server/services/category-data-service';
+import { Post, PostService } from '@src/server/services/post-service';
 import {
   createStaticError,
   createStaticProps,
@@ -20,7 +20,6 @@ import {
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { ReactNode, useState } from 'react';
-import 'twin.macro';
 
 /* --------------------------------- SERVER --------------------------------- */
 type Data = {

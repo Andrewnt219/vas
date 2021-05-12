@@ -1,13 +1,10 @@
 import { ResultError } from '@common';
 import { Language } from '@data/localization-data';
 import { createResultError } from '@utils/create-utils';
-import {
-  Handler,
-  isValidHttpMethod,
-  tryParseLocale,
-} from '@utils/validate-utils';
+import { tryParseLocale } from '@utils/validate-utils';
 import cookie from 'cookie';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { Handler, isValidHttpMethod } from './validate-utils';
 
 export function runMiddleware(
   req: NextApiRequest,
@@ -57,22 +54,24 @@ export function getLocaleCookie(req: NextApiRequest): Language {
  * const get:NextApiHandler<Result<string>> = (req, res) => {...}
  * export default apiHandler({ get });
  */
-export const apiHanler = (
-  supportedHandlers: Partial<Record<Handler, NextApiHandler>>
-) => (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    const method = req.method?.toLowerCase();
-    if (!isValidHttpMethod(method)) {
-      return res.status(400).json(createResultError('Unexpected HTTP method'));
-    }
+export const apiHanler =
+  (supportedHandlers: Partial<Record<Handler, NextApiHandler>>) =>
+  (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+      const method = req.method?.toLowerCase();
+      if (!isValidHttpMethod(method)) {
+        return res
+          .status(400)
+          .json(createResultError('Unexpected HTTP method'));
+      }
 
-    const handler = supportedHandlers[method];
-    if (!handler) {
-      return res.status(405).json(createResultError('Method Not Allowed'));
-    }
+      const handler = supportedHandlers[method];
+      if (!handler) {
+        return res.status(405).json(createResultError('Method Not Allowed'));
+      }
 
-    return handler(req, res);
-  } catch (error) {
-    return errorHandler(req, res, error);
-  }
-};
+      return handler(req, res);
+    } catch (error) {
+      return errorHandler(req, res, error);
+    }
+  };

@@ -1,6 +1,6 @@
-import ContactForm from '@components/ContactForm/ContactForm';
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import MainLayout from '@layouts/MainLayout';
+import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
+import ContactForm from '@components/forms/ContactForm/ContactForm';
+import MainLayout from '@components/pages/MainLayout';
 import { h1 } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import React, { VFC } from 'react';
