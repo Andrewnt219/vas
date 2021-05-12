@@ -1,5 +1,5 @@
 import MemberInfo from '@components/MemberInfoSet/components/MemberInfo/MemberInfo';
-import { SectionH1 } from '@components/SectionH1/SectionH1';
+import { sectionTitle } from '@styles/_typographyStyles';
 import { ComponentProps } from '@utils';
 import React from 'react';
 
@@ -17,9 +17,9 @@ function MemberInfoSet({ className, heading, members }: Props) {
       tw="md:text-lg xl:text-2xl"
     >
       <header tw="mb-6 md:mb-2xl xl:mb-20">
-        <SectionH1 as="h2" tw="mx-0 after:(mx-0)">
+        <h2 css={sectionTitle} tw="mx-0 after:(mx-0)">
           {heading}
-        </SectionH1>
+        </h2>
       </header>
 
       <ul tw="grid grid-cols-12 gap-y-4 md:(gap-y-8 gap-x-4) xl:(gap-y-16 gap-x-8)">

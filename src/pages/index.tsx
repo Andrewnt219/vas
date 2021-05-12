@@ -5,7 +5,6 @@ import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
 import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
 import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
 import PostCard from '@components/posts/PostCard/PostCard';
-import { SectionH1 } from '@components/SectionH1/SectionH1';
 import { SizesProvider } from '@contexts/SizesContext';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import {
@@ -19,6 +18,7 @@ import {
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
 import { wrapper } from '@styles/spacing';
+import { sectionTitle } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -151,7 +151,7 @@ function ArticlesSection({
     >
       <header tw="col-span-full">
         {/* TODO translation */}
-        <SectionH1>Latest articles</SectionH1>
+        <h1 css={sectionTitle}>Latest articles</h1>
       </header>
 
       <ul

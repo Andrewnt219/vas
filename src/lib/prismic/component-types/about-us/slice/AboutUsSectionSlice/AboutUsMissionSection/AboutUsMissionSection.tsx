@@ -1,4 +1,4 @@
-import { SectionH1 } from '@components/SectionH1/SectionH1';
+import { sectionTitle } from '@styles/_typographyStyles';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import tw, { css } from 'twin.macro';
@@ -16,7 +16,7 @@ function AboutUsMissionSection({ className, slice }: Props) {
     >
       <div tw="grid-p-sm xl:(grid-p-md)">
         <header>
-          <SectionH1>{RichText.asText(slice.primary.title)}</SectionH1>
+          <h1 css={sectionTitle}>{RichText.asText(slice.primary.title)}</h1>
         </header>
 
         <RichText
