@@ -4,9 +4,9 @@ import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
 import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
 import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
 import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
-import Image from '@components/Image/Image';
-import { Label } from '@components/Label/Label';
+import PostCard from '@components/posts/PostCard/PostCard';
 import { SectionH1 } from '@components/SectionH1/SectionH1';
+import { SizesProvider } from '@contexts/SizesContext';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import {
   CategoryService,
@@ -19,19 +19,11 @@ import {
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
 import { wrapper } from '@styles/spacing';
-import { articleTitle } from '@styles/_typographyStyles';
-import {
-  getAuthorLink,
-  getCategoryLink,
-  getDataFromPost,
-  getPostLink,
-} from '@utils/convert-utils';
-import { darkenImage, getSizes } from '@utils/css-utils';
+import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
-import { RichText } from 'prismic-reactjs';
 import React, { VFC } from 'react';
 
 // TODO use loadLocaleFrom in i18n.json to load translation files
@@ -139,11 +131,15 @@ const Index: VFC<Props> = ({ data, error }) => {
           aria-label="List of recent articles"
           tw="col-span-2 space-y-4 md:space-y-7 xl:space-y-12"
         >
-          {latestPosts.results.map((post) => (
-            <li key={post.id}>
-              <LatestArticle post={post} />
-            </li>
-          ))}
+          <SizesProvider
+            initialContext={getSizes(['90vw', undefined, '1400px'])}
+          >
+            {latestPosts.results.map((post) => (
+              <li key={post.id}>
+                <PostCard.Article post={post} />
+              </li>
+            ))}
+          </SizesProvider>
         </ul>
 
         <aside tw="mt-7 col-span-1 grid gap-y-4 md:(gap-7 grid-cols-2) xl:(mt-0 grid-cols-1 gap-12)">
@@ -158,64 +154,4 @@ const Index: VFC<Props> = ({ data, error }) => {
   );
 };
 
-type LatestArticleProps = {
-  post: Post;
-  className?: string;
-};
-
-function LatestArticle({ post, className }: LatestArticleProps) {
-  const { mainCategory, title, author, snippet, thumbnail } =
-    getDataFromPost(post);
-  const postLink = getPostLink(post.uid);
-
-  return (
-    <article>
-      <NextLink href={postLink} passHref>
-        <a
-          tw="block relative aspect-w-4 aspect-h-3 md:( aspect-w-16 aspect-h-9)"
-          css={darkenImage}
-        >
-          <Image
-            // Capped 1400px because of the max-width (take width of img at xl * 2)
-            sizes={getSizes(['90vw', undefined, '1400px'])}
-            tw="img-absolute absolute!"
-            imgSrc={thumbnail.url}
-            alt={thumbnail.alt}
-          />
-        </a>
-      </NextLink>
-
-      <header tw="mt-3 space-y-2 md:(mt-6 w-3/4 mx-auto) xl:mt-9">
-        <NextLink href={getCategoryLink(mainCategory.uid)} passHref>
-          <Label className={className} tw="">
-            {mainCategory.data.title}
-          </Label>
-        </NextLink>
-
-        <NextLink href={postLink} passHref>
-          <a
-            css={articleTitle}
-            tw="block font-black underline decorator-transparent transition-colors hocus:(text-primary decorator-current)"
-          >
-            <h3>{title}</h3>
-          </a>
-        </NextLink>
-
-        {/* TODO add published date */}
-        <span tw="block text-smaller">
-          By{' '}
-          <NextLink href={getAuthorLink(author.uid)} passHref>
-            <a tw="font-black text-primary transition-colors underline decorator-transparent hocus:(text-black decorator-current)">
-              {author.data.title}
-            </a>
-          </NextLink>
-        </span>
-      </header>
-
-      <div tw="mt-3 md:(w-3/4 mx-auto mt-6)">
-        <RichText render={snippet} />
-      </div>
-    </article>
-  );
-}
 export default Index;

@@ -44,6 +44,7 @@ export const getDataFromPost = (post: Post | PostDocument) => ({
   firstHashtag: getFirstHashtag(post),
   publishedDate: getPublishedDate(post),
   readingMinutes: getPostReadingMinutes(post),
+  postLink: getPostLink(post.uid),
 });
 /* -------------------------------------------------------------------------- */
 

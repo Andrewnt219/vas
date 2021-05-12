@@ -5,6 +5,7 @@ import RelatedPosts from '@components/RelatedPosts/RelatedPosts';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { Post } from '@services/post-service';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
+import { separator } from '@styles/apply';
 import { h2Margin, wrapper } from '@styles/spacing';
 import { h1, h2, tag } from '@styles/_typographyStyles';
 import {
@@ -39,11 +40,6 @@ const bodyWrapper = css`
   ${tw`max-w-prose mx-auto px-4 md:px-8`}
 `;
 
-const separator = css`
-  ${tw`inline-block bg-current h-px`}
-  width: 0.4em;
-`;
-
 const sharedButton = css`
   ${tw`w-full svg:(text-white text-larger) py-2 flex justify-center transition-colors hocus:(bg-skin-dark)`}
 `;
@@ -58,13 +54,8 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
   const location = useCurrentLocation();
 
-  const {
-    author,
-    firstHashtag,
-    thumbnail,
-    publishedDate,
-    readingMinutes,
-  } = getDataFromPost(post);
+  const { author, firstHashtag, thumbnail, publishedDate, readingMinutes } =
+    getDataFromPost(post);
 
   const authorAvatar = `${author.data.thumbnail.url}&w=48&h=48&fit=crop`;
 

@@ -1,30 +1,24 @@
-import { Result } from "@common";
-import Image from "@components/Image/Image";
-import { Label } from "@components/Label/Label";
-import MainLayout from "@layouts/MainLayout";
-import { MemberDocument } from "@lib/prismic/component-types/member/MemberModel";
-import { PrismicResult } from "@lib/prismic/prismic-service";
-// import { PrismicResult } from '@lib/prismic/prismic-service';
-import { AuthorDataService } from "@services/author-data-service";
-import { Post, PostService } from "@services/post-service";
+import { Result } from '@common';
+import Image from '@components/Image/Image';
+import PostCard from '@components/posts/PostCard/PostCard';
+import { SizesProvider } from '@contexts/SizesContext';
+import MainLayout from '@layouts/MainLayout';
+import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
+import { PrismicResult } from '@lib/prismic/prismic-service';
+import { AuthorDataService } from '@services/author-data-service';
+import { Post, PostService } from '@services/post-service';
 import {
   createStaticError,
   createStaticProps,
   errorStatcPropsHandler,
-} from "@src/server/utils/page-utils";
-import { wrapper } from "@styles/spacing";
-import {
-  getCategoryLink,
-  getDataFromPost,
-  getPostLink,
-} from "@utils/convert-utils";
-import { darkenImage, getSizes } from "@utils/css-utils";
-import { tryParseLocale } from "@utils/validate-utils";
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import NextLink from "next/link";
-import { RichText } from "prismic-reactjs";
-import React from "react";
-import { FaLinkedinIn } from "react-icons/fa";
+} from '@src/server/utils/page-utils';
+import { wrapper } from '@styles/spacing';
+import { getSizes } from '@utils/css-utils';
+import { tryParseLocale } from '@utils/validate-utils';
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { RichText } from 'prismic-reactjs';
+import React from 'react';
+import { FaLinkedinIn } from 'react-icons/fa';
 /* -------------------------------------------------------------------------- */
 /*                                   SERVER                                   */
 /* -------------------------------------------------------------------------- */
@@ -46,13 +40,13 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
     const authorUid = params?.uid;
 
     if (!authorUid) {
-      return createStaticError("Author Uid is undefined");
+      return createStaticError('Author Uid is undefined');
     }
 
     const author = await AuthorDataService.getAuthorByUID(lang, authorUid);
 
     if (!author) {
-      return createStaticError("Author is missing");
+      return createStaticError('Author is missing');
     }
 
     const postsResult = await PostService.getPostsByAuthorID(lang, author.id);
@@ -64,9 +58,9 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const authorDocs = await AuthorDataService.getAuthors("*");
+  const authorDocs = await AuthorDataService.getAuthors('*');
   const paths = authorDocs.map((doc) => ({
-    params: { uid: doc.uid ?? "" },
+    params: { uid: doc.uid ?? '' },
     locale: doc.lang,
   }));
 
@@ -108,15 +102,15 @@ function Author({ data, error }: Props) {
           <h1 tw="text-3xl font-black">{author.data.title}</h1>
 
           <a
-            href={data.author.data.linked_in ?? ""}
+            href={data.author.data.linked_in ?? ''}
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn />
           </a>
           <p>
-            {postsResult.total_results_size}{" "}
-            {postsResult.total_results_size <= 1 ? "article" : "articles"}
+            {postsResult.total_results_size}{' '}
+            {postsResult.total_results_size <= 1 ? 'article' : 'articles'}
           </p>
           <div tw="max-w-2xl">
             <RichText render={author.data.description} />
@@ -124,57 +118,21 @@ function Author({ data, error }: Props) {
         </header>
 
         <ul
-          tw="mb-5 grid md:grid-cols-2"
+          tw="mb-5 grid md:grid-cols-2 gap-lg md:gap-lg xl:gap-2xl"
           aria-label={`Articles of ${author.data.title}`}
         >
           {postsResult.results.map((post: any) => (
             <li key={post.id}>
-              <Article post={post} />
+              <SizesProvider
+                initialContext={getSizes(['90vw', undefined, '1600px'])}
+              >
+                <PostCard.Article post={post} />
+              </SizesProvider>
             </li>
           ))}
         </ul>
       </section>
     </MainLayout>
-  );
-}
-
-type ArticleProps = { className?: string; post: Post };
-
-function Article({ className, post }: ArticleProps) {
-  const { thumbnail, mainCategory, readingMinutes } = getDataFromPost(post);
-  const postLink = getPostLink(post.uid);
-
-  return (
-    <article
-      className={className}
-      tw="mt-3 space-y-1 md:(mt-6 w-3/4 mx-auto) xl:mt-9"
-    >
-      <NextLink href={postLink} passHref>
-        <a tw="block relative pb-sm md:pb-xs" css={darkenImage}>
-          <Image
-            // Capped 1400px because of the max-width (take width of img at xl * 2)
-            sizes={getSizes(["90vw", undefined, "1400px"])}
-            tw="img-absolute absolute!"
-            imgSrc={thumbnail.url}
-            alt={thumbnail.alt}
-          />
-        </a>
-      </NextLink>
-      <div tw="py-2">
-        <NextLink href={getCategoryLink(mainCategory.uid)} passHref>
-          <Label className={className}>{mainCategory.data.title}</Label>
-        </NextLink>
-      </div>
-
-      <h2 tw="text-2xl font-bold">{post.data.title}</h2>
-      <p tw="text-gray-300">
-        {readingMinutes} {" min read"}
-      </p>
-      {/* <Time tw="" time={publishedDate} >
-        {dayjs(publishedDate).format('YYYY-MMMM')}
-        </Time> */}
-      <RichText render={post.data.snippet} />
-    </article>
   );
 }
 
