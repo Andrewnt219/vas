@@ -14,7 +14,9 @@ export enum Format {
   SHORT_TEXT_DATE = 'MMM DD',
   DATE = 'YYYY-MM-DD',
   DATE_TIME = 'YYYY-MM-DD h:mm a',
+  DATE_TIME_TEXT = 'MMMM DD, YYYY - h:mm a',
   DATE_TEXT = 'MMMM DD, YYYY',
+  TIME = 'h:mm a',
 }
 
 export enum Link {

@@ -36,6 +36,16 @@ export function isString(str: unknown): str is string {
   return typeof str === 'string' && str.length > 0;
 }
 
+export function isValidDate(date: any): date is Date {
+  const castedDate = new Date(date);
+
+  return castedDate instanceof Date && !isNaN(castedDate.getTime());
+}
+
+export function isLastElement(array: any[], index: number) {
+  return index === array.length - 1;
+}
+
 /* -------------------------------------------------------------------------- */
 
 export function isRichTextBlock(obj: unknown): obj is RichTextBlock {

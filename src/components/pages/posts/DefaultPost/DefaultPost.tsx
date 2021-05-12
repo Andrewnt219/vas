@@ -2,12 +2,13 @@ import AuthordCard from '@components/cards/AuthorCard/AuthordCard';
 import Image from '@components/common/Image/Image';
 import { Label } from '@components/common/Label/Label';
 import Time from '@components/common/Time/Time';
+import WithSeparator from '@components/common/WithSeparator/WithSeparator';
 import RelatedPosts from '@components/lists/RelatedPosts/RelatedPosts';
+import { Format } from '@data/common-data';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { Post } from '@src/server/services/post-service';
-import { separator } from '@styles/apply';
-import { h2Margin, wrapper } from '@styles/spacing';
+import { h2Margin, postGutterBottom, wrapper } from '@styles/spacing';
 import { h1, h2, tag } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
@@ -16,6 +17,7 @@ import {
   getHashtagLink,
 } from '@utils/convert-utils';
 import { getSizes } from '@utils/css-utils';
+import dayjs from 'dayjs';
 import NextLink from 'next/link';
 import React from 'react';
 import {
@@ -54,8 +56,15 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
   const location = useCurrentLocation();
 
-  const { author, firstHashtag, thumbnail, publishedDate, readingMinutes } =
-    getDataFromPost(post);
+  const {
+    author,
+    firstHashtag,
+    thumbnail,
+    publishedDate,
+    readingMinutes,
+    fromDate,
+    toDate,
+  } = getDataFromPost(post);
 
   const authorAvatar = `${author.data.thumbnail.url}&w=48&h=48&fit=crop`;
 
@@ -86,21 +95,19 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
             <h1 css={h1}>{post.data.title}</h1>
 
-            <div css={tag} tw=" flex items-center  space-x-1">
+            <WithSeparator css={tag}>
               <span tw="text-primary font-black">
                 {post.meta?.views ?? 0} views
               </span>
 
-              <span css={separator} />
               <Time time={publishedDate} />
 
-              <span css={separator} />
               <span>
                 {readingMinutes <= 1
                   ? '1 min read'
                   : `${readingMinutes} mins read`}
               </span>
-            </div>
+            </WithSeparator>
           </div>
 
           {/* Author info */}
@@ -127,6 +134,23 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
       {/* Body */}
       <div css={bodyWrapper} tw="break-words mt-8  md:mt-16">
+        {fromDate && toDate && (
+          <div
+            css={postGutterBottom}
+            tw="flex flex-col italic relative pl-4 before:(content h-full w-1 bg-primary block absolute top-0 left-0)"
+          >
+            {/* TODO translate */}
+
+            <Time time={fromDate}>
+              From: {dayjs(fromDate).format(Format.DATE_TIME_TEXT)}
+            </Time>
+
+            <Time time={toDate}>
+              To: {dayjs(toDate).format(Format.DATE_TIME_TEXT)}
+            </Time>
+          </div>
+        )}
+
         {post.data.body.map((slice, index) => (
           <PostSliceZone slice={slice} key={`slice-${index}`} />
         ))}

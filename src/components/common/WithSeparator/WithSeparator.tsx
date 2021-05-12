@@ -1,8 +1,8 @@
 import { separator } from '@styles/apply';
 import { isLastElement } from '@utils/validate-utils';
-import React, { Children, ReactElement } from 'react';
+import React, { Children, ReactNode } from 'react';
 
-type Props = { className?: string; children: ReactElement[] };
+type Props = { className?: string; children: ReactNode[] };
 
 function WithSeparator({ className, children }: Props) {
   return (
@@ -10,7 +10,7 @@ function WithSeparator({ className, children }: Props) {
       {Children.map(children, (child, index) => {
         return (
           <>
-            {React.cloneElement(child)}
+            {child}
             {!isLastElement(children, index) && <span css={separator} />}
           </>
         );
