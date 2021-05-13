@@ -1,7 +1,6 @@
 import { Result } from '@common';
 import Button from '@components/Button/Button';
 import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import FontPrefetch from '@components/head/FontPrefetch';
 import CategoriesBox from '@components/homepage/CategoriesBox/CategoriesBox';
 import NewsletterBox from '@components/homepage/NewsletterBox/NewsletterBox';
 import SocialMediaBox from '@components/homepage/SocialMediaBox/SocialMediaBox';
@@ -31,7 +30,6 @@ import { darkenImage, getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import Head from 'next/head';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
 import React, { VFC } from 'react';
@@ -91,12 +89,6 @@ const Index: VFC<Props> = ({ data, error }) => {
       title={t('home:hero.title')}
       tw="pb-0! mb-12 space-y-12 xl:space-y-32"
     >
-      <Head>
-        <FontPrefetch
-          fonts={['300', '300italic', '700', '900', 'italic', 'regular']}
-        />
-      </Head>
-
       <section
         tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
         aria-labelledby="hero-title"
@@ -172,9 +164,8 @@ type LatestArticleProps = {
 };
 
 function LatestArticle({ post, className }: LatestArticleProps) {
-  const { mainCategory, title, author, snippet, thumbnail } = getDataFromPost(
-    post
-  );
+  const { mainCategory, title, author, snippet, thumbnail } =
+    getDataFromPost(post);
   const postLink = getPostLink(post.uid);
 
   return (
