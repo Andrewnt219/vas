@@ -1,35 +1,35 @@
 {
-	"fallback": "...",
-	"status": "Status",
-	"active": "Active",
-	"inactive": "Inactive",
-	"form": {
-		"errors": {
-			"required": "Required",
-			"minLength": "Too short, minimum {{length}} characters",
-			"maxLength": "Quá dài, maximum {{length}} characters"
-		}
-	},
-	"locales": {
-		"en-us": "English",
-		"vi": "Vietnamese"
-	},
-	"navbar": {
-		"home": "Home",
-		"about-us": {
-			"text": "About us",
-			"index": "What is VAS",
-			"partners": "Our Partners",
-			"members": "Members"
-		},
-		"events": {
-			"text": "Events",
-			"index": "Events",
-			"orientations": "Orientations",
-			"tet": "Tet"
-		},
-		"news": "News",
-		"blog": "Blogs",
-		"contact-us": "Let's Connect"
-	}
+  "fallback": "...",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "form": {
+    "errors": {
+      "required": "Required",
+      "minLength": "Too short, minimum {{length}} characters",
+      "maxLength": "Quá dài, maximum {{length}} characters"
+    }
+  },
+  "locales": {
+    "en-us": "English",
+    "vi": "Vietnamese"
+  },
+  "navbar": {
+    "home": "Home",
+    "about-us": {
+      "text": "About us",
+      "index": "What is VAS",
+      "partners": "Our Partners",
+      "members": "Members"
+    },
+    "posts": {
+      "text": "Posts",
+      "events": "Events",
+      "orientations": "Orientations",
+      "blog": "Blogs",
+      "tet": "Tet",
+      "news": "News"
+    },
+    "contact-us": "Let's Connect"
+  }
 }
