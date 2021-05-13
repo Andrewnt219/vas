@@ -11,10 +11,8 @@ function NewsletterBox({ className }: Props) {
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
     ev.preventDefault();
 
-    axios.post('/api/contact', {
+    axios.post('/api/email/subscribe', {
       email,
-      subject: 'Subscribe to newsletter',
-      message: `User ${email} subscribe to newsletter`,
     });
   };
 

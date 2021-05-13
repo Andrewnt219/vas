@@ -16,6 +16,7 @@
 		"test:watchAll": "jest --watchAll"
 	},
 	"dependencies": {
+		"@mailchimp/mailchimp_marketing": "^3.0.41",
 		"@next/bundle-analyzer": "^10.0.5",
 		"@prismicio/client": "^4.0.0",
 		"@sendgrid/mail": "^7.4.2",
