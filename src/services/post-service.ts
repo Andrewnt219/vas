@@ -85,6 +85,8 @@ export class PostService {
     return this.replaceWithPosts(postsResult);
   }
 
+
+
   private static async getPostDocsByCategoryID(
     categoryID: string,
     lang: Language
@@ -120,6 +122,8 @@ export class PostService {
     return this.replaceWithPosts(postsResult);
   }
 
+
+
   public static async getRelatedPosts(
     postID: string,
     lang: Language,
@@ -136,6 +140,22 @@ export class PostService {
     const relatedPostsResult = await await this.cms.query(query, options);
 
     return this.replaceWithPosts(relatedPostsResult);
+  }
+
+  public static async getPostsByAuthorID
+  (lang: LanguageOption, authorId: string, options?: QueryOptions): Promise<PrismicResult<Post>>{
+
+    const queryOptions = getQueryOption(lang, options);
+    const query = [
+      Predicates.at('document.type', 'post'),
+      Predicates.at('my.post.author',authorId)
+    ];
+    const postsResult = await(
+      await this.cms.query(query,queryOptions)
+    );
+    
+    return this.replaceWithPosts(postsResult);
+
   }
 
   //#region Firestore
