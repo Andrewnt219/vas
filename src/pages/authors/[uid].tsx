@@ -1,8 +1,7 @@
 import { Result } from '@common';
-import PostCard from '@components/cards/PostCard/PostCard';
 import Image from '@components/common/Image/Image';
+import PagePostCards from '@components/lists/PagePostCards/PagePostCards';
 import MainLayout from '@components/pages/MainLayout';
-import { SizesProvider } from '@contexts/SizesContext';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import { AuthorDataService } from '@services/author-data-service';
@@ -90,8 +89,8 @@ function Author({ data, error }: Props) {
 
   return (
     <MainLayout title={author.data.title}>
-      <section css={wrapper} tw="col-span-full">
-        <header>
+      <section css={wrapper.page} tw="col-span-full">
+        <header tw="space-y-sm flex flex-col items-center max-w-2xl mx-auto">
           <Image
             sizes={getSizes(['96px'])}
             tw="w-24 h-24 object-cover rounded-full"
@@ -106,31 +105,22 @@ function Author({ data, error }: Props) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaLinkedinIn />
+            <FaLinkedinIn tw="transition-colors hocus:(text-primary)" />
           </a>
 
-          {/* TODO Translate with plurals */}
           <div>
             {postsResult.total_results_size}{' '}
             {postsResult.total_results_size <= 1 ? 'article' : 'articles'}
           </div>
 
-          <div>
-            <RichText render={author.data.description} />
+          <div tw="text-center">
+            <div tw="mt-sm">
+              <RichText render={author.data.description} />
+            </div>
           </div>
         </header>
 
-        <ul aria-label={`Articles of ${author.data.title}`}>
-          {postsResult.results.map((post: any) => (
-            <li key={post.id}>
-              <SizesProvider
-                initialContext={getSizes(['90vw', undefined, '1600px'])}
-              >
-                <PostCard.Article post={post} />
-              </SizesProvider>
-            </li>
-          ))}
-        </ul>
+        <PagePostCards posts={postsResult.results} tw="mt-2xl" />
       </section>
     </MainLayout>
   );

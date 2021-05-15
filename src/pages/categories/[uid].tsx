@@ -1,9 +1,8 @@
 import { Result } from '@common';
-import PostCard from '@components/cards/PostCard/PostCard';
 import PageBanner from '@components/common/PageBanner/PageBanner';
 import Pagination from '@components/common/Pagination/Pagination';
+import PagePostCards from '@components/lists/PagePostCards/PagePostCards';
 import MainLayout from '@components/pages/MainLayout';
-import { SizesProvider } from '@contexts/SizesContext';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
@@ -15,7 +14,6 @@ import {
   errorStatcPropsHandler,
   errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
-import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import React, { useState } from 'react';
@@ -126,20 +124,7 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
         <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
       ) : (
         <section tw="grid-p-sm">
-          <ul
-            tw="grid gap-6 md:(gap-12) xl:grid-cols-2"
-            aria-label="articles about VAS' news"
-          >
-            <SizesProvider
-              initialContext={getSizes(['90vw', undefined, '900px', '1600px'])}
-            >
-              {data.results.map((post) => (
-                <li key={post.id}>
-                  <PostCard.Article post={post} />
-                </li>
-              ))}
-            </SizesProvider>
-          </ul>
+          <PagePostCards posts={data.results} />
         </section>
       )}
 
