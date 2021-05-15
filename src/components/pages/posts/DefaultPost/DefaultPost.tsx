@@ -8,8 +8,8 @@ import { Format } from '@data/common-data';
 import PostSliceZone from '@lib/prismic/component-types/post/slice/PostSliceZone/PostSliceZone';
 import { useCurrentLocation } from '@src/hooks/useCurrentLocation';
 import { Post } from '@src/server/services/post-service';
-import { h2Margin, postGutterBottom, wrapper } from '@styles/spacing';
-import { h1, h2, tag } from '@styles/_typographyStyles';
+import { margin, wrapper } from '@styles/spacing';
+import { fonts } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
   getCommentsCount,
@@ -72,7 +72,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
     <section className={className} tw="col-span-full text-skin-base">
       {/* Hero */}
       <header
-        css={wrapper}
+        css={wrapper.page}
         tw="mb-5 md:(grid grid-cols-2 gap-x-16 items-center mb-lg ) xl:mb-2xl"
       >
         {/* TODO don't use fit cover */}
@@ -93,9 +93,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
               <Label tw="inline-block">{firstHashtag.data.title}</Label>
             </NextLink>
 
-            <h1 css={h1}>{post.data.title}</h1>
+            <h1 css={fonts.h1}>{post.data.title}</h1>
 
-            <WithSeparator css={tag}>
+            <WithSeparator css={fonts.tag}>
               <span tw="text-primary font-black">
                 {post.meta?.views ?? 0} views
               </span>
@@ -136,7 +136,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       <div css={bodyWrapper} tw="break-words mt-8  md:mt-16">
         {fromDate && toDate && (
           <div
-            css={postGutterBottom}
+            css={margin.gutterBottom}
             tw="flex flex-col italic relative pl-4 before:(content h-full w-1 bg-primary block absolute top-0 left-0)"
           >
             {/* TODO translate */}
@@ -161,7 +161,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       {/* Footer */}
       <div tw="mt-9" css={bodyWrapper}>
         <div tw="flex flex-col">
-          <span css={tag}>Tagged as</span>
+          <span css={fonts.tag}>Tagged as</span>
 
           <ul tw="flex flex-wrap">
             {post.data.hashtags.map(({ hashtag }) => (
@@ -177,7 +177,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         </div>
 
         <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-md">
-          <span css={tag}>Share</span>
+          <span css={fonts.tag}>Share</span>
           <ul tw="grid grid-cols-2 gap-1 md:grid-cols-4">
             <li>
               <FacebookShareButton
@@ -241,10 +241,10 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
       {/* Comments */}
       <section tw="mt-7 xl:mt-12" css={bodyWrapper}>
-        <h2 css={[h2, h2Margin]}>Join the dicussion</h2>
+        <h2 css={[fonts.h2, , margin.h2]}>Join the dicussion</h2>
         <CommentWriter tw=" text-smaller" onFormSubmitted={onCommentSubmit} />
 
-        <h2 css={[h2, h2Margin]}>{getCommentsCount(post)} comments</h2>
+        <h2 css={[fonts.h2, margin.h2]}>{getCommentsCount(post)} comments</h2>
         {comments.length === 0 && <span>Be the first to comment</span>}
         <ActiveCommentProvider>
           <CommentSet tw="space-y-12" comments={comments} />

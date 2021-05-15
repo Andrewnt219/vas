@@ -1,5 +1,5 @@
-import { postGutterBottom } from '@styles/spacing';
-import { h2 } from '@styles/_typographyStyles';
+import { margin } from '@styles/spacing';
+import { fonts } from '@styles/_typographyStyles';
 import { RichTextBlock } from 'prismic-reactjs';
 import { ReactNode } from 'react';
 import { TwStyle } from 'twin.macro';
@@ -25,7 +25,7 @@ function RichTextSerializer({ className, data, children, config }: Props) {
       return (
         <h2
           className={className}
-          css={[h2, config?.h2]}
+          css={[fonts.h2, config?.h2]}
           tw=" mb-4 mt-7 xl:( mt-14 mb-8)"
         >
           {children}
@@ -56,7 +56,7 @@ function RichTextSerializer({ className, data, children, config }: Props) {
 
     case 'paragraph':
       return (
-        <p className={className} css={[postGutterBottom, config?.p]}>
+        <p className={className} css={[margin.gutterBottom, config?.p]}>
           {children}
         </p>
       );

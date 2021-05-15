@@ -18,7 +18,7 @@ import {
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
 import { wrapper } from '@styles/spacing';
-import { sectionTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -151,7 +151,7 @@ function ArticlesSection({
     >
       <header tw="col-span-full">
         {/* TODO translation */}
-        <h1 css={sectionTitle}>Latest articles</h1>
+        <h1 css={fonts.sectionTitle}>Latest articles</h1>
       </header>
 
       <ul

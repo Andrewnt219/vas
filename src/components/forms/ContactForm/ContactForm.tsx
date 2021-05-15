@@ -2,7 +2,7 @@ import Button from '@components/common/Button/Button';
 import InputGroup from '@components/forms/InputGroup/InputGroup';
 import { InputLabel } from '@components/forms/InputLabel/InputLabel';
 import TextField from '@components/forms/TextField/TextField';
-import { h2 } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import axios from 'axios';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,7 +32,7 @@ function ContactForm({ className }: FormProps) {
       tw="text-sm pt-5 pb-10 px-5 rounded-xl bg-white shadow-card space-y-2 md:(text-2xl space-y-4 pt-10 pb-20 px-10) xl:(p-20 rounded-4xl grid grid-cols-2 gap-x-14)"
     >
       {formMethods.formState.isSubmitSuccessful ? (
-        <div css={h2} tw=" col-span-full self-center">
+        <div css={fonts.h2} tw=" col-span-full self-center">
           <h2>{t`contact-us:submit-response.title`}</h2>
           <p tw="text-primary">{t`contact-us:submit-response.subtitle`}</p>
         </div>
@@ -42,7 +42,7 @@ function ContactForm({ className }: FormProps) {
             i18nKey="contact-us:title"
             components={[
               <h2
-                css={h2}
+                css={fonts.h2}
                 id="contact-form-title"
                 key="h2"
                 tw="xl:col-span-full"

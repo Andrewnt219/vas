@@ -1,9 +1,9 @@
 import { List } from '@prismic-types';
-import { postGutterBottom } from '@styles/spacing';
+import { margin } from '@styles/spacing';
 import React, { ReactNode } from 'react';
 import tw from 'twin.macro';
 
-const listStyle = [postGutterBottom, tw`pl-10 space-y-1`];
+const listStyle = [margin.gutterBottom, tw`pl-10 space-y-1`];
 const ul = [listStyle, tw`list-disc`];
 const ol = [listStyle, tw`list-decimal`];
 

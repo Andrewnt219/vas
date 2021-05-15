@@ -1,4 +1,4 @@
-import { sectionTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import 'twin.macro';
@@ -15,7 +15,9 @@ function AboutUsDefaultSection({ className, slice }: Props) {
     >
       <div tw="grid-p-sm xl:grid-p-md">
         <header>
-          <h1 css={sectionTitle}>{RichText.asText(slice.primary.title)}</h1>
+          <h1 css={fonts.sectionTitle}>
+            {RichText.asText(slice.primary.title)}
+          </h1>
 
           <RichText
             render={slice.primary.description}

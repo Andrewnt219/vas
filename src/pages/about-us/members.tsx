@@ -5,7 +5,7 @@ import { SizesProvider } from '@contexts/SizesContext';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
 import { AuthorDataService } from '@src/server/services/author-data-service';
 import { errorStatcPropsHandler } from '@src/server/utils/page-utils';
-import { pageTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import { createResult } from '@utils/create-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -52,7 +52,7 @@ function Members({ data, error }: Props) {
   return (
     <MainLayout title={t('members:title')} tw="mb-10 md:mb-20">
       <header tw="grid-p-sm ">
-        <h1 css={pageTitle}>{t('members:title')}</h1>
+        <h1 css={fonts.pageTitle}>{t('members:title')}</h1>
       </header>
 
       <SizesProvider initialContext="100vw">

@@ -1,7 +1,7 @@
 import Image from '@components/common/Image/Image';
 import { useSizes } from '@contexts/SizesContext';
 import { Asset } from '@prismic-types';
-import { postGutterBottom } from '@styles/spacing';
+import { margin } from '@styles/spacing';
 import React from 'react';
 import 'twin.macro';
 
@@ -15,7 +15,7 @@ function ImageSerializer({ className, data }: Props) {
   return (
     <Image
       imgSrc={imgSrc}
-      css={postGutterBottom}
+      css={margin.gutterBottom}
       sizes={sizes}
       tw="w-full rounded-sm overflow-hidden"
       className={className}

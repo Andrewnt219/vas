@@ -1,6 +1,6 @@
 import MemberAvatar from '@components/common/MemberAvatar/MemberAvatar';
 import { MemberDocument } from '@lib/prismic/component-types/member/MemberModel';
-import { sectionTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
@@ -18,7 +18,7 @@ function MemberInfoSet({ className, heading, members }: Props) {
       tw="md:text-lg xl:text-2xl"
     >
       <header tw="mb-6 md:mb-2xl xl:mb-20">
-        <h2 css={sectionTitle} tw="mx-0 after:(mx-0)">
+        <h2 css={fonts.sectionTitle} tw="mx-0 after:(mx-0)">
           {heading}
         </h2>
       </header>

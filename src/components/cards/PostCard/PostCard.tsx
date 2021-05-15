@@ -4,7 +4,7 @@ import Time from '@components/common/Time/Time';
 import WithSeparator from '@components/common/WithSeparator/WithSeparator';
 import { useSizes } from '@contexts/SizesContext';
 import { Post } from '@src/server/services/post-service';
-import { articleTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import {
   getAuthorLink,
   getCategoryLink,
@@ -54,7 +54,7 @@ function Title({ post }: Props) {
   return (
     <NextLink href={postLink} passHref>
       <a
-        css={articleTitle}
+        css={fonts.articleTitle}
         tw="block font-black underline decorator-transparent transition-colors hocus:(text-primary decorator-current)"
       >
         <h3>{title}</h3>

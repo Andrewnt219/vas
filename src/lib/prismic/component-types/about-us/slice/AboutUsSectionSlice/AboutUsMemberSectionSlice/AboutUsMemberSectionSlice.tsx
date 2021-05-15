@@ -2,7 +2,7 @@ import MemberAvatar from '@components/common/MemberAvatar/MemberAvatar';
 import { useMembers } from '@contexts/MembersContext';
 import { SizesProvider } from '@contexts/SizesContext';
 import { MemberModel } from '@lib/prismic/component-types/member/MemberModel';
-import { sectionTitle } from '@styles/_typographyStyles';
+import { fonts } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
@@ -20,7 +20,7 @@ function AboutUsMemberSectionSlice({ className, slice }: Props) {
       tw="mx-4 px-8 rounded-lg  bg-gradient-to-b from-gray-400 to-white  md:(rounded-4xl mx-10 px-16) xl:(rounded-4xl mx-14 px-32) "
     >
       <header>
-        <h1 css={sectionTitle}>{RichText.asText(slice.primary.title)}</h1>
+        <h1 css={fonts.sectionTitle}>{RichText.asText(slice.primary.title)}</h1>
       </header>
 
       <SizesProvider

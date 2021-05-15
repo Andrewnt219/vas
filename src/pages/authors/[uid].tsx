@@ -13,6 +13,7 @@ import {
   errorStatcPropsHandler,
 } from '@src/server/utils/page-utils';
 import { wrapper } from '@styles/spacing';
+import { fonts } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -90,16 +91,15 @@ function Author({ data, error }: Props) {
   return (
     <MainLayout title={author.data.title}>
       <section css={wrapper} tw="col-span-full">
-        <header tw="grid mb-10 gap-4 justify-items-center">
-          <p tw="grid col-auto"></p>
+        <header>
           <Image
-            // TODO sizes
-            sizes="1vw"
+            sizes={getSizes(['96px'])}
             tw="w-24 h-24 object-cover rounded-full"
             imgSrc={author.data.thumbnail.url}
             alt={author.data.thumbnail.alt}
           />
-          <h1 tw="text-3xl font-black">{author.data.title}</h1>
+
+          <h1 css={fonts.h3}>{author.data.title}</h1>
 
           <a
             href={data.author.data.linked_in ?? ''}
@@ -108,19 +108,19 @@ function Author({ data, error }: Props) {
           >
             <FaLinkedinIn />
           </a>
-          <p>
+
+          {/* TODO Translate with plurals */}
+          <div>
             {postsResult.total_results_size}{' '}
             {postsResult.total_results_size <= 1 ? 'article' : 'articles'}
-          </p>
-          <div tw="max-w-2xl">
+          </div>
+
+          <div>
             <RichText render={author.data.description} />
           </div>
         </header>
 
-        <ul
-          tw="mb-5 grid md:grid-cols-2 gap-lg md:gap-lg xl:gap-2xl"
-          aria-label={`Articles of ${author.data.title}`}
-        >
+        <ul aria-label={`Articles of ${author.data.title}`}>
           {postsResult.results.map((post: any) => (
             <li key={post.id}>
               <SizesProvider
