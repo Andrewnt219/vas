@@ -2,6 +2,7 @@ import Image from '@components/common/Image/Image';
 import { MemberModel } from '@lib/prismic/component-types/member/MemberModel';
 import { fonts } from '@styles/_typographyStyles';
 import { getAuthorLink } from '@utils/convert-utils';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
@@ -11,8 +12,9 @@ import 'twin.macro';
 type Props = { className?: string; data: MemberModel };
 
 function AuthordCard({ className, data }: Props) {
+  const { t } = useTranslation();
+
   const imgSrc = `${data.thumbnail.url}&w=96&h=96&fit=crop`;
-  const placeholder = `${data.title} is the author of this article. Feel free to leave comments and feedbacks below`;
 
   return (
     <article
@@ -33,7 +35,7 @@ function AuthordCard({ className, data }: Props) {
       {/* NOTE interesting, without flex-1, the image is squished */}
       <div tw="space-y-5 flex-1 mt-2 text-center xl:text-left flex flex-col items-center xl:(items-start mt-0)">
         <header tw="leading-snug">
-          <p css={fonts.tag}>Written By</p>
+          <p css={fonts.tag}>{t('posts:body.author-card.title')}</p>
           {/* TODO link to author page */}
           <NextLink href={getAuthorLink(data.uid)} passHref>
             <a tw="font-black transition-colors hocus:text-primary md:text-3xl">
@@ -46,7 +48,11 @@ function AuthordCard({ className, data }: Props) {
           {data.description ? (
             <RichText render={data.description} />
           ) : (
-            <p>{placeholder}</p>
+            <p>
+              {t('posts:body.author-card.bio-placeholder', {
+                name: data.title,
+              })}
+            </p>
           )}
         </div>
 

@@ -111,12 +111,11 @@ function HeroSection() {
 
         <p tw="mt-md md:text-base xl:(w-2/3)">{t('home:hero.subtitle')}</p>
 
-        {/* TODO translate */}
         {/* TODO add primary button for read more (scroll down) */}
         {/* TODO switch find out more to secondary */}
         <NextLink href="/about-us" passHref>
           <Button as="a" variant="contain" size="lg" tw="mt-2xl inline-block">
-            Find out more
+            {t('home:hero.primary-button')}
           </Button>
         </NextLink>
       </header>
@@ -144,14 +143,16 @@ function ArticlesSection({
   latestPosts,
   categoriesWithPosts,
 }: ArticlesSectionProps) {
+  const { t } = useTranslation();
+
   return (
     <section
-      css={wrapper}
+      css={wrapper.page}
       tw=" col-span-full grid grid-cols-1 xl:(grid-cols-3 gap-x-12 items-start)"
     >
       <header tw="col-span-full">
         {/* TODO translation */}
-        <h1 css={fonts.sectionTitle}>Latest articles</h1>
+        <h1 css={fonts.sectionTitle}>{t('home:latest-articles.title')}</h1>
       </header>
 
       <ul

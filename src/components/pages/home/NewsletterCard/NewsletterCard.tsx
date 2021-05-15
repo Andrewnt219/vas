@@ -1,11 +1,14 @@
 import Card from '@components/cards/Card';
 import Button from '@components/common/Button/Button';
 import axios from 'axios';
+import useTranslation from 'next-translate/useTranslation';
 import React, { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 type Props = { className?: string };
 
 function NewsletterCard({ className }: Props) {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState('');
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = (ev) => {
@@ -22,15 +25,16 @@ function NewsletterCard({ className }: Props) {
   };
 
   return (
-    <Card className={className} title="Newsletter" tw="bg-skin-light">
-      <p>
-        Make sure to subscribe to our newsletter and be the first to know the
-        news.
-      </p>
+    <Card
+      className={className}
+      title={t('common:aside.newsletter.title')}
+      tw="bg-skin-light"
+    >
+      <p>{t('common:aside.newsletter.description')}</p>
 
       <form onSubmit={handleFormSubmit} tw="flex flex-col mt-md">
         <label>
-          Your email address
+          {t('common:aside.newsletter.form.email.label')}
           {/* TODO autocomplete */}
           <input
             onChange={handleInputChange}
@@ -42,7 +46,9 @@ function NewsletterCard({ className }: Props) {
           />
         </label>
 
-        <Button variant="contain">Subscribe</Button>
+        <Button variant="contain">
+          {t('common:aside.newsletter.form.submit')}
+        </Button>
       </form>
     </Card>
   );

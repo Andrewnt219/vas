@@ -31,5 +31,39 @@
       "news": "Tin tức"
     },
     "contact-us": "Kết nối"
+  },
+  "written-by": "Tác giả",
+  "views": {
+    "0": "0 lượt xem",
+    "one": "1 lượt xem",
+    "other": "{{count}} lượt xem"
+  },
+  "reading-minute": {
+    "0": "ít hơn 1 phút đọc",
+    "one": "1 phút đọc",
+    "other": "{{count}} phút đọc"
+  },
+  "date": {
+    "from": "Bắt đầu: {{date}}",
+    "to": "Kết thúc: {{date}}"
+  },
+  "aside": {
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Đăng kí để không bỏ lỡ bất kì sự kiện nào của VAS",
+      "form": {
+        "email": {
+          "label": "Email của bạn"
+        },
+        "submit": "Đăng kí"
+      }
+    },
+    "categories": {
+      "title": "Chủ đề"
+    },
+    "social": {
+      "title": "Giao lưu cùng VAS",
+      "description": "Tụi mình đều là những du học sinh với mong muốn được giúp đỡ các du học sinh khác tại Canada"
+    }
   }
 }

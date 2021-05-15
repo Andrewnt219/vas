@@ -31,5 +31,39 @@
       "news": "News"
     },
     "contact-us": "Let's Connect"
+  },
+  "written-by": "Written by",
+  "views": {
+    "0": "0 view",
+    "one": "1 view",
+    "other": "{{count}} views"
+  },
+  "reading-minute": {
+    "0": "less than 1 min",
+    "one": "1 min read",
+    "other": "{{count}} mins read"
+  },
+  "date": {
+    "from": "From: {{date}}",
+    "to": "To: {{date}}"
+  },
+  "aside": {
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Make sure to subscribe to our newsletter and be the first to know the news.",
+      "form": {
+        "email": {
+          "label": "Your email address"
+        },
+        "submit": "Subscribe"
+      }
+    },
+    "categories": {
+      "title": "Topics"
+    },
+    "social": {
+      "title": "Let's get social",
+      "description": "We are a team of dedicated Vietnamese students helping international students in Canada"
+    }
   }
 }

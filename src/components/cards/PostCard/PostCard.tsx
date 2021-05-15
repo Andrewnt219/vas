@@ -11,6 +11,7 @@ import {
   getDataFromPost,
 } from '@utils/convert-utils';
 import { darkenImage } from '@utils/css-utils';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import { RichText } from 'prismic-reactjs';
 
@@ -65,6 +66,7 @@ function Title({ post }: Props) {
 
 function MetaSubtitle({ post }: Props) {
   const { author, publishedDate, readingMinutes } = getDataFromPost(post);
+  const { t } = useTranslation();
 
   return (
     <WithSeparator tw="text-smaller">
@@ -80,8 +82,7 @@ function MetaSubtitle({ post }: Props) {
 
       <Time time={publishedDate} />
 
-      {/* TODO translate */}
-      <span>{readingMinutes} min read</span>
+      <span>{t('common:reading-minute', { count: readingMinutes })}</span>
     </WithSeparator>
   );
 }

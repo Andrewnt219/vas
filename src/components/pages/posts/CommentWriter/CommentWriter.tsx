@@ -38,7 +38,7 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
     <form className={className} noValidate onSubmit={onSubmitted} tw="">
       <InputGroup error={errors.body}>
         <InputLabel isRequired htmlFor={getUniqueId('body')}>
-          Comment
+          {t('posts:comments.form.comment.label')}
         </InputLabel>
         <TextField
           id={getUniqueId('body')}
@@ -49,7 +49,7 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
 
       <InputGroup error={errors.name}>
         <InputLabel htmlFor={getUniqueId('name')} isRequired>
-          Name
+          {t('posts:comments.form.name.label')}
         </InputLabel>
         <TextField
           id={getUniqueId('name')}
@@ -60,7 +60,7 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
 
       <InputGroup error={errors.email}>
         <InputLabel htmlFor={getUniqueId('email')} isRequired>
-          Email
+          {t('posts:comments.form.email.label')}
         </InputLabel>
         <TextField
           id={getUniqueId('email')}
@@ -77,8 +77,7 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
         tw="flex flex-row-reverse items-baseline justify-end"
       >
         <InputLabel htmlFor={getUniqueId('isSaved')}>
-          Save my name, email, and website in this browser for the next time I
-          comment.
+          {t('posts:comments.form.save-info.label')}
         </InputLabel>
 
         <input
@@ -90,7 +89,9 @@ function CommentWriter({ className, onFormSubmitted }: Props) {
       </InputGroup>
 
       <Button tw="mt-4" variant="contain" disabled={isSubmitting}>
-        {isSubmitting ? 'Sending' : 'Submit Comment'}
+        {isSubmitting
+          ? t('posts:comments.form.submit.sending')
+          : t('posts:comments.form.submit.text')}
       </Button>
     </form>
   );

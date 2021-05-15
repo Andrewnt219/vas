@@ -18,6 +18,7 @@ import {
 } from '@utils/convert-utils';
 import { getSizes } from '@utils/css-utils';
 import dayjs from 'dayjs';
+import useTranslation from 'next-translate/useTranslation';
 import NextLink from 'next/link';
 import React from 'react';
 import {
@@ -55,6 +56,7 @@ type Props = { className?: string; post: Post; relatedPosts: Post[] };
 function DefaultPost({ className, post, relatedPosts }: Props) {
   const [comments, onCommentSubmit] = usePostComments(post);
   const location = useCurrentLocation();
+  const { t } = useTranslation();
 
   const {
     author,
@@ -65,6 +67,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
     fromDate,
     toDate,
   } = getDataFromPost(post);
+  const commentCount = getCommentsCount(post);
 
   const authorAvatar = `${author.data.thumbnail.url}&w=48&h=48&fit=crop`;
 
@@ -97,15 +100,13 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
             <WithSeparator css={fonts.tag}>
               <span tw="text-primary font-black">
-                {post.meta?.views ?? 0} views
+                {t('common:views', { count: post.meta?.views ?? 0 })}
               </span>
 
               <Time time={publishedDate} />
 
               <span>
-                {readingMinutes <= 1
-                  ? '1 min read'
-                  : `${readingMinutes} mins read`}
+                {t('common:reading-minute', { count: readingMinutes })}
               </span>
             </WithSeparator>
           </div>
@@ -122,7 +123,9 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
             />
 
             <div tw="flex flex-col leading-tight">
-              <span tw="text-smaller text-skin-muted">Written by</span>
+              <span tw="text-smaller text-skin-muted">
+                {t('posts:header.written-by')}
+              </span>
 
               <NextLink href={getAuthorLink(author.data.uid)} passHref>
                 <a tw="font-black text-primary">{author.data.title}</a>
@@ -139,14 +142,16 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
             css={margin.gutterBottom}
             tw="flex flex-col italic relative pl-4 before:(content h-full w-1 bg-primary block absolute top-0 left-0)"
           >
-            {/* TODO translate */}
-
             <Time time={fromDate}>
-              From: {dayjs(fromDate).format(Format.DATE_TIME_TEXT)}
+              {t('common:date.from', {
+                date: dayjs(fromDate).format(Format.DATE_TIME_TEXT),
+              })}
             </Time>
 
             <Time time={toDate}>
-              To: {dayjs(toDate).format(Format.DATE_TIME_TEXT)}
+              {t('common:date.to', {
+                date: dayjs(fromDate).format(Format.DATE_TIME_TEXT),
+              })}
             </Time>
           </div>
         )}
@@ -156,12 +161,10 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         ))}
       </div>
 
-      {/* TODO add card for event date time */}
-
       {/* Footer */}
       <div tw="mt-9" css={bodyWrapper}>
         <div tw="flex flex-col">
-          <span css={fonts.tag}>Tagged as</span>
+          <span css={fonts.tag}>{t('posts:body.tagged-as')}</span>
 
           <ul tw="flex flex-wrap">
             {post.data.hashtags.map(({ hashtag }) => (
@@ -177,7 +180,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
         </div>
 
         <div tw="border-skin-light border-t border-opacity-10 pt-2 mt-md">
-          <span css={fonts.tag}>Share</span>
+          <span css={fonts.tag}>{t('posts:body.share')}</span>
           <ul tw="grid grid-cols-2 gap-1 md:grid-cols-4">
             <li>
               <FacebookShareButton
@@ -241,11 +244,19 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
 
       {/* Comments */}
       <section tw="mt-7 xl:mt-12" css={bodyWrapper}>
-        <h2 css={[fonts.h2, , margin.h2]}>Join the dicussion</h2>
+        <h2 css={[fonts.h2, , margin.h2]}>{t('posts:comments.title')}</h2>
         <CommentWriter tw=" text-smaller" onFormSubmitted={onCommentSubmit} />
 
-        <h2 css={[fonts.h2, margin.h2]}>{getCommentsCount(post)} comments</h2>
-        {comments.length === 0 && <span>Be the first to comment</span>}
+        <h2 css={[fonts.h2, , margin.h2]}>
+          {t('posts:comments.body.title', { count: commentCount })}
+        </h2>
+
+        {commentCount === 0 && (
+          <span>
+            {t('posts:comments.body.description', { count: commentCount })}
+          </span>
+        )}
+
         <ActiveCommentProvider>
           <CommentSet tw="space-y-12" comments={comments} />
         </ActiveCommentProvider>
@@ -255,7 +266,7 @@ function DefaultPost({ className, post, relatedPosts }: Props) {
       <RelatedPosts
         tw="pb-10 mt-9 md:mt-12"
         posts={relatedPosts}
-        heading="Futher reading"
+        heading={t('posts:footer.articles.title')}
       />
     </section>
   );

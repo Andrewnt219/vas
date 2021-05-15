@@ -1,5 +1,6 @@
 import Card from '@components/cards/Card';
 import { Link } from '@data/common-data';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import tw, { css } from 'twin.macro';
@@ -10,16 +11,15 @@ const icon = css`
 type Props = { className?: string };
 
 function SocialMediaBox({ className }: Props) {
+  const { t } = useTranslation();
+
   return (
     <Card
       className={className}
       tw="bg-skin-dark text-white"
-      title="Let's get social"
+      title={t('common:aside.social.title')}
     >
-      <p>
-        We are a team of dedicated Vietnamese students helping international
-        students in Canada
-      </p>
+      <p>{t('common:aside.social.description')}</p>
 
       <ul tw="mt-4 flex space-x-2" aria-label="List of our social medias">
         <li css={icon} style={{ background: '#3e5b98' }}>

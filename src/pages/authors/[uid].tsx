@@ -16,6 +16,7 @@ import { fonts } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import { FaLinkedinIn } from 'react-icons/fa';
@@ -77,6 +78,10 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Author({ data, error }: Props) {
+  // TODO make fetch hook
+
+  const { t } = useTranslation();
+
   if (error) {
     return <h1>{error.message}</h1>;
   }
@@ -108,10 +113,11 @@ function Author({ data, error }: Props) {
             <FaLinkedinIn tw="transition-colors hocus:(text-primary)" />
           </a>
 
-          <div>
-            {postsResult.total_results_size}{' '}
-            {postsResult.total_results_size <= 1 ? 'article' : 'articles'}
-          </div>
+          <span>
+            {t('authors:header.numberOfArticles', {
+              count: postsResult.total_results_size,
+            })}
+          </span>
 
           <div tw="text-center">
             <div tw="mt-sm">
