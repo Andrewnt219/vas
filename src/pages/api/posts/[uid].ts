@@ -10,7 +10,6 @@ async function getHandler(
   req: NextApiRequest,
   res: NextApiResponse<PostsUIDget>
 ) {
-  // TODO check documentations for getting params
   const { uid } = req.query;
   const lang = getLocaleCookie(req);
 

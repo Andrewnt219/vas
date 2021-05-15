@@ -35,7 +35,9 @@ export const usePost = ({ post, config }: Parameters): Result<SWRdata> => {
 
   const { locale, isPreview } = useRouter();
 
-  const swrKey = isPreview ? null : `/api/posts/${postUID}`;
+  const shouldSendRequest = !isPreview && postUID !== undefined;
+
+  const swrKey = shouldSendRequest ? `/api/posts/${postUID}` : null;
   const { data, error, revalidate } = useSWR(swrKey, fetcher, {
     initialData: post,
     ...config,

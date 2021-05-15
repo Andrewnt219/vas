@@ -41,7 +41,6 @@ export class PostService {
       options
     );
 
-    console.log(previewRef);
     return this.mapPostDocumentToPost(postDoc);
   }
 
@@ -85,8 +84,6 @@ export class PostService {
     return this.replaceWithPosts(postsResult);
   }
 
-
-
   private static async getPostDocsByCategoryID(
     categoryID: string,
     lang: Language
@@ -122,8 +119,6 @@ export class PostService {
     return this.replaceWithPosts(postsResult);
   }
 
-
-
   public static async getRelatedPosts(
     postID: string,
     lang: Language,
@@ -137,25 +132,24 @@ export class PostService {
       Predicates.at('document.type', 'post'),
     ];
 
-    const relatedPostsResult = await await this.cms.query(query, options);
+    const relatedPostsResult = await this.cms.query(query, options);
 
     return this.replaceWithPosts(relatedPostsResult);
   }
 
-  public static async getPostsByAuthorID
-  (lang: LanguageOption, authorId: string, options?: QueryOptions): Promise<PrismicResult<Post>>{
-
+  public static async getPostsByAuthorID(
+    lang: LanguageOption,
+    authorId: string,
+    options?: QueryOptions
+  ): Promise<PrismicResult<Post>> {
     const queryOptions = getQueryOption(lang, options);
     const query = [
       Predicates.at('document.type', 'post'),
-      Predicates.at('my.post.author',authorId)
+      Predicates.at('my.post.author', authorId),
     ];
-    const postsResult = await(
-      await this.cms.query(query,queryOptions)
-    );
-    
-    return this.replaceWithPosts(postsResult);
+    const postsResult = await this.cms.query(query, queryOptions);
 
+    return this.replaceWithPosts(postsResult);
   }
 
   //#region Firestore
@@ -172,9 +166,9 @@ export class PostService {
     reply: PostReply
   ): Promise<PostComment | null> {
     return this.updatePostCommentByCommentId(commentId, {
-      replies: (fsOperands.FieldValue.arrayUnion(
+      replies: fsOperands.FieldValue.arrayUnion(
         reply
-      ) as unknown) as PostReply[],
+      ) as unknown as PostReply[],
     });
   }
 
@@ -200,7 +194,7 @@ export class PostService {
     postID: string
   ): Promise<PostMeta | undefined> {
     return this.updatePostMetaByPostID(postID, {
-      views: (fsOperands.FieldValue.increment(1) as unknown) as number,
+      views: fsOperands.FieldValue.increment(1) as unknown as number,
     });
   }
 
