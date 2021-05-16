@@ -1,9 +1,10 @@
 import { Result } from '@common';
 import { PostDocument } from '@lib/prismic/component-types/post/PostModel';
-import { Post } from '@services/post-service';
+import { Post } from '@src/server/services/post-service';
 import { AxiosError } from 'axios';
 import { RichText } from 'prismic-reactjs';
 import { getReadingMinutes } from './number-utils';
+import { isValidDate } from './validate-utils';
 export function getErrorMessage(error?: AxiosError<Result<any>>): string {
   if (!error) {
     return 'Something went wrong';
@@ -17,7 +18,7 @@ export const getHashtagLink = (hashtagUID: string | undefined) =>
   `/hashtags/${hashtagUID}`;
 export const getPostLink = (postUID: string | undefined) => `/posts/${postUID}`;
 export const getCategoryLink = (categoryUID: string | undefined) =>
-  `/${categoryUID}`;
+  `/categories/${categoryUID}`;
 export const getAuthorLink = (authorUID: string | undefined) =>
   `/authors/${authorUID}`;
 
@@ -25,11 +26,6 @@ export const getAuthorLink = (authorUID: string | undefined) =>
 
 export const getMainCategory = (post: Post | PostDocument) =>
   post.data.categories[0]?.category;
-
-export const getPublishedDate = (post: Post | PostDocument): Date =>
-  post.first_publication_date
-    ? new Date(post.first_publication_date)
-    : new Date();
 
 export const getFirstHashtag = (post: Post | PostDocument) =>
   post.data.hashtags[0]?.hashtag;
@@ -42,8 +38,13 @@ export const getDataFromPost = (post: Post | PostDocument) => ({
   thumbnail: post.data.thumbnail,
   mainCategory: getMainCategory(post),
   firstHashtag: getFirstHashtag(post),
-  publishedDate: getPublishedDate(post),
+  publishedDate: getDate(post.first_publication_date) ?? new Date(),
+  fromDate: getDate(post.data.from_date),
+  toDate: getDate(post.data.to_date) ?? getDate(post.data.from_date),
+  location: post.data.location,
+
   readingMinutes: getPostReadingMinutes(post),
+  postLink: getPostLink(post.uid),
 });
 /* -------------------------------------------------------------------------- */
 
@@ -76,3 +77,12 @@ export function getPostReadingMinutes(post: Post | PostDocument) {
 
   return Math.floor(readingTime);
 }
+
+/* -------------------------------------------------------------------------- */
+export const getDate = (date: any): Date | undefined => {
+  if (date === undefined) {
+    return undefined;
+  }
+
+  return isValidDate(date) ? date : new Date();
+};

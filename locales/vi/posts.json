@@ -1,0 +1,52 @@
+{
+  "header": {
+    "written-by": "Tác giả"
+  },
+
+  "body": {
+    "tagged-as": "Hashtags",
+    "share": "Share",
+    "author-card": {
+      "title": "Tác giả",
+      "bio-placeholder": "{{name}} là tác giả của bài viết. Hãy để lại bình luận của bạn ở bên dưới nhé"
+    }
+  },
+
+  "comments": {
+    "title": "Tham gia trò chuyện",
+    "form": {
+      "comment": {
+        "label": "Bình luận"
+      },
+      "name": {
+        "label": "Tên bạn"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "save-info": {
+        "label": "Lưu tên và email trong trình duyệt này cho những bình luận sau này"
+      },
+      "submit": {
+        "text": "Gửi bình luận",
+        "sending": "Đang gửi"
+      }
+    },
+    "body": {
+      "title": {
+        "0": "0 bình luận",
+        "one": "1 bình luận",
+        "other": "{{count}} bình luận"
+      },
+      "description": {
+        "0": "Hãy mở đầu cuộc trò chuyện"
+      }
+    }
+  },
+
+  "footer": {
+    "articles": {
+      "title": "Có thể bạn quan tâm"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { SliceComponentProps } from '@prismic-slices';
 import { Asset } from '@prismic-types';
 import { useImageSwap } from '@src/hooks/useImageSwap';
-import { postGutterBottom } from '@styles/spacing';
+import { margin } from '@styles/spacing';
 import { getLqip, getSrcSet } from '@utils/imgix-utils';
 import React from 'react';
 import 'twin.macro';
@@ -26,7 +26,7 @@ function PostImageWithCaptionSlice({ className, slice }: Props) {
   return (
     <figure
       className={className}
-      css={postGutterBottom}
+      css={margin.gutterBottom}
       tw="flex flex-col items-center justify-center rounded overflow-hidden"
     >
       <img

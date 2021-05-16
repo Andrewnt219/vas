@@ -1,7 +1,7 @@
-import ContactForm from '@components/ContactForm/ContactForm';
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import MainLayout from '@layouts/MainLayout';
-import { h1 } from '@styles/_typographyStyles';
+import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
+import ContactForm from '@components/forms/ContactForm/ContactForm';
+import MainLayout from '@components/pages/MainLayout';
+import { fonts } from '@styles/_typographyStyles';
 import { getSizes } from '@utils/css-utils';
 import React, { VFC } from 'react';
 
@@ -12,7 +12,7 @@ const ContactUs: VFC<Props> = ({}) => {
     <MainLayout title="Let's connect" tw="" css="grid-template-rows: auto 1fr">
       <h1
         id="contact-title"
-        css={h1}
+        css={fonts.h1}
         tw=" grid-p-sm text-primary mb-2 xl:(mb-0 col-start-2 col-end-6 row-span-1)"
       >
         Let&apos;s connect

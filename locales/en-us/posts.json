@@ -1,0 +1,52 @@
+{
+  "header": {
+    "written-by": "Written by"
+  },
+
+  "body": {
+    "tagged-as": "Tagged as",
+    "share": "Share",
+    "author-card": {
+      "title": "Written by",
+      "bio-placeholder": "{{name}} is the author of this article. Feel free to leave comments and feedbacks below"
+    }
+  },
+
+  "comments": {
+    "title": "Join the dicussion",
+    "form": {
+      "comment": {
+        "label": "Comment"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "save-info": {
+        "label": "Save my name and email in this browser for the next time I comment."
+      },
+      "submit": {
+        "text": "Submit Comment",
+        "sending": "Sending"
+      }
+    },
+    "body": {
+      "title": {
+        "0": "0 comment",
+        "one": "1 comment",
+        "other": "{{count}} comments"
+      },
+      "description": {
+        "0": "Be the first to comment"
+      }
+    }
+  },
+
+  "footer": {
+    "articles": {
+      "title": "Futher reading"
+    }
+  }
+}

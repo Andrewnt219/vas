@@ -1,22 +1,18 @@
 {
-	"locales": ["en-us", "vi"],
-	"defaultLocale": "en-us",
-	"pages": {
-		"/contact-us": ["contact-us"],
+  "locales": ["en-us", "vi"],
+  "defaultLocale": "en-us",
+  "pages": {
+    "/contact-us": ["contact-us"],
 
-		"/about-us": ["about-us"],
-		"/about-us/members": ["members"],
-		"/about-us/partners": ["partnerships"],
+    "/about-us": ["about-us"],
+    "/about-us/members": ["members"],
+    "/about-us/partners": ["partnerships"],
 
-		"/events": ["events"],
-		"/events/orientations": ["orientation"],
-		"/events/tet": ["tet"],
+    "rgx:/authors/*": ["authors"],
 
-		"/news": ["news"],
+    "rgx:/posts/*": ["posts"],
 
-		"/blogs": ["blog"],
-
-		"/": ["home"],
-		"*": ["common"]
-	}
+    "/": ["home"],
+    "*": ["common"]
+  }
 }

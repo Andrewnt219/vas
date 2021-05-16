@@ -1,9 +1,9 @@
-import { SectionH1 } from '@components/SectionH1/SectionH1';
+import { fonts } from '@styles/_typographyStyles';
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import 'twin.macro';
 import { AboutUsSectionSliceProps } from '..';
-import { AboutUsSerializer } from '../../../serializer/AboutUsSerializer/AboutUsSerializer';
+import { aboutUsSerializer } from '../../../about-us-serializer';
 
 type Props = AboutUsSectionSliceProps;
 
@@ -15,11 +15,13 @@ function AboutUsDefaultSection({ className, slice }: Props) {
     >
       <div tw="grid-p-sm xl:grid-p-md">
         <header>
-          <SectionH1>{RichText.asText(slice.primary.title)}</SectionH1>
+          <h1 css={fonts.sectionTitle}>
+            {RichText.asText(slice.primary.title)}
+          </h1>
 
           <RichText
             render={slice.primary.description}
-            htmlSerializer={AboutUsSerializer}
+            htmlSerializer={aboutUsSerializer}
           />
         </header>
       </div>

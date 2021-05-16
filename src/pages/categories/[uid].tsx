@@ -1,28 +1,26 @@
 import { Result } from '@common';
-import BlogPage from '@layouts/categoryPages/BlogPage';
-import CategoryUIDlayout from '@layouts/categoryPages/CategoryUIDlayout';
-import EventsPageFeature from '@layouts/categoryPages/EventsPageFeature';
-import EventsPageList from '@layouts/categoryPages/EventsPageList';
-import NewsPage from '@layouts/categoryPages/NewsPage';
+import PageBanner from '@components/common/PageBanner/PageBanner';
+import Pagination from '@components/common/Pagination/Pagination';
+import PagePostCards from '@components/lists/PagePostCards/PagePostCards';
+import MainLayout from '@components/pages/MainLayout';
 import { CategoryDocument } from '@lib/prismic/component-types/category/CategoryModel';
-import { CategoryService } from '@services/category-data-service';
-import { Post, PostService } from '@services/post-service';
+import { PrismicResult } from '@lib/prismic/prismic-service';
 import { useCategoryPosts } from '@src/hooks/useCategoryPosts';
+import { CategoryService } from '@src/server/services/category-data-service';
+import { Post, PostService } from '@src/server/services/post-service';
 import {
   createStaticError,
   createStaticProps,
   errorStatcPropsHandler,
   errorStaticPathsHandler,
 } from '@src/server/utils/page-utils';
-import { ComponentProps } from '@utils';
 import { tryParseLocale } from '@utils/validate-utils';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import React from 'react';
-import 'twin.macro';
+import React, { useState } from 'react';
 
 /* --------------------------------- SERVER --------------------------------- */
 type Data = {
-  posts: Post[];
+  postsResult: PrismicResult<Post>;
   categoryUID: string;
   categoryDoc: CategoryDocument;
 };
@@ -37,7 +35,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
 }) => {
   try {
     //NOTE As of 10.2, the typing has changed so an explicit cast is needed
-    const { ref } = previewData as { ref: string | undefined };
+    const { ref = '' } = previewData as { ref: string | undefined };
 
     const categoryUID = params?.uid;
     const lang = tryParseLocale(locale);
@@ -49,16 +47,28 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
     const categoryDoc = await CategoryService.getCategoryByUID(
       categoryUID,
       lang,
-      ref
+      {
+        ref,
+      }
     );
 
     if (!categoryDoc) {
       return createStaticError('Category not found');
     }
 
-    const posts = await PostService.getPostsByCategoryUID(categoryUID, lang);
+    const postsResult = await PostService.getPostsByCategoryUID(
+      categoryUID,
+      lang,
+      {
+        ref,
+      }
+    );
 
-    const data = { posts, categoryDoc, categoryUID };
+    if (!postsResult) {
+      return createStaticError('Cannot find matching posts');
+    }
+
+    const data = { postsResult, categoryDoc, categoryUID };
     return createStaticProps(data);
   } catch (error) {
     return errorStatcPropsHandler(error);
@@ -88,10 +98,13 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 function CategoryUID({ data: initialData, error: serverError }: Props) {
+  const [page, setPage] = useState(1);
+
   const categoryDoc = initialData?.categoryDoc;
   const { data, error } = useCategoryPosts(
     categoryDoc?.uid,
-    initialData?.posts
+    page,
+    initialData?.postsResult
   );
 
   // server error is prioritized, so place first
@@ -103,41 +116,25 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
     return <h1>Fetching posts...</h1>;
   }
 
-  let renderedCategoryPage: ComponentProps<
-    typeof CategoryUIDlayout
-  >['children'];
-
-  switch (categoryDoc.uid) {
-    case 'blog':
-      renderedCategoryPage = <BlogPage posts={data} />;
-      break;
-
-    case 'news':
-      renderedCategoryPage = <NewsPage posts={data} />;
-      break;
-
-    case 'event':
-      renderedCategoryPage = <EventsPageList posts={data} />;
-      break;
-
-    case 'orientation':
-    case 'tet':
-      renderedCategoryPage = <EventsPageFeature posts={data} />;
-      break;
-
-    default:
-      renderedCategoryPage = <h1>This category is not available yet</h1>;
-      break;
-  }
-
   return (
-    <CategoryUIDlayout categoryDoc={categoryDoc}>
-      {data.length == 0 ? (
+    <MainLayout title={categoryDoc.data.title} tw="">
+      <PageBanner data={categoryDoc.data} />
+
+      {data.results.length == 0 ? (
         <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
       ) : (
-        renderedCategoryPage
+        <section tw="grid-p-sm">
+          <PagePostCards posts={data.results} />
+        </section>
       )}
-    </CategoryUIDlayout>
+
+      <Pagination
+        tw="col-span-full"
+        total={data.total_results_size}
+        perPage={data.results_per_page}
+        onItemClicked={(_, page) => setPage(page)}
+      />
+    </MainLayout>
   );
 }
 export default CategoryUID;

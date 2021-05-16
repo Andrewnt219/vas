@@ -1,8 +1,6 @@
-import EnhancedImage from '@components/EnhancedImage/EnhancedImage';
-import PageH1 from '@components/PageH1/PageH1';
-import { SectionH1 } from '@components/SectionH1/SectionH1';
-import MainLayout from '@layouts/MainLayout';
-import { h2 } from '@styles/_typographyStyles';
+import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
+import MainLayout from '@components/pages/MainLayout';
+import { fonts } from '@styles/_typographyStyles';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import React, { VFC } from 'react';
@@ -16,7 +14,9 @@ const Partners: VFC<Props> = ({}) => {
   return (
     <MainLayout title={t('partnerships:title')}>
       <header tw="col-span-full">
-        <PageH1 tw="text-center">{t('partnerships:title')}</PageH1>
+        <h1 css={fonts.pageTitle} tw="text-center">
+          {t('partnerships:title')}
+        </h1>
       </header>
 
       <StyledSection>
@@ -24,7 +24,7 @@ const Partners: VFC<Props> = ({}) => {
           <Trans
             i18nKey="partnerships:why.title"
             components={[
-              <h1 key="h1" css={h2} tw="font-medium" />,
+              <h1 key="h1" css={fonts.h2} tw="font-medium" />,
               <span key="span" tw="text-primary" />,
             ]}
           />
@@ -120,7 +120,7 @@ const Partners: VFC<Props> = ({}) => {
       </StyledSection>
 
       <StyledSection tw="mt-24 md:mt-36">
-        <SectionH1>{t`partnerships:our-partners.title`}</SectionH1>
+        <h1 css={fonts.sectionTitle}>{t`partnerships:our-partners.title`}</h1>
         <ul
           aria-label="List of VAS' partners"
           tw="grid  md:grid-cols-2 xl:grid-cols-4"

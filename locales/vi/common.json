@@ -1,35 +1,69 @@
 {
-	"fallback": "...",
-	"status": "Trạng thái",
-	"active": "Hoạt động",
-	"inactive": "Ngừng",
-	"form": {
-		"errors": {
-			"required": "Cần thiết",
-			"minLength": "Quá ngắn, ít nhất {{length}} chữ",
-			"maxLength": "Quá dài, tối đa {{length}} chữ"
-		}
-	},
-	"locales": {
-		"en-us": "Tiếng Anh",
-		"vi": "Tiếng Việt"
-	},
-	"navbar": {
-		"home": "Trang chủ",
-		"about-us": {
-			"text": "VAS là gì",
-			"index": "VAS là gì",
-			"partners": "Đối tác",
-			"members": "Thành viên"
-		},
-		"events": {
-			"text": "Sự kiện",
-			"index": "Sự kiện",
-			"orientations": "Định hướng",
-			"tet": "Tết"
-		},
-		"news": "Tin tức",
-		"blog": "Blogs",
-		"contact-us": "Kết nối"
-	}
+  "fallback": "...",
+  "status": "Trạng thái",
+  "active": "Hoạt động",
+  "inactive": "Ngừng",
+  "form": {
+    "errors": {
+      "required": "Cần thiết",
+      "minLength": "Quá ngắn, ít nhất {{length}} chữ",
+      "maxLength": "Quá dài, tối đa {{length}} chữ"
+    }
+  },
+  "locales": {
+    "en-us": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "navbar": {
+    "home": "Trang chủ",
+    "about-us": {
+      "text": "VAS là gì",
+      "index": "VAS là gì",
+      "partners": "Đối tác",
+      "members": "Thành viên"
+    },
+    "posts": {
+      "text": "Bài viết",
+      "events": "Sự kiện",
+      "orientations": "Định hướng",
+      "blog": "Blogs",
+      "tet": "Tết",
+      "news": "Tin tức"
+    },
+    "contact-us": "Kết nối"
+  },
+  "written-by": "Tác giả",
+  "views": {
+    "0": "0 lượt xem",
+    "one": "1 lượt xem",
+    "other": "{{count}} lượt xem"
+  },
+  "reading-minute": {
+    "0": "ít hơn 1 phút đọc",
+    "one": "1 phút đọc",
+    "other": "{{count}} phút đọc"
+  },
+  "date": {
+    "from": "Bắt đầu: {{date}}",
+    "to": "Kết thúc: {{date}}"
+  },
+  "aside": {
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Đăng kí để không bỏ lỡ bất kì sự kiện nào của VAS",
+      "form": {
+        "email": {
+          "label": "Email của bạn"
+        },
+        "submit": "Đăng kí"
+      }
+    },
+    "categories": {
+      "title": "Chủ đề"
+    },
+    "social": {
+      "title": "Giao lưu cùng VAS",
+      "description": "Tụi mình đều là những du học sinh với mong muốn được giúp đỡ các du học sinh khác tại Canada"
+    }
+  }
 }

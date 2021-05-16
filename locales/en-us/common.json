@@ -1,35 +1,69 @@
 {
-	"fallback": "...",
-	"status": "Status",
-	"active": "Active",
-	"inactive": "Inactive",
-	"form": {
-		"errors": {
-			"required": "Required",
-			"minLength": "Too short, minimum {{length}} characters",
-			"maxLength": "Quá dài, maximum {{length}} characters"
-		}
-	},
-	"locales": {
-		"en-us": "English",
-		"vi": "Vietnamese"
-	},
-	"navbar": {
-		"home": "Home",
-		"about-us": {
-			"text": "About us",
-			"index": "What is VAS",
-			"partners": "Our Partners",
-			"members": "Members"
-		},
-		"events": {
-			"text": "Events",
-			"index": "Events",
-			"orientations": "Orientations",
-			"tet": "Tet"
-		},
-		"news": "News",
-		"blog": "Blogs",
-		"contact-us": "Let's Connect"
-	}
+  "fallback": "...",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "form": {
+    "errors": {
+      "required": "Required",
+      "minLength": "Too short, minimum {{length}} characters",
+      "maxLength": "Quá dài, maximum {{length}} characters"
+    }
+  },
+  "locales": {
+    "en-us": "English",
+    "vi": "Vietnamese"
+  },
+  "navbar": {
+    "home": "Home",
+    "about-us": {
+      "text": "About us",
+      "index": "What is VAS",
+      "partners": "Our Partners",
+      "members": "Members"
+    },
+    "posts": {
+      "text": "Posts",
+      "events": "Events",
+      "orientations": "Orientations",
+      "blog": "Blogs",
+      "tet": "Tet",
+      "news": "News"
+    },
+    "contact-us": "Let's Connect"
+  },
+  "written-by": "Written by",
+  "views": {
+    "0": "0 view",
+    "one": "1 view",
+    "other": "{{count}} views"
+  },
+  "reading-minute": {
+    "0": "less than 1 min",
+    "one": "1 min read",
+    "other": "{{count}} mins read"
+  },
+  "date": {
+    "from": "From: {{date}}",
+    "to": "To: {{date}}"
+  },
+  "aside": {
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Make sure to subscribe to our newsletter and be the first to know the news.",
+      "form": {
+        "email": {
+          "label": "Your email address"
+        },
+        "submit": "Subscribe"
+      }
+    },
+    "categories": {
+      "title": "Topics"
+    },
+    "social": {
+      "title": "Let's get social",
+      "description": "We are a team of dedicated Vietnamese students helping international students in Canada"
+    }
+  }
 }

@@ -1,0 +1,9 @@
+{
+  "header": {
+    "numberOfArticles": {
+      "0": "Chưa có bài viết",
+      "one": "1 bài viết",
+      "other": "{{count}} bài viết"
+    }
+  }
+}
