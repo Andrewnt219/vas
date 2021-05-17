@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "subtitle": "Make Your Own Compass",
+    "title": "Seneca College<0/>Orientation Summer<0/>2021",
+    "button": "REGISTER NOW"
+  },
+
+  "info": {
+    "location": {
+      "title": "Location",
+      "description": "Online<0/>Zoom  Meeting"
+    },
+
+    "calendar": {
+      "title": "Date and Time",
+      "description": "May 22, 2021<0/>11:00am (Toronto Time) | 10:00pm (Vietnam Time)"
+    }
+  },
+
+  "about": {
+    "title": "About",
+    "subtitle": "A new journey has begun.<0/>Let us guide you in creating your compass!",
+    "description": "Discover your student life at Seneca College and featured activities designed for Vietnamese students with Vietnamese Association at Seneca (VAS)"
+  },
+
+  "featuring": {
+    "title": "Featuring",
+    "description": "With a variety of programs, Seneca College is one of the Ontario colleges that attract thousands of students internationally every year, including Vietnamese students. To provide our new students with the latest updates regarding services and information supported by Seneca, the Vietnamese Association at Seneca (VAS) would like you to join our 2021 Summer Orientation.",
+    "timeline": {
+      "title": "In the orientation, you will be informed about:",
+      "events": [
+        {
+          "title": "Information about SIV",
+          "description": "Offices, study permit, scholarship, overseas study, etc."
+        },
+        {
+          "title": "VAS activities",
+          "description": "Activities that will happen in Summer Term"
+        },
+        {
+          "title": "Compass #1",
+          "description": "Online study navigation in college"
+        },
+        {
+          "title": "Compass #2",
+          "description": "Working and volunteering (on-campus and off-campus)"
+        },
+        {
+          "title": "Compass #3",
+          "description": "Students’ life in Canada: What’s important?"
+        }
+      ]
+    }
+  },
+
+  "register": {
+    "title": "Ready to Register?",
+    "subtitle": "Make your compass for the first semester",
+    "description": "Save your spot and have your questions ready to be answered!",
+    "button": "REGISTER NOW",
+    "day": {
+      "0": "day",
+      "1": "day",
+      "other": "days"
+    },
+    "hour": {
+      "0": "hour",
+      "one": "hour",
+      "other": "hours"
+    },
+    "minute": {
+      "0": "minute",
+      "one": "minute",
+      "other": "minutes"
+    },
+    "second": {
+      "0": "second",
+      "one": "second",
+      "other": "seconds"
+    }
+  }
+}
