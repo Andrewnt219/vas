@@ -2,81 +2,81 @@
   "hero": {
     "subtitle": "Make Your Own Compass",
     "title": "Seneca College<0/>Orientation Summer<0/>2021",
-    "button": "REGISTER NOW"
+    "button": "ĐĂNG KÍ NGAY"
   },
 
   "info": {
     "location": {
-      "title": "Location",
+      "title": "Địa điểm",
       "description": "Online<0/>Zoom  Meeting"
     },
 
     "calendar": {
-      "title": "Date and Time",
-      "description": "May 22, 2021<0/>11:00am (Toronto Time) | 10:00pm (Vietnam Time)"
+      "title": "Ngày giờ",
+      "description": "Tháng 5 ngày 22, 2021<0/>11:00am (Toronto) | 10:00pm (Vietnam)"
     }
   },
 
   "about": {
-    "title": "About",
-    "subtitle": "A new journey has begun.<0/>Let us guide you in creating your compass!",
-    "description": "Discover your student life at Seneca College and featured activities designed for Vietnamese students with Vietnamese Association at Seneca (VAS)"
+    "title": "Về event",
+    "subtitle": "Một hành trình mới đã bắt đầu.<0/>Hãy để chúng mình là la bàn dẫn đường bạn!",
+    "description": "Khám phá trải nghiệm du học sinh tại Cao Đẳng Seneca cùng những hoạt động thú vị dành riêng cho du học sinh Việt Nam tổ chức bởi hội Du Học Sinh Việt Nam tại Seneca College (VAS)"
   },
 
   "featuring": {
-    "title": "Featuring",
-    "description": "With a variety of programs, Seneca College is one of the Ontario colleges that attract thousands of students internationally every year, including Vietnamese students. To provide our new students with the latest updates regarding services and information supported by Seneca, the Vietnamese Association at Seneca (VAS) would like you to join our 2021 Summer Orientation.",
+    "title": "Thông tin chương trình",
+    "description": "Với sự đa dạng trong ngành học, Cao Đẳng Seneca là một trong những cao đẳng có số lượng học sinh theo học lớn nhất tại tỉnh bang Ontario. Cùng tham dự Summer Orientation 2021 để được cung cấp thông tin về những dịch vụ và hỗ trợ từ trường cũng như từ VAS nhé.",
     "timeline": {
-      "title": "In the orientation, you will be informed about:",
+      "title": "Đến với Orientation lần này, bạn sẽ nhận được thông tin về:",
       "events": [
         {
-          "title": "Information about SIV",
-          "description": "Offices, study permit, scholarship, overseas study, etc."
+          "title": "SIV",
+          "description": "Thủ tục liên quan đến gia hạn Study Permit, Học Bổng, Học Online bên ngoài Canada, etc."
         },
         {
-          "title": "VAS activities",
-          "description": "Activities that will happen in Summer Term"
+          "title": "Team VAS",
+          "description": "Các sự kiện của VAS trong kì hè này"
         },
         {
-          "title": "Compass #1",
-          "description": "Online study navigation in college"
+          "title": "La Bàn #1",
+          "description": "Định hướng học online"
         },
         {
-          "title": "Compass #2",
-          "description": "Working and volunteering (on-campus and off-campus)"
+          "title": "La Bàn #2",
+          "description": "Việc làm và Tình nguyện (trong và ngoài campus)"
         },
         {
-          "title": "Compass #3",
-          "description": "Students’ life in Canada: What’s important?"
+          "title": "La Bàn #3",
+          "description": "Cuộc sống du học sinh tại Canada"
         }
       ]
     }
   },
 
   "register": {
-    "title": "Ready to Register?",
-    "subtitle": "Make your compass for the first semester",
-    "description": "Save your spot and have your questions ready to be answered!",
-    "button": "REGISTER NOW",
+    "title": "Sẵn sàng đăng kí?",
+    "subtitle": "Cùng tụi mình tìm kiếm định hướng mới cho kì học đầu tiên",
+    "description": "Đăng kí ngay để nhận được những câu trả lời thực tế cho những thắc mắc của bạn!",
+    "button": "ĐĂNG KÍ NGAY",
     "day": {
-      "0": "day",
-      "1": "day",
-      "other": "days"
+      "0": "ngày",
+      "1": "ngày",
+      "other": "ngày"
     },
     "hour": {
-      "0": "hour",
-      "one": "hour",
-      "other": "hours"
+      "0": "giờ",
+      "one": "giờ",
+      "other": "giờ"
     },
     "minute": {
-      "0": "minute",
-      "one": "minute",
-      "other": "minutes"
+      "0": "phút",
+      "one": "phút",
+      "other": "phút"
     },
     "second": {
-      "0": "second",
-      "one": "second",
-      "other": "seconds"
+      "0": "giây",
+      "one": "giây",
+      "other": "giây"
     }
   }
 }
