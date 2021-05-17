@@ -8,6 +8,7 @@ import { getCountdown } from '@utils/date-utils';
 import { padZero } from '@utils/number-utils';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import Head from 'next/head';
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { HiCheckCircle, HiOutlineArrowNarrowDown } from 'react-icons/hi';
 import tw from 'twin.macro';
@@ -55,6 +56,27 @@ function Summer2021OrientationPage({ className }: Props) {
       className={className}
       tw="pb-0! md:text-lg xl:(text-xl overflow-x-hidden)"
     >
+      <Head>
+        <meta
+          property="og:image"
+          content={require('images/orientation-hero.jpg')}
+        />
+
+        <meta property="og:image:width" content="5237" />
+        <meta property="og:image:height" content="3491" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VAS Orientation Summer 2021" />
+        <meta
+          name="twitter:description"
+          content="Register to get ahead in your first semester at Seneca"
+        />
+        <meta
+          name="twitter:image"
+          content={require('images/orientation-hero.jpg')}
+        />
+      </Head>
+
       <header tw="col-span-full">
         <div tw="relative">
           <img
@@ -291,6 +313,7 @@ type CountDownBlockProps = {
   unit: string;
 };
 function CountDownBlock({ count, unit }: CountDownBlockProps) {
+  //TODO turn text red when count < 0, or maybe turn all red when duration < X
   return (
     <div tw="flex flex-col items-center">
       <span tw="text-2xl font-bold md:text-7xl">{padZero(count)}</span>
