@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "subtitle": "Make Your Own Compass",
+    "title": "Seneca College<0/>Orientation Summer<0/>2021",
+    "button": "ĐĂNG KÍ NGAY"
+  },
+
+  "info": {
+    "location": {
+      "title": "Địa điểm",
+      "description": "Online<0/>Zoom  Meeting"
+    },
+
+    "calendar": {
+      "title": "Ngày giờ",
+      "description": "Tháng 5 ngày 22, 2021<0/>11:00am (Toronto) | 10:00pm (Vietnam)"
+    }
+  },
+
+  "about": {
+    "title": "Về event",
+    "subtitle": "Một hành trình mới đã bắt đầu.<0/>Hãy để chúng mình là la bàn dẫn đường bạn!",
+    "description": "Khám phá trải nghiệm du học sinh tại Cao Đẳng Seneca cùng những hoạt động thú vị dành riêng cho du học sinh Việt Nam tổ chức bởi hội Du Học Sinh Việt Nam tại Seneca College (VAS)"
+  },
+
+  "featuring": {
+    "title": "Thông tin chương trình",
+    "description": "Với sự đa dạng trong ngành học, Cao Đẳng Seneca là một trong những cao đẳng có số lượng học sinh theo học lớn nhất tại tỉnh bang Ontario. Cùng tham dự Summer Orientation 2021 để được cung cấp thông tin về những dịch vụ và hỗ trợ từ trường cũng như từ VAS nhé.",
+    "timeline": {
+      "title": "Đến với Orientation lần này, bạn sẽ nhận được thông tin về:",
+      "events": [
+        {
+          "title": "SIV",
+          "description": "Thủ tục liên quan đến gia hạn Study Permit, Học Bổng, Học Online bên ngoài Canada, etc."
+        },
+        {
+          "title": "Team VAS",
+          "description": "Các sự kiện của VAS trong kì hè này"
+        },
+        {
+          "title": "La Bàn #1",
+          "description": "Định hướng học online"
+        },
+        {
+          "title": "La Bàn #2",
+          "description": "Việc làm và Tình nguyện (trong và ngoài campus)"
+        },
+        {
+          "title": "La Bàn #3",
+          "description": "Cuộc sống du học sinh tại Canada"
+        }
+      ]
+    }
+  },
+
+  "register": {
+    "title": "Sẵn sàng đăng kí?",
+    "subtitle": "Cùng tụi mình tìm kiếm định hướng mới cho kì học đầu tiên",
+    "description": "Đăng kí ngay để nhận được những câu trả lời thực tế cho những thắc mắc của bạn!",
+    "button": "ĐĂNG KÍ NGAY",
+    "day": {
+      "0": "ngày",
+      "1": "ngày",
+      "other": "ngày"
+    },
+    "hour": {
+      "0": "giờ",
+      "one": "giờ",
+      "other": "giờ"
+    },
+    "minute": {
+      "0": "phút",
+      "one": "phút",
+      "other": "phút"
+    },
+    "second": {
+      "0": "giây",
+      "one": "giây",
+      "other": "giây"
+    }
+  }
+}

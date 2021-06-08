@@ -2,6 +2,7 @@
   "locales": ["en-us", "vi"],
   "defaultLocale": "en-us",
   "pages": {
+    "/summer-2021-orientation": ["summer-2021-orientation"],
     "/contact-us": ["contact-us"],
 
     "/about-us": ["about-us"],
