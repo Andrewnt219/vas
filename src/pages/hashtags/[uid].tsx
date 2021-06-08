@@ -6,22 +6,17 @@ import { Result } from "@common";
 import MainLayout from "@components/pages/MainLayout";
 import { HashtagDocument } from "@lib/prismic/component-types/hashtag/HashtagModel";
 import { PrismicResult } from "@lib/prismic/prismic-service";
-import { HashtagDataService } from "@services/hashtag-data-service";
-import { Post, PostService } from "@services/post-service";
 import {
   createStaticError,
   createStaticProps,
   errorStatcPropsHandler,
 } from "@src/server/utils/page-utils";
 import { wrapper } from "@styles/spacing";
-import { getDataFromPost, getPostLink } from "@utils/convert-utils";
 import { tryParseLocale } from "@utils/validate-utils";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { RichText } from "prismic-reactjs";
-import NextLink from "next/link";
-import { darkenImage, getSizes } from "@utils/css-utils";
-import Image from "@components/common/Image/Image";
 import PagePostCards from "@components/lists/PagePostCards/PagePostCards";
+import { HashtagDataService } from "@src/server/services/hashtag-data-service";
+import { Post, PostService } from "@src/server/services/post-service";
 import { fonts } from "@styles/_typographyStyles";
 
 type Data = {
@@ -101,13 +96,11 @@ function HashtagUID({ data, error }: Props) {
   if (!data) {
     return <h1>Fetching posts...</h1>;
   }
-
-  const { hashtagUID, hashtagDoc, postResults } = data;
-
+  const { hashtagDoc, postResults } = data;
   return (
-    <MainLayout title={hashtagDoc.data.title}>
+    <MainLayout css={fonts.h3} title={hashtagDoc.data.title}>
       <section css={wrapper.page} tw="col-span-full">
-        <h1 css={fonts.h3} tw="text-center">{hashtagDoc.data.title}</h1>
+        <h1 tw="text-center">{hashtagDoc.data.title}</h1>
         <PagePostCards posts={postResults.results} tw="mt-2xl" />
       </section>
     </MainLayout>
