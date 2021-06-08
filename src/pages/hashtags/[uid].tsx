@@ -18,6 +18,7 @@ import PagePostCards from "@components/lists/PagePostCards/PagePostCards";
 import { HashtagDataService } from "@src/server/services/hashtag-data-service";
 import { Post, PostService } from "@src/server/services/post-service";
 import { fonts } from "@styles/_typographyStyles";
+import PageBanner from "@components/common/PageBanner/PageBanner";
 
 type Data = {
   postResults: PrismicResult<Post>;
@@ -98,12 +99,18 @@ function HashtagUID({ data, error }: Props) {
   }
   const { hashtagDoc, postResults } = data;
   return (
-    <MainLayout css={fonts.h3} title={hashtagDoc.data.title}>
-      <section css={wrapper.page} tw="col-span-full">
-        <h1 tw="text-center">{hashtagDoc.data.title}</h1>
-        <PagePostCards posts={postResults.results} tw="mt-2xl" />
+
+    <MainLayout title={hashtagDoc.data.title} tw="">
+
+    {postResults.results.length == 0 ? (
+      <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
+    ) : (
+      <section tw="grid-p-sm">
+        <h1 css={fonts.h3} tw="text-center mb-6">{hashtagDoc.data.title}</h1>
+        <PagePostCards posts={postResults.results} />
       </section>
-    </MainLayout>
+    )}
+  </MainLayout>
   );
 }
 
