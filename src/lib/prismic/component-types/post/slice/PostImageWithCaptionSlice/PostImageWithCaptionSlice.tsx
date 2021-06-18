@@ -27,7 +27,7 @@ function PostImageWithCaptionSlice({ className, slice }: Props) {
     <figure
       className={className}
       css={margin.gutterBottom}
-      tw="flex flex-col items-center justify-center rounded overflow-hidden"
+      tw="flex flex-col items-center justify-center rounded overflow-hidden xl:-mx-48"
     >
       <img
         data-srcset={getSrcSet(data.image.url)}
