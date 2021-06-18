@@ -31,7 +31,9 @@ function PostItem({ data }: PostItemProps) {
 
       <header>
         <NextLink href={getHashtagLink(displayedHashtag.uid)} passHref>
-          <Label tw="block max-w-max mb-2">{displayedHashtag.data.title}</Label>
+          <Label tw="block max-w-max mb-2">
+            {displayedHashtag.data?.title}
+          </Label>
         </NextLink>
 
         <h1 tw="leading-tight! mb-1 md:(mb-2) xl:(text-3xl)">
