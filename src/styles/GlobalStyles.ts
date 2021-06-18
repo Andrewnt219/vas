@@ -6,12 +6,12 @@ export default createGlobalStyle`
 
   html, body {        
     scroll-behavior: smooth;
-    ${tw`bg-skin-light`}
+    ${tw`bg-white`}
   }
 
   #__next {
     max-width: 1920px;
-    ${tw`grid bg-white grid-cols-12 relative pb-36  min-h-screen items-start content-start mx-auto md:pb-56`}
+    ${tw`grid bg-white grid-cols-12 relative pb-36  min-h-screen max-w-screen-2xl items-start content-start mx-auto md:pb-56`}
   }
 
 `;

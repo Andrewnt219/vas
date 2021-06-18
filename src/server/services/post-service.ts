@@ -18,8 +18,10 @@ import {
 import { PrismicResult } from '@lib/prismic/prismic-service';
 import { QueryOptions } from '@prismicio/client/types/ResolvedApi';
 import { PMclient } from '@root/prismic-configuration';
+import HashtagUID from '@src/pages/hashtags/[uid]';
 import { isString } from '@utils/validate-utils';
 import { CategoryService } from './category-data-service';
+import { HashtagDataService } from './hashtag-data-service';
 
 // Due to Firestore limitation of `in` query
 
@@ -152,6 +154,48 @@ export class PostService {
     return this.replaceWithPosts(postsResult);
   }
 
+  public static async getPostsByHashtagID(
+    hashtagID: string,
+    lang: Language,
+    options?: QueryOptions
+  ): Promise<PrismicResult<Post>> {
+    const query = [
+      Predicates.at('document.type', 'post'),
+      Predicates.at('my.post.hashtags.hashtag', hashtagID),
+    ];
+    const queryOptions = getQueryOption(lang, options);
+
+    const postsResult = await this.cms.query(query, queryOptions);
+
+    return this.replaceWithPosts(postsResult);
+  }
+
+  
+
+  public static async getPostsByHashtagUID(
+    hashtagUID: string,
+    lang: Language,
+    options: QueryOptions
+  ): Promise<PrismicResult<Post> | null> {
+    const hashtagDoc = await HashtagDataService.getHashtagByUID(
+      hashtagUID,
+      lang
+    );
+
+    if (!hashtagDoc) {
+      return null;
+    }
+
+    const postsResult = await this.getPostsByHashtagID(
+      hashtagDoc.id,
+      lang,
+      options
+    );
+
+    return this.replaceWithPosts(postsResult);
+  }
+
+ 
   //#region Firestore
   public static async insertComment(
     comment: PostComment
