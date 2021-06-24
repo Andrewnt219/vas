@@ -123,7 +123,11 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
       {data.results.length == 0 ? (
         <h1 tw="grid-p-sm">Come back later for interesting articles</h1>
       ) : (
-        <section tw="grid-p-sm">
+        <section
+          id="body-content"
+          tw="grid-p-sm"
+          style={{ scrollMarginTop: '8rem' }}
+        >
           <PagePostCards posts={data.results} />
         </section>
       )}
@@ -132,7 +136,10 @@ function CategoryUID({ data: initialData, error: serverError }: Props) {
         tw="col-span-full"
         total={data.total_results_size}
         perPage={data.results_per_page}
-        onItemClicked={(_, page) => setPage(page)}
+        onItemClicked={(_, page) => {
+          setPage(page);
+          document.getElementById('body-content')?.scrollIntoView();
+        }}
       />
     </MainLayout>
   );
