@@ -1,34 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VAS Blog 
 
-## Getting Started
+<img alt="Next.js" src="https://img.shields.io/badge/-Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white" /><img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=white" /><img alt="Firebase" src="https://img.shields.io/badge/-Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white" /><img alt="Tailwindcss" src="https://img.shields.io/badge/-Tailwindcss-38B2AC?style=for-the-badge&logo=Tailwind%20CSS&logoColor=white" />
 
-First, run the development server:
+Blog and marketing website for Vietnamese Association at Seneca College.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Features :fire:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+:sparkles: Manage content from [Prismic headless CMS](https://prismic.io/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+:sparkles: Content is in dual languages (English and Vietnamese)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+:sparkles: Live update with [SWR](https://swr.vercel.app/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+https://user-images.githubusercontent.com/52666982/135726458-e8d89e1a-8f5d-4775-9501-2ae999ef4193.mp4
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
