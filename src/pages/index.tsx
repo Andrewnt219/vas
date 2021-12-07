@@ -168,7 +168,7 @@ function Christmas2021LandingPage() {
               </p>
 
               <button css={button}>
-                <a href="/" target="_blank" rel="noreferrer noopener">
+                <a href="https://bit.ly/vas_christmas_contest" target="_blank" rel="noreferrer noopener">
                   {t("Learn more")}
                 </a>
               </button>
