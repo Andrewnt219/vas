@@ -92,7 +92,7 @@ const Index: VFC<Props> = ({ data, error }) => {
   );
 };
 
-const EVENT_DATE = new Date("2021-12-25T15:00:00Z");
+const EVENT_DATE = new Date("2020-12-25T15:00:00Z");
 function calculateDistance() {
   return EVENT_DATE.getTime() - new Date().getTime();
 }
@@ -130,30 +130,33 @@ function Christmas2021LandingPage() {
           `}
         >
           <div tw="absolute-cover text-white flex flex-col text-center items-center justify-center font-sans">
-            <div tw="color[#FFD13C] text-3xl font-bold md:(text-4xl)">
+           
+
+            {days >= 0 && <div>
+              <div tw="color[#FFD13C] text-3xl font-bold md:(text-4xl)">
               <p tw="py-xs"> {t("Merry Christmas")}</p>
               <p tw="text-larger">{t("2021")}</p>
             </div>
-            <div tw="mt-lg flex justify-evenly w-full max-w-xl md:mt-2xl">
+              <div tw="mt-lg flex justify-evenly w-full max-w-xl md:mt-2xl">
               <CountDownBlock
                 tw="text-black"
-                count={days}
+                count={days > 0?days:0}
                 unit={t("days", { count: days })}
               />
               <CountDownBlock
-                count={hours}
+                count={hours > 0? hours: 0}
                 unit={t("hours", {
                   count: hours,
                 })}
               />
               <CountDownBlock
-                count={minutes}
+                count={minutes > 0? minutes: 0}
                 unit={t("minutes", {
                   count: minutes,
                 })}
               />
               <CountDownBlock
-                count={seconds}
+                count={seconds > 0? seconds: 0}
                 unit={t("seconds", {
                   count: seconds,
                 })}
@@ -173,7 +176,27 @@ function Christmas2021LandingPage() {
                 </a>
               </button>
             </div>
+            </div>
+            }
+
+            {
+              days < 0 && <div>
+                <div tw="color[#FFD13C] text-7xl font-bold">
+              <h1 tw="py-xs"> {t("Merry Christmas")}</h1>
+              <h1 tw="text-larger">{t("2021")}</h1>
+            </div>
+            <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg"> {t("All VAS's members hope you have a great time with your family and friends!")}
+              <br />
+              {t("Merry Christmas and Happy New Year!")}
+            </p>
+            
+
+              </div>
+            }
+            
+           
           </div>
+              
         </div>
       </header>
     </section>
