@@ -92,7 +92,7 @@ const Index: VFC<Props> = ({ data, error }) => {
   );
 };
 
-const EVENT_DATE = new Date("2020-12-25T15:00:00Z");
+const EVENT_DATE = new Date("2021-12-25T15:00:00Z");
 function calculateDistance() {
   return EVENT_DATE.getTime() - new Date().getTime();
 }
