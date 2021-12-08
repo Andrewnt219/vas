@@ -130,73 +130,74 @@ function Christmas2021LandingPage() {
           `}
         >
           <div tw="absolute-cover text-white flex flex-col text-center items-center justify-center font-sans">
-           
+            {days >= 0 && (
+              <div>
+                <div tw="color[#FFD13C] text-3xl font-bold md:(text-4xl)">
+                  <p tw="py-xs"> {t("Merry Christmas")}</p>
+                  <p tw="text-larger">{t("2021")}</p>
+                </div>
+                <div tw="mt-lg flex justify-evenly w-full max-w-xl md:mt-2xl">
+                  <CountDownBlock
+                    tw="text-black"
+                    count={days}
+                    unit={t("days", { count: days })}
+                  />
+                  <CountDownBlock
+                    count={hours}
+                    unit={t("hours", {
+                      count: hours,
+                    })}
+                  />
+                  <CountDownBlock
+                    count={minutes}
+                    unit={t("minutes", {
+                      count: minutes,
+                    })}
+                  />
+                  <CountDownBlock
+                    count={seconds}
+                    unit={t("seconds", {
+                      count: seconds,
+                    })}
+                  />
+                </div>
 
-            {days >= 0 && <div>
-              <div tw="color[#FFD13C] text-3xl font-bold md:(text-4xl)">
-              <p tw="py-xs"> {t("Merry Christmas")}</p>
-              <p tw="text-larger">{t("2021")}</p>
-            </div>
-              <div tw="mt-lg flex justify-evenly w-full max-w-xl md:mt-2xl">
-              <CountDownBlock
-                tw="text-black"
-                count={days > 0?days:0}
-                unit={t("days", { count: days })}
-              />
-              <CountDownBlock
-                count={hours > 0? hours: 0}
-                unit={t("hours", {
-                  count: hours,
-                })}
-              />
-              <CountDownBlock
-                count={minutes > 0? minutes: 0}
-                unit={t("minutes", {
-                  count: minutes,
-                })}
-              />
-              <CountDownBlock
-                count={seconds > 0? seconds: 0}
-                unit={t("seconds", {
-                  count: seconds,
-                })}
-              />
-            </div>
+                <div>
+                  <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg">
+                    {t("Christmas is coming!")}
+                    <br />
+                    {t("Let's join VAS's events to enjoy this holiday!")}
+                  </p>
 
-            <div>
-              <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg">
-                {t("Christmas is coming!")}
-                <br />
-                {t("Let's join VAS's events to enjoy this holiday!")}
-              </p>
-
-              <button css={button}>
-                <a href="https://bit.ly/vas_christmas_contest" target="_blank" rel="noreferrer noopener">
-                  {t("Learn more")}
-                </a>
-              </button>
-            </div>
-            </div>
-            }
-
-            {
-              days < 0 && <div>
-                <div tw="color[#FFD13C] text-7xl font-bold">
-              <h1 tw="py-xs"> {t("Merry Christmas")}</h1>
-              <h1 tw="text-larger">{t("2021")}</h1>
-            </div>
-            <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg"> {t("All VAS's members hope you have a great time with your family and friends!")}
-              <br />
-              {t("Merry Christmas and Happy New Year!")}
-            </p>
-            
-
+                  <button css={button}>
+                    <a
+                      href="https://bit.ly/vas_christmas_contest"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      {t("Learn more")}
+                    </a>
+                  </button>
+                </div>
               </div>
-            }
-            
-           
+            )}
+
+            {days < 0 && (
+              <div>
+                <div tw="color[#FFD13C] text-4xl sm:(text-7xl) font-bold">
+                  <h1 tw="py-xs"> {t("Merry Christmas")}</h1>
+                  <h1 tw="text-larger">{t("2021")}</h1>
+                </div>
+                <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg sm:(text-sm)">
+                  {t("All VAS's members hope you have a great time")}
+                  <br />
+                  {t("with your family and friends!")}
+                  <br />
+                  {t("Merry Christmas and Happy New Year!")}
+                </p>
+              </div>
+            )}
           </div>
-              
         </div>
       </header>
     </section>
