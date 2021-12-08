@@ -111,7 +111,7 @@ function Christmas2021LandingPage() {
   }, []);
 
   return (
-    <section css={"width: 100vw"}>
+    <section tw="col-span-full">
       <header tw="col-span-full">
         <div
           tw="relative"
