@@ -25,6 +25,10 @@ import React, { useEffect, useState, VFC } from "react";
 import { getCountdown } from "@utils/date-utils";
 import tw from "twin.macro";
 import { padZero } from "@utils/number-utils";
+import Button from "@components/common/Button/Button";
+import EnhancedImage from "@components/common/EnhancedImage/EnhancedImage";
+import NextLink from 'next/link';
+import XmasHero from "@components/pages/home/XmasHero";
 
 // TODO use loadLocaleFrom in i18n.json to load translation files
 // Maybe add some next.js api for fetching files from fire storage/firestore
@@ -81,7 +85,8 @@ const Index: VFC<Props> = ({ data, error }) => {
       title={t("home:hero.title")}
       tw="pb-0! mb-12 space-y-12 xl:space-y-32"
     >
-      <Christmas2021LandingPage tw="pb-0! md:text-lg xl:(text-xl overflow-x-hidden)" />
+      {/* <HeroSection /> */}
+      <XmasHero />
       <ArticlesSection
         categoriesWithPosts={categoriesWithPosts}
         latestPosts={latestPosts}
@@ -92,132 +97,49 @@ const Index: VFC<Props> = ({ data, error }) => {
   );
 };
 
-const EVENT_DATE = new Date("2021-12-25T15:00:00Z");
-function calculateDistance() {
-  return EVENT_DATE.getTime() - new Date().getTime();
-}
-const button = tw` text-black background[#FFFFFF] text-xs transition-all hover:(filter saturate-150) py-sm px-md mt-lg  rounded-lg  md:(py-sm px-lg mt-2xl text-sm) xl:( py-sm px-xl rounded-xl)`;
-
-function Christmas2021LandingPage() {
+function HeroSection() {
   const { t } = useTranslation();
-  const [distance, setDistance] = useState<number>(calculateDistance);
-
-  const { days, hours, minutes, seconds } = getCountdown(distance);
-
-  useEffect(() => {
-    const timerId = setInterval(() => setDistance(calculateDistance()), 1000);
-
-    return () => clearInterval(timerId);
-  }, []);
 
   return (
-    <section tw="col-span-full">
-      <header tw="col-span-full">
-        <div
-          tw="relative"
-          css={`
-            @media only screen and (min-width: 1280px) {
-              background-image: url("${require("images/Background.jpg")}");
-              aspect-ratio: 1280 / 640;
-            }
-
-            background-image: url("${require("images/Background-mobile.jpg")}");
-            aspect-ratio: 768 / 1280;
-
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            width: 100%;
-          `}
+    <section
+      tw="col-span-full grid grid-cols-12 content-start xl:-mt-24"
+      aria-labelledby="hero-title"
+    >
+      <header tw="text-center grid-p-sm  xl:(col-start-2 col-end-6 self-center z-10 width[150%] text-left)">
+        <h1
+          id="hero-title"
+          tw="text-2xl text-primary font-black md:text-4xl lg:text-5xl"
         >
-          <div tw="absolute-cover text-white flex flex-col text-center items-center justify-center font-sans">
-            {days >= 0 && (
-              <div>
-                <div tw="color[#FFD13C] text-3xl font-bold md:(text-4xl)">
-                  <p tw="py-xs"> {t("Merry Christmas")}</p>
-                  <p tw="text-larger">{t("2021")}</p>
-                </div>
-                <div tw="mt-lg flex justify-evenly w-full max-w-xl md:mt-2xl">
-                  <CountDownBlock
-                    tw="text-black"
-                    count={days}
-                    unit={t("days", { count: days })}
-                  />
-                  <CountDownBlock
-                    count={hours}
-                    unit={t("hours", {
-                      count: hours,
-                    })}
-                  />
-                  <CountDownBlock
-                    count={minutes}
-                    unit={t("minutes", {
-                      count: minutes,
-                    })}
-                  />
-                  <CountDownBlock
-                    count={seconds}
-                    unit={t("seconds", {
-                      count: seconds,
-                    })}
-                  />
-                </div>
+          {t('home:hero.title')}
+        </h1>
 
-                <div>
-                  <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg">
-                    {t("Christmas is coming!")}
-                    <br />
-                    {t("Let's join VAS's events to enjoy this holiday!")}
-                  </p>
+        <p tw="mt-md md:text-base xl:(w-2/3)">{t('home:hero.subtitle')}</p>
 
-                  <button css={button}>
-                    <a
-                      href="https://bit.ly/vas_christmas_contest"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      {t("Learn more")}
-                    </a>
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {days < 0 && (
-              <div>
-                <div tw="color[#FFD13C] text-4xl sm:(text-7xl) font-bold">
-                  <h1 tw="py-xs"> {t("Merry Christmas")}</h1>
-                  <h1 tw="text-larger">{t("2021")}</h1>
-                </div>
-                <p tw="color[rgba(255, 255, 255, 0.7)] font-thin text-xs mt-lg sm:(text-sm)">
-                  {t("All VAS's members hope you have a great time")}
-                  <br />
-                  {t("with your family and friends!")}
-                  <br />
-                  {t("Merry Christmas and Happy New Year!")}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
+        {/* TODO add primary button for read more (scroll down) */}
+        {/* TODO switch find out more to secondary */}
+        <NextLink href="/about-us" passHref>
+          <Button as="a" variant="contain" size="lg" tw="mt-2xl inline-block">
+            {t('home:hero.primary-button')}
+          </Button>
+        </NextLink>
       </header>
+
+      <div tw="col-span-full mt-10 xl:(mt-0 col-start-6 col-end-13 relative top-24)">
+        <EnhancedImage
+          src={require('images/friends-with-books.png')}
+          lqip={require('images/friends-with-books.png?lqip')}
+          alt="A group of friends reading books"
+          width={2995}
+          height={2331}
+          layout="responsive"
+          sizes="50vw"
+        />
+      </div>
     </section>
   );
 }
 
-type CountDownBlockProps = {
-  count: number;
-  unit: string;
-};
-function CountDownBlock({ count, unit }: CountDownBlockProps) {
-  return (
-    <div tw="flex flex-col items-center background[rgba(255, 255, 255, 0.1)] w-1/5 rounded-lg p-6">
-      <span tw="text-2xl font-bold md:text-6xl lg:text-6xl">
-        {padZero(count)}
-      </span>
-      <span tw="text-sm">{unit}</span>
-    </div>
-  );
-}
+
 type ArticlesSectionProps = {
   latestPosts: PrismicResult<Post>;
   categoriesWithPosts: CategoryWithPosts[];

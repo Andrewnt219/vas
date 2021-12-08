@@ -37,7 +37,7 @@ export default function MainLayout({
 
       <main
         className={className}
-        tw="col-span-full grid grid-cols-12 mt-6 pb-6 xl:(mt-20 pb-14)"
+        tw="col-span-full grid grid-cols-12 mt-6 pb-6 xl:(pb-14)"
         id="skip"
       >
         {/* TODO extract to component and move it to _app */}
