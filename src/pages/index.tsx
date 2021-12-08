@@ -1,30 +1,34 @@
-import { Result } from '@common';
-import PostCard from '@components/cards/PostCard/PostCard';
-import Button from '@components/common/Button/Button';
-import EnhancedImage from '@components/common/EnhancedImage/EnhancedImage';
-import CategoriesCard from '@components/pages/home/CategoriesCard/CategoriesCard';
-import NewsletterCard from '@components/pages/home/NewsletterCard/NewsletterCard';
-import SocialMediaBox from '@components/pages/home/SocialMediaCard/SocialMediaCard';
-import MainLayout from '@components/pages/MainLayout';
-import { SizesProvider } from '@contexts/SizesContext';
-import { PrismicResult } from '@lib/prismic/prismic-service';
+import { Result } from "@common";
+import PostCard from "@components/cards/PostCard/PostCard";
+import CategoriesCard from "@components/pages/home/CategoriesCard/CategoriesCard";
+import NewsletterCard from "@components/pages/home/NewsletterCard/NewsletterCard";
+import SocialMediaBox from "@components/pages/home/SocialMediaCard/SocialMediaCard";
+import MainLayout from "@components/pages/MainLayout";
+import { SizesProvider } from "@contexts/SizesContext";
+import { PrismicResult } from "@lib/prismic/prismic-service";
 import {
   CategoryService,
   CategoryWithPosts,
-} from '@src/server/services/category-data-service';
-import { Post, PostService } from '@src/server/services/post-service';
+} from "@src/server/services/category-data-service";
+import { Post, PostService } from "@src/server/services/post-service";
 import {
   createStaticProps,
   errorStatcPropsHandler,
-} from '@src/server/utils/page-utils';
-import { wrapper } from '@styles/spacing';
-import { fonts } from '@styles/_typographyStyles';
-import { getSizes } from '@utils/css-utils';
-import { tryParseLocale } from '@utils/validate-utils';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+} from "@src/server/utils/page-utils";
+import { wrapper } from "@styles/spacing";
+import { fonts } from "@styles/_typographyStyles";
+import { getSizes } from "@utils/css-utils";
+import { tryParseLocale } from "@utils/validate-utils";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import useTranslation from "next-translate/useTranslation";
+import React, { useEffect, useState, VFC } from "react";
+import { getCountdown } from "@utils/date-utils";
+import tw from "twin.macro";
+import { padZero } from "@utils/number-utils";
+import Button from "@components/common/Button/Button";
+import EnhancedImage from "@components/common/EnhancedImage/EnhancedImage";
 import NextLink from 'next/link';
-import React, { VFC } from 'react';
+import XmasHero from "@components/pages/home/XmasHero";
 
 // TODO use loadLocaleFrom in i18n.json to load translation files
 // Maybe add some next.js api for fetching files from fire storage/firestore
@@ -49,7 +53,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Params> = async ({
     );
     const latestPosts = await PostService.getPosts(lang, {
       pageSize: 10,
-      orderings: '[document.first_publication_date desc]',
+      orderings: "[document.first_publication_date desc]",
     });
 
     return createStaticProps({ categoriesWithPosts, latestPosts });
@@ -78,11 +82,11 @@ const Index: VFC<Props> = ({ data, error }) => {
 
   return (
     <MainLayout
-      title={t('home:hero.title')}
+      title={t("home:hero.title")}
       tw="pb-0! mb-12 space-y-12 xl:space-y-32"
     >
-      <HeroSection />
-
+      {/* <HeroSection /> */}
+      <XmasHero />
       <ArticlesSection
         categoriesWithPosts={categoriesWithPosts}
         latestPosts={latestPosts}
@@ -135,6 +139,7 @@ function HeroSection() {
   );
 }
 
+
 type ArticlesSectionProps = {
   latestPosts: PrismicResult<Post>;
   categoriesWithPosts: CategoryWithPosts[];
@@ -152,14 +157,14 @@ function ArticlesSection({
     >
       <header tw="col-span-full">
         {/* TODO translation */}
-        <h1 css={fonts.sectionTitle}>{t('home:latest-articles.title')}</h1>
+        <h1 css={fonts.sectionTitle}>{t("home:latest-articles.title")}</h1>
       </header>
 
       <ul
         aria-label="List of recent articles"
         tw="col-span-2 space-y-4 md:space-y-7 xl:space-y-12"
       >
-        <SizesProvider initialContext={getSizes(['90vw', undefined, '1400px'])}>
+        <SizesProvider initialContext={getSizes(["90vw", undefined, "1400px"])}>
           {latestPosts.results.map((post) => (
             <li key={post.id}>
               <PostCard.Article post={post} />
